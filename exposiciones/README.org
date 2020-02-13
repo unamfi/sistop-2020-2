@@ -19,6 +19,7 @@ el que ustedes me planteen los temas de su interés.
 | 25.02.2020 | Windows Subsystem for Linux        | Alfonso Murrieta y Joaquín Valdespino |            |            |
 | 27.02.2020 | Contenedores en Linux - Docker     | Samuel Garrido y Jorge Cárdenas       |            |            |
 | 03.03.2020 | La arquitectura ARM                | Patricio Barrero y Héctor Espino      |            |            |
+| 05.03.2020 | Meltdown y SPECTRE                 | Fernando Medina y Sergio Osorio       |            |            |
 |------------+------------------------------------+---------------------------------------+------------+------------|
 #+TBLFM: 
 
