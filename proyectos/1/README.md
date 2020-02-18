@@ -64,6 +64,15 @@ en forma individual o en equipos:
    sistemas operativos. Trabajamos sobre *modelos simplificados* de
    los procesadores, en buena medida heredados de cómo eran hace 30
    años. ¿Y qué tanto ha cambiado un CPU desde entonces?
+4. [Anatomy of Linux system call on
+   ARM64](http://eastrivervillage.com/Anatomy-of-Linux-system-call-in-ARM64/)
+   detalla desde la compilación de un simple `hola mundo` en C, hasta
+   su seguimiento línea por línea en ensamblador, mostrando cómo el
+   programa en espacio de usuario prepara una llamada al sistema (y el
+   texto termina en el punto justo de inicio de la llamada al
+   sistema). Honestamente, la forma de escribir no es la más
+   clara... Pero ilustra muy bien los puntos que vimos en el último
+   par de clases.
 
 Y siempre se puede... Ir más allá. Quise compartir los siguientes con
 ustedes en caso de que alguien sea masoquista o quiera ponerse un reto

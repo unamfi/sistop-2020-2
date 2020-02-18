@@ -14,12 +14,13 @@ el que ustedes me planteen los temas de su interés.
 |------------+------------------------------------+---------------------------------------+------------+------------|
 |      Fecha | Tema                               | Integrantes                           | Documentos | Evaluación |
 |------------+------------------------------------+---------------------------------------+------------+------------|
-| 18.02.2020 | Dart como lenguaje multiplataforma | Niver Martínez y Jorge Bárcenas       |            |            |
 | 20.02.2020 | El lenguaje de programación Rust   | Alam Guillen y Alejandro Espejel      |            |            |
 | 25.02.2020 | Windows Subsystem for Linux        | Alfonso Murrieta y Joaquín Valdespino |            |            |
 | 27.02.2020 | Contenedores en Linux - Docker     | Samuel Garrido y Jorge Cárdenas       |            |            |
 | 03.03.2020 | La arquitectura ARM                | Patricio Barrero y Héctor Espino      |            |            |
 | 05.03.2020 | Meltdown y SPECTRE                 | Fernando Medina y Sergio Osorio       |            |            |
+| 17.03.2020 | Dart como lenguaje multiplataforma | Niver Martínez y Jorge Bárcenas       |            |            |
+| 14.04.2020 | Coherencia de caché                | Facundo Acuña                         |            |            |
 |------------+------------------------------------+---------------------------------------+------------+------------|
 #+TBLFM: 
 
