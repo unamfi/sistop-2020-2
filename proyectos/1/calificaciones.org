@@ -1,0 +1,106 @@
+#+title: Proyecto 1 • Calificaciones y comentarios
+#+options: toc:nil
+
+*Nota:* Hay unos pocos trabajos que no se incluyen en esta revisión,
+son los que tienen detalles pendientes por incorporar en Git. Algunos,
+requieren de ustedes para que yo los procese. Otros, sólo me están
+esperando a mí. Actualizo esto pronto.
+
+* Carlos Alcántara / Roel Pérez
+- Lectura :: Tearing apart =printf()=
+- Documento :: [[./AlcantaraCarlos-PerezRoel/TearingApartprintf.pdf][TearingApartprintf.pdf]]
+- Comentarios ::
+- Calificación ::
+
+* Jorge Bárcenas
+- Lectura :: Tearing apart =printf()=
+- Documento :: [[./BarcenasJorge/printf.pdf][printf.pdf]]
+- Comentarios ::
+- Calificación ::
+
+* Patricio Barrero / Héctor Espino
+- Lectura :: Llamadas al sistema en ARM
+- Documento :: [[./BarreroPatricio-EspinoHector/proyecto_1.pdf][proyecto_1.pdf]]
+- Comentarios ::
+- Calificación ::
+
+* Ismael Caballero / Alam Guillén
+- Lectura :: Anatomy of Linux system call in ARM64
+- Documento :: [[./CaballeroIsmael-GuillenAlam/Mapa
+               conceptual.png][Mapa conceptual.png]]
+- Comentarios ::
+- Calificación ::
+
+* Marcelo Cruz
+- Lectura :: C is not a low-level language
+- Documento :: [[./CruzMarcelo/Proyecto1.jpg][Proyecto1.jpg]]
+- Comentarios ::
+- Calificación ::
+
+* Edgar Facundo
+- Lectura :: Open Source Firmware
+- Documento :: [[./FacundoEdgar/Firmware.pdf][Firmware.pdf]]
+- Comentarios ::
+- Calificación ::
+
+* Samuel Garrido / Jorge Cárdenas
+- Lectura :: Another level of indirection
+- Documento :: [[./GarridoSamuel-CárdenasJorge/Another level of
+               indirection. GarridoSamuel-CárdenasJorge.pdf][Another level of indirection. GarridoSamuel-CárdenasJorge.pdf]]
+- Comentarios ::
+- Calificación ::
+
+* Eduardo Jiménez
+- Lectura :: Open Source Firmware
+- Documento :: [[./JimenezEduardo/Proyecto1Firmware.pdf][Proyecto1Firmware.pdf]]
+- Comentarios ::
+- Calificación ::
+
+* Kevin Lara
+- Lectura :: Open Source Firmware
+- Documento :: [[./LaraKevin/ConceptMap.pdf][ConceptMap.pdf]]
+- Comentarios ::
+- Calificación ::
+
+* Fernando Leco
+- Lectura :: C is not a low-level language
+- Documento :: [[./LecoFernando.png][LecoFernando.png]]
+- Comentarios ::
+- Calificación ::
+
+* Javier Loidi
+- Lectura :: C is not a low-level language
+- Documento :: [[./LoidiJavier/Mapa.pdf][Mapa.pdf]]
+- Comentarios ::
+- Calificación ::
+
+* Fernando Medina
+- Lectura :: Tearing apart =printf()=
+- Documento :: [[./MedinaFernando/SistopP1.pdf][SistopP1.pdf]]
+- Comentarios ::
+- Calificación ::
+
+* Ricardo Muñoz
+- Lectura :: Open source firmware
+- Documento :: [[./MuñozRicardo/mapa mental.PNG][mapa mental.PNG]]
+- Comentarios ::
+- Calificación ::
+
+* Alfonso Murrieta / Joaquín Valdespino
+- Lectura :: Tearing apart =printf()=
+- Documento :: [[./MurrietaAlfonso-ValdespinoJoaquin/README.md][README.md]], [[./MurrietaAlfonso-ValdespinoJoaquin/proyecto1.pdf][proyecto1.pdf]]
+- Comentarios ::
+- Calificación ::
+
+* Pamela Nieto
+- Lectura :: C is not a low-level language
+- Documento :: [[./NietoPamela_/proyecto 1, c no es un lenguaje de bajo nivel.jpeg][proyecto 1, c no es un lenguaje de bajo nivel.jpeg]]
+- Comentarios ::
+- Calificación ::
+
+* Sergio Reza
+- Lectura :: C is not a low-level language
+- Documento :: [[./RezaSergio/Proyecto1.pdf][Proyecto1.pdf]]
+- Comentarios ::
+- Calificación ::
+
