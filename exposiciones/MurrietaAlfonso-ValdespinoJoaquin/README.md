@@ -8,14 +8,20 @@ herramientas denominada como WSL 2, la cuál está incluida en la
 Últimas adiciones
 =================
 
-Versión 1 :
-
+Versión 1.1 :
 * Se subió la presentación de la exposición
 * Se subió el documento con toda la información pertinente
 
 Correcciones:
-
 * Esperando a revisión por parte del profesor :D
+
+
+Versión 1.2 :
+* Se agregaron detalles sugeridos por el profesor a la presentación de la exposición
+* Se agregaron detalles sugeridos por el profesor a el documento con toda la información pertinente
+
+Correcciones:
+* Traducción de Controladores y Procesos pico a "Pico procesos"
 
 
 Integrantes del equipo:
