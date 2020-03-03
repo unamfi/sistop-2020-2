@@ -205,6 +205,16 @@ provecho! 😉
    - Buen resumen
  - Calificación :: 10
 
+** René Vázquez
+ - Documento :: [[./VazquezRene/VazquezRene.jpg][VazquezRene.jpg]]
+ - Comentarios ::
+   - Equivocaste la definición del anillo 3 (el menos privilegiado,
+     donde se ejecuta el código nivel usuario) con el -3 (motor de
+     gestión).
+     - Pero... no entiendo — ¿Copiaste y pegaste el pedazo de imagen
+       del 3 al -3? :-/ No, la letra no es la misma... ¡No entiendo!
+ - Calificación :: 9
+
 * What's new in CPUs since the 80s?
 
 ** Sergio Osorio
