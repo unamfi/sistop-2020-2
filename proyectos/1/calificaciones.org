@@ -109,12 +109,27 @@ esperando a mí. Actualizo esto pronto.
 * C is not a low-level language
 
 Tengo que pedirles una disculpa: Planteé este artículo como
-/relativamente sencillo/, pero ate una re-lectura... Toca varios
+/relativamente sencillo/, pero ante una re-lectura... Toca varios
 conceptos bastante específicos, y estoy seguro de que más de uno de
 ustedes terminó mareado.
 
 Pero, ni hablar, ya lo leyeron y lo entendieron. ¡Que les sea de mucho
 provecho! 😉
+
+** Enrique Albores
+ - Documento :: [[./AlboresEnrique/mapa.jpeg][mapa.jpeg]]
+ - Comentarios ::
+   - Ugh, cuesta trabajo leer la foto que tomaste ☹ Ligeramente fuera
+     de foco, baja resolución...
+     - No pude siquiera leer bien la parte derecha de la
+       fotografía... No es una buena publicidad para tu teléfono (que
+       pone su nombre dentro de la imagen. ¿para qué se lo dejas? 😉)
+   - El artículo se refiere a la PDP-11 porque es la arquitectura para
+     la cual fue diseñada C. El que C se presente a nosotros hoy en
+     día como "bajo nivel" es porque sus instrucciones son fáciles de
+     traducir a la arquitectura de PDP, pero... No lo es a los CPUs
+     actuales
+ - Calificación :: 10
 
 ** Marcelo Cruz
  - Documento :: [[./CruzMarcelo/Proyecto1.jpg][Proyecto1.jpg]]
