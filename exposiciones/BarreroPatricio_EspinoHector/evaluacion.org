@@ -2,7 +2,7 @@
 #+author: Gunnar Wolf
 
 - Tema presentado por :: Patricio Barrero y Héctor Espino
-- Calificación global ::  8.52 * 0.3 +  5.88 * 0.7 = *6.672*
+- Calificación global ::  8.52 * 0.3 +  7.38 * 0.7 = *7.72*
 
 # * Comentarios
 
@@ -49,13 +49,13 @@
 | *Aspecto*              | *Peso* | *Evaluación* | *Puntos* |
 |------------------------+--------+--------------+----------|
 | Originalidad del tema  |    0.1 |           10 |       1. |
-| Material desarrollado  |    0.2 |            0 |       0. |
+| Material desarrollado  |    0.2 |            5 |       1. |
 | Contenido              |    0.2 |          7.5 |      1.5 |
-| Fuentes bibliográficas |    0.1 |            0 |       0. |
+| Fuentes bibliográficas |    0.1 |            5 |      0.5 |
 | Uso del tiempo         |    0.1 |          7.5 |     0.75 |
 | Dominio del tema       |   0.15 |           10 |      1.5 |
 | Presencia              |   0.15 |          7.5 |    1.125 |
 |------------------------+--------+--------------+----------|
-| *Global*               |        |              |     5.88 |
+| *Global*               |        |              |     7.38 |
 #+TBLFM: @<<$4..@>>$4=$2*$3::$4=vsum(@<<..@>>);f-2
 
