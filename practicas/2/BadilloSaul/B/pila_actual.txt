@@ -1,0 +1,8 @@
+{
+  "health": "GOOD",
+  "percentage": 35,
+  "plugged": "UNPLUGGED",
+  "status": "DISCHARGING",
+  "temperature": 33.0,
+  "current": 284179
+}

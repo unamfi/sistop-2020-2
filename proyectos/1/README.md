@@ -19,6 +19,11 @@ poco más complejos. Claro, también pueden elegir trabajar
 individualmente con un artículo complejo (pero serán calificados en
 pie de igualdad con los demás).
 
+## Calificaciones y comentarios
+
+Pueden ya consultar las [calificaciones y comentarios a sus
+proyectos](./calificaciones.org).
+
 ## Los artículos
 
 Los siguientes artículos son relativamente sencillos; pueden

@@ -1,0 +1,62 @@
+
+Nombre de host:                            LAPTOP-L3O9GNDQ
+Nombre del sistema operativo:              Microsoft Windows 10 Home Single Language
+Versi¢n del sistema operativo:             10.0.18362 N/D Compilaci¢n 18362
+Fabricante del sistema operativo:          Microsoft Corporation
+Configuraci¢n del sistema operativo:       Estaci¢n de trabajo independiente
+Tipo de compilaci¢n del sistema operativo: Multiprocessor Free
+Propiedad de:                              HP
+Organizaci¢n registrada:                   HP
+Id. del producto:                          00327-30043-82256-AAOEM
+Fecha de instalaci¢n original:             18/09/2019, 11:56:00 p. m.
+Tiempo de arranque del sistema:            14/02/2020, 12:45:33 p. m.
+Fabricante del sistema:                    HP
+Modelo el sistema:                         HP Laptop 15-db0xxx
+Tipo de sistema:                           x64-based PC
+Procesador(es):                            1 Procesadores instalados.
+                                           [01]: AMD64 Family 21 Model 112 Stepping 0 AuthenticAMD ~3100 Mhz
+Versi¢n del BIOS:                          Insyde F.02, 06/04/2018
+Directorio de Windows:                     C:\WINDOWS
+Directorio de sistema:                     C:\WINDOWS\system32
+Dispositivo de arranque:                   \Device\HarddiskVolume1
+Configuraci¢n regional del sistema:        es-mx;Espa¤ol (M‚xico)
+Idioma de entrada:                         es-mx;Espa¤ol (M‚xico)
+Zona horaria:                              (UTC-06:00) Guadalajara, Ciudad de M‚xico, Monterrey
+Cantidad total de memoria f¡sica:          3,982 MB
+Memoria f¡sica disponible:                 1,213 MB
+Memoria virtual: tama¤o m ximo:            7,963 MB
+Memoria virtual: disponible:               2,440 MB
+Memoria virtual: en uso:                   5,523 MB
+Ubicaci¢n(es) de archivo de paginaci¢n:    C:\pagefile.sys
+Dominio:                                   WORKGROUP
+Servidor de inicio de sesi¢n:              \\LAPTOP-L3O9GNDQ
+Revisi¢n(es):                              11 revisi¢n(es) instaladas.
+                                           [01]: KB4534132
+                                           [02]: KB4515383
+                                           [03]: KB4516115
+                                           [04]: KB4520390
+                                           [05]: KB4521863
+                                           [06]: KB4524244
+                                           [07]: KB4524569
+                                           [08]: KB4528759
+                                           [09]: KB4537759
+                                           [10]: KB4538674
+                                           [11]: KB4532693
+Tarjeta(s) de red:                         3 Tarjetas de interfaz de red instaladas.
+                                           [01]: Realtek RTL8723DE 802.11b/g/n PCIe Adapter
+                                                 Nombre de conexi¢n: Wi-Fi
+                                                 DHCP habilitado:    S¡
+                                                 Servidor DHCP:      192.168.0.1
+                                                 Direcciones IP
+                                                 [01]: 192.168.0.10
+                                                 [02]: fe80::bd5f:4b64:8d4:d365
+                                           [02]: Realtek PCIe GBE Family Controller
+                                                 Nombre de conexi¢n: Ethernet
+                                                 Estado:             Medios desconectados
+                                           [03]: Bluetooth Device (Personal Area Network)
+                                                 Nombre de conexi¢n: Conexi¢n de red Bluetooth
+                                                 Estado:             Medios desconectados
+Requisitos Hyper-V:                        Extensiones de modo de monitor de VM: S¡
+                                           Se habilit¢ la virtualizaci¢n en el firmware: No
+                                           Traducci¢n de direcciones de segundo nivel: S¡
+                                           La prevenci¢n de ejecuci¢n de datos est  disponible: S¡
