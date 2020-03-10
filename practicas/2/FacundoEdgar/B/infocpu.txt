@@ -1,0 +1,62 @@
+C:\Users\Facundo>systeminfo
+
+Nombre de host:                            SATELLITE-L55
+Nombre del sistema operativo:              Microsoft Windows 10 Pro
+Versión del sistema operativo:             10.0.17763 N/D Compilación 17763
+Fabricante del sistema operativo:          Microsoft Corporation
+Configuración del sistema operativo:       Estación de trabajo independiente
+Tipo de compilación del sistema operativo: Multiprocessor Free
+Propiedad de:                              Facundo
+Organización registrada:
+Id. del producto:                          00331-10000-00001-AA464
+Fecha de instalación original:             7/1/2020, 17:58:50
+Tiempo de arranque del sistema:            14/2/2020, 11:16:20
+Fabricante del sistema:                    TOSHIBA
+Modelo el sistema:                         Satellite L55-B
+Tipo de sistema:                           x64-based PC
+Procesador(es):                            1 Procesadores instalados.
+                                           [01]: Intel64 Family 6 Model 69 Stepping 1 GenuineIntel ~1700 Mhz
+Versión del BIOS:                          INSYDE Corp. 1.90, 8/10/2014
+Directorio de Windows:                     C:\Windows
+Directorio de sistema:                     C:\Windows\system32
+Dispositivo de arranque:                   \Device\HarddiskVolume1
+Configuración regional del sistema:        580a
+Idioma de entrada:                         es;Español (tradicional)
+Zona horaria:                              (UTC-06:00) Guadalajara, Ciudad de México, Monterrey
+Cantidad total de memoria física:          8,117 MB
+Memoria física disponible:                 3,914 MB
+Memoria virtual: tamaño máximo:            9,397 MB
+Memoria virtual: disponible:               3,010 MB
+Memoria virtual: en uso:                   6,387 MB
+Ubicación(es) de archivo de paginación:    C:\pagefile.sys
+Dominio:                                   WORKGROUP
+Servidor de inicio de sesión:              \\SATELLITE-L55
+Revisión(es):                              10 revisión(es) instaladas.
+                                           [01]: KB4534131
+                                           [02]: KB4465065
+                                           [03]: KB4470788
+                                           [04]: KB4486153
+                                           [05]: KB4489907
+                                           [06]: KB4516115
+                                           [07]: KB4523204
+                                           [08]: KB4524244
+                                           [09]: KB4537759
+                                           [10]: KB4532691
+Tarjeta(s) de red:                         3 Tarjetas de interfaz de red instaladas.
+                                           [01]: Bluetooth Device (Personal Area Network)
+                                                 Nombre de conexión: Conexión de red Bluetooth
+                                                 Estado:             Medios desconectados
+                                           [02]: Realtek PCIe FE Family Controller
+                                                 Nombre de conexión: Ethernet
+                                                 DHCP habilitado:    Sí
+                                                 Servidor DHCP:      192.168.1.1
+                                                 Direcciones IP
+                                                 [01]: 192.168.1.240
+                                                 [02]: fe80::9498:e456:b6c7:27c9
+                                           [03]: Qualcomm Atheros AR956x Wireless Network Adapter
+                                                 Nombre de conexión: Wi-Fi
+                                                 Estado:             Medios desconectados
+Requisitos Hyper-V:                        Extensiones de modo de monitor de VM: Sí
+                                           Se habilitó la virtualización en el firmware: Sí
+                                           Traducción de direcciones de segundo nivel: Sí
+                                           La prevención de ejecución de datos está disponible: Sí

@@ -1,0 +1,252 @@
+#+title: Proyecto 1 • Calificaciones y comentarios
+#+options: toc:nil
+
+*Nota:* Hay unos pocos trabajos que no se incluyen en esta revisión,
+son los que tienen detalles pendientes por incorporar en Git. Algunos,
+requieren de ustedes para que yo los procese. Otros, sólo me están
+esperando a mí. Actualizo esto pronto.
+
+* Anatomy of Linux system call in ARM64
+** Patricio Barrero / Héctor Espino
+ - Documento :: [[./BarreroPatricio-EspinoHector/proyecto_1.pdf][proyecto_1.pdf]]
+ - Comentarios ::
+   - Encuentran los puntos principales del tema
+   - No es lo que yo llamaría un mapa conceptual... Pero quedamos en
+     que no es /eso/ lo que calificaríamos 😉
+ - Calificación :: 10
+
+** Ismael Caballero / Alam Guillén
+ - Documento :: [[./CaballeroIsmael-GuillenAlam/Mapa
+                conceptual.png][Mapa conceptual.png]]
+ - Comentarios ::
+   - ¡Buen resumen!
+   - Me llama la atención que lo escriban en inglés. ¡Me parece un buen
+     esfuerzo!
+ - Calificación :: 10
+
+* Another level of indirection
+** Samuel Garrido / Jorge Cárdenas
+ - Documento :: [[./GarridoSamuel-C%C3%A1rdenasJorge/Another%20level%20of%20indirection.%20GarridoSamuel-C%C3%A1rdenasJorge.pdf][Another level of indirection. GarridoSamuel-CárdenasJorge.pdf]]
+ - Comentarios ::
+   - Uau... ¡Qué nivel de detalle!
+   - Muy bien realizado, muy claro, con flujo natural y mapeo directo
+     al artículo
+   - Sin embargo, cuando están elaborando un mapa conceptual, uno de
+     los puntos claves a ganar de esta herramienta es lograr ser
+     concisos y aislar lo más importante. Sí, lograron resumir 13
+     páginas de texto corrido en un diagrama de una sola (aunque
+     enorme 😉)
+     - Para ser sintéticos, hay que ahorrar en el lenguaje (y sí, eso
+       a mí no se me da demasiaod bien). Por ejemplo, /Esa capa
+       permite al sistema de archivos/ /ofrecer algunos servicios
+       basados en los servicios de sistemas de archivos subyacentes/
+       podría reducirse a /Permite al sistema de archivos ofrecer
+       servicios que reflejan los del sistema subyacente/, agregando
+       legibilidad y reduciendo cantidad de texto.
+ - Calificación :: 10
+
+* Tearing apart =printf()=
+
+** Carlos Alcántara / Roel Pérez
+ - Documento :: [[./AlcantaraCarlos-PerezRoel/TearingApartprintf.pdf][TearingApartprintf.pdf]]
+ - Comentarios ::
+   - Buena y atractiva presentación. ¡Bien!
+   - Me preguntaron, y les dije que no me importaban los /detalles
+     específicos/ del mapa conceptual. Va únicamente como comentario,
+     para que no los agarren en curva a futuro: Lo que entregaron se
+     conoce como /cuadro sinóptico/, no como /mapa conceptual/
+     - (Como veo que ustedes mismos lo anotan en la columna
+       izquierda...)
+   - Hacen un cuadro a dos niveles, y el tercer nivel es prosa
+     corrida. No ganan mucho ahorrando un par de caracteres del flujo
+     de texto — Bajo /Compilando → Ligador/, mencionan al
+     /cod. objeto/. Resulta más claro referirse a éste con todas sus
+     letras: /Código objeto/.
+   - Se mantuvieron al 2° nivel de acercamiento ("90 seconds -
+     interview question edition"). ¡Vale la pena echarle un buen ojo a
+     la "1000 seconds"...
+ - Calificación :: 8
+
+** Jorge Bárcenas
+ - Documento :: [[./BarcenasJorge/printf.pdf][printf.pdf]]
+ - Comentarios ::
+   - ¡Muy buen trabajo! No es sencillo organizar la información de un
+     artículo tan complicado como éste, y –sin usar una
+     herramienta... particularmente diseñada para hacerlo– lo hiciste
+     bastante completo.
+   - Hay un par de detalles a marcar. Por ejemplo, mezclar en igualdad
+     de condiciones a los ejemplos utilizados (=printf0.c=
+     vs. =printf1.c=) con los conceptos presentados
+   - Claro, conforme aumenta la densidad de la explicación en los
+     últimos pasos, se nota que costó comprender, e incluyeron la
+     traducción directa parcial. Pero era de esperarse ☺
+ - Calificación :: 10
+
+** Fernando Medina
+ - Documento :: [[./MedinaFernando/SistopP1.pdf][SistopP1.pdf]]
+ - Comentarios ::
+   - ¡Muy buen trabajo! Se ve que te esforzaste en comprender conforme
+     se hacía más y más denso.
+   - Misma nota que al compañero anterior: conforme aumenta la
+     densidad de la explicación en los últimos pasos, se nota que
+     costó comprender, e incluyeron la traducción directa
+     parcial. Pero era de esperarse ☺
+ - Calificación :: 10
+
+** Alfonso Murrieta / Joaquín Valdespino
+ - Documento :: [[./MurrietaAlfonso-ValdespinoJoaquin/README.md][README.md]], [[./MurrietaAlfonso-ValdespinoJoaquin/proyecto1.pdf][proyecto1.pdf]]
+ - Comentarios ::
+   - Respecto a la aclaración que hacen en el README: Recuerden que
+     PDF no es un formato de mapa de bits, sino que nativamente
+     vectorial. No se puede hablar de que tenga una resolución
+     determinada (aunque sí las imágenes que lo conforman). Me quedo
+     con el PDF que enviaron. Basta ampliar el tamaño presentado, se
+     puede ver perfectamente 😉
+   - ¡Muy buen trabajo! Completo (incluso con los distintos niveles de
+     acercamiento), con notas humorísticas y demás ☺
+ - Calificación :: 10
+
+* C is not a low-level language
+
+Tengo que pedirles una disculpa: Planteé este artículo como
+/relativamente sencillo/, pero ante una re-lectura... Toca varios
+conceptos bastante específicos, y estoy seguro de que más de uno de
+ustedes terminó mareado.
+
+Pero, ni hablar, ya lo leyeron y lo entendieron. ¡Que les sea de mucho
+provecho! 😉
+
+** Enrique Albores
+ - Documento :: [[./AlboresEnrique/mapa.jpeg][mapa.jpeg]]
+ - Comentarios ::
+   - Ugh, cuesta trabajo leer la foto que tomaste ☹ Ligeramente fuera
+     de foco, baja resolución...
+     - No pude siquiera leer bien la parte derecha de la
+       fotografía... No es una buena publicidad para tu teléfono (que
+       pone su nombre dentro de la imagen. ¿para qué se lo dejas? 😉)
+   - El artículo se refiere a la PDP-11 porque es la arquitectura para
+     la cual fue diseñada C. El que C se presente a nosotros hoy en
+     día como "bajo nivel" es porque sus instrucciones son fáciles de
+     traducir a la arquitectura de PDP, pero... No lo es a los CPUs
+     actuales
+ - Calificación :: 10
+
+** Marcelo Cruz
+ - Documento :: [[./CruzMarcelo/Proyecto1.jpg][Proyecto1.jpg]]
+ - Comentarios ::
+   - ¡GUAU! Más que un mapa conceptual, me entregaste un mapa de
+     carreteras bastante completo. Y se ve que te dedicaste a entender
+     bastante a detalle los conceptos que presenta el artículo, hasta
+     algunos /bastante/ complejos. ¡Felicidades!
+ - Calificación :: 10
+
+** Fernando Leco
+ - Documento :: [[./LecoFernando.png][LecoFernando.png]]
+ - Comentarios ::
+   - Tu nota amarilla, al centro, abajo: /Garbage-collected virtual
+     machines/ — Lo que indica el artículo en ese párrafo es que C no
+     necesariamente se implementa en arquitecturas similares o
+     cercanas a su modelo como fue descrito inicialmente, sino que
+     (...) hasta /máquinas virtuales con recolección de basura/.
+     - Ya hablarán de /recolección de basura/ cuando estudien la
+       materia /Compiladores/. Es un tema bonito y complicado; una
+       máquina virtual puede /seguir rastro/ a las asignaciones y
+       liberaciones de memoria que hacen sus programas, y liberar
+       automáticamente regiones de memoria /hacia niveles más bajos/.
+   - Como mapa conceptual, le falta un poco. Por ejemplo, no queda
+     claro cuál es la importancia de la línea de conceptos azules (¡y
+     es altísima!)
+ - Calificación :: 10
+
+** Javier Loidi
+ - Documento :: [[./LoidiJavier/Mapa.pdf][Mapa.pdf]]
+ - Comentarios ::
+   - Buen resumen, y buen mapeo de conceptos (¡inclusive creando un
+     grafo complejo, no-árbol! 😉)
+   - No cubre la última parte del artículo (/Imagining a Non-C
+     Processor/), pero no importa (ver mi nota-disculpa al principio
+     de esta sección)
+ - Calificación :: 10
+
+** Pamela Nieto
+ - Documento :: [[./NietoPamela_/proyecto 1, c no es un lenguaje de bajo nivel.jpeg][proyecto 1, c no es un lenguaje de bajo nivel.jpeg]]
+ - Comentarios ::
+   - ¡Ojo con las fotos! Perdiste parte de tu texto ☹
+   - No es que C no sea un lenguaje rápido (sigue siendo el "estándar
+     dorado" contra el que cualquier lenguaje tendrá que medirse),
+     es lo "más mejor" que podemos conseguir si insistimos en usar una
+     semántica de instrucciones estrictamente secuenciales
+   - A pesar de que mantengo lo que dije, que el artículo no era tan
+     sencillo como me pareció al principio, me parece que te faltó
+     desarrollar varios de los conceptos que se presentan
+ - Calificación :: 9
+
+** Sergio Reza
+ - Documento :: [[./RezaSergio/Proyecto1.pdf][Proyecto1.pdf]]
+ - Comentarios ::
+   - Me habría gustado ver los conceptos un /poquito/ más desagregados
+     — Pero reconozco lo que menciono en mi nota-disculpa al principio
+     de esta sección.
+ - Calificación :: 10
+
+* Open Source Firmware
+** Edgar Facundo
+ - Documento :: [[./FacundoEdgar/Firmware.pdf][Firmware.pdf]]
+ - Comentarios ::
+   - Presentas bien la primera parte del artículo (introducción al
+     firmware, niveles o anillos de privilegio), pero no mencionas a
+     los proyectos, runtimes, otros tipos de firmware que se ejecutan,
+     las raíces de confianza, retos... ☹
+ - Calificación :: 8
+
+** Eduardo Jiménez
+ - Documento :: [[./JimenezEduardo/Proyecto1Firmware.pdf][Proyecto1Firmware.pdf]]
+ - Comentarios ::
+   - Buen resumen
+   - Me gustaría que entraran más en la importante parte relativa a la
+     /confianza/ (boot guard / root of trust). Son conceptos
+     importantes para comprender.
+ - Calificación :: 10
+
+** Kevin Lara
+ - Documento :: [[./LaraKevin/ConceptMap.pdf][ConceptMap.pdf]]
+ - Comentarios ::
+   - ¡Buen trabajo! Me dejaste sin nada que agregar ☺
+ - Calificación :: 10
+
+** Ricardo Muñoz
+ - Documento :: [[./MuñozRicardo/mapa mental.PNG][mapa mental.PNG]]
+ - Comentarios ::
+   - Buen resumen
+ - Calificación :: 10
+
+** René Vázquez
+ - Documento :: [[./VazquezRene/VazquezRene.jpg][VazquezRene.jpg]]
+ - Comentarios ::
+   - Equivocaste la definición del anillo 3 (el menos privilegiado,
+     donde se ejecuta el código nivel usuario) con el -3 (motor de
+     gestión).
+     - Pero... no entiendo — ¿Copiaste y pegaste el pedazo de imagen
+       del 3 al -3? :-/ No, la letra no es la misma... ¡No entiendo!
+ - Calificación :: 9
+
+* What's new in CPUs since the 80s?
+
+** Sergio Osorio
+ - Documento :: [[./proyectos/1/OsorioSergio/Proyecto 1.jpeg][Proyecto 1.jpeg]]
+ - Comentarios ::
+   - El artículo menciona muchos aspectos... Y, claro, sería ridículo
+     que auditara con lupa para asegurarme que incorporaras todo lo
+     que yo considero /importante/ 😉 Me parece una buena cobertura
+     general
+   - ¿Por qué le llamas /paradigma/ a la /ejecución fuera de orden? Es
+     una característica del hardware, un poquito difícil de entender:
+     El planificador (en hardware) del CPU /espía/ sus siguientes
+     instrucciones para ejecutar, y (si puede) las reordena para
+     lograr una mejor utilización de todos los componentes internos
+     del CPU.
+   - Concurrencia de memoria → Creación de barreras: No son los
+     /archivos/ (datos persistentes, almacenados en algún medio
+     magnético o de estado sólido) de un hilo desde otro, sino que
+     /datos/ (en memoria primaria).
+ - Calificación :: 10
