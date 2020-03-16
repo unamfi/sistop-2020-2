@@ -1,0 +1,25 @@
+Alumno: Jorge Octavio Barcenas Avelar
+
+Elegí el problema del cruce del río.
+
+Desarrrolle mi propuesta para resolver el problema en Python 3
+la version que tengo es 3.6.9 por lo que se requiere una version cercana 
+comando para ejecutar, en caso de tener python 2 y 3 :
+python3 el_cruce_rio.python
+
+
+la lógica que use fue ocupar mutex para porteger el acceso de la 
+balsa y semaforos para la señalizacion del numero de hacker o serfs
+una parte importante en la resolucion del problema fue el conteo
+de los hackers y sefs, es decir, la parte del envio de señales ya que
+en este punto intente condicionar de que cuando ya se cumpliera el número la balsa
+zarpara.
+
+Los problemas que tuve fueron:
+
+Al ejecutar el programa el flujo para muchos hackers y serfs (100 cada uno) era el siguiente:
+    Muchos hacker accedian de 4 en 4 a la balse y se iban
+    Muy pocos hackers coexistian en la balsa con los serfs 2 y 2
+    y finalmente accedian el resto de serfs de 4 en 4
+
+Rara vez el programa llego a enviar 5 desarrolladores, no tengo mucha idea del por qué :,v
