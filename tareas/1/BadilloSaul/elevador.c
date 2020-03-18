@@ -15,7 +15,7 @@ void* elevador( ) {
 			printf("Llegando al piso %d",piso);
 			pthread_cond_broadcast(&piso_actual);
 			pthread_mutex_unlock(&en_sal);
-			sleep(10);
+			sleep(4);
 			pthread_mutex_lock(&en_sal);
 			printf("Se mueve el elevador \n");
 		}
@@ -42,24 +42,26 @@ void* alumno(int* pisos) {
   
   
 int main() { 
-    sem_init(&mutex, 0, 4); 
-    pthread_t t1,t2,t3,t4,t5; 
-	 int pisos[]={1,4};
-    pthread_create(&t1,NULL,elevador,pisos); 
-    sleep(1); 
-    pthread_create(&t2,NULL,alumno,pisos); 
-    sleep(1); 
-    pthread_create(&t3,NULL,alumno,pisos); 
-    sleep(1); 
-    pthread_create(&t4,NULL,alumno,pisos); 
-    sleep(1); 
-    pthread_create(&t5,NULL,alumno,pisos); 
-    sleep(1); 
-    pthread_join(t1,NULL); 
-    pthread_join(t2,NULL); 
-    pthread_join(t3,NULL); 
-    pthread_join(t4,NULL); 
-    pthread_join(t5,NULL); 
-    sem_destroy(&mutex); 
-    return 0; 
+	sem_init(&mutex, 0, 4); 
+	pthread_t t1,t2,t3,t4,t5; 
+	int pisos[]={0,4};
+   pthread_create(&t1,NULL,elevador,pisos); 
+   sleep(1); 
+   pthread_create(&t2,NULL,alumno,pisos); 
+   sleep(1); 
+	int pisos2[]={0,3};
+   pthread_create(&t3,NULL,alumno,pisos2); 
+   sleep(1); 
+	int pisos3[]={1,4};
+   pthread_create(&t4,NULL,alumno,pisos3); 
+   sleep(1); 
+   pthread_create(&t5,NULL,alumno,pisos3); 
+   sleep(1); 
+   pthread_join(t1,NULL); 
+   pthread_join(t2,NULL); 
+   pthread_join(t3,NULL); 
+   pthread_join(t4,NULL); 
+   pthread_join(t5,NULL); 
+   sem_destroy(&mutex); 
+   return 0; 
 } 
