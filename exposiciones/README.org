@@ -21,6 +21,7 @@ el que ustedes me planteen los temas de su interés.
 | 17.03.2020 | Dart como lenguaje multiplataforma | Niver Martínez y Jorge Bárcenas       |                                                                    |            |
 | 19.03.2020 | El lenguaje de programación Rust   | Alam Guillen y Alejandro Pérez        |                                                                    |            |
 | 24.03.2020 | Pointer Authentication Codes       | Carlos Alcántara y Roel Pérez         |                                                                    |            |
+| 26.03.2020 | Cargado y ligado de programas      | Araí Jaramillo                        |                                                                    |            |
 | 14.04.2020 | Coherencia de caché                | Facundo Acuña                         |                                                                    |            |
 |------------+------------------------------------+---------------------------------------+--------------------------------------------------------------------+------------|
 #+TBLFM: 
