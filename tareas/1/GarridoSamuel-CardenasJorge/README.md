@@ -1,5 +1,5 @@
 # Comer o ser comido 🐭 🐈
-###Alumnos: 
+### Alumnos: 
 - Garrido Sánchez Samuel Arturo
 - Cárdenas Cárdenas Jorge
 
@@ -7,17 +7,17 @@
 ## Planteamiento 🍎
 
 Tengo *k* gatos (y desafortunadamente, *l* ratones) en su casa. Le sirvo la comida a mis gatos en *m* platos.
-Gatos y ratones han llegado a un acuerdo para repartirse el tiempo y comida, pero tienen que convencerme de que están haciendo su trabajo.
+Gatos y ratones han llegado a un acuerdo para repartirse el tiempo y comida, pero tienen que convencerme de que están haciendo su trabajo.
 
 ## Reglas ⭐️
 
 Los gatos pueden comer de sus m platos de comida.
 Los ratones pueden comer de esos mismos platos siempre y
 cuando no sean vistos.
-Si un gato ve a un ratón comiendo, se lo debe comer (para mantener su reputación)
-Los platos están puestos uno junto al otro
-Sólo un animal puede comer de cada plato a la vez
-Si un gato está comiendo y un ratón comienza a comer de otro plato, el gato lo ve (y se lo come).
+Si un gato ve a un ratón comiendo, se lo debe comer (para mantener su reputación)
+Los platos están puestos uno junto al otro
+Sólo un animal puede comer de cada plato a la vez
+Si un gato está comiendo y un ratón comienza a comer de otro plato, el gato lo ve (y se lo come).
 Por acuerdo de caballeros, los gatos no se van a acercar a los platos mientras hay ratones comiendo.
 
 ## Resolución 💡
