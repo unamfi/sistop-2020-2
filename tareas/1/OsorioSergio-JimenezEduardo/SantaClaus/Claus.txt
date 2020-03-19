@@ -1,0 +1,11 @@
+Problema a resolver: Problema de Santa Claus.
+
+Qué se debe de hacer para correr el programa? 
+El proyecto se realizó en NetBeans, por lo que es importante, tener instalado la última version de Apache, ya que se usa un plug in org.codehaus.mojo:exec-maven-plugin:1.2.1 , y hemos notado que en versiones anteriores de NetBeans no se realiza la instalación, por lo que no se puede compilar...
+
+Estrategia de sincronización:
+ Barrera - Controla los Elfos con errores.
+Semaforo - Para Santa Claus.
+
+Sin refinamiento: No porque en algunos casos de 1 a 2 juguetes se queda sin reparar, tenemos duda en eso, deberiamos agregar una validación al final? Para evitar esos casos? O lo dejamos así? 
+
