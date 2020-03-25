@@ -1,0 +1,15 @@
+Esta tarea trata de la implementación de algoritmos básicos
+en la planificación de procesos.
+
+los procesos se generan de manera aleatoria usando 
+rend_proc(), cada proceso se compone del id del proceso,
+el timepo en que llega el proceso y el tiempo de ejecución.
+
+
+el comando para correr el programa es:
+python3 main.py <numero_de_procesos> <numero_de_rondas>
+
+ejemplo:
+python3 main.py 7 4
+
+7 procesos y 4 rondas
