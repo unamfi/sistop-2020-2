@@ -77,4 +77,4 @@ para probar el algoritmo.
 	
 Se incluye una imagen de la prueba de ejecución.
 
- [!captura](https://github.com/NiverMtz/sistop-2020-2/tareas/2/MartinezNiver/images.png)
+ ![captura](tareas/2/MartinezNiver/images/captura.PNG)
