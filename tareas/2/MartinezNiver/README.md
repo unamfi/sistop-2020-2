@@ -77,4 +77,4 @@ para probar el algoritmo.
 	
 Se incluye una imagen de la prueba de ejecución.
 
- ![captura](tareas/2/MartinezNiver/images/captura.PNG)
+ <p align="center"><img src="images/captura.PNG" width="350"/> </p> 
