@@ -6,6 +6,7 @@ import threading
 import time
 import random 
 
+# Declaracion de hilos Santa,Reno, Elfo y Elfo(grupo de 3 para solicitar ayuda)
 SantaSem = threading.Semaphore(0)
 RenoSem = threading.Semaphore(0)
 ElfoAyudaSem = threading.Semaphore(3)
@@ -26,6 +27,8 @@ TO_HELP = 2
 RenosID = ["A","B","C","D","F","G","H","I","J"]
 ElfoID = ["1","2","3","4","5","6","7","8","9"]
 
+#Proceso de Santa para llevar el conteo de Elfos acumulados para solicitar ayuda 
+#Asi como el contador de los renos cuando ya esten reunidos todos, podran irse
 def santa():
 	global RenosContador
 	global elfs
@@ -50,7 +53,9 @@ def santa():
                 preparesleight()
                 for i in range(Renos):
                     RenoSem.release()
-				
+
+
+#Proceso Reno similar a pasar la lista para irse 				
 def reindeer():
 	global RenosContador
 	global ren
@@ -70,6 +75,8 @@ def reindeer():
     RenoSem.acquire()
         print ("   {} listos ").format(RenosID[num]))
         print ("   Renos {} terminaron").format(RenosID[num]))
+
+#Proceso Elfo, es el proceso para reunir de 3 en 3 a los Elfos para pasar con santa, en el proceso Santa 
 
 def elf():
 
@@ -94,13 +101,14 @@ def elf():
 		print ("{} recibiendo ayuda".format(ElfoID[num]))
 	print (" {} termino".format(ElfoID[num]))
 
-
+#Proceso final para ir a entregar juguetes 
 def preparesleight():
     print ("Santa dice: juguetes listos")
     print ("Santa carga los juguetes")
     print ("Santa dice: hasta las siguientes vacaciones")
     print ("Santa dice: vamos a dormir")
 
+#Lanzamiento de los hilos Santa, Elfos y Renos
 def main()
 
 threads = []
