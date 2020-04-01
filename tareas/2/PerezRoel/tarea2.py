@@ -7,7 +7,8 @@ Genera la tabla de procesos aleatoria. Recibe una lista vacia 'procesos' y
 la convierte en una lista de listas de procesos
 	
 Lista proceso:	[<tiempo de llegada>,<tiempo requerido>,<nombre(caracter)>,
-				<tiempo de respuesta>,<tiempo en espera>,<proporcion de penalizacion>]
+				<tiempo de respuesta>,<tiempo en espera>,<proporcion de penalizacion>,
+				<texto de ejecucion>]
 
 Cada tick (t), hay una probabilidad de 1/p de que llegue un proceso con un tiempo
 requerido entre tmin y tmax. T,E,P se inicializan en 0. 
@@ -17,7 +18,7 @@ def generarProcesos(procesos,n,p,tmin,tmax):
 	nombreASCII = 65 
 	while(n > 0):
 		if(randint(0,p-1) == 0):
-			proceso = [t,randint(tmin,tmax),chr(nombreASCII),0,0,0]
+			proceso = [t,randint(tmin,tmax),chr(nombreASCII),0,0,0,""]
 			procesos.append(proceso)
 			nombreASCII += 1
 			n -= 1
@@ -61,7 +62,7 @@ Muestra el diagrama donde se observan los procesos, desde su inicio hasta su fin
 def diagrama(lista_tareas):
 	print("\nDiagrama: ")
 	for i in lista_tareas:
-		print((" "*i[0]) + (i[2]*i[3]))
+		print((" "*i[0]) + i[6])
 
 
 #FIRST COME FIRST SERVE
@@ -88,10 +89,16 @@ def fcfs(tareas):
 		if(len(tareas_cola) > 0):
 			esquema = esquema + tareas_cola[0][2] 
 			for i in tareas_cola:
-				i[3]+=1 
+				i[3]+=1
 			tareas_cola[0][1] -= 1
+			######
+			tareas_cola[0][6] = tareas_cola[0][6] + tareas_cola[0][2]
+			for i in range (1, len(tareas_cola)):
+				tareas_cola[i][6] = tareas_cola[i][6] + '-'
+			######
 			if(tareas_cola[0][1] == 0):
 				tareas_ent[tareas_cola_ite][3] = tareas_cola[0][3]
+				tareas_ent[tareas_cola_ite][6] = tareas_cola[0][6] ######
 				tareas_cola_ite += 1;
 				tareas_cola.pop(0) 
 		else:
@@ -141,11 +148,18 @@ def rrn(tareas, n):
 			tareas_cola[0][1] -= 1
 			quantum -= 1
 
+			######
+			tareas_cola[0][6] = tareas_cola[0][6] + tareas_cola[0][2]
+			for i in range (1, len(tareas_cola)):
+				tareas_cola[i][6] = tareas_cola[i][6] + '-'
+			######
+
 			if(tareas_cola[0][1] == 0):
 				nombre = tareas_cola[0][2]
 				for i in range(len(tareas_ent)):
 					if(tareas_ent[i][2] == nombre):
 						tareas_ent[i][3] = tareas_cola[0][3]
+						tareas_ent[i][6] = tareas_cola[0][6] #####
 						break
 				tareas_cola.pop(0)
 				quantum = n 
@@ -196,12 +210,20 @@ def spn(tareas):
 			for i in tareas_cola:
 				i[3]+=1 
 			tareas_cola[0][1] -= 1
+
+			######
+			tareas_cola[0][6] = tareas_cola[0][6] + tareas_cola[0][2]
+			for i in range (1, len(tareas_cola)):
+				tareas_cola[i][6] = tareas_cola[i][6] + '-'
+			######
+
 			ejec = 1
 			if(tareas_cola[0][1] == 0):
 				nombre = tareas_cola[0][2]
 				for i in range(len(tareas_ent)):
 					if(tareas_ent[i][2] == nombre):
 						tareas_ent[i][3] = tareas_cola[0][3]
+						tareas_ent[i][6] = tareas_cola[0][6] #####
 						break
 				tareas_cola.pop(0)
 				ejec = 0
@@ -246,6 +268,12 @@ def srr(tareas,a,b):
 			sigEjec[4] = b
 			esquema = esquema + sigEjec[2]
 			sigEjec[1] -= 1
+			####
+			sigEjec[6] = sigEjec[6] + sigEjec[2]
+			for i in tareas_colas:
+				for j in i:
+					j[6] = j[6] + '-'
+			####
 			#Se vuelve a encolar si no ha terminado; de lo contrario, devuelve su info a la cola entrante
 			if(sigEjec[1] > 0):
 				tareas_colas[len(tareas_colas)-1].insert(0,sigEjec)
@@ -255,6 +283,7 @@ def srr(tareas,a,b):
 				for i in range(len(tareas_ent)):
 					if(tareas_ent[i][2] == nombre):
 						tareas_ent[i][3] = sigEjec[3]
+						tareas_ent[i][6] = sigEjec[6] #####
 						break
 			#Se actualiza la prioridad de todos los procesos
 			for i in reversed(range(0,len(tareas_colas))):
@@ -292,7 +321,7 @@ rrn(tareas1,1)
 rrn(tareas1,4)
 spn(tareas1)
 srr(tareas1,2,1)
-
+""""
 print("\n***************************************************")
 
 tareas2 = []
@@ -314,3 +343,4 @@ rrn(tareas3,1)
 rrn(tareas3,4)
 spn(tareas3)
 srr(tareas3,2,1)
+"""
