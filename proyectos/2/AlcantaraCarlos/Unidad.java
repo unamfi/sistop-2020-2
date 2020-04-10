@@ -65,20 +65,21 @@ public class Unidad extends Thread{
 	}
 	
 	public void run() {
+		int trayectoriaTotal=this.mutexEspacial.size();//la cantidad de mutex, son el total de espacios para recorrer todo el juego mecanico
+		int espaciosNecesariosNetos=this.longitud+this.espacioEntreUnidades;// Nos dice los espacios que debe ocupar una unidad contando los de seguridad
+		
 		print("Arrancamos");
-		ocuparLugar(0,longitud-1);
+		ocuparLugar(0,espaciosNecesariosNetos);//con esto ya contemplamos que la unidad ya avanzó y ya dejó marcados los espacios de seguridad en la parte de atras
 		
-		for (int i=this.longitud;i<(this.espacioEntreUnidades+this.longitud);i++) {
+		//mientras vamos avanzando, liberamos los espacios de seguridad, avanza 1, liberamos 1 para que otros hilos lo comiencen a ocupar
+		int i=0;//contador que nos dice en que punto de la trayectoria vamos
+		for (i=espaciosNecesariosNetos;i<trayectoriaTotal;i++) {
 			ocuparLugar(i);
+			desocuparLugar(i-espaciosNecesariosNetos);//
 		}
 		
-		//mientras vamos avanzando, liberamos los espacios de seguridad
-		int i=0;
-		for (i=this.espacioEntreUnidades+this.longitud;i<this.mutexEspacial.size();i++) {
-			ocuparLugar(i);
-			desocuparLugar(i-(this.espacioEntreUnidades+this.longitud));
-		}
-		for(i=this.mutexEspacial.size()-(this.espacioEntreUnidades+this.longitud);i<this.mutexEspacial.size();i++) {
+		//aun tenemos lugares que no desocupamos, estos ultimos son los correspondientes a la salida del vagon de la trayectoria, por ello liberamos
+		for(i=trayectoriaTotal-espaciosNecesariosNetos;i<trayectoriaTotal;i++) {
 			desocuparLugar(i);
 		}
 		
