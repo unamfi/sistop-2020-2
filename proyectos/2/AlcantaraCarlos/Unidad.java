@@ -59,7 +59,6 @@ public class Unidad extends Thread{
 		}
 
 		mutexEspacial.get(indiceDelLugar).release();
-		
 		print("Libere espacio: "+indiceDelLugar);
 
 	}
@@ -69,7 +68,7 @@ public class Unidad extends Thread{
 		int espaciosNecesariosNetos=this.longitud+this.espacioEntreUnidades;// Nos dice los espacios que debe ocupar una unidad contando los de seguridad
 		
 		print("Arrancamos");
-		ocuparLugar(0,espaciosNecesariosNetos);//con esto ya contemplamos que la unidad ya avanzó y ya dejó marcados los espacios de seguridad en la parte de atras
+		ocuparLugar(0,espaciosNecesariosNetos-1);//con esto ya contemplamos que la unidad ya avanzó y ya dejó marcados los espacios de seguridad en la parte de atras
 		
 		//mientras vamos avanzando, liberamos los espacios de seguridad, avanza 1, liberamos 1 para que otros hilos lo comiencen a ocupar
 		int i=0;//contador que nos dice en que punto de la trayectoria vamos
