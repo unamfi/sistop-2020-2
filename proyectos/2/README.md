@@ -1,5 +1,5 @@
-#Planteamiento
-##EL PLATO DE COMIDA PARA PERROS
+# Planteamiento
+## EL PLATO DE COMIDA PARA PERROS
 Como parte del planteamiento, se pretende establecer un ejemplo para la 
 concurrencia con una situación cotidiana, en este caso la situación será planteada
 con un caso personal, actualmente tengo tres perros, pero cada uno lo adopté en 
