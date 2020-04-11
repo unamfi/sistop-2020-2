@@ -4,18 +4,34 @@ import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 
 
-public class JuegoMecanico implements Runnable{
-	private String nombre;
-	private ArrayList<Unidad> unidadesFuncionando;
-	private int numLugaresAbordarJuego;
-	private int longitudCarriles;
+public class JuegoMecanico extends Thread{
+	private String nombre;	//nombre del juego mecanico
+	private int longitudTrayectoria;//longitud de la trayectoria que deben recorrer los vagones
+	private ArrayList<Unidad> unidadesFuncionando;//las unidades funcionando
+	private ArrayList<Semaphore> mutexTrayectoria;//conjunto de semaforos para que las unidades no choquen
 	
-	public JuegoMecanico(String nombre, int unidadesFuncionando,
-			int numLugaresAbordarJuego){
+	private ArrayList<Semaphore> barrerasEntrada;//barreras respetando la cantidad minima por unidad y que no sean mas de la cantidad e asientos
+	
+	
+	
+	public JuegoMecanico(String nombre, int unidadesFuncionando, int numAsientos,
+			int cupoMinimo,int longitudUnidades,int longitudTrayectoria, int longitudEspacioSeguro){
 		this.nombre=nombre;
-		this.unidadesFuncionando=new ArrayList<Unidad>(unidadesFuncionando);
+		this.longitudTrayectoria=longitudTrayectoria;
+		this.unidadesFuncionando=new ArrayList<Unidad>();
+		this.mutexTrayectoria=new ArrayList<Semaphore>();
 		
-		this.numLugaresAbordarJuego=numLugaresAbordarJuego;
+		//generamos los mutex de la trayectoria
+		for(int i=0;i<longitudTrayectoria;i++) {
+			this.mutexTrayectoria.add(new Semaphore(1));
+		}
+		
+		//generamos las unidades
+		for(int i=0;i<unidadesFuncionando;i++) {
+			this.unidadesFuncionando.add(new Unidad(numAsientos,cupoMinimo,longitudUnidades,
+					longitudEspacioSeguro,mutexTrayectoria));
+		}
+		
 	}
 	
 	public String getNombre() {
@@ -26,21 +42,13 @@ public class JuegoMecanico implements Runnable{
 		return this.unidadesFuncionando.size();
 	}
 	
-	public int getNumLugaresAbordarJuego() {
-		return this.numLugaresAbordarJuego;
-	}
 
 	@Override
 	public void run() {
-		ArrayList<Semaphore> s=new ArrayList<Semaphore>();
-		for(int i=0;i<50;i++) {
-			s.add(new Semaphore(1));
+		while (true) {
+			
 		}
-		Unidad u=new Unidad(5,1,3,3,s);
-		Unidad u1=new Unidad(5,1,3,3,s);
-		
-		u.run();
-		u1.run();
 		
 	}
+	
 }
