@@ -43,13 +43,13 @@ Como se especifica en el código, el recurso a compartir será el plato en el qu
 vierte la cantidad apropiada para que todos los perros se alimenten, siempre y 
 cuando consuman la porción adecuada a su tamaño, es por ello que el plato será el
 que se bloqueará al momento en el que uno de los perros quiera comer para así 
-consumir los gramos requeridos y después este "liberará" el plato para que los 
+consumir los gramos requeridos y después este *"liberará"* el plato para que los 
 demás consuman su porción, una vez terminado el alimento, se podrá rellenar el 
 plato.
 En éste caso específico, la variable que queremos proteger con nuestro mutex o 
-"*plato*" será la cantidad de comida servida, ya que todos pueden tener acceso a 
+*"plato"* será la cantidad de comida servida, ya que todos pueden tener acceso a 
 ella, sin embargo tendrán que poseer el plato para comerla o disminuirla.
-Al ser inicializado cada uno de los hilos o "*Perros*" tendrán como objetivo comer
+Al ser inicializado cada uno de los hilos o *"Perros"* tendrán como objetivo comer
 por lo que se les especificará su recurso a compartir (plato), la cantidad de 
 alimento que pueden comer por ocasión, y el tiempo que tardarán para consumir el
 alimento.
