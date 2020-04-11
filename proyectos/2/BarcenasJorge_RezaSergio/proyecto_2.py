@@ -12,10 +12,12 @@ num_clientes
 ###########listas
 meserosDisponibles = []
 clientesEnEspera = [] 
+chefsDisponibles = []
 
-## Mutex para los meseros disponibles y fila de clientes en espera
+## Mutex para los chefs y meseros disponibles y fila de clientes en espera
 mutex_fila_espera = threading.Semaphore(1)
 mutex_meseros_disp = threading.Semaphore(1)
+mutex_chefs_disp = threading.Semaphore(1)
 
 ## Multiplex para chefs, mesa, meseros disponibles
 chefs = threading.Semaphore(num_chefs)
@@ -32,6 +34,7 @@ class Cliente:
         self.id_cliente = id_cliente
         self.num_invitados = num_invitados
         self.lista_invitados = []
+        self.esperarComida = True
         #usaremos una barrera para que todos elijan su platillo
         self.cuenta_orden = 0
         self.mutex_orden = threading.Semaphore(1)
@@ -56,6 +59,8 @@ class Cliente:
         self.llamarMesero("menu")
         self.leerMenuYOrdenar()
         self.llamarMesero("orden")
+        while self.esperarComida == True:
+            print("Yo, el cliente {}, estoy esperando nuestra orden".format(self.id_cliente))
         self.comer()
         self.llamarMesero("cuenta")
         self.irse()
@@ -66,7 +71,7 @@ class Cliente:
         return threading.Thread(target = Cliente.Invitado, args=[self, i]).start()
 
     def llamarMesero(self, peticion):
-        global meserosDisponibles, meseros, mutex_meseros_disp, num_meseros
+        global meserosDisponibles, meseros, mutex_meseros_disp
         print("el cliente {} tiene una petición".format(self.id_cliente))
 
         #se pide un mesero, se saca de la lista de disponibles, se le da la peticion
@@ -75,7 +80,7 @@ class Cliente:
         mutex_meseros_disp.acquire()
         mesero = meserosDisponibles.pop(0)
         mutex_meseros_disp.release()
-        mesero.activar(peticion, self.id_cliente)
+        mesero.activar(peticion, self.id_cliente, self)
         meseros.release()
 
     def obtenerMesa(self):
@@ -139,23 +144,123 @@ class Cliente:
         
 
 
+class Invitado:
+    def __init__(self,cliente,id_invitado):
+        self.cliente = cliente
+        self.id_invitado = id_invitado
+        self.leerMenu()
+        self.decidirOrden()
 
+    def leerMenu(self)
+        print("El invitado {} del cliente {} leé el menu".format(self.id_invitado,self.cliente.id_cliente))
+        espera = random.randrange(1,5)
+        for i in range(espera):
+            pass
 
+    def decidirOrden(self):
+        self.cliente.mutex_orden.acquire()
+        #mensaje 
+        #tiempo espera
+        self.cliente.cuenta_orden += 1
+        self.cliente.mutex_orden.release()
+        self.cliente.lista_invitados.append(self)
 
-
-
-
-
-
-
-class invitado:
+    def comer(self):
+        #t espera
+        self.cliente.mutex_comer.acquire()
+        #mensaje de que termino
+        self.cliente.barrera_comer += 1
+        self.cliente.mutex_comer.release()
 
 
 class Mesero:
+    def __init__(self, id_mesero):
+        self.id_mesero = id_mesero
+        self.descansar = threading.Semaphore(0)
+        #*
+        self.enlistar()
 
+    def enlistar(self):
+        global meserosDisponibles
+        mutex_meseros_disp.acquire()
+        meserosDisponibles.append(self)
+        mutex_meseros_disp.release()
+
+    def activar(self, peticion, id_cliente, cliente, cliente):
+        global mutex_meseros_disp, meserosDisponibles
+        self.descansar.release()
+
+       if peticion == "mesa":
+             self.llevarMesa(id_cliente)
+        elif peticion == "menu":
+             self.mostrarMenu(id_cliente)
+        elif peticion == "orden":
+             self.llevarOrdenAChef(id_cliente, cliente)
+        elif peticion == "ordenLista":
+             self.llevarOrdenAMesa(id_cliente, cliente)
+        elif peticion == "cuenta":
+             self.traerCuenta(id_cliente)
+
+        print("El mesero {} ya se encuentra libre".format(self.id_mesero))
+        self.enlistar
+
+    def llevarMesa(self, id_cliente):
+        print("Yo, el mesero {}, llevare al cliente {} a su mesa".format(self.id_mesero,id_cliente))
+
+    def mostrarMenu(self, id_cliente):
+        print("Yo, el mesero {}, le he dado los Menus a todos en la mesa del cliente {} ".format(self.id_mesero,id_cliente))
+
+    def llevarOrdenAChef(self, id_cliente, cliente):
+        global chefsDisponibles, chefs, mutex_chefs_disp
+        print("Yo, el mesero {}, he llevado la orden del cliente {} a preparar".format(self.id_mesero,id_cliente))
+
+
+        #se pide un chef, se saca de la lista de disponibles
+        #al completar la acción el chef regresa a estar disponible
+        chefs.acquire()
+        mutex_chefs_disp.acquire()
+        chef = chefsDisponibles.pop(0)
+        mutex_chefs_disp.release()
+        chef.cocinar(cliente)
+        chefs.release()
+
+    def llevarOrdenAMesa(self, id_cliente, cliente):
+        print("Yo, el mesero {}, llevo la orden lista del cliente {} ".format(self.id_mesero,id_cliente))
+        cliente.esperarComida = False
+
+    def traerCuenta(self, id_cliente)
+        print("Yo, el mesero {}, llevo la cuenta en la mesa del cliente {} ".format(self.id_mesero,id_cliente))
 
 
 class Chef:
+    def __init__(self, id_chef):
+        self.id_chef = id_chef
+        self.enlistar()
+    
+    def enlistar(self):
+        global chefsDisponibles
+        mutex_chefs_disp.acquire()
+        chefsDisponibles.append(self)
+        mutex_chefs_disp.release()
+
+    def cocinar(self, cliente):
+        print("Yo, el chef {}, preparo la orden del cliente {} ".format(self.id_chef,cliente.id_cliente))
+        espera = random.randrange(1,5)
+        for i in range(espera):
+            pass
+        print("Yo, el chef {}, termine la orden del cliente {} ".format(self.id_chef,cliente.id_cliente))
+        
+        #busquemos un mesero que lleve la orden
+        meseros.acquire()
+        mutex_meseros_disp.acquire()
+        mesero = meserosDisponibles.pop(0)
+        mutex_meseros_disp.release()
+        mesero.activar("ordenLista", cliente.id_cliente, cliente)
+        meseros.release()
+
+        print("Yo, el chef {}, estoy libre, ire a dormir".format(self.id_chef))
+        self.enlistar()
+
 
 
 class Restaurante:
