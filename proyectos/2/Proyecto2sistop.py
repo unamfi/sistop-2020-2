@@ -35,7 +35,7 @@ import time
 
 cantidadDeCroquetas=450
 
-def consumo(cantidad,tDeCons):
+def consumo(cantidad,tDeCons,perro):
     """
     Una vez que el perro se acerque al plato y lo posea, éste podrá consumir la
     cantidad adecuada establecida por su tamaño.
@@ -43,13 +43,14 @@ def consumo(cantidad,tDeCons):
     ocasión:int
     """
     global cantidadDeCroquetas
+    print('El perro '+perro+' está comiendo')
     time.sleep(tDeCons)
     cantidadDeCroquetas=cantidadDeCroquetas - cantidad
-    print(cantidadDeCroquetas)
+    print('Cantidad de croquedas actual: '+str(cantidadDeCroquetas)+' gramos\n\n\n')
     if cantidadDeCroquetas==0:
         print('Ya no quedan croquetas!!! a ladrar para que nos hagan caso.')
 
-def comer(plato,cantidad,tDeCons):
+def comer(plato,cantidad,tDeCons,perro):
     '''
     El perro en acercarse primero, será el que tenga la oportunidad de 
     alimentarse en ese momento ya que poseerá el plato.
@@ -59,13 +60,15 @@ def comer(plato,cantidad,tDeCons):
     el perro, variará según su tamaño:int 
     '''
     plato.acquire()#Adquisición del plato
-    consumo(cantidad,tDeCons)#Llamada a la función consumo
+    consumo(cantidad,tDeCons,perro)#Llamada a la función consumo
     plato.release()#El perro ahora está satisfecho, puede ir a descansar
     
+print('Plato servido!!! A comer!')
+print('Cantidad de croquetas actual: '+str(cantidadDeCroquetas)+' gramos\n\n\n')
 plato=threading.Lock()#El plato será el recurso protegido
-perroG=threading.Thread(target=comer,args=(plato,300,5))
-perroM=threading.Thread(target=comer,args=(plato,100,3))
-perroC=threading.Thread(target=comer,args=(plato,50,2))
+perroG=threading.Thread(target=comer,args=(plato,300,5,'grande'))
+perroM=threading.Thread(target=comer,args=(plato,100,3,'mediano'))
+perroC=threading.Thread(target=comer,args=(plato,50,2,'chico'))
 
 perroG.start()
 perroM.start()
