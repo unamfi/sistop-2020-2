@@ -58,13 +58,21 @@ uno de los perros el tiempo especificado que tarda cada uno en comer, cuando és
 sea liberado, cualquiera de los otros restantes podrá obtener el plato y comer de 
 la misma manera.
 ## Descripción del entorno de desarrollo
-*Lenguaje empleado: **Python** versión: **3**
-*Bibliotecas empleadas: **threading** (Para la creación de los hilos), **time** (Para los 
+* Lenguaje empleado: 
+	- **Python** versión: **3**
+* Bibliotecas empleadas: 
+	- **threading** (Para la creación de los hilos)
+	- **time** (Para los 
 tiempos de espera para el consumo)
-*Sistemas operativos/distribuciones en los que fue probado: Windows 10, Kali Linux (WSL)
-*Ejemplos:
-![Ejecución en Spyder](./Spyder.png)
-![Ejecución en PowerShell de W10](./Powershell.png)
-![Ejecución en Kali Linux (WSL)](./Kali.png)
+* Sistemas operativos/distribuciones en los que fue probado: 
+	- Windows 10 
+	- Kali Linux (WSL)
+* Ejemplos:
+	- Ejecución en Spyder para Windows 10 
+		![Ejecución en Spyder](./Spyder.png)
+	- Ejecución en PowerShell de Windows 10
+		![Ejecución en PowerShell de W10](./Powershell.png)
+	- Ejecución en Kali Linux (Windows Subsistem for Linux)
+		![Ejecución en Kali Linux (WSL)](./Kali.png)
 
 
