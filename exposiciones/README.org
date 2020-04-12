@@ -24,6 +24,7 @@ el que ustedes me planteen los temas de su interés.
 | 26.03.2020 | Cargado y ligado de programas                  | Araí Jaramillo                        | [[./JaramilloArai/Cargado%20y%20Ligado%20de%20Programas.docx][Documento (DOCX)]], [[https://www.youtube.com/watch?v=pWl_m5nhqlk][Video]]                                                                        | [[./JaramilloArai/evaluacion.org][Evaluación]] |
 | 31.03.2020 | Virtualización directa de I/O: GPU Passthrough | Eduardo Jiménez                       |                                                                                                |            |
 | 14.04.2020 | Coherencia de caché                            | Facundo Acuña                         |                                                                                                |            |
+| 21.04.2020 | Heartbleed: Un exploit basado en /libres/      | Erick Jaimes y Josué Torres           |                                                                                                |            |
 |------------+------------------------------------------------+---------------------------------------+------------------------------------------------------------------------------------------------+------------|
 #+TBLFM: 
 
