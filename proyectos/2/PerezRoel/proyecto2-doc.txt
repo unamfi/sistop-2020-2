@@ -1,0 +1,57 @@
+Proyecto 2. 
+de Roel Pérez.
+
+Elaborado en:
+Python 3.6.8
+Linux Mint 19
+
+En el archivo descripcionDelProblema.txt se describe a fondo el problema planteado.
+
+- Mecanismos de sincronización
+Para este problema, se utilizaron semáforos (s) y variables de condición (vc). Se describen a continuación:
+
+reyPresente (vc). Booleano que indica que el rey está presente en la sala.
+
+bufonSentado (vc). Booleano que indica que el bufón está sentado.
+
+cortesanosPasados (vc). Entero que cuenta los cortesanos que han pasado por la sala mientras el bufón no está sentado. 
+
+cortesanosEsperando (vc). Entero que cuenta los cortesanos que están afuera esperando en la puerta. 
+
+presentes (vc). Entero que cuenta a los presentes en la sala, cortesanos o rey, sin incluir al bufón.
+
+debeLevantarse (s). Es una señalización que le indica al bufón cuándo debe levantarse del trono. 
+
+puedeSentarse (s). Es un(a especie de) apagador que se prende y apaga por el primero y el último en entrar, respectivamente (ya sea cortesano o el rey), pero únicamente si el bufón no está sentado. También lo prende y apaga el bufón al sentarse y levantarse. 
+
+puertaCortesanos (s). Es un torniquete para los cortesanos. Se puede cerrar o abrir dependiendo de cuántos cortesanos han pasado o cuántos cortesanos hay esperando, respectivamente.
+
+cederTrono (s). Es una señalización que le indica al rey que el bufón ha salido del trono y que ahora puede sentarse. 
+
+mutex (s). Es un mutex que protege todas las variables de condición. 
+
+
+Descripción de los hilos y su interacción. 
+(léase varias veces para entender bien la interacción)
+Nota: Cada escritura o lectura de una variable de condición se hace dentro del semáforo mutex.
+Nota 2: Utilizaré los términos "adquirir" y "liberar" para referirme a las operaciones de los semáforos.
+
+rey: El hilo del rey se encuentra dentro de un ciclo y una condición tal que cada segundo, hay una probabilidad de 1/p de que el rey entre a la sala.
+Cuando el rey entra, reyPresente se vuelve verdadero y presentes incrementa en 1. Si el rey es el primero en entrar y el bufón no está sentado, adquiere el "apagador" puedeSentarse. Si el bufón está sentado, liberará debeLevantarse para indicarle que salga del trono; adquirirá puedeSentarse, el cuál tiene garantizado que será liberado por el bufón después de levantarse del trono, y adqurirá cederTrono, que le señalizará cuándo puede sentarse. El orden de estos semáforos es para asegurarse de que el bufón no se sentará mientras el rey esté sentado.
+El rey estará en el trono por unos segundos.
+Al terminar, decrementará presentes en 1 y hara falso reyPresente. Si al retirarse es el último (presente = 0), y ya que tenemos garantizado en este caso que el bufón no está sentado, liberará puedeSentarse. 
+
+bufon: El hilo del bufón se ejecuta en un ciclo infinito.
+Al iniciar, empezará la cuenta de cortesanosPasados en 0. Adquirirá puedeSentarse, avanzando únicamente cuando el apagador esté abierto. 
+Cuando se le permita avanzar, hará bufonSentado verdadero, y adquirirá debeLevantarse, esperando a que otro hilo le señalice. Cuando esto ocurra, liberará puedeSentarse, para indicar que cede el apagador. 
+Finalmente, hará bufonSentado falso. Si hay M o más cortesanos esperando afuera, liberará puertaCortesanos para abrir el torniquete. Si el rey está presente, liberará cederTrono para señalizarle que puede sentarse. 
+
+cortesano: Existen múltiples hilos de cortesanos que corren concurrentemente, iniciando aleatoriamente en el tiempo.
+Al iniciar incrementa en uno cortesanosEsperando. Si hay M esperando, y el bufón está sentado, se le libera debeLevantarse para señalizarle al bufón (éste se encargará de abrir el torniquete). Si hay M esperando, pero el bufón no está sentado, solamente se reinicia la cuenta de cortesanosPasados y se libera puertaCortesanos para abrir el torniquete. Después, se pasa por el torniquete (se adquiere y libera puertaCortesanos de forma seguida).
+Pasado el torniquete, se incrementa en 1 a presentes y cortesanosPasados, mientras se decrementa cortesanosEsperando. Si es el primero en entrar (presentes = 1) y el bufón no está sentado, se adquiere a puedeSentarse. Si para este punto la cuenta de cortesanosPasados ya llego a N y el bufón no está sentado, adquirirá puertaCortesanos para cerrar el torniquete.
+El cortesano está unos segundos en la sala.
+Al terminar, el cortesano decrementa en 1 a presentes. Si es el último en salir y el bufón no está sentado, libera puedeSentarse. 
+
+
+
+ 
