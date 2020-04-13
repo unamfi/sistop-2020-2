@@ -17,13 +17,23 @@ total_seccion_de_transmision = 0
 total_llantas = 0
 total_pinturas = 0
 
+total_motor_chasis = 0
+total_transmision_llantas = 0
+total_autos_sin_pintura = 0
+total_autos = 0
+
 mutex_print = Semaphore(1)
 
 mutex_motor = Semaphore(1)
 mutex_seccion_de_chasis = Semaphore(1)
 mutex_seccion_de_transmision = Semaphore(1)
 mutex_llantas = Semaphore(1)
-mutex_cristales = Semaphore(1)
+mutex_pinturas = Semaphore(1)
+
+mutex_motor_chasis = Semaphore(1)
+mutex_transmision_llantas = Semaphore(1)
+mutex_autos_sin_pintura = Semaphore(1)
+mutex_autos = Semaphore(1)
 
 hay_motor = Semaphore(0)
 hay_seccion_de_chasis = Semaphore(0)
@@ -67,7 +77,7 @@ def constructor_seccion_de_chasis():
 
 
 def ensamblar_motor_con_seccion_de_chasis():
-    global hay_motor, hay_seccion_de_chasis, cuenta_motor, cuenta_seccion_de_chasis
+    global hay_motor, hay_seccion_de_chasis, cuenta_motor, cuenta_seccion_de_chasis, total_motor_chasis, mutex_motor_chasis
 
     hay_motor.acquire()
     hay_seccion_de_chasis.acquire()
@@ -75,12 +85,19 @@ def ensamblar_motor_con_seccion_de_chasis():
     mutex_motor.acquire()
     mutex_seccion_de_chasis.acquire()
 
+    mutex_motor_chasis.acquire()
+
+    total_motor_chasis = total_motor_chasis + 1
+
     mutex_print.acquire()
-    print("\n Hay",cuenta_motor,"motor/es y",cuenta_seccion_de_chasis,"secciones de chasis. Se ensamblo 1 motor con 2 secciones de chasis.")
+    print("\n --> Hay",cuenta_motor,"motor/es y",cuenta_seccion_de_chasis,"secciones de chasis.")
+    print("\n --> Se ensamblo 1 motor con 2 secciones de chasis. Se ensamblo el motor-chasis numero",total_motor_chasis)
     mutex_print.release()
 
     cuenta_motor = cuenta_motor - 1
     cuenta_seccion_de_chasis = cuenta_seccion_de_chasis - 2
+
+    mutex_motor_chasis.release()
 
     mutex_seccion_de_chasis.release()
     mutex_motor.release()
