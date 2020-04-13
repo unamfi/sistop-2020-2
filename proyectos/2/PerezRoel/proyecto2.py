@@ -8,6 +8,7 @@ import config as c
 N = 10 # Tolerancia de cortesanos que pasan
 M = 5 # Tolerancia de cortesanos esperando
 
+#Semaforos y variables de condicion
 debeLevantarse = Semaphore(0) # Señalización
 puedeSentarse = Semaphore(1) # 'Apagador' 
 puertaCortesanos = Semaphore(1) # Torniquete
@@ -16,7 +17,7 @@ cortesanosPasados = 0
 reyPresente = False 
 bufonSentado = False 
 presentes = 0 # presentes en la sala, sin incluir al bufón
-mutex = Semaphore(1) # Mutex para todas las variables. 
+mutex = Semaphore(1) # Mutex para todas las variables de condición. 
 cortesanosEsperando = 0
 
 #Variables que no sirven para concurrencia, sino para la visualización
@@ -34,8 +35,7 @@ def rey():
 			presentes += 1
 			reyPresente = True
 
-			#print("Ahi viene el rey!")
-			actualizarSinMutex("Ahi viene el rey!")
+			actualizarPantalla("Ahi viene el rey!")
 
 			#Si es el primero, adquiere el apagador
 			if presentes == 1 and not bufonSentado:
@@ -44,7 +44,7 @@ def rey():
 			#Si el bufón está sentado, le indica que se levante y le ceda el trono.
 			if bufonSentado:
 				debeLevantarse.release()
-				puedeSentarse.acquire()####
+				puedeSentarse.acquire()
 				mutex.release()
 				cederTrono.acquire()
 			else:
@@ -52,7 +52,7 @@ def rey():
 
 			mutex.acquire()
 			reySentado = True
-			actualizarSinMutex("El rey se sienta en el trono.")
+			actualizarPantalla("El rey se sienta en el trono.")
 			mutex.release()
 			sleep(randint(3,5))
 
@@ -62,10 +62,10 @@ def rey():
 			reySentado = False
 			reyPresente = False
 
-			actualizarSinMutex("El rey se levanta del trono y se va.")
+			actualizarPantalla("El rey se levanta del trono y se va.")
 
 			if presentes == 0:
-				actualizarSinMutex("No hay moros en la costa!")
+				actualizarPantalla("No hay moros en la costa!")
 				puedeSentarse.release()
 			mutex.release()
 
@@ -83,13 +83,13 @@ def bufon():
 		mutex.release()
 
 		#Procede cuando el apagador esté libre para sentarse
-		actualizarSinMutex("El bufón espera pacientemente...")
+		actualizarPantalla("El bufón espera pacientemente...")
 		puedeSentarse.acquire()
 
 		#Se sienta en el trono
 		mutex.acquire()
 		bufonSentado = True
-		actualizarSinMutex("El bufón se sienta en el trono.")
+		actualizarPantalla("El bufón se sienta en el trono.")
 		mutex.release()
 
 		#Espera a que le señalicen que debe levantarse.
@@ -98,22 +98,20 @@ def bufon():
 		#Cede el apagador.
 		puedeSentarse.release()
 
-		#print("El bufón debe levantarse!")
-
 		#Sale
 		mutex.acquire()
-		actualizarSinMutex("El bufón debe levantarse!")
+		actualizarPantalla("El bufón debe levantarse!")
 		bufonSentado = False 
 
 		#Si hay cortesanos en la puerta, libera el torniquete.
 		if cortesanosEsperando >= M:
 			puertaCerrada = False
-			actualizarSinMutex("El bufón abre la puerta. >:)")
+			actualizarPantalla("El bufón abre la puerta. >:)")
 			puertaCortesanos.release()
 
 		#Si el rey llegó, le cede el trono. 
 		if reyPresente:
-			actualizarSinMutex("El bufón cede el trono al rey.")
+			actualizarPantalla("El bufón cede el trono al rey.")
 			cederTrono.release()
 		mutex.release()
 
@@ -126,13 +124,13 @@ def cortesano(id):
 	cortesanosEsperando += 1
 
 	#print("El cortesano %d está en la puerta. pr = %d, pa = %d, e = %d, " % (id, presentes, cortesanosPasados, cortesanosEsperando) )
-	actualizarSinMutex("El cortesano "+str(id)+" está en la puerta.")
+	actualizarPantalla("El cortesano "+str(id)+" está en la puerta.")
 
 
 	#El cortesano está afuera de la sala. Si ya son M esperando:
 	if cortesanosEsperando == M:	
 		#print("Ya hay %d cortesanos esperando. Hay que abrirles la puerta!" % (M))
-		actualizarSinMutex('Ya hay '+str(M)+' cortesanos esperando. Hay que abrirles la puerta!')
+		actualizarPantalla('Ya hay '+str(M)+' cortesanos esperando. Hay que abrirles la puerta!')
 		#Si el bufón está sentado, se le señaliza que debe levantarse;
 		#de lo contrario, se reinicia la cuenta y se libera el torniquete.
 		if bufonSentado:
@@ -140,7 +138,7 @@ def cortesano(id):
 		else:
 			cortesanosPasados = 0
 			puertaCerrada = False
-			actualizarSinMutex("El bufón abre la puerta. :(")
+			actualizarPantalla("El bufón abre la puerta. :(")
 			puertaCortesanos.release()
 	mutex.release()
 
@@ -157,14 +155,13 @@ def cortesano(id):
 	cortesanosEsperando -= 1
 	cortesanosPasados += 1
 
-	actualizarSinMutex("El cortesano "+str(id)+" está en la sala.")
+	actualizarPantalla("El cortesano "+str(id)+" está en la sala.")
 
 	#Se entra a la sala
 	#Si ya han pasado N cortesanos y el bufón no se ha sentado, se cierra el torniquete. 
 	if cortesanosPasados == N and not bufonSentado:
 		puertaCerrada = True
-		actualizarSinMutex("El bufón ya esperó demasiado. Cierra la puerta cuando nadie lo ve.")
-		#cortesanosPasados = 0
+		actualizarPantalla("El bufón ya esperó demasiado. Cierra la puerta cuando nadie lo ve.")
 		mutex.release()
 		puertaCortesanos.acquire()
 	else: 
@@ -175,72 +172,65 @@ def cortesano(id):
 	#El cortesa sale.
 	mutex.acquire()
 	presentes -= 1
-	actualizarSinMutex("El cortesano "+str(id)+" se retira.")
+	actualizarPantalla("El cortesano "+str(id)+" se retira.")
 	
 	#Si es el último en retirarse y el bufón no está sentado, se libera al apagador.
 	if presentes == 0 and not bufonSentado:
-		actualizarSinMutex("No hay moros en la costa!")
+		actualizarPantalla("No hay moros en la costa!")
 		puedeSentarse.release()
 	mutex.release()
 
 
+#Hilo que controla la generación de hilos de cortesanos.
 def llegadaCortesanos():
 	i = 1
 	while(True):
+
+		#torniquete que se puede abrir o cerrar desde la interfaz de usuario
+		c.pausa.acquire()
+		c.pausa.release()
+
+		#Cada segundo hay una probabilidad de 1/2 de que llegue un cortesano
 		if(randint(0,1) == 0):
 			Thread(target = cortesano, args = [i]).start()
 			i += 1
 		sleep(1)
 
 
-def actualizarSinMutex(msg):
+#Método que actualiza el estado de los actores en la pantalla
+#Recibe como parámetro la descripción textual del último evento.
+def actualizarPantalla(msg):
 
 	global puertaCerrada, reyPresente, reySentado, bufonSentado, presentes
 
-	if c.vis:
-		c.grafico[0] = "  " + ("C"*cortesanosEsperando) + (" "*(20-cortesanosEsperando))
-		
-		if puertaCerrada:
-			c.grafico[1] = "o====================o" 
-		else:
-			c.grafico[1] = "o=  =================o"
-
-		if reyPresente:
-			if reySentado:
-				c.grafico[2] = "|       |  K  |       "
-			else: 
-				c.grafico[2] = "|       |     |      K"
-		else: 
-			c.grafico[2] = "|       |     |       "
-
-		if bufonSentado:
-			c.grafico[3] = "|       |  B  |      |"
-		else:
-			c.grafico[3] = "|       |     |   B  |"
-
-		cortesanosPresentes = presentes
-		if reyPresente:
-			cortesanosPresentes -= 1
-		c.grafico[5] = "| " + (cortesanosPresentes*"C") + ((19-cortesanosPresentes)*" ") + "|"
-		
-		c.grafico[7] = msg
-
-
-		#Rendevouz para refrescar la pantalla
-		c.sigHilos.release()
-		c.sigInterfaz.acquire()
-
+	c.grafico[0] = "  " + ("C"*cortesanosEsperando) + (" "*(20-cortesanosEsperando))
+	
+	if puertaCerrada:
+		c.grafico[1] = "o====================o" 
 	else:
-		sleep(0)
+		c.grafico[1] = "o=  =================o"
+
+	if reyPresente:
+		if reySentado:
+			c.grafico[2] = "|       |  K  |       "
+		else: 
+			c.grafico[2] = "|       |     |      K"
+	else: 
+		c.grafico[2] = "|       |     |       "
+
+	if bufonSentado:
+		c.grafico[3] = "|       |__B__|      |"
+	else:
+		c.grafico[3] = "|       |_____|   B  |"
+
+	cortesanosPresentes = presentes
+	if reyPresente:
+		cortesanosPresentes -= 1
+	c.grafico[5] = "| " + (cortesanosPresentes*"C") + ((19-cortesanosPresentes)*" ") + "|"
+	
+	c.grafico[7] = msg
 
 
-
-def actualizarConMutex():
-	print("Hola")
-
-
-
-"""
-Thread(target = rey, args = []).start()
-Thread(target = bufon, args = []).start() 
-"""
+	#Señalizar y esperar a que se refresque la pantalla
+	c.sigHilos.release()
+	c.sigInterfaz.acquire()
