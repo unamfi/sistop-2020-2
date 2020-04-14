@@ -5,6 +5,7 @@ from modulos.compania import compania
 
 
 class agencia(object):
+
     def __init__(self, companias: [compania], varN:str ):
         #mutex para las acciones de la agencia
         global agLock
@@ -26,11 +27,11 @@ class agencia(object):
                 asientosCompania = comp.getAsientosDisponibles()
                 for asiento in asientosCompania:
                     self.disponibles.append((comp , asiento.num , comp.getPrecioActual()))
-            #print('-Update'+'\a') # Sound ALert
+            #print('-Actualizacion'+'\a') 
             sleep(1)
             agLock.release()
         except:
-            print('excepcion al realizar la actualización ' + self.nombre)
+            print('# Excepcion al realizar la actualización :(' + self.nombre)
             agLock.release()
 
     def autoActualizar(self):
@@ -54,34 +55,39 @@ class agencia(object):
         return asientoList
 
     def run(self):
-        print('Starting run ' + self.nombre)
+        print('Iniciando ' + self.nombre)
         Thread(target= self.autoActualizar).start()
 
         return True
 
     def vender_Cliente(self, comp: compania, asiento: int):
-        #print('\nTrying to sell')
+        
         global agLock
         agLock.acquire()
-        #print('\nSelling')
+        #print('\Vendiendo')
+
         for companiaDeseada , asientoDeseado, v  in self.disponibles:
             if companiaDeseada == comp and asientoDeseado == asiento:
                 break
         try:
             if(companiaDeseada.venderAsiento(asientoDeseado)):
                 print("\n####################################################")
-                print('\n', self.nombre, ' vendido:' ,  companiaDeseada, 'el asiento', asientoDeseado, 'a', companiaDeseada.precioActual )
+                print('#Agencia: ', self.nombre, ' | Company: ' ,  companiaDeseada, ' | Asiento: ', asientoDeseado, ' | Precio: ', companiaDeseada.precioActual)
+                #print('\n#Agencia: ', self.nombre, ' | Company: ' ,  companiaDeseada, ' | Asiento: ', comp.asiento.index , ' | Precio: ', companiaDeseada.precioActual)
                 print("####################################################\n")
                 agLock.release()
                 sleep(0.1)
                 self.actualizar()
                 return True
+
             else:
-                print('\n', self.nombre,' fallo al vender:',  companiaDeseada,'el asiento ', asientoDeseado, ' (Vendido actualmente)')
+                print('\n-> ', self.nombre,' no pudo vender a:',  companiaDeseada,' el asiento ', asientoDeseado)
+                print('     [Asiento no disponible - Vendido actualmente]')
                 agLock.release()
                 sleep(0.1)
                 return False
+
         except:
-            print('excepcion originada de venta cliente ' + self.nombre)
-        #    agLock.release()
+            print('# Excepcion originada de venta cliente ' + self.nombre)
+            #agLock.release()
             return False

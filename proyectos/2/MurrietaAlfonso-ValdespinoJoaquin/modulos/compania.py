@@ -7,11 +7,11 @@ class Asiento(object):
         self.num = index
         self.disponible = True
 
-    def __str__(self):
-        return str(self.num)
-
     def __int__(self):
         return self.num
+
+    def __str__(self):
+        return str(self.num)
 
 class compania(object):
     def __init__(self, varN: str):
@@ -22,6 +22,7 @@ class compania(object):
         self.cantidadAsientos = 5
         self.Asientosdisponibles = 0
         self.asientos = []
+
         for i in range(self.cantidadAsientos):
             self.asientos.append(Asiento(i))
             self.Asientosdisponibles+=1
@@ -63,7 +64,8 @@ class compania(object):
             self.aumentarPrecio()
             cpLock.release()
             return True
-        else: #sgundo intento
+
+        else: #segundo intento
             sleep(1)
             if self.asientos[asientoNum].disponible :
                 self.asientos[asientoNum].disponible = False
@@ -79,11 +81,14 @@ class compania(object):
     def aumentarPrecio(self):
         self.precioActual += self.precioActual * 0.1
 
-    def manager(self):
+    #Parte encargada de mostrar concurrencias -> Es la solución del generente al tener fallo en la venta del boleto
+    #El problema de concurrencia se puede ver en la clase agencia, método vender_Cliente
+    def manager(self): 
         global cpLock
         cpLock.acquire()
         if  not self.Asientosdisponibles  == self.cantidadAsientos:
-            print("\n el manager loco ha inflado los precios ",self.Asientosdisponibles," veces! de",self.nombre)
-            for i in range(self.Asientosdisponibles):
-                self.aumentarPrecio()
+            print("\n-> El manager loco ha subido los precios de ",self.nombre ," | Asientos disponibles: ",self.Asientosdisponibles,"\n")
+            
+            for i in range(self.Asientosdisponibles):#Consideraremos la cantidad de asientos para el incremento en el precio
+                self.aumentarPrecio() 
         cpLock.release()

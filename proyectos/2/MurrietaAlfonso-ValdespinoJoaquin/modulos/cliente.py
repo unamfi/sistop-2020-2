@@ -1,11 +1,11 @@
 from random import randrange
 from threading import currentThread
 from time import sleep
-
 from modulos.agencia import agencia
 
 
 class cliente(object):
+
     def __init__(self, Agencias: [agencia]):
         self.agencias = Agencias
         self.agenciaElegida = self.agencias[randrange(0,self.agencias.__len__())]
@@ -29,4 +29,4 @@ class cliente(object):
                 self.comprar(ag)
         except:
             sleep(0.5)
-            print('\n\nEl cliente ', str(currentThread().getName()),'no encontro vuelos') # en caso de que haya mas clientes que asientos.
+            print('\n#', str(currentThread().getName()),'no se encontro vuelos') # en caso de que haya mas clientes que asientos.
