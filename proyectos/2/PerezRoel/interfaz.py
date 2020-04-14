@@ -81,7 +81,6 @@ def menu():
 
 			#Se abre el torniquete para generar cortesanos
 			c.pausa.release()
-			
 			while s != 115 and s != 83:
 				s = scr.getch()
 
@@ -99,22 +98,23 @@ def menu():
 				scr.addstr(8,(dims[1]-23)//2,c.grafico[4])
 				scr.addstr(9,(dims[1]-23)//2,c.grafico[5])
 				scr.addstr(10,(dims[1]-23)//2,c.grafico[6])
+				scr.addstr(12,(dims[1]-31)//2,"B-Bufon    C-Cortesano    K-Rey")
 
 				#Se actualiza la lista de eventos recientes, y se muestra
 				for i in reversed(range(9)):
 					textoEntrante[i+1] = textoEntrante[i]
 				textoEntrante[0] = c.grafico[7]
 
-				scr.addstr(13,(dims[1]-66)//2,textoEntrante[9])
-				scr.addstr(14,(dims[1]-66)//2,textoEntrante[8])
-				scr.addstr(15,(dims[1]-66)//2,textoEntrante[7])
-				scr.addstr(16,(dims[1]-66)//2,textoEntrante[6])
-				scr.addstr(17,(dims[1]-66)//2,textoEntrante[5])
-				scr.addstr(18,(dims[1]-66)//2,textoEntrante[4])
-				scr.addstr(19,(dims[1]-66)//2,textoEntrante[3])
-				scr.addstr(20,(dims[1]-66)//2,textoEntrante[2])
-				scr.addstr(21,(dims[1]-66)//2,textoEntrante[1])
-				scr.addstr(22,(dims[1]-66)//2,textoEntrante[0]) 
+				scr.addstr(14,(dims[1]-66)//2,textoEntrante[9])
+				scr.addstr(15,(dims[1]-66)//2,textoEntrante[8])
+				scr.addstr(16,(dims[1]-66)//2,textoEntrante[7])
+				scr.addstr(17,(dims[1]-66)//2,textoEntrante[6])
+				scr.addstr(18,(dims[1]-66)//2,textoEntrante[5])
+				scr.addstr(19,(dims[1]-66)//2,textoEntrante[4])
+				scr.addstr(20,(dims[1]-66)//2,textoEntrante[3])
+				scr.addstr(21,(dims[1]-66)//2,textoEntrante[2])
+				scr.addstr(22,(dims[1]-66)//2,textoEntrante[1])
+				scr.addstr(23,(dims[1]-66)//2,textoEntrante[0]) 
 				scr.refresh()
 				sleep(0.25)
 
