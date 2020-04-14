@@ -17,7 +17,7 @@ Este proyecto simula las ventas de boletos de avión, a través de las siguiente
 Cada una de las compañías de vuelo tiene:
 - 5 asientos por avión
 - Un costo total por vuelo de 1000.00 'monedas'
-- Un gerente "loco" que aumenta el precio del boleto en 10% ante incidentes por cada boleto vendido.
+- Aumenta el precio del boleto en un 10% ante incidentes por cada boleto vendido.
 - La compañía debe asegurarse de no vender el mismo boleto a dos agencias diferentes
 
 ### Agencia de viajes
