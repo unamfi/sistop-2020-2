@@ -4,13 +4,15 @@ Contiene lógica para facilitar el uso de items de comida y ordenes
 
 from enum import Enum, unique
 from copy import deepcopy
+from random import sample
 
 @unique
 class Item(Enum):
     """
     Enumeración que representa tener items de un menú
     """
-    Coca_Cola = 50, 'Bebida', 10
+    Coca_Cola = 40, 'Bebida', 10
+    Carne_Res = 140, 'Carnes', 60 * 20
 
     def __new__(cls, *args, **kwds):
         value = len(cls.__members__) + 1
@@ -22,6 +24,9 @@ class Item(Enum):
         self.precio = precio
         self.categoria = categoria
         self.tiempo = tiempo  # Tiempo de preparacion
+
+    def es_bebida(self):
+        return self.categoria.lower() == 'bebida'
         
     def __str__(self):
         return str(self.name).replace('_', ' ')
@@ -37,14 +42,25 @@ class Orden:
     """
     Clase que representa la orden de una mesa
     """
-    def __init__(self, mesa_asociada, lista_item_cantidad, mesero):
-        self.lista_original = deepcopy(lista_item_cantidad)
+    def __init__(self, mesa_asociada, mesero, grupo_personas):
         self.mesa_asociada = mesa_asociada
-        self.lista_item_cantidad = lista_item_cantidad
+        self.lista_item_cantidad = dict()
         self.mesero = mesero
+        self.grupo_personas = grupo_personas
 
     def siguente_item(self):
         return self.lista_item_cantidad.pop(0)
+
+    def anadir_a_orden(self, items):  # Region critica, hiper critica jajaj
+        for item in items:
+            if item in self.lista_item_cantidad:
+                self.lista_item_cantidad[item] = self.lista_item_cantidad[item] + 1
+            else:
+                self.lista_item_cantidad[item] = 1
+
+    def orden_finalizada(self):
+        self.lista_original = deepcopy(self.lista_item_cantidad)
+        return self
 
     def __str__(self):
         return 'Orden de la mesa {}\n{}'.format(self.mesa_asociada, 
@@ -59,8 +75,11 @@ def platillos_azar(n):
 
     Returns:
     list(Item): n platillos seleccionados al azar
+
+    Raises:
+    ValueError: si n > todos los platillos
     '''
-    pass
+    return sample(list(filter(lambda item : not item.es_bebida(), list(Item))), k = n)
 
 def bebidas_azar(n):
     '''
@@ -71,10 +90,16 @@ def bebidas_azar(n):
 
     Returns:
     list(Item): n bebidas seleccionados al azar
+
+    Raises:
+    ValueError: si n > todas las bebidas
     '''
-    pass
+    return sample(list(filter(lambda item : item.es_bebida(), list(Item))), k = n)
 
 
 if __name__ == "__main__":
     print(repr(Item.Coca_Cola))
     print(Item.Coca_Cola)
+    print(list(Item))
+    print(len(Item))
+    print(bebidas_azar(2))
