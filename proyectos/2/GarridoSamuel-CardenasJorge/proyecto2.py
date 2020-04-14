@@ -4,6 +4,9 @@ import random
 
 parentescos = ['Papá','Mamá','Bebe','Niño','Niña','Adolescente','Joven','Abuelo','Abuela','Perro','Gato']
 
+nombreTareas = {1:['Ordenar la cama','Acomodar la mesa','Lavar el baño','Barrer','Trapear','Sacudir','Planchar'],2:['Lavar la ropa','Cocinar','Ordenar el librero','Lavar los trastes'],3:['Ordenar la bodega','Podar el jardín']}
+
+
 mutexTarea = threading.Semaphore(1)
 mutexFamDisponible = threading.Semaphore(1)
 mutexFamiliar = threading.Semaphore(1)
@@ -13,6 +16,25 @@ familiares = threading.Semaphore(personas_en_casa)
 
 familiarDisponible =[]
 listaDeTareas =[]
+
+class Tarea:
+    def __init__(self,numero,requeridosParaUnaTarea):
+        self.integrantes = []
+        #Barrera de terminar al mismo tiempo
+        self.equipo = 0
+        self.mutex = threading.Semaphore(1)
+        self.barrera = threading.Semaphore(0)
+        self.esperarMesa()
+
+
+    def identificarTarea(self):
+        global mesas, mutexTarea, listaDeTareas
+        familiares.acquire()
+        tarea=listaDeTareas.pop(0)
+        tarea.release() 
+        self.realizarse()
+        self.salir()
+        familiares.release()
 
 class Persona:
     def __init__(self,numero,parentesco):
