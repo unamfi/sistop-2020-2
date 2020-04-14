@@ -39,9 +39,6 @@ def menu():
 		scr.addstr(16,(dims[1]//2)-15,'1. El problema')
 		scr.addstr(18,(dims[1]//2)-15,'2. Ejecución visual')
 		scr.refresh()
-
-
-		#scr.nodelay(0)
 		
 		s = -1
 
@@ -54,7 +51,7 @@ def menu():
 			while s != 115 and s != 83:
 				scr.addstr(1, dims[1]-33,'Presiona \'s\' parar salir al menú')
 				scr.addstr(2, (dims[1]-20)//2,'El bufón en el trono')
-				scr.addstr(3, 2,'El bufón de la corte tiene un pasatiempo secreto: le gusta disfrazarse del rey y sentarse en el trono. Sin embargo, solo puede hacer esto cuando no hay nadie presente en la sala: ni el rey ni los cortesanos. El bufón aprovechará cualquier oportunidad que tenga para darse este lujo. El rey suele ausentarse por periodos considerables de tiempo, mientras que varios cortesanos pueden entrar y salir de la sala. Si el rey llega mientras el bufón está sentado, el bufón tiene que levantarse inmediatamente y cederle el trono. Si un cortesano llega mientras el bufón está sentado, pensará que es el rey y no lo molestará. El bufón también es impaciente, por lo que si cuenta que ya pasaron N cortesanos por la sala y no lo han dejado a solas con el trono, aún en presencia del rey, cerrará maliciosamente la puerta de los cortesanos y esperará a que todos se vayan. Los cortesanos tendrán que esperar afuera. Desafortunadamente, cuando hay M cortesanos esperando, éstos se ponen ruidosos, y el bufón tiene abrirles la puerta, aún si no está sentado. En ocasiones, el bufón es lo suficientemente rápido para abrirles la puerta y sentarse en el trono antes de que entren. ')
+				scr.addstr(3, 2,'El bufón de la corte tiene un pasatiempo secreto: le gusta disfrazarse del rey y sentarse en el trono. Sin embargo, solo puede hacer esto cuando no hay nadie presente en la sala: ni el rey ni los cortesanos. El bufón aprovechará cualquier oportunidad que tenga para darse este lujo. El rey suele ausentarse por periodos considerables de tiempo, mientras que varios cortesanos pueden entrar y salir de la sala. Si el rey llega mientras el bufón está sentado, el bufón tiene que levantarse inmediatamente y cederle el trono. Si un cortesano llega mientras el bufón está sentado, pensará que es el rey y no lo molestará. El bufón también es impaciente, por lo que si cuenta que ya pasaron N (N = 10) cortesanos por la sala y no lo han dejado a solas con el trono, aún en presencia del rey, cerrará maliciosamente la puerta de los cortesanos y esperará a que todos se vayan. Los cortesanos tendrán que esperar afuera. Desafortunadamente, cuando hay M (M = 5) cortesanos esperando, éstos se ponen ruidosos, y el bufón tiene abrirles la puerta, aún si no está sentado.')
 
 				scr.nodelay(0)
 				s = scr.getch()
@@ -121,7 +118,7 @@ def menu():
 				#Se señaliza al actor que ya se termino de actualizar la pantalla.
 				c.sigInterfaz.release()
 
-			#Se cierra el torniquete detener la generación de cortesanos
+			#Se cierra el torniquete para detener la generación de cortesanos
 			c.pausa.acquire()
 
 		sleep(0.05)

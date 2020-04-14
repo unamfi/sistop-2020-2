@@ -1,12 +1,12 @@
 Proyecto 2. 
 de Roel Pérez.
 
-Elaborado en:
+Desarrollado en:
 Python 3.6.8
 Linux Mint 19
 Para la interfaz de usuario se utilizó el módulo curses (ya incluido en Python).
 
-Para ejecutar el programa, ejecuta interfaz.py en la terminal junto a los archivos config.py y proyecto2.py
+Para arrancar el programa, ejecuta interfaz.py en la terminal con el comando: 'python3 interfaz.py', en el mismo directorio que config.py y proyecto2.py
 
 
 Instrucciones para el usuario.
@@ -20,7 +20,7 @@ DOCUMENTACIÓN
 En el archivo descripcionDelProblema.txt se describe a fondo el problema planteado.
 
 - Mecanismos de sincronización
-Para este problema, se utilizaron semáforos (s) y variables de condición (vc). Éstos y los hilos se encuentran en proyecto2.py, y se describen a continuación:
+Para este problema, se utilizaron semáforos (s) y variables de condición (vc). Éstos y los métodos de los hilos se encuentran en proyecto2.py, y se describen a continuación:
 
 reyPresente (vc). Booleano que indica que el rey está presente en la sala.
 
@@ -34,34 +34,37 @@ presentes (vc). Entero que cuenta a los presentes en la sala, cortesanos o rey, 
 
 debeLevantarse (s). Es una señalización que le indica al bufón cuándo debe levantarse del trono. 
 
-puedeSentarse (s). Es un(a especie de) apagador que se prende y apaga por el primero y el último en entrar, respectivamente (ya sea cortesano o el rey), pero únicamente si el bufón no está sentado. También lo prende y apaga el bufón al sentarse y levantarse. 
+puedeSentarse (s). Es una especie de apagador (apagador cuando lo usa el rey y el cortesano; señalizador cuando lo usa el bufón) que se prende y apaga por el primero y el último en entrar, respectivamente (ya sea cortesano o el rey), pero únicamente si el bufón no está sentado. También lo prende y apaga el bufón al sentarse y levantarse. 
 
 puertaCortesanos (s). Es un torniquete para los cortesanos. Se puede cerrar o abrir dependiendo de cuántos cortesanos han pasado o cuántos cortesanos hay esperando, respectivamente.
 
-cederTrono (s). Es una señalización que le indica al rey que el bufón ha salido del trono y que ahora puede sentarse. 
+bufonSeSienta (s). Es una señalización del bufón que indica a un actor (ya sea cortesano o rey) que el bufón se ha sentado luego de haber señalizado puedeSentarse.
 
 mutex (s). Es un mutex que protege todas las variables de condición. 
 
+También se tiene a los booleanos puertaCerrada y reySentado (auto explicativos) que no son requeridos para resolver problemas de concurrencia, pero son utilizados para visualizar el escenario en la interfaz.
+
+
 Descripción de los hilos y su interacción. 
 (léase varias veces para entender bien la interacción)
-Nota: Cada escritura o lectura de una variable de condición se hace dentro del semáforo mutex.
+Nota: Cada escritura o lectura de una variable de condición se hace dentro del semáforo mutex (aún si no se nota directamente)
 Nota 2: Utilizaré los términos "adquirir" y "liberar" para referirme a las operaciones de los semáforos.
 
 rey: El hilo del rey se encuentra dentro de un ciclo y una condición tal que cada segundo, hay una probabilidad de 1/p de que el rey entre a la sala.
-Cuando el rey entra, reyPresente se vuelve verdadero y presentes incrementa en 1. Si el rey es el primero en entrar y el bufón no está sentado, adquiere el "apagador" puedeSentarse. Si el bufón está sentado, liberará debeLevantarse para indicarle que salga del trono; adquirirá puedeSentarse, el cuál tiene garantizado que será liberado por el bufón después de levantarse del trono, y adqurirá cederTrono, que le señalizará cuándo puede sentarse. El orden de estos semáforos es para asegurarse de que el bufón no se sentará mientras el rey esté sentado.
-El rey estará en el trono por unos segundos.
-Al terminar, decrementará presentes en 1 y hara falso reyPresente. Si al retirarse es el último (presente = 0), y ya que tenemos garantizado en este caso que el bufón no está sentado, liberará puedeSentarse. 
+Cuando el rey entra, reyPresente se vuelve verdadero y presentes incrementa en 1. Si el rey es el primero en entrar y el bufón no está sentado, adquiere el "apagador" puedeSentarse (es un caso particular de inicio, si el rey llega antes que el bufón). Si el bufón está sentado, liberará debeLevantarse para señalizar al bufón, y adquirirá puedeSentarse, esperando a que el bufón se levante y le ceda puedeSentarse.
+El rey se sentará por unos segundos. 
+Al terminar, decrementará presentes en 1 y hará falso reyPresente. Si al retirarse es el último (presente = 0), y ya que tenemos garantizado en este caso que el bufón no está sentado, liberará puedeSentarse y adquirirá bufonSeSienta, con el que espera a que el bufón termine de sentarse para continuar.
 
 bufon: El hilo del bufón se ejecuta en un ciclo infinito.
-Al iniciar, empezará la cuenta de cortesanosPasados en 0. Adquirirá puedeSentarse, avanzando únicamente cuando el apagador esté abierto. 
-Cuando se le permita avanzar, hará bufonSentado verdadero, y adquirirá debeLevantarse, esperando a que otro hilo le señalice. Cuando esto ocurra, liberará puedeSentarse, para indicar que cede el apagador. 
-Finalmente, hará bufonSentado falso. Si hay M o más cortesanos esperando afuera, liberará puertaCortesanos para abrir el torniquete. Si el rey está presente, liberará cederTrono para señalizarle que puede sentarse. 
+Al iniciar, empezará la cuenta de cortesanosPasados en 0. Se contemplan dos posibilidades al llegar a este punto: 1. Ningún otro actor a adquirido puedeSentarse() (caso particular de inicio, en el que bufón es el primero en llegar), por lo que el bufón puede pasar a sentarse, 2. Alguien tiene adquirido puedeSentarse() y bufón tiene que esperar a que un actor le señalice. En el primer caso, el bufón tiene que mantenerse dentro del mutex para cambiar bufonSentado a verdadero. En el segundo caso, ya que se sabe que alguien dentro de un mutex le señalizará que puede sentarse, tendrá adquirir puedeSentarse afuera de su propio mutex; cambiará el estado de bufonSentado a verdadero y liberará bufónSentado para indicarle al actor que ha terminado.  
+Adquirirá debeLevantarse, esperando a que alguien le señalice. 
+Nuevamente, ya que se sabe que se le señalizará debeLevantarse dentro del mutex de otro actor, no es necesario proteger las variables dentro de otro mutex. Si hay M cortesanos esperando, liberará el torniquete puertaCortesanos.
 
-cortesano: Existen múltiples hilos de cortesanos que corren concurrentemente, iniciando aleatoriamente en el tiempo.
-Al iniciar incrementa en uno cortesanosEsperando. Si hay M esperando, y el bufón está sentado, se le libera debeLevantarse para señalizarle al bufón (éste se encargará de abrir el torniquete). Si hay M esperando, pero el bufón no está sentado, solamente se reinicia la cuenta de cortesanosPasados y se libera puertaCortesanos para abrir el torniquete. Después, se pasa por el torniquete (se adquiere y libera puertaCortesanos de forma seguida).
-Pasado el torniquete, se incrementa en 1 a presentes y cortesanosPasados, mientras se decrementa cortesanosEsperando. Si es el primero en entrar (presentes = 1) y el bufón no está sentado, se adquiere a puedeSentarse. Si para este punto la cuenta de cortesanosPasados ya llego a N y el bufón no está sentado, adquirirá puertaCortesanos para cerrar el torniquete.
+cortesano: Existen múltiples hilos de cortesanos que corren concurrentemente, iniciando aleatoriamente en el tiempo. Estos son lanzados por el hilo de llegadaCortesanos.
+Al iniciar incrementa en uno cortesanosEsperando. Si hay M cortesanos esperando, y la puerta está cerrada: 1. Si el bufón está sentado, se le libera debeLevantarse para señalizar al bufón (éste se encargará de abrir el torniquete puertaCortesanos) y se adquiere puedeSentarse para esperar a que termine, 2. Si el bufón no está sentado, solamente se reinicia la cuenta de cortesanosPasados y se libera el torniquete puertaCortesanos. Después, se pasa por el torniquete (se adquiere y libera puertaCortesanos de forma seguida).
+Pasado el torniquete, se incrementa en 1 a presentes y cortesanosPasados, mientras se decrementa cortesanosEsperando. Si es el primero en entrar (presentes = 1), el bufón no está sentado y no hay una fila de cortesanos, se adquiere a puedeSentarse (caso particular en el que el cortesano es el primero en llegar). Si para este punto la cuenta de cortesanosPasados ya llego a N y el bufón no está sentado, se adquirirá puertaCortesanos para cerrar el torniquete.
 El cortesano está unos segundos en la sala.
-Al terminar, el cortesano decrementa en 1 a presentes. Si es el último en salir y el bufón no está sentado, libera puedeSentarse. 
+Al terminar, el cortesano decrementa en 1 a presentes. Si es el último en salir y el bufón no está sentado, libera puedeSentarse y adquiere bufonSeSienta para esperar al bufón.
 
 llegadaCortesanos: Es un hilo que controla el lanzamiento de los hilos de cortesano. Se ejecuta dentro de un ciclo infinito en el que se pasa por un torniquete que se puede abrir y cerrar si se sale o entra del menú. Cada segundo, hay cierta probabilidad de que se lance un hilo de cortesano.
 
@@ -78,11 +81,11 @@ sigHilos y sigInterfaz: Son señalizadores entre los actores y la interfaz. sigH
 
 pausa: Es un torniquete para el hilo llegadaCortesanos, para evitar que lleguen cortesanos cuando se sale al menú una vez inicializada la ejecución de los hilos. Sin embargo, no se detendrán a los hilos que ya estén corriendo (el rey, el bufón, y los cortesanos que ya hayan llegado). Su utilidad es cuestionable, pues de todas formas no es recomendable salir y volver a entrar a la ejecución.
 
-grafico: Es una lista de 8 cadenas. Las siete primeras sirven para describir visualmente el estado actual de la pantalla, mientras la octava tiene la descripción textual del evento más reciente. 
+grafico: Es una lista de 8 cadenas. Las siete primeras sirven para describir visualmente el estado actual del escenario, mientras la octava tiene la descripción textual del evento más reciente. 
 
 En proyecto2.py se agrega el siguiente método:
 
-actualizarPantalla: Método llamado por los actores para indicarle a la interfaz que debe actualizar la pantalla. Se revisa el estado de las variables puertaCerrada, reyPresente, reySentado, bufonSentado y presentes para decidir cómo se debe mostrar a las cadenas de la lista grafico. Al terminar, se libera a sigHilos para señalizar a la interfaz que debe actualizarse, y se adquiere a sigInterfaz para esperar a que termine de actualizar la pantalla. Cabe destacar que actualizar pantalla siempre es llamado por los actores dentro de un mutex, lo que asegura la integridad de las variables.
+actualizarPantalla: Método llamado por los actores para indicarle a la interfaz que debe actualizar la pantalla. Se revisa el estado de las variables puertaCerrada, reyPresente, reySentado, bufonSentado y presentes para decidir cómo se debe mostrar a las cadenas de la lista grafico. Al terminar, se libera a sigHilos para señalizar a la interfaz que debe actualizarse, y se adquiere a sigInterfaz para esperar a que termine de actualizar la pantalla. Cabe destacar que actualizarPantalla siempre es llamado por los actores dentro de un mutex, lo que asegura la integridad de las variables.
 
  
 
