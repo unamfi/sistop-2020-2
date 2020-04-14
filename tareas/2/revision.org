@@ -1,0 +1,297 @@
+#+title: Revisión de la tarea #2
+#+options: toc:nil num:nil
+
+* Criterios de calificación
+
+- Toda entrega que muestre trabajo y se acerque al planteamiento,
+  aunque no funcione, tiene asegurada una calificación mínima de 6
+- Si replica exitosamente el primer ejemplo (sólo tabla de
+  resultados), 7.5
+- Si presenta el esquema visual, 9
+- Si desarrollan un algoritmo de colas múltiples (retroalimentación
+  multinivel/FB, ronda egoísta/SRR), 9
+- Si presenta el esquema visual y además desarrollan un algoritmo de
+  colas múltiples, 10
+
+* Revisión
+
+** Carlos Alcántara
+- Documentación :: [[./AlcantaraCarlos/doc.txt][doc.txt]]
+- Archivos :: [[./AlcantaraCarlos/tarea2SO.py][tarea2SO.py]]
+- Lenguaje de implementación :: Python
+- Se acerca al planteamiento :: ✓
+- Algoritmos base completos :: ✓
+- Tabla de resultados :: ✓
+- Esquema visual :: ✓
+- Algún algoritmo de colas múltiples :: ✓
+- Comentarios ::
+  - ¡Muy buena implementación!
+  - ... Un poco difícil de leer. Usas nombres de variable cortos (que
+    tienen sentido, pero no resultan claros a primera vista), y no hay
+    comentarios. ¿Te animarías a darle mantenimiento a tu código
+    dentro de un par de años? ☺
+- Calificación :: 10
+
+** Jorge Bárcenas
+- Documentación ::  [[./BarcenasJorge/algoritmos_planificacion.txt][algoritmos_planificacion.txt]],
+- Archivos :: [[./BarcenasJorge/RR.py][RR.py]], [[./BarcenasJorge/RR4.py][RR4.py]], [[./BarcenasJorge/SPN.py][SPN.py]], [[./BarcenasJorge/fifo.py][fifo.py]], [[./BarcenasJorge/main.py][main.py]], [[./BarcenasJorge/common/mystats.py][mystats.py]],
+              [[./BarcenasJorge/common/random_proc.py][random_proc.py]], [[./BarcenasJorge/common/watcher.py][watcher.py]]
+- Lenguaje de implementación :: Python
+- Se acerca al planteamiento :: ✓
+- Algoritmos base completos :: ✓
+- Tabla de resultados :: ✓
+- Esquema visual :: ✗
+- Algún algoritmo de colas múltiples :: ✗
+- Comentarios ::
+  - Modularización y reutilización de código. ¡Bien!
+  - Comentarios útiles y no excesivos. ¡Bien!
+  - Te faltó un =.gitignore= para no mandarme código precompilado
+    específico a tu instalación (dentro de tu =__pycache__= están los
+    módulos compilados para Python 3.6)
+- Calificación :: 7.5
+
+** Patricio Barrero y Héctor Espino
+- Documentación ::  [[./BarreroPatricio-EspinoHector/Documentacion.pdf][Documentacion.pdf]], [[./BarreroPatricio-EspinoHector/README.MD][README.MD]]
+- Archivos :: [[./BarreroPatricio-EspinoHector/planificador.py][planificador.py]]
+- Lenguaje de implementación :: Python
+- Se acerca al planteamiento :: ✓
+- Algoritmos base completos :: ✓
+- Tabla de resultados :: ✓
+- Esquema visual :: ✓
+- Algún algoritmo de colas múltiples :: ✓
+- Comentarios ::
+  - ¡Excelente implementación! Todo lo que podría pedir al
+    respecto. ¡Hasta se deja leer bonito! ☺
+- Calificación :: 10
+
+** Jorge Cárdenas y Samuel Garrido
+- Documentación :: [[./CardenasJorge-GarridoSamuel/README.md][README.md]], [[./CardenasJorge-GarridoSamuel/img.png][img.png]]
+- Archivos :: [[./CardenasJorge-GarridoSamuel/Planificadores.py][Planificadores.py]]
+- Lenguaje de implementación :: Python
+- Se acerca al planteamiento :: ✓
+- Algoritmos base completos :: ✓
+- Tabla de resultados :: ✓
+- Esquema visual :: ✓
+- Algún algoritmo de colas múltiples :: ✓
+- Comentarios ::
+  - ¡Muy buena implementación! Fácil de leer y comprender. Tal vez un
+    poco sobrecargado de comentarios redundantes, pero no excesivo
+  - Me gusta que manejen argumentos de línea de comando — Pero hay un
+    bug ahí para que resulten de utilidad:
+    #+BEGIN_SRC python
+      arg = sys.argv
+      np = int(arg[1]) if len(arg) == 2 else 5 # Número de procesos
+      nq = int(arg[2]) if len(arg) == 3 else 2 # Número de quantums (RR)
+      p = int(arg[3]) if len(arg) == 4 else 5  # Número de Colas de (FB)
+    #+END_SRC
+    Si verifican con igualdad estricta, no puedo especificar los tres
+    valores, pues los dos primeros "caen" al caso default. Deberían
+    usar el operador =>== en vez de ====.
+- Calificación :: 10
+
+** Eduardo Jiménez y Sergio Osorio
+- Documentación :: [[./JimenezEduardoOsorioSergio/readme.md][readme.md]]
+- Archivos :: [[./JimenezEduardoOsorioSergio/FCFS.py][FCFS.py]], [[./JimenezEduardoOsorioSergio/RoundRobin.py][RoundRobin.py]], [[./JimenezEduardoOsorioSergio/SPN.py][SPN.py]]
+- Lenguaje de implementación :: Python
+- Se acerca al planteamiento :: ½ imposibilita comparación en el mismo
+     caso
+- Algoritmos base completos :: ✓
+- Tabla de resultados :: ½ (en FCFS y en RR1, no en SPN)
+- Esquema visual :: ✓
+- Algún algoritmo de colas múltiples :: ✗
+- Comentarios ::
+  - Entregar tres programas separados que generan una tabla aleatoria
+    haría imposible una comparación entre implementaciones como la que
+    les mostré al plantear la tarea
+  - El estilo de los tres programas que presentan es _muy_
+    diferente. Densidad de comentarios, incluso el idioma en que
+    desarrollan es muy dispar.
+    - Prefiero no pensar mal, y asumir que repartieron el trabajo
+      entre ustedes dos. Pero ... suena ... bastante raro
+- Calificación :: 8
+
+** Javier Loidi y Kevin Lara
+- Documentación :: /No entregada/
+- Archivos :: [[./LoidiJavier-LaraKevin/planificador.py][planificador.py]]
+- Lenguaje de implementación :: Python
+- Se acerca al planteamiento :: ✓
+- Algoritmos base completos :: ✗ (Falta SPN)
+- Tabla de resultados :: ✓
+- Esquema visual :: ✓
+- Algún algoritmo de colas múltiples :: ✗
+- Comentarios ::
+  - El código está limpio, fácil de entender.
+  - Ante cargas aleatorias, les faltó considerar un caso: ¿Qué pasa
+    cuando en determinado tick /no hay ningún proceso/ por ejecutar?
+    Cosa de ejecutar un par de veces, y aparece un caso problemático:
+    #+BEGIN_SRC text
+       Procesos:  [['A', 0, 4], ['B', 5, 5], ['C', 10, 2], ['D', 13, 2], ['E', 15, 9]] 
+
+      FCFS: 
+	A  A  A  A
+       ---- Para  A :  T =  4   E =  0   P =  1.0
+	B  B  B  B  B
+       ---- Para  B :  T =  4   E =  -1   P =  0.8
+	C  C
+       ---- Para  C :  T =  1   E =  -1   P =  0.5
+	D  D
+       ---- Para  D :  T =  0   E =  -2   P =  0.0
+	E  E  E  E  E  E  E  E  E
+       ---- Para  E :  T =  7   E =  -2   P =  0.7777777777777778
+       T promedio =  3.2   E promedio =  -1.2   P promedio =  0.6155555555555555
+    #+END_SRC
+    - ¡Es imposible tener un tiempo de espera de -1 o -2! (deberían
+      reportar un /hueco/ en =t=4= y =t=11= — Entre el fin de =A= y el
+      inicio de B, y entre el fin de =C= y el inicio de =D=)
+    - ...Es un bug, pero menor y sutil. Pero se extiende a la lógica
+      de RR
+- Calificación :: 8
+
+** Niver Martínez
+- Documentación :: [[./MartinezNiver/README.md][README.md]], [[./MartinezNiver/images/captura.PNG][captura.PNG]]
+- Archivos :: [[./MartinezNiver/tarea_planif.py][tarea_planif.py]]
+- Lenguaje de implementación :: Python
+- Se acerca al planteamiento :: ✓
+- Algoritmos base completos :: ✗
+- Tabla de resultados :: ✓
+- Esquema visual :: ½ (funcional sólo para FCFS)
+- Algún algoritmo de colas múltiples :: ✗
+- Comentarios ::
+  - Muy bueno que le dediques tiempo a documentar cada función. Te va
+    a resultar una muy buena práctica para tu vida profesional 😉
+    (aunque no documentaste ni comentaste las funciones específicas de
+    los planificadores específicos ☹)
+  - Si reemplazas =sec.append('N')= por =sec.append(i)= (línea 119),
+    verás que tu implementación de RR no es correcta: Se comporta
+    igual que FCFS (¿y por qué te arroja resultados diferentes para la
+    tabla?):
+    #+BEGIN_SRC text
+      FCFS: T: 12.00 E: 6.40 P: 2.09
+      AAABBBBBBCCCCCCCDDDDEEEEEEEE
+      RR1: T: 13.40 E: 7.80 P: 1.55
+      0001111112222222333344444444
+      RR1: T: 10.80 E: 5.20 P: 1.10
+      000111111222222233334444444
+      SPN: T: 0.00 E: 0.00 P: 0.00
+    #+END_SRC
+    - El orden de ejecución para los procesos, a pesar de que usa
+      nombres distintos, es exactamente el mismo
+    - La duración de la planificación, sea FCFS, RR1 o RR4 (en el
+      inferior veo que es únicamente un error al imprimir la etiqueta)
+      debería ser siempre exactamente la misma.
+- Calificación :: 7
+
+** Alfonso Murrieta y Joaquín Valdespino
+- Documentación :: [[./MurrietaAlfonso-ValdespinoJoaquin/README.md][README.md]],
+- Archivos :: [[./MurrietaAlfonso-ValdespinoJoaquin/auxFunctions.py][auxFunctions.py]], [[./MurrietaAlfonso-ValdespinoJoaquin/main.py][main.py]], [[./MurrietaAlfonso-ValdespinoJoaquin/process.py][process.py]], [[./MurrietaAlfonso-ValdespinoJoaquin/processClass.py][processClass.py]]
+- Lenguaje de implementación :: Python
+- Se acerca al planteamiento :: ✓
+- Algoritmos base completos :: ✓
+- Tabla de resultados :: ✓
+- Esquema visual :: ✓
+- Algún algoritmo de colas múltiples :: ✗
+- Comentarios ::
+  - Me gusta que dentro de la documentación incluyan cuestiones
+    respecto al paradigma utilizado y a la /estética/ de la
+    implementación. ¡Muy buenas señales! 😀
+  - Considero importante que comprendan que los lenguajes /siempre/
+    pueden asumir su /biblioteca estándar/. En su documentación
+    mencionan, /«Módulo matemático random <- descargar en caso de no
+    tenerlo»/ — Tal vez alguna versión para embebidos como μPython
+    pueda carecer de parte de la biblioteca estándar, pero ya con
+    decir /Python 3.x/ están asumiendo que está instalado =random=.
+  - Por claridad, sería bueno representar en el diagrama de tiempo a
+    los espacios muertos. Por ejemplo:
+    #+BEGIN_SRC text
+      A:10, t:6 B:0, t:9 C:13, t:8  
+      PROCESS: FCFS - First Come First Serve 
+      BBBBBBBBBAAAAAACCCCCCCC
+       |  Time:8.667 | Wait or sleep:1.000 | Penalitation:1.125
+    #+END_SRC
+    La ejecución en realidad debería mostrar
+    =BBBBBBBBB-AAAAAACCCCCCCC= (porque hay un /tick/ vacío entre =B= y
+    =A=). El tiempo total de ejecución no es sólo la suma de los
+    tiempos de cada proceso (=6+9+8=23=), sino que desde la llegada del
+    primero (=t=0=) hasta la salida del último (=t=24=).
+- Calificación :: 9
+
+** Alejandro Pérez
+- Documentación :: /No entregada/
+- Archivos :: [[./PerezAlejandro/tarea2.py][tarea2.py]]
+- Lenguaje de implementación :: Python
+- Comentarios ::
+  - Tu tarea está [[https://github.com/gwolf/sistop-2019-2/blob/master/tareas/3/MoralesCarlos-PerezQuirozMiguel/DEFINITIVO.py][copiada de alumnos de un semestre anterior]]
+  - Es la segunda tarea copiada (¡de dos!) que entregas en el
+    semestre. Si no sientes que puedas desarrollar un ejercicio, o si
+    no tienes tiempo para realizar tus tareas, coméntamelo en directo.
+  - No tienes derecho a calificación para esta entrega. Una vez más
+    que ocurra algo así, y pierdes derecho a calificación en la
+    materia.
+- Calificación :: 0
+
+** Roel Pérez
+- Documentación :: [[./PerezRoel/ejemploEjecucion.txt][ejemploEjecucion.txt]], [[./PerezRoel/tarea2-doc.txt][tarea2-doc.txt]]
+- Archivos :: [[./PerezRoel/tarea2.py][tarea2.py]]
+- Lenguaje de implementación :: Python
+- Se acerca al planteamiento :: ✓
+- Algoritmos base completos :: ✓
+- Tabla de resultados :: /
+- Esquema visual :: ✓
+- Algún algoritmo de colas múltiples :: ✓
+- Comentarios ::
+  - ¡Qué bonita ejecución! Es la implementación más clara que yo haya
+    visto hasta ahora de este problema. ¡Felicidades!
+  - El código también es fácil de leer, limpio y documentado.
+- Calificación :: 10
+
+** Sergio Reza
+- Documentación :: [[./RezaSergio/README.md][README.md]]
+- Archivos :: [[./RezaSergio/tarea2.py][tarea2.py]]
+- Lenguaje de implementación :: Python
+- Se acerca al planteamiento :: ✓
+- Algoritmos base completos :: ✓
+- Tabla de resultados :: ✓
+- Esquema visual :: ✓
+- Algún algoritmo de colas múltiples :: ✗
+- Comentarios ::
+  - Será que... ¿no consideras el tiempo que el planificador está
+    inactivo? (los /ticks/ en que no hay ningún proceso por ejecutar)
+    Sólo eso puede llevarte a tiempos totales negativos (o incluso por
+    debajo del promedio):
+    #+BEGIN_SRC text
+      A	t:5
+      B	t:5
+      C	t:3
+      D	t:4
+      E	t:6
+      Proceso FCFS
+      A|A|A|A|A|B|B|B|B|B|C|C|C|D|D|D|D|E|E|E|E|E|E|
+      T: 4.6   	 E: 4.0   P: 0.5802020202020202 
+      Proceso RR Quantum: 1
+      A|B|A|B|A|B|A|B|A|B|C|D|C|D|C|D|E|D|E|E|E|E|E|
+      T: 10.4  	 E: 5.4   P: 1.059090909090909 
+      Proceso SPN
+      A|A|A|A|A|C|C|C|B|B|B|B|B|D|D|D|D|E|E|E|E|E|E|
+      T: -0.4  	 E: 3.6   P: 0.03257575757575757 
+    #+END_SRC
+    - Tuve que echarme un clavado en tus fuentes para encontrar el
+      tiempo de llegada de cada proceso — No lo reportas en la tabla
+      de inicio, así que es necesario llegar a la línea 236 de tu
+      programa para encontrar que es un parámetro /en duro/ para la
+      creación de tus objetos. (¿por qué? Bueno, no importa — no es
+      incorrecto 😉)
+- Calificación :: 9
+
+** René Vázquez
+- Documentación :: /No entregada/
+- Archivos :: [[./VazquezRene/Tarea2.py][Tarea2.py]]
+- Lenguaje de implementación :: Python
+- Se acerca al planteamiento :: ✓
+- Algoritmos base completos :: ½ falta SPN
+- Tabla de resultados :: ✓
+- Esquema visual :: ✓
+- Algún algoritmo de colas múltiples :: ✗
+- Comentarios ::
+  - Buena implementación, código fácil de seguir.
+- Calificación :: 9
+

@@ -1,0 +1,52 @@
+#+title: Evaluación de exposición: Pointer Authentication Codes (PACs)
+#+author: Gunnar Wolf
+
+- Tema presentado por :: Carlos Alcántara y Roel Pérez
+- Calificación global :: 8.51 * 0.3 + 9.63 * 0.7 = *9.294*
+
+* Comentarios
+
+Dado que es una presentación en video, no puedo evaluar /dominio del
+tema/ y /presencia/ como lo hacemos habitualmente. Me centro en las
+respuestas que hagan a las preguntas de sus compañeros y en si la
+presentación "suena" leída directamente del material que prepararon o
+expuesta más libremente.
+
+* Evaluación grupal
+
+[[./evaluacion_alumnos.pdf][Evaluaciones individuales de los alumnos]]
+
+|--------------+-------+------------+----------+-----------+-------|
+| Originalidad | Nivel | Relevancia | Claridad | Presencia | Total |
+|--------------+-------+------------+----------+-----------+-------|
+|           10 |    10 |         10 |       10 |        10 |       |
+|           10 |    10 |         10 |       10 |        10 |    10 |
+|           10 |    10 |         10 |       10 |        10 |    10 |
+|           10 |    10 |         10 |       10 |        10 |    10 |
+|           10 |    10 |         10 |       10 |        10 |    10 |
+|           10 |   7.5 |         10 |      7.5 |       7.5 |  8.50 |
+|           10 |   7.5 |        7.5 |      7.5 |       7.5 |  8.00 |
+|          7.5 |   7.5 |        7.5 |        5 |       7.5 |  7.00 |
+|          7.5 |   7.5 |        7.5 |          |       7.5 |  7.50 |
+|          7.5 |   7.5 |        7.5 |          |         0 |  5.63 |
+|              |       |            |          |           |       |
+|--------------+-------+------------+----------+-----------+-------|
+|         9.25 |  8.75 |       9.00 |     8.75 |      8.00 |  8.51 |
+|--------------+-------+------------+----------+-----------+-------|
+#+TBLFM: @>$1..@>$6=vmean(@II..@III-1); f-2::@3$>..@>>>$>=vmean($1..$5); f-2
+
+* Evaluación del docente
+
+| *Aspecto*              | *Peso* | *Evaluación* | *Puntos* |
+|------------------------+--------+--------------+----------|
+| Originalidad del tema  |    0.1 |           10 |       1. |
+| Material desarrollado  |    0.2 |           10 |       2. |
+| Contenido              |    0.2 |           10 |       2. |
+| Fuentes bibliográficas |    0.1 |           10 |       1. |
+| Uso del tiempo         |    0.1 |           10 |       1. |
+| Dominio del tema       |   0.15 |           10 |      1.5 |
+| Presencia              |   0.15 |          7.5 |    1.125 |
+|------------------------+--------+--------------+----------|
+| *Global*               |        |              |     9.63 |
+#+TBLFM: @<<$4..@>>$4=$2*$3::$4=vsum(@<<..@>>);f-2
+

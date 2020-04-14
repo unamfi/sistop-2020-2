@@ -1,0 +1,2 @@
+#Vamos a ignorar archivos compilados de C 
+*.out

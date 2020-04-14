@@ -1,0 +1,4 @@
+*.out
+procedure.md
+*.pdf
+tests/*
