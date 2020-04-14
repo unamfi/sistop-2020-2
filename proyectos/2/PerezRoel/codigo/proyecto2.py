@@ -159,7 +159,7 @@ def cortesano(id):
 	cortesanosPasados += 1
 	presentes += 1
 
-	if presentes == 1 and not bufonSentado and cortesanosEsperando != (M-1):
+	if presentes == 1 and not bufonSentado and cortesanosEsperando < (M-1):
 		puedeSentarse.acquire()
 
 	actualizarPantalla("El cortesano "+str(id)+" está en la sala.")
