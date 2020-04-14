@@ -4,72 +4,89 @@ import random
 
 parentescos = ['Papá','Mamá','Bebe','Niño','Niña','Adolescente','Joven','Abuelo','Abuela','Perro','Gato']
 
-nombreTareas = {1:['Ordenar la cama','Acomodar la mesa','Lavar el baño','Barrer','Trapear','Sacudir','Planchar'],2:['Lavar la ropa','Cocinar','Ordenar el librero','Lavar los trastes'],3:['Ordenar la bodega','Podar el jardín']}
+DiccionarioTareas = {1:['Ordenar la cama','Acomodar la mesa','Lavar el baño','Barrer','Trapear','Sacudir','Planchar'],2:['Lavar la ropa','Cocinar','Ordenar el librero','Lavar los trastes'],3:['Ordenar la bodega','Podar el jardín']}
 
 
 mutexTarea = threading.Semaphore(1)
 mutexFamDisponible = threading.Semaphore(1)
 mutexFamiliar = threading.Semaphore(1)
 
-tarea = threading.Semaphore(numero_tareas)
-familiares = threading.Semaphore(personas_en_casa)
 
 familiarDisponible =[]
 listaDeTareas =[]
 
+tareas = threading.Semaphore(0)
+personas = threading.Semaphore(0)
+
 class Tarea:
-    def __init__(self,numero,requeridosParaUnaTarea):
+    def __init__(self,numero,requeridosParaUnaTarea,nombreTarea):
         self.integrantes = []
-        #Barrera de terminar al mismo tiempo
         self.equipo = 0
+
+        self.cuenta = 0
         self.mutex = threading.Semaphore(1)
         self.barrera = threading.Semaphore(0)
-        self.esperarMesa()
+
+        self.identificarTarea()
 
 
     def identificarTarea(self):
-        global mesas, mutexTarea, listaDeTareas
+        global personas, mutexTarea, listaDeTareas
         familiares.acquire()
-        tarea=listaDeTareas.pop(0)
-        tarea.release() 
+        listaDeTareas.pop(0)
+         
+        mutexTarea.release()
+
         self.realizarse()
-        self.salir()
+
         familiares.release()
+
+    def realizarse(numero,nombreTarea):
+        global personas, familiarDisponible, mutexFamDisponible, cantidad_personas
+        familiares.acquire()
+        mutexFamDisponible.acquire()
+        familiar = familiarDisponible.pop(0)
+        mutexFamDisponible.release()
+        familiar.entrarDisponible(self.nombreTarea)
+        personas.release()
 
 class Persona:
     def __init__(self,numero,parentesco):
         self.descanso = threading.Semaphore(0)
-        self.empezarDia()
-
-    def empezarDia(self):
-        global familiarDisponible
+        self.entrarDisponible()
+        
+    def entrarDisponible(self):
         mutexFamiliar.acquire()
         familiarDisponible.append(self)
         mutexFamiliar.release()
 
-    def Trabajar(self,nombreTarea,numero,parentesco):
+    def Trabajar(self):
         global mutexTarea, familiarDisponible
         self.descanso.release()
-        print(parentesco," ",numero," está ",nombreTarea)
+        print("está trabajando")
+        self.entrarDisponible()
+
 
 class Casa:
-	def __init__(self, cantidad_personas, tareasdelDia):
-        global listaDeTareas, familiarDisponible
-        
+    def __init__(self, cantidad_personas, tareasdelDia):
+        global listaDeTareas, familiarDisponible 
         for x in range(cantidad_personas):
             threading.Thread(target = Persona, args=[x,parentescos[random.randrange(10)]]).start()
         
-        for y in range(self.tareasdelDia):
-            requeridosParaUnaTarea = random.randrange(1,3)
+        for y in range(tareasdelDia):
+            requeridosParalaTarea = random.randrange(1,3)
+            posibilidad = DiccionarioTareas[requeridosParalaTarea]
+            nombreTarea =random.choice(posibilidad)
             mutexTarea.acquire()          
-            listaDeTareas.append(threading.Thread(target = Tarea, args= [y, requeridosParaUnaTarea]).start())
+            listaDeTareas.append(threading.Thread(target = Tarea, args= [y, requeridosParalaTarea,nombreTarea]).start())
             mutexTarea.release() 
      
-
+cantidad_personas = 0
 if __name__ == '__main__':
-	tareasdelDia = int(intput("Ingrese el número de queaseres en la casa: "))
-	cantidad_personas = int(intput("Ingrese el número de familiares en la casa: "))
+    global tareas, personas, cantidad_personas
+    tareasdelDia = int(input("Ingrese el número de queaseres en la casa: "))
+    cantidad_personas = int(input("Ingrese el número de familiares en la casa: "))
+    tareas = threading.Semaphore(tareasdelDia)
+    personas = threading.Semaphore(cantidad_personas)
     cuarentena = Casa(cantidad_personas,tareasdelDia)
-
-## TORNIQUETE PARA ATENDER A LAS TAREAS. 
 
