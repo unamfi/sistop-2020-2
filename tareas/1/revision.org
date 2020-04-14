@@ -1,0 +1,429 @@
+#+title: Revisión de la tarea 1
+#+options toc:nil num:nil
+
+* Criterios de calificación
+
+- Documentación :: 2 puntos
+- Programa funcional :: 2 puntos
+- Planteamiento resuelto satisfactoriamente :: 3 puntos
+- Aplicación de los principios vistos en clase :: 3 puntos
+
+* Revisión
+
+** Javier Loidi
+- Problema elegido :: El elevador
+- Documentación :: [[./LoidiJavier/readme.txt][readme.txt]]
+- Código :: [[./LoidiJavier/elevador.py][elevador.py]]
+- Lenguaje :: Python
+- Comentarios ::
+  - Me gusta tu resolución — Es simple y clara de seguir. Las
+    construcciones que elegiste son adecuadas
+  - Me pareció interesante que revises el estado interno del semáforo
+    con =lugares._value=. Debemos tratar al semáforo como una caja
+    negra inescrutable
+    - Pero bueno, no lo hiciste para tomar una decisión a partir de su
+      estado, sino que meramente por curiosidad. Y, como tal, te lo
+      aplaudo ☺
+  - Falta un punto importante (que es parte expresa de las reglas del
+    ejercicio: /Para ir del piso x a y, el elevador tiene que cruzar
+    todos los pisos intermedios/.  Tu elevador no guarda estado → No
+    está en ningún piso
+    - Por ello, puede ir dejando y recogiendo alumnos sin importar que
+      lleven un orden lógico. Por ejemplo:
+      #+begin_src text
+	Llevando a alumno  5  del piso  4  al piso  2 . Hay  5  a bordo
+	estado de semaforo:  1 
+	Llevando a alumno  8  del piso  3  al piso  4 . Hay  5  a bordo
+	estado de semaforo:  1 
+	Llevando a alumno  14  del piso  1  al piso  5 . Hay  5  a bordo
+	estado de semaforo:  1 
+	Llevando a alumno  2  del piso  2  al piso  3 . Hay  5  a bordo
+	estado de semaforo:  1 
+	Llevando a alumno  6  del piso  5  al piso  3 . Hay  5  a bordo
+	estado de semaforo:  1 
+	Llevando a alumno 10 del piso 4 al piso 5 . Hay 5 a bordo estado de
+	semaforo: 1
+      #+end_src
+- Calificación :: 8
+
+** Eduardo Jiménez y Sergio Osorio
+- Problema elegido :: Santa Claus
+- Documentación :: [[./OsorioSergio-JimenezEduardo/SantaClaus/Claus.txt][Claus.txt]]
+- Código :: [[./OsorioSergio-JimenezEduardo/SantaClaus/pom.xml][pom.xml]], [[./OsorioSergio-JimenezEduardo/SantaClaus/target/test-classes/.netbeans_automatic_build][.netbeans_automatic_build]], [[./OsorioSergio-JimenezEduardo/SantaClaus/target/maven-archiver/pom.properties][pom.properties]], [[./OsorioSergio-JimenezEduardo/SantaClaus/target/classes/SantaClaus$estadoBarrera.class][SantaClaus$estadoBarrera.class]], [[./OsorioSergio-JimenezEduardo/SantaClaus/target/classes/SantaClaus.class][SantaClaus.class]], [[./OsorioSergio-JimenezEduardo/SantaClaus/target/classes/SantaClaus$Reno.class][SantaClaus$Reno.class]], [[./OsorioSergio-JimenezEduardo/SantaClaus/target/classes/SantaClaus$atarRenos.class][SantaClaus$atarRenos.class]], [[./OsorioSergio-JimenezEduardo/SantaClaus/target/classes/.netbeans_automatic_build][.netbeans_automatic_build]], [[./OsorioSergio-JimenezEduardo/SantaClaus/target/classes/SantaClaus$Elfo.class][SantaClaus$Elfo.class]], [[./OsorioSergio-JimenezEduardo/SantaClaus/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst][inputFiles.lst]], [[./OsorioSergio-JimenezEduardo/SantaClaus/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst][createdFiles.lst]], [[./OsorioSergio-JimenezEduardo/SantaClaus/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst][inputFiles.lst]], [[./OsorioSergio-JimenezEduardo/SantaClaus/src/main/java/SantaClaus.java][SantaClaus.java]]
+- Lenguaje :: Java
+- Comentarios ::
+  - No aplicaron lo visto en la práctica 3 ☹ No deben subir a Gi
+    archivos autogenerados y susceptibles de cambiar al ejecutarse.
+  - =pom.xml=, =.netbeans_automatic_build=, =pom.properties=,
+    =*.class=, =*.lst=... ¡Todos esos debían haber sido mencionados en
+    el .gitignore! El único archivo real de fuentes a revisar es
+    SantaClaus.java
+  - Es bueno que indiquen las dependencias (en este caso, NetBeans,
+    Apache, maven 1.2.1)... Pero también que, como programadores,
+    entiendan el por qué de esa necesidad. No, no hay tal
+    dependencia. Yo no tengo NetBeans, y:
+    #+begin_src text
+      ~/vcs/sistop-2020-2/tareas/1/OsorioSergio-JimenezEduardo/SantaClaus/src/main/java$ javac SantaClaus.java 
+      ~/vcs/sistop-2020-2/tareas/1/OsorioSergio-JimenezEduardo/SantaClaus/src/main/java$ java SantaClaus 
+      Año: 2020
+      ...Elfos creando Juguetes...
+      El elfo 8 necesita ayuda
+      ...Elfos creando Juguetes...
+      El elfo 9 necesita ayuda
+      ...Elfos creando Juguetes...
+      El elfo 7 necesita ayuda
+      --- 3 elfos están esperando por Santa ---
+      ...Elfos creando Juguetes...
+      ...Elfos creando Juguetes...
+      El elfo 7 resolvió el problema con Santa
+      (...)
+    #+end_src
+  - Respecto a la orientación a objetos: Es una monserga, sí, que Java
+    nos obligue a crear un archivo diferente por cada clase. Y que nos
+    obligue a hacer POO, nos guste o no. Es cómoda la salida que le
+    encuentran, a declarar (no conozco el término en el lenguaje)
+    clases internas. Pero... Los =Reno=, los =Elfo=, el hecho de
+    =atarRenos= y el =estadoBarrera= /no son parte de/
+    =SantaClaus=. Para seguir esta estrategia, yo sugeriría que la
+    clase externa se llamara =Navidad= — y que =SantaClaus= fuera
+    también una clase interna.
+  - Me gusta que pasada la última navidad programada, el último reno
+    tome en sus manos la ingrata tarea de matar a Santa 😉 (y que lo
+    haga tan explícitamente)
+  - Ustedes saben algo que yo no. ¡Es posible escribir código en Java
+    que me gusta! Felicidades, muy buena implementación.
+- Calificación :: 10
+
+** Sergio Reza
+- Problema elegido :: Los alumnos y el asesor
+- Documentación :: /No entregada/
+- Código :: [[./RezaSergio/Tarea1RezaSergio.py][Tarea1RezaSergio.py]]
+- Lenguaje :: Python
+- Comentarios ::
+  - Sin documentación ☹
+  - La implementación es /casi/ correcta — Pero como no hay
+    interacción real (las preguntas las plantea y resuelve el mismo
+    hilo), estás modelando una situación con 10 alumnos /y 10
+    maestros/ en una misma sala con cinco sillas.
+  - Creo que incluso sería más sencillo visualizar lo que pasa si
+    partieras de:
+    #+begin_src python
+    Thread(target=asesor, args=[lugar]).start()
+    for i in range(10):
+        preguntas=randrange(1,4)
+	hechas=0
+	Thread(target=alumno, args[i+1, lugar, preguntas, hechas]).start()
+    #+end_src
+- Calificación :: 7
+
+** Roel Pérez
+- Problema elegido :: Los alumnos y el asesor
+- Documentación :: [[./PerezRoel/tarea1-doc.txt][tarea1-doc.txt]]
+- Código :: [[./PerezRoel/tarea1.py][tarea1.py]]
+- Lenguaje :: Python
+- Comentarios ::
+  - Implementación buena y clara
+  - Documentación muy completa, detalla perfectamente la lógica que seguiste
+  - Ya que lo detallas en la documentación: Para no tener que matar
+    malamente al programa con un profesor dormido y ya sin alumnos,
+    podrías poner al hilo externo a vigilar hasta que pase cierto
+    tiempo (termina la hora de oficina, el profesor se va no importa
+    qué dudas haya pendientes) o que ya no haya más alumnos a la
+    espera. Algo así como:
+    #+begin_src python
+      #Se inicia un hilo de asesor
+      sesion_terminada=False
+      t_asesor = Thread(target = asesor, args=[sesion_terminada])
+      t_asesor.start()
+
+      #Se inician 20 hilos de alumnos
+      alumnos = []
+      for i in range(1,21):
+	      t_alumnos= Thread(target = alumno, args = [i])
+	      alumnos.append(t_alumnos)
+	      t_alumnos.start()
+
+      # Esperamos a que terminen todos los alumnos
+      for i in alumnos:
+	  t.join()
+
+      # Hacemos que el asesor despierte de su sueño. Estamos seguros de que
+      # no hay ningún otro alumno que quiera preguntar al profe.
+      sesion_terminada=True
+      preguntas.release()
+      atencion.release()
+    #+end_src
+    Esto, mas una verificación sobre =sesion_terminada= antes de
+    comenzar a responder, le permitiría al asesor irse a hacer alguna
+    otra cosa.
+- Calificación :: 10
+
+** Patricio Barrero y Héctor Espino
+- Problema elegido :: Gatos y ratones
+- Documentación :: [[./BarreroPatricio_EspinoHector/Documentacion.pdf][Documentacion.pdf]]
+- Código :: [[./BarreroPatricio_EspinoHector/ratones_gatos.py][ratones_gatos.py]]
+- Lenguaje :: Python
+- Comentarios ::
+  - Voy a tener que despedir a un gato ☹ Los gatos no quieren comerse
+    a los ratones, pero /tienen que/ hacerlo. Sin embargo, después de
+    un ratito de interacción aparentemente correcta:
+    #+BEGIN_SRC text
+      Gato 1 estoy esperando
+      Raton 0 estoy comiendo en el plato Plato #1 esta ocupado
+      Gato 1 estoy comiendo en el plato Plato #1 esta ocupado
+      Gato 1 desocupe el plato Plato #1 esta libre
+      Gato 1 estoy esperando
+      Raton 0 desocupe el plato Plato #1 esta libre
+      Raton 6 estoy comiendo en el plato Plato #2 esta ocupado
+      Gato 1 estoy comiendo en el plato Plato #1 esta ocupado
+    #+END_SRC
+  - Este problema se trata de una /exclusión categórica/ → Pueden
+    resolverlo como los /lectores y escritores/
+  - Me parece una implementación interesante, aunque muy distinta de
+    lo que estoy acostumbraod a ver. Es un manejo mucho más limpio OOP
+    de lo que estoy acostumbrado a ver (¡incluso con manejo de
+    herencia!)
+  - ... Extrañé más comentarios en el código ☹ Es una muy sana
+    costumbre hacerlos.
+  - Me queda la duda: Dado que =Gato= y =Raton= tienen el mismo
+    =__init__()=, y en ambos casos es únicamente llamar al
+    =__init__()= de su superclase... Creo que esto sería más limpio:
+    #+BEGIN_SRC python
+      class Gato(Animal):
+	  pass
+      class Raton(Animal):
+	  pass
+    #+END_SRC
+- Calificación :: 8
+
+** Samuel Garrido y Jorge Cárdenas
+- Problema elegido :: Gatos y ratones
+- Documentación :: [[./GarridoSamuel-CardenasJorge/README.md][README.md]], [[./GarridoSamuel-CardenasJorge/23.png][23.png]]
+- Código :: [[./GarridoSamuel-CardenasJorge/Tarea1.py][Tarea1.py]]
+- Lenguaje :: Python
+- Comentarios ::
+  - ¡Excelente implementación!
+  - Muy bien identificado como exclusión categórica / apagador
+  - Muy buena manera de modelar los requisitos posiblemente
+    inconsistentes del planteamiento: Se controla la exclusión
+    categórica al momento de entrar a comer, pero el gato puede llegar
+    mientras el ratón ya está adentro (y se lo tiene que comer, ni
+    hablar)
+- Calificación :: 10
+
+** Alejandro Pérez
+- Problema elegido :: Santa Claus
+- Documentación :: [[./PerezAlejandro/planteamiento.txt][planteamiento.txt]]
+- Código :: [[./PerezAlejandro/staclaus.py][staclaus.py]]
+- Lenguaje :: Python
+- Comentarios ::
+  - Esta tarea ya había sido entregada, [[https://github.com/gwolf/sistop-2019-1/blob/master/tareas/1/ValerianoCristian/tarea1.py][hace 18 meses]] ☹
+  - Eso es *plagio*. No acepto la entrega.
+- Calificación :: 0
+
+** Alam Guillén y Ricardo Muñoz
+- Problema elegido :: Gatos y ratones
+- Documentación :: /No entregada/
+- Código :: [[./GuillenAlam-MuñozRicardo/tarea 1.txt][tarea 1.txt]]
+- Lenguaje :: Python
+- Comentarios ::
+  - La entrega que hacen es una rara mezcla de Python y texto... Es un
+    Python no ejecutable. Quitando las líneas de guiones y el
+    encabezado (¡que no es que cuente como documentación!) funciona
+    correctamente.
+    - Ni documentación ni comentarios ☹
+  - Cuesta trabajo seguir la lógica. Pero me parece que para cada
+    =gato()= y =raton()= se crea un nuevo plato (no hay un número
+    finito de platos)
+  - No contemplas interacción entre gatos y ratones (que es requerida
+    por el planteamnieto del problema)
+  - Iban por el camino correcto para implementar una /exclusión
+    categórica/ (apagador), que es la resolución más clara para este
+    problema, pero me parece que se les revolvió la implementación...
+    - ... y sin comentarios, no me atrevo a señalar "aquí sí / aquí no"
+- Calificación :: 6.5
+
+** Carlos Alcántara
+- Problema elegido :: Santa Claus
+- Documentación :: [[./AlcantaraCarlos/Tarea1SO.pdf][Tarea1SO.pdf]]
+- Código :: [[./AlcantaraCarlos/renos.py][renos.py]]
+- Lenguaje :: Python
+- Comentarios ::
+  - Buena implementación, correcta y de fácil lectura
+  - No hay ayuda explícita de Santa a los duendes (se juntan tres, lo
+    despiertan... y se dan por atendidos). Pero se vale :-] A fin de
+    cuentas, Santa es mágico.
+- Calificación :: 10
+
+** Alfonso Murrieta y Joaquín Valdespino
+- Problema elegido :: Gatos y ratones
+- Documentación :: [[./MurrietaAlfonso-ValdespinoJoaquin/README.md][README.md]]
+- Código :: [[./MurrietaAlfonso-ValdespinoJoaquin/gatosRatones.py][gatosRatones.py]]
+- Lenguaje :: Python
+- Comentarios ::
+  - Respecto a la duda que plantean: El /acuerdo de caballeros/ dice
+    que /harán lo posible/ por no ser brutos y comerse los unos a los
+    otros. Pero si se ven en la necesidad y coinciden ante los platos,
+    pues... tendrán que comérselos
+    - Si el planteamiento considera al acuerdo de caballeros, pero
+      creen que no son implementables, podrían hacer código que
+      contemplara que se lo comiera — aunque nunca fuera invocado (por
+      estar en un área imposible de alcanzar de un mutex)
+  - La implementación es correcta: Exclusión categórica, dejando un
+    espacio en que el ratón vea si llegó algún gato (y decida morirse
+    él solito ☺) ¡Bien!
+- Calificación :: 10
+		  
+** Saúl Badillo
+- Problema elegido :: Elevador
+- Documentación :: [[./BadilloSaul/README.md][README.md]]
+- Código :: [[./BadilloSaul/elevador.c][elevador.c]]
+- Lenguaje :: C
+- Comentarios ::
+  - ¡Bien! Un valiente que se anima a quitarle las rueditas a la
+    bicicleta y escribir en C
+  - ¡Y usando variables de condición! ¡Buenísimo! ☺
+  - Como mencionas en la documentación, el elevador hace únicamente un
+    recorrido (del piso 0 al piso 5). No vuelve a bajar.
+    - Me parece que la corrección para esto es trivial — En vez de
+      simplemente un =for(piso=0;piso<5;piso++)=, podrías agregar una
+      bandera =direccion=, y mantener subiendo y bajando en un =while(1)=;
+  - Por lo visto, todos los alumnos van... ¿del piso 0 al piso 4? ¿O
+    qué significa que le des el arreglo completo =pisos= a cada uno de
+    los alumnos? En ningún lugar eligen su destino. Me parece que
+    simplemente se bajan cuando se /des-duermen/, no en donde les
+    toca.
+  - Además... Creas al =elevador= antes que a ninguno de los hilos, y
+    le das un =sleep(1)= antes de crear al primer
+    =alumno=. ¿Cómo esperas que aborden el elevador?
+  - Te sugiero que, en vez de crear variables separadas para los hilos
+    =t1=, =t2=, =t3=, =t4= y =t5=, generes un solo arreglo. Eso te
+    deja un código resultante más limpio y en mi opinión
+    claro.
+
+    Además, como puedes ver aquí, más extensible — dejas en una
+    constante el tamaño de tu arreglo, y se pueden generar tantos
+    hilos como quieras.
+    #+BEGIN_SRC C
+      #define CUANTOS 100
+      pthread_t thr[CUANTOS];
+      int i;
+      int pisos[]={0,4};
+
+      pthread_create(&thr[0],NULL,elevador,pisos); 
+      sleep(1); 
+      for (i=1;i<CUANTOS;i++) {
+	pthread_create(&thr[i], NULL, alumno, pisos);
+	sleep(1);
+       }
+      for (i=0;i<CUANTOS;i++)
+	pthread_join(thr[i], NULL);
+    #+END_SRC
+- Calificación :: 9
+
+** Jorge Bárcenas
+- Problema elegido :: El cruce del río
+- Documentación :: [[./BarcenasJorge/el_cruce_del_rio.txt][el_cruce_del_rio.txt]]
+- Código :: [[./BarcenasJorge/el_cruce_rio.py][el_cruce_rio.py]]
+- Lenguaje :: Python
+- Comentarios ::
+  - Tienes una condición de carrera no resuelta: En una de las
+    ejecuciones vi:
+    #+BEGIN_SRC text
+      ,*** Zarpando  la balsa
+      hacker 9 subiendo a la balsa
+      hacker 10 subiendo a la balsa
+      hacker 11 subiendo a la balsa
+      serf 0 subiendo a la balsa
+      serf 1 subiendo a la balsa
+      ,*** Zarpando a la balsa
+      hacker 8 subiendo a la balsa
+      serf 2 subiendo a la balsa
+      serf 5 subiendo a la balsa
+      ,*** Zarpando a la balsa
+    #+END_SRC
+    (y luego constaté que lo mencionaste en tu documentación)
+    - El ver una balsa de 5 seguida una de 3 me hace pensar en que tus
+      estructuras están bien, pero el =print()= se les adelanta
+    - Si agregas un contador (con su respectivo mutex — Sin este
+      mutex, sí se mantiene la condición de carrera) al manejo de la
+      balsa, el problema se corrige:
+      #+BEGIN_SRC python
+	def hacker(num):
+		global hackers,serfs,esCap, num_balsa, mutex_nb
+		#print("hacker %d esperando ..." %num)
+		mutex_balsa.acquire()
+		with mutex_nb:
+			if hackers == 0 and serfs == 0:
+				num_balsa += 1
+		hackers+=1
+      #+END_SRC
+      (y la contraparte en =serf()=, y para asegurar, incluyendo el
+      número de balsa en todos los demás =print()=)
+- Calificación :: 8.5
+
+** Niver Martínez
+- Problema elegido :: Santa Claus
+- Documentación :: [[./MartinezNiver/README.md][README.md]]
+- Código :: [[./MartinezNiver/santaClaus.py][santaClaus.py]]
+- Lenguaje :: Python
+- Comentarios ::
+  - Tu programa no funciona ☹ Lanza excepciones... Intento corregirlo
+    para ver si es algo trivial, o centro mi revisión en el fuente
+    - Las excepciones marcan que utilizas a =elfos= para una
+      comparación antes de haberlo inicializado. ¿Solución? Agregar
+      =global elfos= al inicio de las funciones =syncElfo()= y
+      =syncSanta()=. Podrías también recibir a =elfos= como argumento,
+      te daría más o menos el mismo resultado
+    - La única salida observable de tu programa es:
+      #+BEGIN_SRC text
+	Santa ha atendiendo tres elfos...
+	Santa ha atendiendo tres elfos...
+	Santa ha atendiendo tres elfos...
+	Santa ha atendiendo tres elfos...
+      #+END_SRC
+      Y es que... Sí, ¡lo hacen a toda velocidad! Dentro de
+      =syncElfo()= hay un sólo =acquire()= que no sea sobre un mutex
+      sencillo, sobre =torElfo=. Si lo quito, veo un correcto avance
+      con los elfos (aunque el mensaje no necesariamente es el
+      correcto):
+      #+BEGIN_SRC text
+	Santa ha atendiendo tres elfos...
+	Santa ha atendiendo tres elfos...
+	Santa ha atendiendo tres elfos...
+	Santa se levantó...
+	ayudando elfos...
+	Santa ha atendiendo tres elfos...
+	Santa ha atendiendo tres elfos...
+	Santa ha atendiendo tres elfos...
+	Santa se levantó...
+	ayudando elfos...
+      #+END_SRC
+    - ¿Y los renos? No, esos nunca van a salir. No le diste =start()=
+      a los hilos. Y le estás dando un argumento que no espera. Y
+      =renos= no es global. Y a veces le llamas =renos=, a veces
+      =reno=....
+  - No puedo considerar el programa funcional de ninguna manera ☹
+  - Me parece que la lógica que presentas es correcta. Mencionas en tu
+    documentación que algo en los semáforos "no te queda", y me parece
+    que es el manejo de los renos... ¿?
+- Calificación :: 7
+
+** René Vázquez
+- Problema elegido :: Santa Claus
+- Documentación ::  /No entregada/
+- Código :: [[./VazquezRene/Santa.py][Santa.py]]
+- Lenguaje :: Python
+- Comentarios ::
+  - Sin documentación ☹
+  - Tu código tiene varios errores sintácticos (paréntesis de más y de
+    menos, bloques no indentados, indentación que no sigue a =:=, etc.)
+  - Hay variables que son presentadas en un punto en español, más
+    adelante en inglés...
+  - ... Tengo que dudar acerca de si el código es realmente
+    tuyo. Entiendo que realizaste el trabajo rápido por no haberte
+    enterado de las clases en línea; si el código es tuyo, /antes del
+    martes 31, 23:59/ entrégame el código corregido y documentación
+    /explicando la lógica empleada/, y lo tomo. Mientras tanto, tengo
+    que asumir que el código no es tuyo.
+- Calificación :: 0

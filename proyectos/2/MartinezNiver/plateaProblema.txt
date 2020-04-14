@@ -1,0 +1,71 @@
+IDENTIFICACIÓN Y DESCRIPCIÓN DEL PROBLEMA.
+
+1. Situación a modelar.
+
+Cuando una persona asiste a una consulta médica, en ocasiones le solicitan
+algunos estudios como: química sanguínea, biometría hemática, examen general
+de secreciones (como la orina) y en caso de ser diabético; también se llegan 
+a pedir estudios de hemoglobina glicosilada. En tal situación, algunas veces 
+existen distintas áreas del hospital encargadas de realizar los distintos 
+estudios o dentro de un mismo laboratorio se elaboran cada uno de estos, 
+pero clasificados por áreas específicas, pues no pueden aplicarse las mismas 
+técnicas para una química sanguínea, de las que se aplicarían para un estudio
+general de orina, por ejemplo. Este conjunto de técnicas se le suele llamar
+en el argot de la medicina, "perfiles".
+
+Por otra parte, hoy en día se están implementando algunas tecnologías como la
+de "lab on a chip" (LOC), misma que se trata de un dispositivo que implementa
+elementos de los campos de los microfluidos y la nanotecnología. En esencia
+esta tecnología busca desarrollar un sistema integrado que permita elaborar
+análisis químicos, radioactivos o biológicos que permitan hacer que el proceso
+sea menos costoso y más eficiente.
+
+Bueno, en este caso y dado que la situación es realmente compleja y no se podría
+ofrecer una solución tan real, sin que hubiera cientos de errores brotando por 
+aquí y por allá. En ese sentido se ofrece plantear más como un problema teórico
+(del estilo de los problemas planteados en la tarea para los patrones de
+sincronización), que no por eso se despega de la realidad, pues vamos, sigue
+cumoliendo con el objetivo de modelar un problema de la vida real, pero lo que
+estamos diciendo es que es bastante complicado modelar tal complejidad y por ende
+la solución tiene que quedar más comprometida como un desarrollo "teórico".
+
+2. Consecuencias nocivas de la concurrencia y eventos que queremos controlar.
+
+Los eventos que queremos controlar son los procesos que simulan el hecho de
+tener que mandar ciertos examenes a realizarse, mediante determinados criterios
+o técnicas, para completar un perfil. Y que este este asociado a un proceso
+independiente del otro, el problema que veo al tratar con esto es cuando se
+requiera utilizar dos mismos componentes para una cierta técnica, o que los
+datos en este caso (por ejemplo la sangre), esté comprometida para otro tipo
+de análisis. Además de que por ser fluidos biológicos, tienen un tiempo de
+vigencia para ser validos, pues podrían perder validez (como la sangre al
+coagularse). En ese sentido tendríamos que aprovechar al máximo los resultados
+de cada proceso y generar información disponible para cada departamento
+que la requiera, por ejemplo.
+
+En efecto este es un modelo teórico, pero si hablamos de consecuencias nocivas
+de la concurrencia, podría ser el hecho de que teniendo tantos procesos o
+información que requiera ser analizada por un mismo recurso. El recurso no pueda
+estar disponible y la sangre pierda su validez, por ejemplo.
+
+Nota. Está parte se revisará mejor en la implementación.
+
+3. Eventos concurrentes que no les resulta importante el orden relativo.
+
+Cuando generamos lo perfiles de cada tipo(s) de fluido(s), puede ser importante
+procesar antes un fluido que otro, pues su tiempo de validez será importante a 
+considerar, puesto que algunos de los fluidos podrían esperar más por un recurso
+que otros. En ese sentido podrían haber eventos concurrentes que le importe un
+orden específico. Sin embargo, puede haber otros como el hecho de inicializar
+los datos de muestra de cada proceso de análisis, por ejemplo.
+
+Referencias.
+
+Lab o a chip
+https://www.eluniverso.com/vida/2017/06/09/nota/6221665/examenes-laboratorio-diagnostico-enfermedades
+https://blogthinkbig.com/lab-on-a-chip
+https://www.healio.com/infectious-disease/vaccine-preventable-diseases/news/online/%7Bcaeb408a-27b9-47fe-a4d3-301ae7fb121d%7D/lab-on-a-chip-platform-detects-disease-antibodies-in-minutes?page=2
+
+Cómputo paralelo
+http://dmoztools.net/Computers/Parallel_Computing/
+http://ibiblio.org/pub/linux/docs/LuCaS/Manuales-LuCAS/doc-manual-openMosix-1.0/doc-manual-openMosix_html-1.0/node9.html
