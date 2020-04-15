@@ -71,22 +71,23 @@ class EstadosComensal(Enum):
         bebidas = bebidas_azar(randint(1, 3))
         platillos = platillos_azar(randint(1, 4))
         grupo = this.orden.grupo
-        print("Esperando mesero para atender")
+        #print("Esperando mesero para atender")
         grupo.esperar_mesero.acquire()  # Esperar mesero para atender, no hecho
         grupo.esperar_mesero.release()
-        print("Añado mi orden")
+        #print("Añado mi orden")
         this.orden.anadir_a_orden(bebidas)  # Region Critica
         this.orden.anadir_a_orden(platillos)  # Region Critica
         
     @siguiente_estado(siguiente = pidiendo_orden)
     def pensando_orden(self, *arg, **args):
-        print("Pensando Orden")
+        # print("Pensando Orden")
         sleep(random() * 2 + .3)  # Simula pensar orden
 
     @siguiente_estado(siguiente = pensando_orden)
     def esperando_mesa(self, *arg, **args):
-        print("Esperando Mesa")
-    
+        # print("Esperando Mesa")
+        pass
+
     inicial = esperando_mesa
 
     def __str__(self):
@@ -111,7 +112,8 @@ class EstadosGrupo(Enum):
 
     @siguiente_estado(siguiente=final)
     def salir(self, this, *arg, **argv):
-        this.mesa.desocupar_mesa()  # Desocupa la mesa
+        this.orden.mesa.desocupar_mesa()  # Desocupa la mesa
+        print("El grupo", this, "desocupa la mesa", this.orden.mesa)
 
     @siguiente_estado(siguiente = salir)
     def pedir_cuenta(self, this, *arg, **argv):
@@ -216,7 +218,7 @@ class Clientes:
         """
         Determina si uno de los grupos todavia esta esperando mesa
         """
-        return any(filter(lambda g : g.is_alive(), self.grupos))
+        return any(filter(lambda g : g.estado != None, self.grupos))
 
     def __str__(self):
         return '\n'.join(map(str, self.grupos))

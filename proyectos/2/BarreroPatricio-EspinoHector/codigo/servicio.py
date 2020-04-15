@@ -41,12 +41,13 @@ class Mesa:
         self.mutex_mesa.release()
         return disponibilidad
 
+    def __str__(self):
+        return str(self.numero_mesa)
 class EstadosMesero(Enum):
 
     def disponible(self, this, *arg, **argv):
         this.servicio.semaforo_meseros.release()
         this.senalizador.acquire()
-        print("holaaa")
 
     def ocupado(self, this, *arg, **argv):
         pass
@@ -54,19 +55,16 @@ class EstadosMesero(Enum):
     @siguiente_estado(siguiente = disponible)
     def tomar_orden(self, this, *arg, **argv):
         this.mesa.grupo.senalador.release()  # Simula
-        print("El mesero", this, "tomo la orden de la mesa", this.mesa)
 
     @siguiente_estado(siguiente = disponible)
     def atender_mesa(self, this, *arg, **argv):
         this.mesa.grupo.senalador.release()  # Simula atender a una mesa
-        print("El mesero", this, "atendio la mesa", this.mesa)
 
     
     @siguiente_estado(siguiente = disponible)
     def llevar_comida(self, this, *arg, **argv):
         this.servicio.obtener_orden_cola()  # Simula obtener la comida
         this.mesa.grupo.senalador.release()  # Simula llevar la comida
-        print("El mesero", this, "llevo la comida a la mesa", this.mesa)
 
     inicial = disponible
 
@@ -149,9 +147,9 @@ class Servicio(Thread):
 
     def obtener_orden_cola(self):
         self.mutex_comidas.acquire()
-        comida = self.comidas.pop(0)
+        if self.comidas:
+            self.comidas.pop(0)
         self.mutex_comidas.release()
-        return comida
 
     def obtener_mesero_disponible(self):  # Puede ser region critica
         self.mutex_lista_meseros.acquire()
@@ -171,7 +169,6 @@ class Servicio(Thread):
 
     def tomar_orden(self, mesa):
         self.mutex_atencion.acquire()
-        print("aqui")
         self.atencion.append((mesa, EstadosMesero.tomar_orden))
         self.mutex_atencion.release()
 

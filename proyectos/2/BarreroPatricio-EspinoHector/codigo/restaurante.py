@@ -56,3 +56,7 @@ if __name__ == "__main__":
 
     cocina.start()
     clientes.iniciar()
+
+    while clientes.existe_activo():
+        pass
+    
