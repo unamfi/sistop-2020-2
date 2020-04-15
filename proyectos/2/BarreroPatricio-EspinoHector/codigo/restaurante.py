@@ -26,9 +26,10 @@ class Restaurante:
             Ejemplo de uso:
             python3 restaurante.py 6 3 2 2
             """)
-        parser.add_argument("clientes",type=int,help="Numero de clientes")
         parser.add_argument("grupos",type=int,help="Numero de grupos de clientes")
+        parser.add_argument("maxgrupos",type=int,help="Numero maximo de  clientes por grupo")
         parser.add_argument("meseros",type=int,help="Numero de meseros")
+        parser.add_argument("mesas",type=int,help="Numero de mesas")
         parser.add_argument("chefs",type=int,help="Numero de chefs")
         arg = parser.parse_args()
         print("Clientes",arg.clientes)
@@ -38,14 +39,14 @@ class Restaurante:
         
 
 if __name__ == "__main__":
-    #restarurantito = Restaurante()
-    #restarurantito.main()
+    restarurantito = Restaurante()
+    restarurantito.main()
 
-    num_mesas = 5
-    num_meseros = 2
-    num_cocineros = 2
-    num_grupos = 2
-    max_por_grupo = 3
+    num_mesas = arg.mesas
+    num_meseros = arg.meseros
+    num_cocineros = arg.cocineros
+    num_grupos = arg.grupos
+    max_por_grupo = arg.maxgrupos
 
     cocina =  Cocina(num_cocineros)
     servicio = Servicio(cocina, num_mesas, num_meseros)
