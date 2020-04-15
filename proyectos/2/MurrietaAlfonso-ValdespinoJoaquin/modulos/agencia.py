@@ -3,11 +3,10 @@ from time import sleep
 
 from modulos.compania import compania
 
-
 class agencia(object):
 
     def __init__(self, companias: [compania], varN:str ):
-        #mutex para las acciones de la agencia
+        #Mutex para las acciones de la agencia
         global agLock
         agLock = RLock()
         agLock.acquire()
@@ -31,7 +30,7 @@ class agencia(object):
             sleep(1)
             agLock.release()
         except:
-            print('# Excepcion al realizar la actualización :(' + self.nombre)
+            print('# Excepcion al realizar la actualización ' + self.nombre)
             agLock.release()
 
     def autoActualizar(self):
@@ -61,7 +60,6 @@ class agencia(object):
         return True
 
     def vender_Cliente(self, comp: compania, asiento: int):
-        
         global agLock
         agLock.acquire()
         #print('\Vendiendo')

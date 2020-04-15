@@ -9,6 +9,11 @@ from modulos.cliente import cliente
 
 if __name__ == "__main__":
 
+
+    lock = RLock()
+    lock.acquire()
+    lock.release()
+
     hilosList = []
     clienteList = []
     companiaList = []
@@ -35,6 +40,7 @@ if __name__ == "__main__":
     sleep(2)
 
     # creando clientes y corriendo los hilos correspondientes
-    for i in range(3):
+    #No poner menos de 4 clientes pues nunca se venderían todos los asientos
+    for i in range(6):
         clienteList.append( cliente(agenciaList))
         hilosList.append(Thread(target=clienteList[i].run).start())
