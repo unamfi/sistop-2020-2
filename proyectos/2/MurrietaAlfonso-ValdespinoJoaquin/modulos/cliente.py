@@ -30,3 +30,4 @@ class cliente(object):
         except:
             sleep(0.5)
             print('\n#', str(currentThread().getName()),'no se encontro vuelos') # en caso de que haya mas clientes que asientos.
+            

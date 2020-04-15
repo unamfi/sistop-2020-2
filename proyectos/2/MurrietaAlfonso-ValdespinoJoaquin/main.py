@@ -42,3 +42,4 @@ if __name__ == "__main__":
     for i in range(numClientes):
         clienteList.append( cliente(agenciaList))
         hilosList.append(Thread(target=clienteList[i].run).start())
+        

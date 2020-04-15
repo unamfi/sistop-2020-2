@@ -44,7 +44,6 @@ Como se muestra previamente, dentro de la carpeta modulos, se encuentran 3 códi
 
 ### Descripción de uso de hilos y sincronización:
 
-
 De manera general, cada clase ubicada dentro de la carpeta modulos,hace uso de las bibliotecas:
  - threading 
  - time
@@ -54,6 +53,18 @@ tanto cliente como compania usan:
 - random
 
 Para escoger de forma aleatoria un asiento de un avión, entre otras cosas (Más información dentro de cada código).
+
+
+### Descripcion de implementaciones de sincronización y paralelismo:
+
+De manera general se emplearon MUTEX's para poder tener un control al paralelizar cada una de las simulaciones mediante 
+procesos de cada clase.
+
+Además, y como un recurso algo extraño, la función RLock importada de threading se utilizó en varios segmentos, esta función actua parecido a como funcionaría un semáforo.
+
+Por otro lado, al hacer uso de varios mutex a través de funciones como  acquire() o release() podríamos decir que también usamos un multiplex.
+
+Por último, y como se observa en la prueba de escritorio inferior, debido a la concurrencia que puede existir al comprar in boleto, la forma de hacer explicita la solución fue hacer uso del "manager loco" que ante un problema como ese sube el precio del boleto.
 
 
 ## Prueba de escritorio:

@@ -15,22 +15,20 @@ Este proyecto simula las ventas de boletos de avión, a través de las siguiente
 ### Compañía de vuelo
 
 Cada una de las compañías de vuelo tiene:
-- 5 asientos por avión
-- Un costo total por vuelo de 1000.00 'monedas'
-- Aumenta el precio del boleto en un 10% ante incidentes por cada boleto vendido.
+- 4 asientos por avión <- Puede ser modificable
+- Un costo base por vuelo de 250
+- Aumenta el precio del boleto en un 10% ante incidentes por cada boleto vendido
 - La compañía debe asegurarse de no vender el mismo boleto a dos agencias diferentes
 
 ### Agencia de viajes
 
 Cada una de las agencia debe asegurarse de:
-- Mostrar al cliente todos los asientos disponibles para comprar,además de información como: empresa y número
-- No vender el mismo boleto a dos clientes diferentes
+- Mostrar al cliente información como: empresa y número
 
 ### Cliente
 
 Cada cliente  cumple con las siguientes reglas:
 - Comprará solo un boleto
-- Siempre comprará el vuelo más barato disponible.
 
 
 ## Especificaciones generales del proyecto:
@@ -45,7 +43,3 @@ Ejecución del programa:
 Para más información acerca del funcionamiento [click aquí](ABOUT.md) para leer todo el apartado técnico del 
 proyecto desdes conceptos claves hasta la forma en que se distribuyó el código.
 
-## Notas extras:
-
-- Todos los apartados con "*" son implementaciones no logradas pero que se plantearon como parte del problema
-- Probablemente agregaremos un timeline de trabajo 

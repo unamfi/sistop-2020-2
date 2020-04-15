@@ -92,3 +92,4 @@ class compania(object):
             for i in range(self.Asientosdisponibles):#Consideraremos la cantidad de asientos para el incremento en el precio
                 self.aumentarPrecio() 
         cpLock.release()
+        
