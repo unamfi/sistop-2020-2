@@ -2,6 +2,7 @@
 Archivo principal, 
 
 '''
+import argparse
 
 class Restaurante:
     """
@@ -13,3 +14,25 @@ class Restaurante:
     clientes (Clientes): Permite manipular a los clientes de una forma sencila  
     """
     pass
+
+    def main(self):
+        parser = argparse.ArgumentParser(description="""Este programa permite simular el comportamiento de un\
+            de un restaurante. Y los distintos comportamientos concurrentes que estos presentan. 
+
+            Ejemplo de uso:
+            python3 restaurante.py 6 3 2 2
+            """)
+        parser.add_argument("clientes",type=int,help="Numero de clientes")
+        parser.add_argument("grupos",type=int,help="Numero de grupos de clientes")
+        parser.add_argument("meseros",type=int,help="Numero de meseros")
+        parser.add_argument("chefs",type=int,help="Numero de chefs")
+        arg = parser.parse_args()
+        print("Clientes",arg.clientes)
+        print("Grupos",arg.grupos)
+        print("Meseros",arg.meseros)
+        print("Chefs",arg.chefs)
+        
+
+if __name__ == "__main__":
+    restarurantito = Restaurante()
+    restarurantito.main()
