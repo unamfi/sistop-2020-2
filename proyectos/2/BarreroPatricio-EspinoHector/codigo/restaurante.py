@@ -32,19 +32,16 @@ class Restaurante:
         parser.add_argument("mesas",type=int,help="Numero de mesas")
         parser.add_argument("chefs",type=int,help="Numero de chefs")
         arg = parser.parse_args()
-        print("Clientes",arg.clientes)
-        print("Grupos",arg.grupos)
-        print("Meseros",arg.meseros)
-        print("Chefs",arg.chefs)
-        
+        return arg        
+
 
 if __name__ == "__main__":
     restarurantito = Restaurante()
-    restarurantito.main()
+    arg = restarurantito.main()
 
     num_mesas = arg.mesas
     num_meseros = arg.meseros
-    num_cocineros = arg.cocineros
+    num_cocineros = arg.chefs
     num_grupos = arg.grupos
     max_por_grupo = arg.maxgrupos
 
