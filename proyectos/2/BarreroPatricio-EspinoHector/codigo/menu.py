@@ -5,6 +5,7 @@ Contiene lógica para facilitar el uso de items de comida y ordenes
 from enum import Enum, unique
 from copy import deepcopy
 from random import sample
+from threading import Semaphore
 
 @unique
 class Item(Enum):
@@ -47,16 +48,19 @@ class Orden:
         self.lista_item_cantidad = dict()
         self.mesero = mesero
         self.grupo_personas = grupo_personas
+        self.mutex_lista = Semaphore(1)
 
     def siguente_item(self):
         return self.lista_item_cantidad.pop(0)
 
     def anadir_a_orden(self, items):  # Region critica, hiper critica jajaj
+        self.mutex_lista.acquire()
         for item in items:
             if item in self.lista_item_cantidad:
                 self.lista_item_cantidad[item] = self.lista_item_cantidad[item] + 1
             else:
                 self.lista_item_cantidad[item] = 1
+        self.mutex_lista.release()
 
     def orden_finalizada(self):
         self.lista_original = deepcopy(self.lista_item_cantidad)
