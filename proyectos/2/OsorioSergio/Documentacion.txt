@@ -1,0 +1,8 @@
+Mecanismos de sincronización empleados:
+
+-RoundRobin para 3 hilos
+
+Uso de Java 8 JDK
+Uso de la biblioteca Swing
+Ejecuciones realizadas en Linux Mint utilizando NetBeans 8.1
+
