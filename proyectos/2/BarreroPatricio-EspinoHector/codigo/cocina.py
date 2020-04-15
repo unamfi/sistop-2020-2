@@ -18,7 +18,7 @@ class Linea_Orden:
         self.mutex_entrada = Semaphore(1)
         self.mutex_disponibles_entrada = Semaphore(0)
 
-    def colocar_orden_entrada(self,orden): ##Lo llama el mesero ##señalizacion y mutex
+    def colocar_orden_entrada(self,orden): ##Lo llama el mesero ##senalizacion y mutex
         self.mutex_entrada.acquire()
         self.linea_entrada.append(orden)
         self.mutex_disponibles_entrada.release()
@@ -36,7 +36,7 @@ class Cocinero(Persona):
     """
     Representacion de un cocinero
     """
-    |
+    servicio = None
     def __init__(self,id,estados,barra_pedidos):
         super.__init__(self,id,estados)
         self.orden = None
@@ -65,17 +65,15 @@ class Cocina:
         for i in range(n):
             self.cocineros.append(Cocinero(i,self.estados,self.barra_pedidos))
 
-    def añadir_servicio(self,servicio):
+    def anadir_servicio(self,servicio):
         self.servicio = servicio
-        self.estados.añadir_servicio(servicio)
-    def añadir_orden(self,orden):
+        Cocinero.servicio = servicio
+
+    def anadir_orden(self,orden):
         self.barra_pedidos.colocar_orden_entrada(orden)
 
 @unique
 class EstadosCocinero(Enum):
-
-    def añadir_servicio(self,servicio):
-        self.servicio=servicio
     
      
     @siguiente_estado(siguiente = cocinar)
@@ -91,7 +89,7 @@ class EstadosCocinero(Enum):
 
     @siguiente_estado(siguiente=esperar_orden)
     def dejar_plato(self, this, *arg, **args):
-        self.servicio.añadir_orden_lista(this.orden)
+        this.servicio.anadir_orden_lista(this.orden)
         this.orden=None
 
     
