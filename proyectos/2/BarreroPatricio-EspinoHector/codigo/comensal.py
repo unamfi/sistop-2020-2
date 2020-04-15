@@ -2,7 +2,7 @@
 Contiene lógica que simula a un comensal y a grupos de los mismos
 """
 from menu import platillos_azar, bebidas_azar, Orden
-from funciones_utiles import siguiente_estado, Persona, estado_final
+from comun import siguiente_estado, Persona, estado_final
 
 from enum import Enum, unique
 from threading import Thread, Semaphore
