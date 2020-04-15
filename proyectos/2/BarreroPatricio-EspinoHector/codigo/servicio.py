@@ -147,14 +147,14 @@ class Servicio(Thread):
         return comida
 
     def obtener_mesero_disponible(self):  # Puede ser region critica
-        self.mutex_lista_mesas.acquire()
+        self.mutex_lista_meseros.acquire()
         meserito = None
         for mesero in self.meseros:
             if mesero.esta_disponible():
                 meserito =  mesero
                 break
         meserito.estado = EstadosMesero.ocupado
-        self.mutex_lista_mesas.release()
+        self.mutex_lista_meseros.release()
         return meserito
 
     def pedir_cuenta(self, mesa):
