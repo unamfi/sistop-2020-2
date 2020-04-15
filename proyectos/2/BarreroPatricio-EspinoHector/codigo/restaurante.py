@@ -2,6 +2,10 @@
 Archivo principal, 
 
 '''
+from servicio import Servicio
+from comensal import Clientes
+from cocina import Cocina
+
 import argparse
 
 class Restaurante:
@@ -36,3 +40,17 @@ class Restaurante:
 if __name__ == "__main__":
     restarurantito = Restaurante()
     restarurantito.main()
+
+    num_mesas = 5
+    num_meseros = 2
+    num_cocineros = 2
+    num_grupos = 2
+    max_por_grupo = 3
+
+    cocina =  Cocina(num_cocineros)
+    servicio = Servicio(cocina, num_mesas, num_meseros)
+    cocina.anadir_servicio(servicio)
+    clientes = Clientes(num_grupos, max_por_grupo, servicio)
+    servicio.start()
+    cocina.start()
+    clientes.iniciar()

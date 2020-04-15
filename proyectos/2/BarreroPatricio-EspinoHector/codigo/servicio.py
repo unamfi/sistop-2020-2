@@ -176,6 +176,7 @@ class Servicio(Thread):
                 mesita = mesa
                 break 
         orden = Orden(mesita, self, grupo)
+        self.semaforo_mesas.release()
         return orden
 
     
