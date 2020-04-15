@@ -57,14 +57,15 @@ class Cocina:
 
     def __len__(self):
         pass
+    def anadir_orden(self,orden):
+        ###mutex
+        ##añadir a la cola de ordenes
+        ##dejar el mutex
 
 
 class EstadosCocinero(Enum):
 
-    @siguiente_estado(siguiente = recibir_orden)
-    def esperar_orden(self,this, *arg, **args):
-        # Mutex
-        pass
+
     
     @siguiente_estado(siguiente = cocinar)
     def recibir_orden(self, this, *arg, **args):  # orden como parametro
@@ -75,6 +76,11 @@ class EstadosCocinero(Enum):
         print("Cocinando")
         sleep(random() * 6 + .3)  # Simula que esta cocinando
  
+    @siguiente_estado(siguiente = recibir_orden)
+    def esperar_orden(self,this, *arg, **args):
+        # Mutex
+        pass
+
     @siguiente_estado(siguiente = esperar_orden)
     def dejar_plato(self,this, *arg, **args):
         #plato terminado, debemos regresarlo
