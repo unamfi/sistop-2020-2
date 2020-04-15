@@ -46,26 +46,24 @@ class EstadosMesero(Enum):
     def disponible(self, this, *arg, **argv):
         this.servicio.semaforo_meseros.release()
         this.senalizador.acquire()
+        print("holaaa")
 
     def ocupado(self, this, *arg, **argv):
         pass
 
     @siguiente_estado(siguiente = disponible)
     def tomar_orden(self, this, *arg, **argv):
-        this.servicio.semaforo_meseros.acquire()
         this.mesa.grupo.senalador.release()  # Simula
         print("El mesero", this, "tomo la orden de la mesa", this.mesa)
 
     @siguiente_estado(siguiente = disponible)
     def atender_mesa(self, this, *arg, **argv):
-        this.servicio.semaforo_meseros.acquire()
         this.mesa.grupo.senalador.release()  # Simula atender a una mesa
         print("El mesero", this, "atendio la mesa", this.mesa)
 
     
     @siguiente_estado(siguiente = disponible)
     def llevar_comida(self, this, *arg, **argv):
-        this.servicio.semaforo_meseros.acquire()  # Simula llevar comida a la mesa
         this.servicio.obtener_orden_cola()  # Simula obtener la comida
         this.mesa.grupo.senalador.release()  # Simula llevar la comida
         print("El mesero", this, "llevo la comida a la mesa", this.mesa)
@@ -116,21 +114,30 @@ class Servicio(Thread):
         self.mutex_lista_meseros = Semaphore(1)
 
     def run(self):
+        for mesero in self.meseros:
+            mesero.start()
         while True:
             self.semaforo_meseros.acquire()
             self.mutex_atencion.acquire()
-            if len(self.atencion) > 1:
+            if self.atencion:
                 mesa, estado = self.atencion.pop(0)
                 mesero = self.obtener_mesero_disponible()
                 mesero.estado = estado
+                mesero.senalizador.release()
                 mesero.mesa = mesa
                 self.mutex_atencion.release()
             else:                
                 self.mutex_atencion.release()
-                orden = self.comidas.pop(0)
-                mesero = self.obtener_mesero_disponible()
-                mesero.estado = EstadosMesero.llevar_comida
-                mesero.mesa = orden.mesa
+                self.mutex_comidas.acquire()
+                if len(self.comidas) > 0:
+                    orden = self.comidas[0]
+                    mesero = self.obtener_mesero_disponible()
+                    mesero.estado = EstadosMesero.llevar_comida
+                    mesero.senalizador.release()
+                    mesero.mesa = orden.mesa
+                else:
+                    self.semaforo_meseros.release()
+                self.mutex_comidas.release()
 
     def dar_orden(self, orden):
         self.cocina.anadir_orden(orden)
@@ -159,11 +166,12 @@ class Servicio(Thread):
 
     def pedir_cuenta(self, mesa):
         self.mutex_atencion.acquire()
-        self.atencion.append((mesa, EstadosMesero.tomar_orden))
+        self.atencion.append((mesa, EstadosMesero.atender_mesa))
         self.mutex_atencion.release()
 
     def tomar_orden(self, mesa):
         self.mutex_atencion.acquire()
+        print("aqui")
         self.atencion.append((mesa, EstadosMesero.tomar_orden))
         self.mutex_atencion.release()
 

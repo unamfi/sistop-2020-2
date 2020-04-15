@@ -31,7 +31,7 @@ class EstadosComensal(Enum):
     @siguiente_estado(siguiente = levantarse)
     def pagando(self, this, *arg, **args):
         grupo = this.orden.grupo
-        grupo.esperar_mesero.acquiere()  # Esperar cuenta
+        grupo.esperar_mesero.acquire()  # Esperar cuenta
         grupo.esperar_mesero.release()
         sleep(random() * 2 + .3)  # Simula sacar dinero
     
@@ -55,15 +55,15 @@ class EstadosComensal(Enum):
     @siguiente_estado(siguiente = comiendo)
     def termino_orden(self, this, *arg, **args):
         grupo = this.orden.grupo
-        grupo.mutex_cuenta.acquire()
-        grupo.cuenta1 = grupo.cuenta + 1
+        grupo.mutex_cuenta1.acquire()
+        grupo.cuenta1 = grupo.cuenta1 + 1
         if grupo.cuenta1 == len(grupo):
             grupo.barrera_terminar_ordenar.release()
             grupo.dar_orden(this.orden) # Pasarlo a grupo
-        grupo.mutex_cuenta.release()
+        grupo.mutex_cuenta1.release()
         grupo.barrera_terminar_ordenar.acquire()
         grupo.barrera_terminar_ordenar.release()
-        grupo.esperar_mesero.acquiere()  # Esperar comida
+        grupo.esperar_mesero.acquire()  # Esperar comida
         grupo.esperar_mesero.release()
 
     @siguiente_estado(siguiente = termino_orden)
@@ -71,8 +71,10 @@ class EstadosComensal(Enum):
         bebidas = bebidas_azar(randint(1, 3))
         platillos = platillos_azar(randint(1, 4))
         grupo = this.orden.grupo
-        grupo.esperar_mesero_atender.acquiere()  # Esperar mesero para atender, no hecho
-        grupo.esperar_mesero_atender.release()
+        print("Esperando mesero para atender")
+        grupo.esperar_mesero.acquire()  # Esperar mesero para atender, no hecho
+        grupo.esperar_mesero.release()
+        print("Añado mi orden")
         this.orden.anadir_a_orden(bebidas)  # Region Critica
         this.orden.anadir_a_orden(platillos)  # Region Critica
         
@@ -137,9 +139,9 @@ class EstadosGrupo(Enum):
 
     @siguiente_estado(siguiente = esperar_mesero_pedir_orden)
     def sentar_comensales(self, this, *arg, **argv):
-        print("El grupo de personas", this, "ha adquirido la mesa", this.orden.mesa)
+        print("El grupo de personas", this, "ha adquirido la mesa", this.orden.mesa.numero_mesa)
         for comensal in this.comensales:
-            comensal.asignar_orden(this.orden)
+            comensal.recibir_orden(this.orden)
             comensal.start()
 
     @siguiente_estado(siguiente = sentar_comensales)
@@ -162,11 +164,11 @@ class Grupo(Persona):
     Atributos:
     comensales list(Comensal): Lista de comensales que representa un grupito de personas que fueron a comer juntos
     """
-    def __init__(self, n, servicio):
+    def __init__(self, id, n, servicio):
         """
         Crea un grupo con n comensales
         """
-        Thread.__init__(self)
+        Persona.__init__(self, id, EstadosGrupo)
         self.comensales = [Comensal(i + 1) for i in range(n)]
         self.servicio = servicio
         self.cuenta1 = self.cuenta2 = self.cuenta3 = 0
@@ -179,11 +181,14 @@ class Grupo(Persona):
         self.senalador = Semaphore(0)  # Indica pedir la cuenta al mesero
         self.esperar_mesero = Semaphore(0)
 
+    def dar_orden(self, orden):
+        self.servicio.dar_orden(orden)
+        
     def __str__(self):
-        return '; '.join(map(str, self.comensales)) 
+        return str(self.id) + ': ' + '; '.join(map(str, self.comensales)) 
 
     def __repr__(self):
-        return '; '.join(map(repr, self.comensales)) 
+        return str(self.id) + ': ' + '; '.join(map(repr, self.comensales)) 
 
     def __len__(self):
         return len(self.comensales)
@@ -200,7 +205,7 @@ class Clientes:
         Permite crear n grupos con un máximo de m personas. Cada grupo puede tener diferente
         tamaño de personas
         '''
-        self.grupos = [Grupo(randint(1, m), servicio) for i in range(randint(1, n))]
+        self.grupos = [Grupo(i, randint(1, m), servicio) for i in range(randint(1, n))]
         
 
     def iniciar(self):

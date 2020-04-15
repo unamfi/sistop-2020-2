@@ -32,13 +32,41 @@ class Linea_Orden:
         return orden
 
 
+def esperar_orden(self,this, *arg, **args):
+        this.encargar_orden(this.barra_pedidos.obtener_orden_entrada())
+@unique
+class EstadosCocinero(Enum):
+    
+
+    @siguiente_estado(siguiente=esperar_orden)
+    def dejar_plato(self, this, *arg, **args):
+        this.servicio.anadir_orden_lista(this.orden)
+        this.orden=None
+
+
+    @siguiente_estado(siguiente = dejar_plato)
+    def cocinar(self, this, *arg, **args):
+        print("Cocinando")
+        sleep(random() * 6 + .3)  # Simula que esta cocinando
+
+    @siguiente_estado(siguiente = cocinar)
+    def esperar_orden(self,this, *arg, **args):
+        this.encargar_orden(this.barra_pedidos.obtener_orden_entrada())
+
+    inicial = esperar_orden
+    def __str__(self):
+        return str(self.name)
+
+if __name__ == "__main__":
+    pass
+
 class Cocinero(Persona):
     """
     Representacion de un cocinero
     """
     servicio = None
-    def __init__(self,id,estados,barra_pedidos):
-        super.__init__(self,id,estados)
+    def __init__(self,id,barra_pedidos):
+        Persona.__init__(self,id,EstadosCocinero)
         self.orden = None
         self.barra_pedidos = barra_pedidos
 
@@ -60,10 +88,9 @@ class Cocina:
         Permite crear n cocineros:
         '''
         self.barra_pedidos = Linea_Orden()
-        self.estados = EstadosCocinero(self.barra_pedidos)
         self.cocineros = []
         for i in range(n):
-            self.cocineros.append(Cocinero(i,self.estados,self.barra_pedidos))
+            self.cocineros.append(Cocinero(i, self.barra_pedidos))
 
     def anadir_servicio(self,servicio):
         self.servicio = servicio
@@ -72,35 +99,8 @@ class Cocina:
     def start(self):
         for cocinero in self.cocineros:
             cocinero.start()
-        cocinero.join()
 
     def anadir_orden(self,orden):
         self.barra_pedidos.colocar_orden_entrada(orden)
 
-@unique
-class EstadosCocinero(Enum):
-    
-     
-    @siguiente_estado(siguiente = cocinar)
-    def esperar_orden(self,this, *arg, **args):
-        this.encargar_orden(this.barra_pedidos.obtener_orden_entrada())
 
-        
-    @siguiente_estado(siguiente = dejar_plato)
-    def cocinar(self, this, *arg, **args):
-        print("Cocinando")
-        sleep(random() * 6 + .3)  # Simula que esta cocinando
-
-
-    @siguiente_estado(siguiente=esperar_orden)
-    def dejar_plato(self, this, *arg, **args):
-        this.servicio.anadir_orden_lista(this.orden)
-        this.orden=None
-
-    
-    inicial = esperar_orden
-    def __str__(self):
-        return str(self.name)
-
-if __name__ == "__main__":
-    pass
