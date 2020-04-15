@@ -26,6 +26,7 @@ class Cocinero(Persona):
     
     def encargar_orden(self,orden):
         self.orden = orden
+
     def terminar_turno(self,*arg,**args):
         pass
 
@@ -36,7 +37,6 @@ class Cocina:
     Atributos:
 
     """
-
     def __init__(self, n):            
         '''
         Permite crear n cocineros:
@@ -71,7 +71,7 @@ class EstadosCocinero(Enum):
         ##Plantear como pedire las ordenes
         
     @siguiente_estado(siguiente = dejar_plato)
-    def cocinar(self,this, *arg, **args):
+    def cocinar(self, this, *arg, **args):
         print("Cocinando")
         sleep(random() * 6 + .3)  # Simula que esta cocinando
  

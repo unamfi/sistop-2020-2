@@ -23,6 +23,7 @@ class EstadosComensal(Enum):
         grupo.cuenta3 = grupo.cuenta3 + 1
         if grupo.cuenta3 == len(grupo):
             grupo.barrera_salir.release()
+            grupo.senalador.release()
         grupo.mutex_cuenta3.release()
         grupo.barrera_salir.acquire()
         grupo.barrera_salir.release()
@@ -38,6 +39,7 @@ class EstadosComensal(Enum):
         grupo.cuenta2 = grupo.cuenta2 + 1
         if grupo.cuenta2 == len(grupo):
             grupo.barrera_terminar_comer.release()
+            grupo.senalador.release()
         grupo.mutex_cuenta2.release()
         grupo.barrera_terminar_comer.acquire()
         grupo.barrera_terminar_comer.release()
@@ -103,13 +105,14 @@ class EstadosGrupo(Enum):
     def pedir_cuenta(self, this, *arg, **argv):
         this.orden.mesero.pedir_cuenta(this.orden.mesa)
         print("Pidieron la cuenta en la mesa", this.orden.mesa)
-        this.semaforo.acquiere()
-
+        this.senalador.acquire()
+        this.senalador.release()
+    
     @siguiente_estado(siguiente = pedir_cuenta)
     def esperar_todos_terminen_comer(self, this, *arg, **argv):
-        this.semaforo.acquire()
+        this.senalador.acquire()
+        this.senalador.release()
         print("En la mesa", this.orden.mesa, "todos han terminado de comer")
-        this.reiniciar_semaforo()
 
     @siguiente_estado(siguiente = esperar_todos_terminen_comer)
     def sentar_comensales(self, this, *arg, **argv):
@@ -174,6 +177,7 @@ class Clientes:
         self.barrera_terminar_ordenar = Semaphore(0)
         self.barrera_terminar_comer = Semaphore(0)
         self.barrera_salir = Semaphore(0)
+        self.senalador = Semaphore(0)
 
     def iniciar(self):
         for g in self.grupos:
