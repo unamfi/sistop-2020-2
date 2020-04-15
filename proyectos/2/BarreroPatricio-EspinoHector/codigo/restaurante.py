@@ -7,7 +7,7 @@ from comensal import Clientes
 from cocina import Cocina
 
 import argparse
-
+from time import sleep
 class Restaurante:
     """
     Representa el concepto del restaurante
@@ -49,11 +49,7 @@ if __name__ == "__main__":
     cocina.anadir_servicio(servicio)
     clientes = Clientes(num_grupos, max_por_grupo, servicio)
     servicio.start()
-    print("aqui")
 
     cocina.start()
     clientes.iniciar()
-
-    while clientes.existe_activo():
-        pass
     
