@@ -45,20 +45,20 @@ Actualmente el prototipo no esta del todo bien, hubo módulos de la aplicación 
 En esta parte se pretende que el médico ingrese varios procesos para un paciente y que se pongan a ejecutar todos al mismo tiempo, con las características que pide de inicio como los perfiles y el nombre del estudio. Todas estás opciones de dan disponible en una lista
 desplegable:
 
-![captura_intefaz](capturas/Captura_02.png)
+![Captura_02](capturas/Captura_02.png)
 
 #La parte donde se siulan los procesos.
 
 En esta parte se pretende que se pudieran ver todos los procesos que se van agregando, para que posteriormente se creen instancias inclusive de pacientes y tengamos paralelismo de procesos por cada usuario. Bueno en desarrollos más a futuro:
 
-![captura_intefaz](capturas/Captura_03.png)
+![Captura_03](capturas/Captura_03.png)
 
 ## Pruebas:
 
-	Las primeras pruebas del programa se hicieron en la terminal como es costumbre,
+Las primeras pruebas del programa se hicieron en la terminal como es costumbre,
 por lo que se incluyen algunas imagenes de como funcionaría este módulo:
 
-![captura_terminal](capturas/Captura_01.png)
+![Captura_01](capturas/Captura_01.png)
 
 # Conclusiones.
 
