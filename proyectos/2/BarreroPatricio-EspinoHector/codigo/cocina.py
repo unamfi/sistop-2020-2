@@ -68,6 +68,11 @@ class Cocina:
     def anadir_servicio(self,servicio):
         self.servicio = servicio
         Cocinero.servicio = servicio
+    
+    def start(self):
+        for cocinero in self.cocineros:
+            cocinero.start()
+        cocinero.join()
 
     def anadir_orden(self,orden):
         self.barra_pedidos.colocar_orden_entrada(orden)

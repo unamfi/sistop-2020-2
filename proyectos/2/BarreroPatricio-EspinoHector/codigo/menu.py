@@ -13,7 +13,13 @@ class Item(Enum):
     Enumeración que representa tener items de un menú
     """
     Coca_Cola = 40, 'Bebida', 10
+    Pepsi = 40,'Bebida',10
     Carne_Res = 140, 'Carnes', 60 * 20
+    Pato_A_La_Naranja = 150,'Carnes', 500
+    Jugo_Naranja = 15,'Bebida',15
+    Enchiladas = 30,'Guiso',17
+    Col = 30,'Ensalada',20
+    Agua = 5,'Bebida',10
 
     def __new__(cls, *args, **kwds):
         value = len(cls.__members__) + 1
