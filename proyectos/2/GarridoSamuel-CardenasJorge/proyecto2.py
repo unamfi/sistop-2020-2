@@ -10,7 +10,7 @@ mutexTarea = threading.Semaphore(1)
 mutexFamiliar = threading.Semaphore(1)
 familiarDisponible =[]
 listaDeTareas =[]
-cantidad_personas = 4
+cantidad_personas = 20
 tareasdelDia = 20   
 tareas = threading.Semaphore(tareasdelDia)
 personas = threading.Semaphore(cantidad_personas)
@@ -38,7 +38,7 @@ class Tarea:
         for i in range(requeridosParalaTarea):
             personas.acquire()
             mutexFamiliar.acquire()
-            requeridos.append(familiarDisponible.pop())
+            requeridos.append(familiarDisponible.pop(random.randrange(len(familiarDisponible))))
             mutexFamiliar.release()
         for i in requeridos:
             i.Trabajar(nombreTarea)
@@ -86,7 +86,7 @@ class Casa:
         for y in range(tareasdelDia):
             requeridosParalaTarea = random.randrange(1,4)
             posibilidad = DiccionarioTareas[requeridosParalaTarea]
-            nombreTarea =random.choice(posibilidad)
+            nombreTarea = random.choice(posibilidad)
             mutexTarea.acquire()          
             listaDeTareas.append(threading.Thread(target = Tarea, args= [y, requeridosParalaTarea,nombreTarea]).start())
             mutexTarea.release() 
