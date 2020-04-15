@@ -82,13 +82,19 @@ Se cuenta con una función banner que realiza un texto con "==" para dar introdu
 ## Ejecución 🖥
 Para la ejecución debe emplearse el comando:
 
-```python
+```shell
 ~:$ python3 proyecto2.py
 ```
 Se proporcionará el número de tareas y el número de personas y hasta ese entonces comenzará la ejecución.
 
-#### Ejemplos:
+#### Ejemplos: 
+Los emojis me aparecen en la terminal (macOS) pero si tiene Gnome parece que puede sacar la paleta de emojis con cntrl+shif+e + SpaceBar pero si no lo tiene disponible podría instalarse (en Debians) con:
+
+```shell
+sudo apt install fonts-emojione 
+```
 
 ![](screen1.png)
 ![](screen2.png)
 ![](screen3.png)
+![](screen4.png)
