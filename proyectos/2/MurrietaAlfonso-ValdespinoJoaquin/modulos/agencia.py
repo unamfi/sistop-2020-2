@@ -1,12 +1,14 @@
 from threading import RLock, Thread
 from time import sleep
+import sys
 
 from modulos.compania import compania
 
+
 class agencia(object):
 
-    def __init__(self, companias: [compania], varN:str ):
-        #Mutex para las acciones de la agencia
+    def __init__(self, companias: [compania], varN:str,numClientes ):
+        #mutex para las acciones de la agencia
         global agLock
         agLock = RLock()
         agLock.acquire()
@@ -14,6 +16,7 @@ class agencia(object):
         self.companiaList = companias
         self.disponibles = []
         self.iniDatos()
+        self.numC = numClientes
         agLock.release()
 
     def actualizar(self):
@@ -29,16 +32,24 @@ class agencia(object):
             #print('-Actualizacion'+'\a') 
             sleep(1)
             agLock.release()
+            return True
         except:
-            print('# Excepcion al realizar la actualización ' + self.nombre)
+            print('# Excepcion al realizar la actualización :(' + self.nombre)
             agLock.release()
 
     def autoActualizar(self):
+        count=0
         while(True):
-            sleep(5)
+            sleep(4)
+            #print("autoactualiza"+self.nombre)
+            count+=1
+            if (count>self.numC+1):
+                print(self.nombre+ " ha dejado de operar.")
+                sys.exit()
             if not (self.actualizar()):
                 sleep(0.5)
                 self.actualizar()
+                
 
     def iniDatos(self):
         self.disponibles.clear()
@@ -56,10 +67,11 @@ class agencia(object):
     def run(self):
         print('Iniciando ' + self.nombre)
         Thread(target= self.autoActualizar).start()
-
         return True
+    
 
     def vender_Cliente(self, comp: compania, asiento: int):
+        
         global agLock
         agLock.acquire()
         #print('\Vendiendo')
@@ -70,8 +82,8 @@ class agencia(object):
         try:
             if(companiaDeseada.venderAsiento(asientoDeseado)):
                 print("\n####################################################")
-                print('#Agencia: ', self.nombre, ' | Company: ' ,  companiaDeseada, ' | Asiento: ', asientoDeseado, ' | Precio: ', companiaDeseada.precioActual)
-                #print('\n#Agencia: ', self.nombre, ' | Company: ' ,  companiaDeseada, ' | Asiento: ', comp.asiento.index , ' | Precio: ', companiaDeseada.precioActual)
+                print('#Agencia: ', self.nombre, ' | Compania: ' ,  companiaDeseada, ' | Asiento: ', asientoDeseado, ' | Precio: ', companiaDeseada.precioActual,"\a")
+                #print('\n#Agencia: ', self.nombre, ' | Compania: ' ,  companiaDeseada, ' | Asiento: ', comp.asiento.index , ' | Precio: ', companiaDeseada.precioActual)
                 print("####################################################\n")
                 agLock.release()
                 sleep(0.1)
@@ -79,7 +91,7 @@ class agencia(object):
                 return True
 
             else:
-                print('\n-> ', self.nombre,' no pudo vender a:',  companiaDeseada,' el asiento ', asientoDeseado)
+                print('   ', self.nombre,' no pudo vender a:',  companiaDeseada,' el asiento ', asientoDeseado)
                 print('     [Asiento no disponible - Vendido actualmente]')
                 agLock.release()
                 sleep(0.1)
@@ -89,3 +101,5 @@ class agencia(object):
             print('# Excepcion originada de venta cliente ' + self.nombre)
             #agLock.release()
             return False
+        
+      

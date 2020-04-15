@@ -87,7 +87,7 @@ class compania(object):
         global cpLock
         cpLock.acquire()
         if  not self.Asientosdisponibles  == self.cantidadAsientos:
-            print("\n-> El manager loco ha subido los precios de ",self.nombre ," | Asientos disponibles: ",self.Asientosdisponibles,"\n")
+            print("\n-> El manager loco ha subido los precios de ",self.nombre)
             
             for i in range(self.Asientosdisponibles):#Consideraremos la cantidad de asientos para el incremento en el precio
                 self.aumentarPrecio() 

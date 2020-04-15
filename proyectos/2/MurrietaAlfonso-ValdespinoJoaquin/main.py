@@ -8,8 +8,7 @@ from modulos.cliente import cliente
 
 
 if __name__ == "__main__":
-
-
+    numClientes=4
     lock = RLock()
     lock.acquire()
     lock.release()
@@ -27,11 +26,11 @@ if __name__ == "__main__":
     companiaList = [aereomar,aereomexico,interjet,volaris]
 
     #Agencias de vuelo
-    coppel = agencia(companiaList,'coppelViajes')
-    despegar = agencia(companiaList, 'despegar.com')
-    mundo  = agencia(companiaList, "mundomex")
-    best = agencia(companiaList, 'bestday')
-    palacio = agencia(companiaList, 'viajesPalacio')
+    coppel = agencia(companiaList,'coppelViajes',numClientes)
+    despegar = agencia(companiaList, 'despegar.com',numClientes)
+    mundo  = agencia(companiaList, "mundomex",numClientes)
+    best = agencia(companiaList, 'bestday',numClientes)
+    palacio = agencia(companiaList, 'viajesPalacio',numClientes)
     agenciaList = [coppel,despegar,mundo,best,palacio]
 
     for agencias in agenciaList:
@@ -40,7 +39,6 @@ if __name__ == "__main__":
     sleep(2)
 
     # creando clientes y corriendo los hilos correspondientes
-    #No poner menos de 4 clientes pues nunca se venderían todos los asientos
-    for i in range(6):
+    for i in range(numClientes):
         clienteList.append( cliente(agenciaList))
         hilosList.append(Thread(target=clienteList[i].run).start())

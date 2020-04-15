@@ -40,6 +40,7 @@ Como se muestra previamente, dentro de la carpeta modulos, se encuentran 3 códi
         - Programación Paralela: 
                 - Multithreading
                 - Mutex (mutual exclusion), Multiplex, GIL (Global Interpreter Lock)
+                - Rlock -> Función incluida en threading que tiene el comportamiento entre semáforo y torniquete
 
 ### Descripción de uso de hilos y sincronización:
 
@@ -55,5 +56,46 @@ tanto cliente como compania usan:
 Para escoger de forma aleatoria un asiento de un avión, entre otras cosas (Más información dentro de cada código).
 
 
+## Prueba de escritorio:
 
+python3 main.py
+
+        Iniciando coppelViajes
+        Iniciando despegar.com
+        Iniciando mundomex
+        Iniciando bestday
+        Iniciando viajesPalacio
+
+        ####################################################
+        #Agencia:  coppelViajes  | Compania:  Aereomexico  | Asiento:  0  | Precio:  281.6 
+        ####################################################
+
+
+        -> El manager loco ha subido los precios de  Aereomexico
+        despegar.com  no pudo vender a: Aereomexico  el asiento  0
+        [Asiento no disponible - Vendido actualmente]
+
+        -> El manager loco ha subido los precios de  Aereomexico
+        bestday  no pudo vender a: Aereomexico  el asiento  0
+        [Asiento no disponible - Vendido actualmente]
+
+        ####################################################
+        #Agencia:  coppelViajes  | Compania:  volaris  | Asiento:  4  | Precio:  294.8 
+        ####################################################
+
+
+        ####################################################
+        #Agencia:  despegar.com  | Compania:  volaris  | Asiento:  3  | Precio:  324.28000000000003 
+        ####################################################
+
+
+        ####################################################
+        #Agencia:  bestday  | Compania:  Aeromar  | Asiento:  1  | Precio:  305.8 
+        ####################################################
+
+        mundomex ha dejado de operar.
+        coppelViajes ha dejado de operar.
+        despegar.com ha dejado de operar.
+        viajesPalacio ha dejado de operar.
+        bestday ha dejado de operar.
 
