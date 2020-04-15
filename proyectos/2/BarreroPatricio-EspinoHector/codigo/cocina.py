@@ -1,7 +1,7 @@
 """
 Permite manipular a los cocineros de una forma sencilla 
 """
-from .comun import Persona
+from comun import Persona,siguiente_estado
 from enum import Enum, unique
 from threading import Thread
 from random import random, randint 
@@ -77,22 +77,27 @@ class EstadosCocinero(Enum):
     def añadir_servicio(self,servicio):
         self.servicio=servicio
     
+     
+    @siguiente_estado(siguiente = cocinar)
+    def esperar_orden(self,this, *arg, **args):
+        this.encargar_orden(self.barra_pedidos.obtener_orden_entrada())
+
+        
+    @siguiente_estado(siguiente = dejar_plato)
+    def cocinar(self, this, *arg, **args):
+        print("Cocinando")
+        sleep(random() * 6 + .3)  # Simula que esta cocinando
+
+
     @siguiente_estado(siguiente=esperar_orden)
     def dejar_plato(self, this, *arg, **args):
         self.servicio.añadir_orden_lista(this.orden)
         this.orden=None
 
-        
-    @siguiente_estado(siguiente = esperar_orden)
-    def cocinar(self, this, *arg, **args):
-        print("Cocinando")
-        sleep(random() * 6 + .3)  # Simula que esta cocinando
-
- 
-    @siguiente_estado(siguiente = cocinar)
-    def esperar_orden(self,this, *arg, **args):
-        this.encargar_orden(self.barra_pedidos.obtener_orden_entrada())
     
     inicial = esperar_orden
     def __str__(self):
         return str(self.name)
+
+if __name__ == "__main__":
+    pass
