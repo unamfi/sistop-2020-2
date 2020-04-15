@@ -5,6 +5,10 @@
  */
 package Interfaces;
 
+import Clases.RRHormonas;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author ale
@@ -47,7 +51,7 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         consola = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        consolaa = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -134,9 +138,10 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel4.setText("Presione Comer para poner a trabajar el sistema digestivo");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        consola.setViewportView(jTextArea1);
+        consolaa.setColumns(20);
+        consolaa.setRows(5);
+        consolaa.setText("Empecemos");
+        consola.setViewportView(consolaa);
 
         getContentPane().add(consola, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 250, 220));
 
@@ -151,6 +156,28 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       RRHormonas lista_hormonas = new RRHormonas();
+       List<Integer> lista = lista_hormonas.RoundRobin();
+        System.out.println(lista);
+        String alimento;
+        
+        //consolaa.append("Empezamos a comer una "+alimento);
+        for(int cont=0;cont<lista.size();cont++){
+                          
+           System.out.println(lista.get(cont));
+           if(lista.get(cont)==0){
+               System.out.println("Insulina");
+              consolaa.append("\n\n==Insulina trabajando ==");
+           }else if(lista.get(cont)==1){
+                              System.out.println("Liptina");
+
+              consolaa.append("\n\n==Liptina trabajando==");
+           }else if(lista.get(cont)==2){
+                              System.out.println("Grelina");
+
+               consolaa.append("\n\n==Grelina trabajando==");
+           }
+       }
        
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -200,6 +227,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JTextArea alimentosConsumidos1;
     private javax.swing.JTextArea alimentosConsumidos2;
     private javax.swing.JScrollPane consola;
+    private javax.swing.JTextArea consolaa;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -210,6 +238,5 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

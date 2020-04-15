@@ -74,16 +74,16 @@ public class RRHormonas {
         tiempoRespuesta(procesos, n, tiempoProc, tiempoEspera, tiempoDeRespuesta);
 
         //Imprimir procesos
-        System.out.println("Proceso " + "Tiempo Ejecucion " + " Tiempo Espera " + " Tiempo de Respuesta");
+        //System.out.println("Proceso " + "Tiempo Ejecucion " + " Tiempo Espera " + " Tiempo de Respuesta");
 
         for (int i = 0; i < n; i++) {
             total_tiempoEspera = total_tiempoEspera + tiempoEspera[i];
             total_tat = total_tat + tiempoDeRespuesta[i];
-            System.out.println(" " + (i + 1) + "\t\t" + tiempoProc[i] + "\t\t "+ tiempoEspera[i] + "\t\t " + tiempoDeRespuesta[i]);
+//            System.out.println(" " + (i + 1) + "\t\t" + tiempoProc[i] + "\t\t "+ tiempoEspera[i] + "\t\t " + tiempoDeRespuesta[i]);
         }
 
-        System.out.println("Promedio tiempo de espera = "+ (float) total_tiempoEspera / (float) n);
-        System.out.println("Promedio tiempo de Respuesta = "+ (float) total_tat / (float) n);
+//        System.out.println("Promedio tiempo de espera = "+ (float) total_tiempoEspera / (float) n);
+//        System.out.println("Promedio tiempo de Respuesta = "+ (float) total_tat / (float) n);
     }
 
     public List<Integer> RoundRobin() {
@@ -96,13 +96,16 @@ public class RRHormonas {
         //Tiempo de ejecución
         //Tiempo en el sistema digestivo
         //de cada hormona
-        int tiempo_procesamiento[] = {10, 5, 8};
+        int tiempo_procesamiento[] = new int [3];
+        for(int i=0;i<3;i++){
+            tiempo_procesamiento[i]=(int) (Math.random()*20)+1;
+        }
         //Valor de Quantum
         int quantum = 2;
         promediosTiempo(procesos, n, tiempo_procesamiento, quantum,ListaEjecucion);
-        System.out.println("Orden de Ejecución ");
-        
-        System.out.println(ListaEjecucion);
+//        System.out.println("Orden de Ejecución ");
+//        
+//        System.out.println(ListaEjecucion);
         return ListaEjecucion;
     }
     
