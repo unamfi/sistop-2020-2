@@ -43,10 +43,10 @@ class Orden:
     """
     Clase que representa la orden de una mesa
     """
-    def __init__(self, mesa_asociada, mesero, grupo_personas):
+    def __init__(self, mesa_asociada, servicio, grupo_personas):
         self.mesa_asociada = mesa_asociada
         self.lista_item_cantidad = dict()
-        self.mesero = mesero
+        self.servicio = servicio
         self.grupo_personas = grupo_personas
         self.mutex_lista = Semaphore(1)
 
