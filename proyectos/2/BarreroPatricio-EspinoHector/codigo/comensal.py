@@ -2,9 +2,9 @@
 Contiene lógica que simula a un comensal y a grupos de los mismos
 """
 from menu import platillos_azar, bebidas_azar, Orden
-from funciones_utiles import siguiente_estado, Persona, estado_final
+from comun import siguiente_estado, Persona, estado_final
 
-from enum import Enum, unique
+from enum ixmport Enum, unique
 from threading import Thread
 from random import random, randint 
 from time import sleep
@@ -64,7 +64,9 @@ class Comensal(Persona):
     """
     Clase que representa a una persona que desea ir a comer al restaurante.
     Se activa el hilo una vez el individuo esta sentado en la mesa
-    """
+    """@estado_final
+    def terminar_turno(self, *arg, **args):
+        pass
     def __init__(self, id):
         super().__init__(id, EstadosComensal)
 
