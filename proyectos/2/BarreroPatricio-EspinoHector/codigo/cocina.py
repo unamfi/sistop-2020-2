@@ -14,16 +14,6 @@ class Cocinero(Persona):
     def __init__(self,id):
         super.__init__(self,id,EstadosCocinero)
 
-    def run(self):
-        while self.estado:
-            self.estado(self, self)
-       
-    def __str__(self):
-        return str(self.id)
-
-    def __repr__(self):
-        return '{}: {}'.format(self, self.estado.__name__)
-    
     def encargar_orden(self,orden):
         self.orden = orden
 

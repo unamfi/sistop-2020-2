@@ -26,11 +26,12 @@ class Restaurante:
         parser.add_argument("grupos",type=int,help="Numero de grupos de clientes")
         parser.add_argument("meseros",type=int,help="Numero de meseros")
         parser.add_argument("chefs",type=int,help="Numero de chefs")
-        parser.parse_args()
-        print(parser.clientes)
-        print(parser.grupos)
-        print(parser.meseros)
-        print(parser.chefs)
+        arg = parser.parse_args()
+        print("Clientes",arg.clientes)
+        print("Grupos",arg.grupos)
+        print("Meseros",arg.meseros)
+        print("Chefs",arg.chefs)
+        
 
 if __name__ == "__main__":
     restarurantito = Restaurante()
