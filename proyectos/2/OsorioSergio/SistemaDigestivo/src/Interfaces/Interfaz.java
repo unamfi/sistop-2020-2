@@ -8,12 +8,17 @@ package Interfaces;
 import Clases.RRHormonas;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author ale
  */
 public class Interfaz extends javax.swing.JFrame {
+
+    int consumidos = 0;
+    int intestino = 0;
+    int hormonas_Segregadas = 0;
 
     /**
      * Creates new form Interfaz
@@ -43,15 +48,16 @@ public class Interfaz extends javax.swing.JFrame {
         alimentos3 = new javax.swing.JLabel();
         alimentos2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        alimentosConsumidos1 = new javax.swing.JTextArea();
+        capacidadIn = new javax.swing.JTextArea();
         alimentos4 = new javax.swing.JLabel();
         alimentos5 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        alimentosConsumidos2 = new javax.swing.JTextArea();
+        hormonasSegre = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         consola = new javax.swing.JScrollPane();
         consolaa = new javax.swing.JTextArea();
+        comida = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,6 +79,11 @@ public class Interfaz extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(255, 255, 51));
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButton2.setText("Vaciar Intestino");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 120, -1));
 
         jButton3.setBackground(new java.awt.Color(255, 255, 102));
@@ -108,10 +119,10 @@ public class Interfaz extends javax.swing.JFrame {
         alimentos2.setText("Capacidad");
         getContentPane().add(alimentos2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 190, -1, -1));
 
-        alimentosConsumidos1.setColumns(5);
-        alimentosConsumidos1.setRows(2);
-        alimentosConsumidos1.setTabSize(2);
-        jScrollPane3.setViewportView(alimentosConsumidos1);
+        capacidadIn.setColumns(5);
+        capacidadIn.setRows(2);
+        capacidadIn.setTabSize(2);
+        jScrollPane3.setViewportView(capacidadIn);
 
         getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 190, -1, -1));
 
@@ -123,10 +134,10 @@ public class Interfaz extends javax.swing.JFrame {
         alimentos5.setText("Hormonas");
         getContentPane().add(alimentos5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 240, -1, -1));
 
-        alimentosConsumidos2.setColumns(5);
-        alimentosConsumidos2.setRows(2);
-        alimentosConsumidos2.setTabSize(2);
-        jScrollPane4.setViewportView(alimentosConsumidos2);
+        hormonasSegre.setColumns(5);
+        hormonasSegre.setRows(2);
+        hormonasSegre.setTabSize(2);
+        jScrollPane4.setViewportView(hormonasSegre);
 
         getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 240, -1, -1));
 
@@ -144,6 +155,7 @@ public class Interfaz extends javax.swing.JFrame {
         consola.setViewportView(consolaa);
 
         getContentPane().add(consola, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 250, 220));
+        getContentPane().add(comida, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, 110, 60));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo.png"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, -1));
@@ -152,34 +164,64 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       System.exit(0);
+        System.exit(0);
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       RRHormonas lista_hormonas = new RRHormonas();
-       List<Integer> lista = lista_hormonas.RoundRobin();
-        System.out.println(lista);
-        String alimento;
-        
-        //consolaa.append("Empezamos a comer una "+alimento);
-        for(int cont=0;cont<lista.size();cont++){
-                          
-           System.out.println(lista.get(cont));
-           if(lista.get(cont)==0){
-               System.out.println("Insulina");
-              consolaa.append("\n\n==Insulina trabajando ==");
-           }else if(lista.get(cont)==1){
-                              System.out.println("Liptina");
+        RRHormonas lista_hormonas = new RRHormonas();
+        List<Integer> lista = lista_hormonas.RoundRobin();
+        //Limpiar el cuadro de trabajo
+        consolaa.setText("");
+        //Actualizar el contador de la capacidad del intestino
+        if (intestino < 3) {
+            intestino++;
+            capacidadIn.setText(Integer.toString(intestino) + "/3");
+            //Seleccionaremos aleatoriamente los alimentos que se consumiran
+            
+            consumidos++;
+            //Actualizar el contador de alimentos consumidos
+            alimentosConsumidos.setText("   " + Integer.toString(consumidos));
+            int dados = (int) (Math.random() * 100) + 20;
+            if (dados % 2 == 0) {
+                consolaa.append("Se comió pizza");
+            } else {
+                consolaa.append("Se comió enchiladas");
+            }
+            hormonas_Segregadas+=3;
+            hormonasSegre.setText(Integer.toString(hormonas_Segregadas));
+            
+            //consolaa.append("Empezamos a comer una "+alimento);
+            for (int cont = 0; cont < lista.size(); cont++) {
 
-              consolaa.append("\n\n==Liptina trabajando==");
-           }else if(lista.get(cont)==2){
-                              System.out.println("Grelina");
+                System.out.println(lista.get(cont));
+                if (null != lista.get(cont)) {
+                    switch (lista.get(cont)) {
+                        case 0:
+                            consolaa.append("\n\n==Insulina trabajando ==");
+                            break;
+                        case 1:
+                            consolaa.append("\n\n==Liptina trabajando==");
+                            break;
+                        case 2:
+                            consolaa.append("\n\n==Grelina trabajando==");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "¡Debemos vaciar el intestino!", "Error al intentar comer", JOptionPane.WARNING_MESSAGE);
+        }
 
-               consolaa.append("\n\n==Grelina trabajando==");
-           }
-       }
-       
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        intestino = 0;
+        capacidadIn.setText("0/3");
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -224,10 +266,11 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel alimentos4;
     private javax.swing.JLabel alimentos5;
     private javax.swing.JTextArea alimentosConsumidos;
-    private javax.swing.JTextArea alimentosConsumidos1;
-    private javax.swing.JTextArea alimentosConsumidos2;
+    private javax.swing.JTextArea capacidadIn;
+    private javax.swing.JLabel comida;
     private javax.swing.JScrollPane consola;
     private javax.swing.JTextArea consolaa;
+    private javax.swing.JTextArea hormonasSegre;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

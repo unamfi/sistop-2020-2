@@ -98,10 +98,10 @@ public class RRHormonas {
         //de cada hormona
         int tiempo_procesamiento[] = new int [3];
         for(int i=0;i<3;i++){
-            tiempo_procesamiento[i]=(int) (Math.random()*20)+1;
+            tiempo_procesamiento[i]=(int) (Math.random()*10)+1;
         }
         //Valor de Quantum
-        int quantum = 2;
+        int quantum = 4;
         promediosTiempo(procesos, n, tiempo_procesamiento, quantum,ListaEjecucion);
 //        System.out.println("Orden de Ejecución ");
 //        
