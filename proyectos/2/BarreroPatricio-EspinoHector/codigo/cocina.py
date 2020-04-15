@@ -36,9 +36,11 @@ class Cocinero(Persona):
     """
     Representacion de un cocinero
     """
-    def __init__(self,id,estados):
+    |
+    def __init__(self,id,estados,barra_pedidos):
         super.__init__(self,id,estados)
         self.orden = None
+        self.barra_pedidos = barra_pedidos
 
     def encargar_orden(self,orden):
         self.orden = orden
@@ -61,7 +63,7 @@ class Cocina:
         self.estados = EstadosCocinero(self.barra_pedidos)
         self.cocineros = []
         for i in range(n):
-            self.cocineros.append(i,self.estados)
+            self.cocineros.append(Cocinero(i,self.estados,self.barra_pedidos))
 
     def añadir_servicio(self,servicio):
         self.servicio = servicio
@@ -71,8 +73,6 @@ class Cocina:
 
 @unique
 class EstadosCocinero(Enum):
-    def __init__(self,barra_pedidos):
-        self.barra_pedidos = barra_pedidos
 
     def añadir_servicio(self,servicio):
         self.servicio=servicio
@@ -80,7 +80,7 @@ class EstadosCocinero(Enum):
      
     @siguiente_estado(siguiente = cocinar)
     def esperar_orden(self,this, *arg, **args):
-        this.encargar_orden(self.barra_pedidos.obtener_orden_entrada())
+        this.encargar_orden(this.barra_pedidos.obtener_orden_entrada())
 
         
     @siguiente_estado(siguiente = dejar_plato)
