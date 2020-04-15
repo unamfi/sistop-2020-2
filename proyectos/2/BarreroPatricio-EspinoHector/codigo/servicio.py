@@ -26,7 +26,6 @@ class Mesa:
     def desocupar_mesa(self):
         self.mutex_mesa.acquire()
         self.disponibilidad = True
-        self.grupo = None
         self.mutex_mesa.release()
 
     def ocupar_mesa(self, grupo):
@@ -121,8 +120,8 @@ class Servicio(Thread):
                 mesa, estado = self.atencion.pop(0)
                 mesero = self.obtener_mesero_disponible()
                 mesero.estado = estado
-                mesero.senalizador.release()
                 mesero.mesa = mesa
+                mesero.senalizador.release()
                 self.mutex_atencion.release()
             else:                
                 self.mutex_atencion.release()
@@ -131,8 +130,8 @@ class Servicio(Thread):
                     orden = self.comidas[0]
                     mesero = self.obtener_mesero_disponible()
                     mesero.estado = EstadosMesero.llevar_comida
-                    mesero.senalizador.release()
                     mesero.mesa = orden.mesa
+                    mesero.senalizador.release()
                 else:
                     self.semaforo_meseros.release()
                 self.mutex_comidas.release()

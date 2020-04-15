@@ -7,7 +7,7 @@ from comensal import Clientes
 from cocina import Cocina
 
 import argparse
-
+from time import sleep
 class Restaurante:
     """
     Representa el concepto del restaurante
@@ -53,6 +53,4 @@ if __name__ == "__main__":
 
     cocina.start()
     clientes.iniciar()
-
-    
     
