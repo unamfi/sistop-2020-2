@@ -38,8 +38,8 @@ class Restaurante:
         
 
 if __name__ == "__main__":
-    restarurantito = Restaurante()
-    restarurantito.main()
+    #restarurantito = Restaurante()
+    #restarurantito.main()
 
     num_mesas = 5
     num_meseros = 2
@@ -52,5 +52,7 @@ if __name__ == "__main__":
     cocina.anadir_servicio(servicio)
     clientes = Clientes(num_grupos, max_por_grupo, servicio)
     servicio.start()
+    print("aqui")
+
     cocina.start()
     clientes.iniciar()

@@ -50,10 +50,10 @@ class Orden:
     Clase que representa la orden de una mesa
     """
     def __init__(self, mesa_asociada, servicio, grupo_personas):
-        self.mesa_asociada = mesa_asociada
+        self.mesa = mesa_asociada
         self.lista_item_cantidad = dict()
         self.servicio = servicio
-        self.grupo_personas = grupo_personas
+        self.grupo = grupo_personas
         self.mutex_lista = Semaphore(1)
 
     def siguente_item(self):
@@ -73,7 +73,7 @@ class Orden:
         return self
 
     def __str__(self):
-        return 'Orden de la mesa {}\n{}'.format(self.mesa_asociada, 
+        return 'Orden de la mesa {}\n{}'.format(self.mesa, 
                 '\n'.join([str(i) + '  x' + c for i, c in self.lista_original]))
 
 def platillos_azar(n):
