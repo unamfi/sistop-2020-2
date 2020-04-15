@@ -1,0 +1,15 @@
+Perez Facio Javier Alejandro
+
+Tarea 1
+
+Santa Claus y los elfos
+
+PROBLEMA
+Santa Claus duerme en el Polo Norte mientras sus elfos trabajan frenéticamente en la construcción de millones de nuevos juguetes.
+A veces se topan con un problema — Pueden pedir ayuda a Santa Claus, pero sólo de tres en tres.
+Sus nueve renos pasan todo el año de vacaciones en las playas del Caribe Santa debe despertar a tiempo para iniciar su viaje anual
+
+PLANTEAMIENTO
+Si los nueve renos están de vuelta, es hora de despertar a Santa Claus para que inicie su recorrido.
+Si los elfos tienen problemas construyendo algún juguete, le piden ayuda a Santa Claus, pero para no darle demasiada lata, lo hacen sólo cuando hay tres elfos que tienen un problema. Mientras tanto, lo dejan dormir. Puede haber cualquier cantidad de elfos.
+

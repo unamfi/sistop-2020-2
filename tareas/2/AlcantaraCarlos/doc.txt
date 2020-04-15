@@ -1,0 +1,5 @@
+Tarea 2:
+Se implementó en python 3 en el entorno de programacion de Anaconda- Spider
+Desarrollé los algortimos que se pedian en la tarea, y de los dificiles, escogí FB. 
+Si quiere cambiar cuantos procesos son genereados para las cargas aleatorias, se puede modificar la variable NUM_CARGAS encontrada en la linea 10, que por defecto crea 4 procesos llamados de A a la D. El máximo valor que puede insertarse en esta variable es 7.
+
