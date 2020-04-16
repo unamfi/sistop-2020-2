@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="520.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.FXMLDocumentController">
+   <children>
+      <TabPane layoutX="1.0" layoutY="58.0" prefHeight="460.0" prefWidth="691.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="game1" text="Game 1">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+          <Tab fx:id="game2" text="Game 2">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+            <Tab fx:id="game3" text="Game 3">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab fx:id="game4" text="Game 4">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab fx:id="game5" text="Game 5">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Label layoutX="542.0" layoutY="16.0" text="Park Monitor">
+         <font>
+            <Font name="SF Pro Rounded Medium" size="24.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="41.0" fitWidth="46.0" layoutX="487.0" layoutY="10.0" preserveRatio="true">
+         <image>
+            <Image url="@../iconMaterial/rollerCoaster.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="startButton" layoutX="22.0" layoutY="18.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="111.0" text="Start" />
+      <Button fx:id="resetButton" layoutX="149.0" layoutY="18.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="111.0" text="Reset" />
+   </children>
+</AnchorPane>
