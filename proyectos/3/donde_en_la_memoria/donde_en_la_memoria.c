@@ -28,7 +28,7 @@ int main() {
 
   puts(cadena_total);
 
-  gets(cadena2);
+  getc(stdin);
 
   free(cadena3);
   free(cadena4);

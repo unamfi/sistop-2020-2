@@ -1,0 +1,22 @@
+557c8e463000-557c8e464000 r--p 00000000 fe:01 11289373                   /home/gwolf/vcs/sistop-2020-2/proyectos/3/ejemplos/donde_en_la_memoria
+557c8e464000-557c8e465000 r-xp 00001000 fe:01 11289373                   /home/gwolf/vcs/sistop-2020-2/proyectos/3/ejemplos/donde_en_la_memoria
+557c8e465000-557c8e466000 r--p 00002000 fe:01 11289373                   /home/gwolf/vcs/sistop-2020-2/proyectos/3/ejemplos/donde_en_la_memoria
+557c8e466000-557c8e467000 r--p 00002000 fe:01 11289373                   /home/gwolf/vcs/sistop-2020-2/proyectos/3/ejemplos/donde_en_la_memoria
+557c8e467000-557c8e468000 rw-p 00003000 fe:01 11289373                   /home/gwolf/vcs/sistop-2020-2/proyectos/3/ejemplos/donde_en_la_memoria
+557c8fb4f000-557c8fb70000 rw-p 00000000 00:00 0                          [heap]
+7fd3a61ca000-7fd3a61ec000 r--p 00000000 fe:01 3676438                    /lib/x86_64-linux-gnu/libc-2.28.so
+7fd3a61ec000-7fd3a6334000 r-xp 00022000 fe:01 3676438                    /lib/x86_64-linux-gnu/libc-2.28.so
+7fd3a6334000-7fd3a6380000 r--p 0016a000 fe:01 3676438                    /lib/x86_64-linux-gnu/libc-2.28.so
+7fd3a6380000-7fd3a6381000 ---p 001b6000 fe:01 3676438                    /lib/x86_64-linux-gnu/libc-2.28.so
+7fd3a6381000-7fd3a6385000 r--p 001b6000 fe:01 3676438                    /lib/x86_64-linux-gnu/libc-2.28.so
+7fd3a6385000-7fd3a6387000 rw-p 001ba000 fe:01 3676438                    /lib/x86_64-linux-gnu/libc-2.28.so
+7fd3a6387000-7fd3a638d000 rw-p 00000000 00:00 0 
+7fd3a63d0000-7fd3a63d1000 r--p 00000000 fe:01 3676434                    /lib/x86_64-linux-gnu/ld-2.28.so
+7fd3a63d1000-7fd3a63ef000 r-xp 00001000 fe:01 3676434                    /lib/x86_64-linux-gnu/ld-2.28.so
+7fd3a63ef000-7fd3a63f7000 r--p 0001f000 fe:01 3676434                    /lib/x86_64-linux-gnu/ld-2.28.so
+7fd3a63f7000-7fd3a63f8000 r--p 00026000 fe:01 3676434                    /lib/x86_64-linux-gnu/ld-2.28.so
+7fd3a63f8000-7fd3a63f9000 rw-p 00027000 fe:01 3676434                    /lib/x86_64-linux-gnu/ld-2.28.so
+7fd3a63f9000-7fd3a63fa000 rw-p 00000000 00:00 0 
+7ffc05546000-7ffc05567000 rw-p 00000000 00:00 0                          [stack]
+7ffc0557e000-7ffc05581000 r--p 00000000 00:00 0                          [vvar]
+7ffc05581000-7ffc05583000 r-xp 00000000 00:00 0                          [vdso]
