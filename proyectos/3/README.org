@@ -3,7 +3,7 @@
 
 #+begin_src yaml
 Planteamiento: 2020.04.24
-Entrega: 2020.05.05
+Entrega: 2020.05.07
 #+end_src
 
 # Pueden [[./calificaciones.org][consultar los comentarios y calificaciones del proyecto aquí]].
