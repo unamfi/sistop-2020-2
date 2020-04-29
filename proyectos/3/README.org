@@ -43,13 +43,13 @@ debe recibir como entrada el mapa de memoria de /cualquier proceso/
   de apenas 4MB ante la inmensidad de un espacio de direccionamiento
   de 48 bits? 😉
 
-  La representación visual puede ser a partir de algo [[./donde_en_la_memoria/repr_visual_bash_rpi0%0A][como mi ejemplo]]
+  La representación visual puede ser a partir de algo [[./ejemplo/repr_visual_bash_rpi0][como mi ejemplo]]
   (ver un poquito más adelante para mayores detalles. Pero... ¡Échenle
   creatividad! Pueden generar una imagen (dando mucha mayor
   resolución), presentar cada sección con un color distinto, etc.
 
   Ojo, mi ejemplo está construido a partir de procesar los archivos
-  [[./donde_en_la_memoria/maps_bash_rpi0.txt][maps_bash_rpi0.txt]] y [[./donde_en_la_memoria/smaps_bash_rpi0.txt][smaps_bash_rpi0.txt]], que fueron obtenidos en
+  [[./ejemplo/maps_bash_rpi0.txt][maps_bash_rpi0.txt]] y [[./ejemplo/smaps_bash_rpi0.txt][smaps_bash_rpi0.txt]], que fueron obtenidos en
   una Raspberry Pi 0. Menciono esto porque es una plataforma de /32
   bits/ — Y se nota cuando ven las direcciones. 
 

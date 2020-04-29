@@ -1,0 +1,30 @@
+0046b000-00561000 r-xp 00000000 b3:02 659        /usr/bin/bash
+00570000-00572000 r--p 000f5000 b3:02 659        /usr/bin/bash
+00572000-00578000 rw-p 000f7000 b3:02 659        /usr/bin/bash
+00578000-00581000 rw-p 00000000 00:00 0 
+008f5000-00937000 rw-p 00000000 00:00 0          [heap]
+b6db6000-b6dbf000 r-xp 00000000 b3:02 1879       /usr/lib/arm-linux-gnueabi/libnss_files-2.28.so
+b6dbf000-b6dcf000 ---p 00009000 b3:02 1879       /usr/lib/arm-linux-gnueabi/libnss_files-2.28.so
+b6dcf000-b6dd0000 r--p 00009000 b3:02 1879       /usr/lib/arm-linux-gnueabi/libnss_files-2.28.so
+b6dd0000-b6dd1000 rw-p 0000a000 b3:02 1879       /usr/lib/arm-linux-gnueabi/libnss_files-2.28.so
+b6dd1000-b6dd7000 rw-p 00000000 00:00 0 
+b6dd7000-b6f17000 r-xp 00000000 b3:02 1870       /usr/lib/arm-linux-gnueabi/libc-2.28.so
+b6f17000-b6f26000 ---p 00140000 b3:02 1870       /usr/lib/arm-linux-gnueabi/libc-2.28.so
+b6f26000-b6f28000 r--p 0013f000 b3:02 1870       /usr/lib/arm-linux-gnueabi/libc-2.28.so
+b6f28000-b6f29000 rw-p 00141000 b3:02 1870       /usr/lib/arm-linux-gnueabi/libc-2.28.so
+b6f29000-b6f2c000 rw-p 00000000 00:00 0 
+b6f2c000-b6f2e000 r-xp 00000000 b3:02 1872       /usr/lib/arm-linux-gnueabi/libdl-2.28.so
+b6f2e000-b6f3d000 ---p 00002000 b3:02 1872       /usr/lib/arm-linux-gnueabi/libdl-2.28.so
+b6f3d000-b6f3e000 r--p 00001000 b3:02 1872       /usr/lib/arm-linux-gnueabi/libdl-2.28.so
+b6f3e000-b6f3f000 rw-p 00002000 b3:02 1872       /usr/lib/arm-linux-gnueabi/libdl-2.28.so
+b6f3f000-b6f5d000 r-xp 00000000 b3:02 3034       /usr/lib/arm-linux-gnueabi/libtinfo.so.6.1
+b6f5d000-b6f6d000 ---p 0001e000 b3:02 3034       /usr/lib/arm-linux-gnueabi/libtinfo.so.6.1
+b6f6d000-b6f6f000 r--p 0001e000 b3:02 3034       /usr/lib/arm-linux-gnueabi/libtinfo.so.6.1
+b6f6f000-b6f70000 rw-p 00020000 b3:02 3034       /usr/lib/arm-linux-gnueabi/libtinfo.so.6.1
+b6f70000-b6f90000 r-xp 00000000 b3:02 1865       /usr/lib/arm-linux-gnueabi/ld-2.28.so
+b6f9a000-b6f9c000 rw-p 00000000 00:00 0 
+b6fa0000-b6fa1000 r--p 00020000 b3:02 1865       /usr/lib/arm-linux-gnueabi/ld-2.28.so
+b6fa1000-b6fa2000 rw-p 00021000 b3:02 1865       /usr/lib/arm-linux-gnueabi/ld-2.28.so
+be9ea000-bea0b000 rw-p 00000000 00:00 0          [stack]
+beae7000-beae8000 r-xp 00000000 00:00 0          [sigpage]
+ffff0000-ffff1000 r-xp 00000000 00:00 0          [vectors]
