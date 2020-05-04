@@ -11,3 +11,6 @@
 3. Para la unidad *5. Administración de memoria*, [Proyecto 3:
    Asignación de memoria en un sistema real](./3/README.org)
    (2020.04.24 → 2020.05.07)
+
+4. Para la unidad *6. sistemas de archivos*, [Proyecto 4: (micro)
+   sistema de archivos](./4/README.org)   (2020.05.04 → 2020.05.19)
