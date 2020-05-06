@@ -1,3 +1,10 @@
+from columnar import columnar
+
+headers = [' USO ', ' PAGINA INICIAL ', ' PAGINA FINAL ', ' BYTES ', ' PAGINAS ', ' PERMISO ', ' MAPEO O USO ']
+
+print("\n\n   <---- MAPA DE MEMORIA DE PROCESOS ---->")
+
+
 proceso = input("\n\n  Ingresa PID de proceso a analizar: ")
 
 archivos = []
@@ -8,7 +15,6 @@ maps = open(direccion, "r")
 
 for linea in maps:
 	linea_separada = linea.split()
-	print(linea_separada," Len: ",len(linea_separada))
 
 	paginas = linea_separada[0].split("-")
 
@@ -17,38 +23,38 @@ for linea in maps:
 	if(len(linea_separada) == 6):
 		ubicacion = linea_separada[5]
 	else:
-		ubicacion = "Vacio"
+		ubicacion = "---- Vacio ----"
 
 
 	archivos.append([paginas[0][:-3], paginas[1][:-3], permisos, ubicacion])
 
-print("\n\n\n\n LISTA: \n\n")
+lista = []
 
-for p in archivos:
-	print("Archivo: ",p)
+print("\n\n\n LISTA: \n\n")
 
-print("\n\n\n\n LISTA ARREGLADA: \n\n")
 
 for elemento in archivos:
+
+	uso = ""
 
 	if(elemento[3][0] == "/"):
 	
 		if(elemento[3][0:4] == "/lib" or elemento[3][0:8] == "/usr/lib"):
-			print("Bib->",end="")
+			uso = "Bib->"
 
 		if(elemento[2][2] == "x"):
-			print("Texto  |",end="")
+			uso = uso + "Texto"
 		else:
-			print("Datos  |",end="")
+			uso = uso + "Datos"
 
 	else:
-		print(elemento[3],"  |",end="")
-
-	print(elemento[0],elemento[1],"  |",end="")
+		uso = elemento[3]
 
 	paginas = int(elemento[1],16)-int(elemento[0],16)
 
-	print(paginas * 4000," bytes  |", paginas, "  |", elemento[2],"  |", elemento[3], end="")
+	lista.append([uso, elemento[0], elemento[1], paginas * 4000, paginas, elemento[2], elemento[3]])
 
-	print("\n",end="")
+
+table = columnar(lista, headers, no_borders=False)
+print(table)
 
