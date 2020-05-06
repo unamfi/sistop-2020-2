@@ -96,15 +96,15 @@ class infoArchivos:
 		self.uso=uso
 		paginaAUX=pagina.split("-")
 		self.paginacompleta=pagina
-		self.inicioPagina=paginaAUX[1]
-		self.finPagina=paginaAUX[0]
+		self.inicioPagina=paginaAUX[0]
+		self.finPagina=paginaAUX[1]
 		self.num_size=self.CalculoSIZEPag()
 		self.num_pag=self.calculoPaginas()
 		self.permisos=permisos
 		self.mapeo=mapeo
 	#Fomato de impresion de info
 	def printInfo(self):
-		return("|| {:7} || {:16} - {:16} || {:12} || {:12} || {:4} || {}\n".format(self.uso,self.inicioPagina,self.finPagina,self.num_size,self.num_pag,self.permisos,self.mapeo))
+		return("|| {:12} || {:16} - {:16} || {:12} || {:12} || {:4} || {}\n".format(self.uso,self.inicioPagina,self.finPagina,self.num_size,self.num_pag,self.permisos,self.mapeo))
 	
 	"""
 	def CalculoSize(self):
@@ -125,7 +125,7 @@ class infoArchivos:
 		#Calculo de tamanio de archivo
 		inipag=int(self.inicioPagina,16)
 		finpag=int(self.finPagina,16)
-		resta=int((inipag-finpag)/1024)
+		resta=int((finpag - inipag)/1024)
 		#Dependiendo del tamanio se anexa Gb,Mb kB
 		if((resta/1024)>=1):
 			if((resta/1048576)>=1):
@@ -209,6 +209,8 @@ def inicioMap(num_PIB):
 		perm=lineaSeparada[1]
 		mapeo=lineaSeparada[len(lineaSeparada)-1]
 		mapeo=mapeo.replace("\n","")
+		if (mapeo==""):
+			mapeo="-VACIO-"
 		tipo=""
 		if mapeo in listaUso:
 			if mapeo.find('['):
@@ -219,7 +221,7 @@ def inicioMap(num_PIB):
 		else:
 			if(tex > 0 and mapeo == mapeoRex):
 				tipo = "Datos"
-			elif (tex == 0 and perm.find('r') > -1  and perm.find('x') > -1  and mapeo != ""):
+			elif (tex == 0 and perm.find('r') > -1  and perm.find('x') > -1  and mapeo != "-VACIO-"):
 				tipo = "Texto"
 				mapeoRex = mapeo
 				tex += 1
@@ -237,10 +239,10 @@ def inicioMap(num_PIB):
 		cont+=1
 
 	#Impresion en consola, escritura en archivo correspondiente y Escritura a color en el cuadro del Frame2
-	print("|| {:20} || {:16} - {:16} || {:15} || {:12} || {:4} || {} \n".format("USO","inicioPagina","FinPagina","Size","Num-pagina","Perm","Uso o mapeo"))
-	newmap.write(("|| {:20} || {:16} - {:16} || {:15} || {:12} || {:4} || {} \n".format("USO","inicioPagina","FinPagina","Size","Num-pagina","Perm","Uso o mapeo")))
+	print("|| {:12} || {:16} - {:16} || {:15} || {:12} || {:4} || {} \n".format("USO","inicioPagina","FinPagina","Size","Num-pagina","Perm","Uso o mapeo"))
+	newmap.write(("|| {:12} || {:16} - {:16} || {:15} || {:12} || {:4} || {} \n".format("USO","inicioPagina","FinPagina","Size","Num-pagina","Perm","Uso o mapeo")))
 	action.insert(INSERT,"||")
-	action.insert(INSERT," {:7} ".format("USO"),'color_uso')
+	action.insert(INSERT," {:12} ".format("USO"),'color_uso')
 	action.insert(INSERT,"||")
 	action.insert(INSERT," {:16} ".format("Inicio pag"),'color_inicioP')
 	action.insert(INSERT,"-")
@@ -257,7 +259,7 @@ def inicioMap(num_PIB):
 		print(i.printInfo())
 		newmap.write(i.printInfo())
 		action.insert(INSERT,"||")
-		action.insert(INSERT," {:7} ".format(i.uso),'color_uso')
+		action.insert(INSERT," {:12} ".format(i.uso),'color_uso')
 		action.insert(INSERT,"||")
 		action.insert(INSERT," {:16} ".format(i.inicioPagina),'color_inicioP')
 		action.insert(INSERT,"-")
