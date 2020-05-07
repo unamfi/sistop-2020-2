@@ -1,0 +1,17 @@
+--- DOCUMENTACION DE PMAP.PY ---
+
+Elaborado por: Javier Loidi y Kevin Lara
+
+--> El programa está hecho en Python 3.6.9 ejecutado en Ubuntu 18.04.4 LTS
+
+--> Usa la biblioteca columnar que puede ser instalada con pip
+
+--> Obtiene el mapeo de memoria de un determinado proceso mientras se pueda accesar al archivo maps en la correspondiente carpeta en proc
+
+--> Según nosotros si debería de funcionar para cualquier proceso y tanto en sistemas de 64 bits como de 32 bits
+
+
+La estrategia es que de las cadenas que se obtienen del archivo maps se analizan los permisos para determinar si las regiones de memoria
+contienen texto o datos y también de la ruta o mapeo se puede deducir si se trata te una biblioteca o si se trata de un elemento de distinta
+naturaleza como podría ser: stack, heap, etc. y si no incluye una ruta entonces se trata de un espacio vacio.
+
