@@ -1,0 +1,17 @@
+--- EXPLICACIÓN DE ACOMODO DE PROCESO EN MEMORIA ---
+
+Elaborado por: Javier Loidi y Kevin Lara
+
+--> Primero, en una terminal compilamos el programa donde_en_la_memoria.c y a la salida la nombramos: ejecutable (no está en el proyecto por ser un ejecutable)
+
+--> Al ejecutarlo se le asignó el PID: 4542
+
+--> Con el comando: "sudo gcore -a 4542" obtuvimos el volcado de su memoria en ejecución en un archivo llamado: core.4542 (está en el proyecto)
+
+--> Con el comando: "hexdump -C core.4542 > hexdump.txt" obtuvimos el desglose binario del volcado y se guardo en: hexdump.txt (está en el proyecto)
+
+
+
+
+
+
