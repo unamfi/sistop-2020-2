@@ -17,23 +17,23 @@ import os
 ###################################################################################
 #Creacion de ventana para salida
 raiz=Tk()
-PIB=StringVar()
-num_PIB=0
+PID=StringVar()
+num_PID=0
 #PArametros de ventana
 raiz.title("Proyecto 3: Asignacion de memoria en un sistema real")
 raiz.resizable(False, False)
 raiz.geometry("1100x650")
 raiz.config(bg="#b8c9ff")
 
-#Parametros de frame que contiene la barra de texto para la seleccion del PIB
+#Parametros de frame que contiene la barra de texto para la seleccion del PID
 Frame1=Frame()
 Frame1.config(bg='#6c80bf')
 Frame1.config(bd=10)
 Frame1.config(relief="groove")
 Frame1.config(width="700", height="100")
 Frame1.pack(side="top")
-Label(Frame1,text="Ingrese PIB deseado: ", font=("Imprint MT Shadow",12)).grid(row=0,column=0)
-Entry(Frame1,textvariable=PIB).grid(row=0,column=1)
+Label(Frame1,text="Ingrese PID deseado: ", font=("Imprint MT Shadow",12)).grid(row=0,column=0)
+Entry(Frame1,textvariable=PID).grid(row=0,column=1)
 Button(Frame1,text="Envio",width=7,command=lambda:envioDatos()).grid(row=0,column=2)
 
 #Ventana que contiene la informacion del archivo
@@ -67,16 +67,16 @@ action.tag_configure('color_mapeo',foreground='#ff00ff')
 
 
 
-##Funcion para el envio del PIB 
+##Funcion para el envio del PID 
 def envioDatos():
 	action.delete('1.0',END)
 	try:
-		num_PIB=int(PIB.get())
+		num_PID=int(PID.get())
 	except ValueError:
 		action.insert(INSERT,"Valores incorrectos\n")
-	if(num_PIB>0):
-		action.insert(INSERT,"PIB: {}\n".format(str(num_PIB)))
-		inicioMap(num_PIB)
+	if(num_PID>0):
+		action.insert(INSERT,"PID: {}\n".format(str(num_PID)))
+		inicioMap(num_PID)
 
 	else:
 		action.insert(INSERT,"Valores incorrectos\n")
@@ -166,17 +166,17 @@ class infoArchivos:
 
 
 
-def inicioMap(num_PIB):
-	#Parametros globales para obtencion de informacion del pib
-	maps = 'cat /proc/' + str(num_PIB) + '/maps > maps'+str(num_PIB)+'.txt'
-	smaps = 'cat /proc/' + str(num_PIB) + '/smaps > smaps'+str(num_PIB)+'txt'
+def inicioMap(num_PID):
+	#Parametros globales para obtencion de informacion del PID
+	maps = 'cat /proc/' + str(num_PID) + '/maps > maps'+str(num_PID)+'.txt'
+	smaps = 'cat /proc/' + str(num_PID) + '/smaps > smaps'+str(num_PID)+'txt'
 	listaUso=['[heap]','[stack]','[sigpag]','[vectors]','[vsyscall]','[vdso]','[vvar]','Data']
 	os.system(maps)
 	os.system(smaps)
 
-	newmapname='newMap'+str(num_PIB)+'.txt'
+	newmapname='newMap'+str(num_PID)+'.txt'
 	#Archivos utilizados y creados
-	f=open('maps'+str(num_PIB)+'.txt','r')
+	f=open('maps'+str(num_PID)+'.txt','r')
 	newmap=open(newmapname,'w')
 	#Lista para el guardado de la informacion de maps.txt
 	lineasArchivo=[]
