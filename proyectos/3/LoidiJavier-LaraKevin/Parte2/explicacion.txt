@@ -45,11 +45,11 @@ Con estos archivos concluyo lo siguiente:
 		En código:
 
 		char *cadena2;
-	    strncpy(cadena2, "Yo sólo sé que nada sé", tamano * sizeof(char));
+		strncpy(cadena2, "Yo sólo sé que nada sé", tamano * sizeof(char));
 
-	    En hexdump.txt la encontramos en las líneas 2263 a 2265:
+		En hexdump.txt la encontramos en las líneas 2263 a 2265:
 
-	    00052140  fd 7f 00 00 1c 00 00 00  00 00 00 00 59 6f 20 73  |............Yo s|
+		00052140  fd 7f 00 00 1c 00 00 00  00 00 00 00 59 6f 20 73  |............Yo s|
 		00052150  c3 b3 6c 6f 20 73 c3 a9  20 71 75 65 20 6e 61 64  |..lo s.. que nad|
 		00052160  61 20 73 c3 a9 00 00 00  00 00 00 00 d3 d2 14 14  |a s.............|
 
@@ -64,11 +64,11 @@ Con estos archivos concluyo lo siguiente:
 		En código:
 
 		cadena3 = (char *) malloc(tamano * sizeof(char));
-	    strncpy(cadena3, "Pero si alguien sabe menos", tamano * sizeof(char));
+		strncpy(cadena3, "Pero si alguien sabe menos", tamano * sizeof(char));
 
-	    En hexdump.txt la encontramos en las líneas 243 a 245:
+		En hexdump.txt la encontramos en las líneas 243 a 245:
 
-	    000030d0  00 00 00 00 31 00 00 00  00 00 00 00 50 65 72 6f  |....1.......Pero|
+		000030d0  00 00 00 00 31 00 00 00  00 00 00 00 50 65 72 6f  |....1.......Pero|
 		000030e0  20 73 69 20 61 6c 67 75  69 65 6e 20 73 61 62 65  | si alguien sabe|
 		000030f0  20 6d 65 6e 6f 73 00 00  00 00 00 00 00 00 00 00  | menos..........|
 
@@ -81,20 +81,20 @@ Con estos archivos concluyo lo siguiente:
 	--> No encontramos las cadenas:
 
 		char parte1[20] = "¡siempre ";
-  		char parte3[20] = " usted!";
-  		char *parte2 = "puede ser";
+		char parte3[20] = " usted!";
+		char *parte2 = "puede ser";
 
-  		Pero, si encontramos:
+		Pero, si encontramos:
 
-  		completa
+		completa
 
-  		En código:
+		En código:
 
-  		char *completa = malloc(tamano * sizeof(char));
+		char *completa = malloc(tamano * sizeof(char));
 
-  		En hexdump.txt la encontramos en las líneas 256 a 258:
+		En hexdump.txt la encontramos en las líneas 256 a 258:
 
-  		00003510  00 00 00 00 31 00 00 00  00 00 00 00 c2 a1 73 69  |....1.........si|
+		00003510  00 00 00 00 31 00 00 00  00 00 00 00 c2 a1 73 69  |....1.........si|
 		00003520  65 6d 70 72 65 20 70 75  65 64 65 20 73 65 72 20  |empre puede ser |
 		00003530  75 73 74 65 64 21 00 00  00 00 00 00 00 00 00 00  |usted!..........|
 
@@ -112,14 +112,14 @@ Con estos archivos concluyo lo siguiente:
 		En código:
 
 		cadena_total = malloc(tamano * 4 * sizeof(char));
-  	    snprintf(cadena_total, tamano * 4 * sizeof(char), "%s\n%s\n%s\n%s\n",
-	    cadena1, cadena2, cadena3, cadena4);
+		snprintf(cadena_total, tamano * 4 * sizeof(char), "%s\n%s\n%s\n%s\n",
+		cadena1, cadena2, cadena3, cadena4);
 
-        puts(cadena_total);
+		puts(cadena_total);
 
-        En hexdump.txt la encontramos en las líneas 259 a 266:
+		En hexdump.txt la encontramos en las líneas 259 a 266:
 
-        00003540  00 00 00 00 81 00 00 00  00 00 00 00 59 6f 20 73  |............Yo s|
+		00003540  00 00 00 00 81 00 00 00  00 00 00 00 59 6f 20 73  |............Yo s|
 		00003550  6f 6c 6f 20 73 c3 a9 20  71 75 65 20 6e 6f 20 73  |olo s.. que no s|
 		00003560  c3 a9 20 6e 61 64 61 0a  59 6f 20 73 c3 b3 6c 6f  |.. nada.Yo s..lo|
 		00003570  20 73 c3 a9 20 71 75 65  20 6e 61 64 61 20 73 c3  | s.. que nada s.|
