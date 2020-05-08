@@ -21,6 +21,5 @@ Ejecución del programa:
 ``` python3 main.py ``` 
 
 
-    Para más información acerca del proyecto [click aquí](proyecto3.pdf) para leer todo el apartado técnico del 
-    proyecto desdes conceptos claves hasta la aspectos particulares.
+Para leer todo el apartado técnico y descriptivo del programa de la parte 1, además de la parte 2 [click aquí](proyecto3.pdf) 
 
