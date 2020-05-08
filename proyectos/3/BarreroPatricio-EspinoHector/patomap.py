@@ -4,9 +4,11 @@ Para este proyecto se hara un parseo del archivo smaps a travez del cual se obte
 Para este archivo se sigue una regla del zen de python "explicit is better than implicit" Por lo que las direcciones 
 de memoria serán mostradas de forma explicita. 
 
-Entradas: python3 -m" archivoMap -s archivoSmap
-        en caso de desear utilizar pid:
-        python3 -p pid
+Ejecucion: 
+1) Mediante el archivo smaps
+python3 -s archivoSmaps  
+2) Mediante el pid  
+python3 -p pid
 """
 
 # Importamos las Bibliotecas Necesarias
@@ -18,14 +20,15 @@ from functools import reduce
 
 # Definimos funciones utiles
 def crear_parser():
+    """
+    Crea un parser para poder recibir por linea de comandos el archivo smaps o el pid del proceso que deseamos
+    """
     parser = argparse.ArgumentParser(description="""Pato map, un programa que igual y te mapea la memoria como te la rompe.\n
-    Se debe utilizar ya sea la opción [-p] o [-m y -s] Ej:
+    Se debe utilizar ya sea la opción [-p] o [-s] Ej:
     python3 patomap.py -p 53
     python3 patomap.py -s /proc/34/maps
     python3 patomap.py -s /home/gwolf/Downloads/smapdump""",
     epilog="En caso de bugs reportar a pato@patomail.com",formatter_class=argparse.RawTextHelpFormatter)
-    parser.add_argument('-m','--m', dest='map',type=argparse.FileType('r'),
-                    help='Ruta del archivo map')
     parser.add_argument('-s','--smap',dest='smap',type=argparse.FileType('r'),
                     help='Ruta del archivo smap')
     parser.add_argument('-p','--pid',dest='pid',type=int,
@@ -34,22 +37,22 @@ def crear_parser():
 
 
 def revisar_opciones(args):
-    if not (args.map or args.smap or args.pid) :
+    """
+    Verifica que el usuario halla usado las opciones de linea de comandos corretamente 
+    ----
+    regresa
+    str => ruta del archivo smaps
+    """
+    if not (args.smap or args.pid) :  # No utilizo ninguna opcion
         print("Utilize al menos una de las opciones:")
         print("Consulte: python3 patomap.py -h")
         exit()
-        ###ver que utilize ya sea pid o map y smap.
-        ###si utiliza los 3 alv solo pid
-        ### Si utiliza map y no smap -> Validar este caso
-    elif args.pid:
+    elif args.pid:  # Utilizo pid
         base= "/proc/{}".format(args.pid)
-        ruta = [base+"/smaps",base+"/maps"]
-    elif args.smap and args.maps:
-        ruta = [args.smap,args.maps]
-    elif args.smap or args.maps:
-        print("Debes especificar ambos archivos, smap y maps")
-        exit()
-    else:
+        ruta = base+"/smaps"
+    elif args.smap:   # Utilizo el archivo smaps
+        ruta = args.smap
+    else:  # Hubo un error
         print("No se que hiciste")
         print(args)
         exit()
@@ -100,6 +103,9 @@ def obtener_info_smaps(texto_smaps):
     return lista_segmentos
 
 def convertir(unidad):
+    """
+    Convierte de prefijos de cantidad a numeros
+    """
     if unidad.upper() == "KB":
         return 1000
     if unidad.upper() == "MB":
@@ -107,17 +113,31 @@ def convertir(unidad):
     return 1000000000
 
 def organizar_informacion_unitario(segmento):
+    """
+    Analiza un segmento y determina sus propiedades
+    ---
+    Regresa
+    list(str) => segmento con partes identificadas
+    """
+    # Accedemos a los valores mas importantes
     mapeo = segmento["mapping"]
     tamano = segmento["Tamano"][0] + " " + segmento["Tamano"][1]
     num_paginas = str(float(segmento["Tamano"][0]) * convertir(segmento["Tamano"][1]) / (float(segmento["TamanoMMUPagina"][0]) * convertir(segmento["TamanoMMUPagina"][1])))
     de = segmento["inicio"]
     a = segmento["final"]
     permisos = segmento["leer"] + segmento["escribir"] + segmento["ejecutar"]
+    # Averiguamos su uso
     uso = "???"
     if mapeo == '[stack]':
         uso = "Stack"
     elif mapeo == '[heap]':
         uso = "Heap"
+    elif mapeo == '[anon]':
+        uso = 'Mapeo Anonimo'
+    elif mapeo in ('[vdso]', '[vsyscall]', '[vectors]'):
+        uso = "Llamada al Sistema"
+    elif mapeo == '[vvar]':
+        uso = 'Var Kernel'
     elif mapeo == "":
         uso = mapeo = "vacio"
     elif segmento["leer"].lower() == 'r' and segmento["ejecutar"].lower() == "x" and "lib" in mapeo:
@@ -139,9 +159,21 @@ def organizar_informacion(lista_segmentos):
 
 def imprimir_salida(lista_segmentos):
     def calcula_maximo(lista_segmentos, i, cadena):
+        """
+        Calcula la longitud maxima de una lista de cadenas y una cadena que no pertenece a estas
+        ---
+        Regresa
+        int => longitud maxima de la cadena
+        """
         return len(reduce(lambda s1, s2 : s1 if len(s1) >= len(s2) else s2, map(lambda l : l[i], lista_segmentos), cadena))
 
     def agregar_espacios(cadena, n):
+        """
+        Agrega espacios suficientes para que la cadena tenga longitud n
+        ----
+        Regresa 
+        str => cadena de tamaño n
+        """
         if n <= len(cadena):
             return cadena
         resta = n - len(cadena) 
@@ -152,11 +184,14 @@ def imprimir_salida(lista_segmentos):
     nombres = ['USO', 'DE PAG.', 'A PAG.', 'TAMAÑO', 'NUM. PAG.', 'PERMISOS', 'MAPEO']
     colores = ['red', 'green', 'green', 'magenta', 'blue', 'cyan', 'yellow']
     maximos = [calcula_maximo(lista_segmentos, i, cadena) for i, cadena in enumerate(nombres)]
+
     # Imprimir encabezados
     for nombre, color, maximo in zip(nombres, colores, maximos):
         print(" | ", end ="")
         cprint(agregar_espacios(nombre, maximo), color, 'on_grey', attrs = ['bold'], end = '')
     print()
+
+    # Imprimimos contenido
     for i, segmento in enumerate(lista_segmentos):
         color_fondo = "on_white" if i % 2 == 0 else "on_grey"
         for j, (color, maximo, elemento) in enumerate(zip(colores, maximos, segmento)):
@@ -168,11 +203,11 @@ def imprimir_salida(lista_segmentos):
 if __name__ == "__main__":
     try:
         # Obtenemos la ubicacion del archivo smaps
-        ubicacion_smaps, ubiacion_maps = revisar_opciones(crear_parser())
+        ubicacion_smaps = revisar_opciones(crear_parser())
+
         # Obtenemos el contenido del archivo smaps
         texto_smaps = leer_archivo(ubicacion_smaps)
         lista_segmentos = obtener_info_smaps(texto_smaps)
-
         
         # Determinamos a que corresponde cada segmento
         segmentos_organizados = organizar_informacion(lista_segmentos)
