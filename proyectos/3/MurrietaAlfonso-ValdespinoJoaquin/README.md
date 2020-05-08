@@ -18,7 +18,7 @@ Bibliotecas, módulos y dependencias:
 
 Ejecución del programa:
 - Entra a la carpeta correspondiente y ejecutar en terminal la siguiente instrucción:
-``` python3 main.py ``` 
+``` python3 Myapp.py ``` 
 
 
 Para leer todo el apartado técnico y descriptivo del programa de la parte 1, además de la parte 2 [click aquí](proyecto3.pdf) 
