@@ -41,6 +41,7 @@ class BloqueMemoria:
 
 		self.tamanioTxt = BloqueMemoria.obtenerTamanio(self.numPaginas)
 
+		#Identificacion del uso del bloque
 		if('/' in self.pathname):
 			if('x' in self.permisos):
 				self.uso = 'Texto'
@@ -152,7 +153,6 @@ def generarMemoria(bloques, memoria):
 
 		if(bloque.uso == 'Heap'):
 			pasadoHeap = True
-
 		#Si el heap no es explícito
 		if(not pasadoHeap and '/' in bloque.pathname and origen == None):
 			origen = bloque.pathname
@@ -193,7 +193,7 @@ def mostrarMemoria(memoria):
 
 	#longitud de cada columna
 	dirLen = len(memoria[len(memoria)-1].pagInicial)
-	usoLen = 16
+	usoLen = 18
 	tamanoLen = 12
 	numPaginasLen = 10
 	permisosLen = 5
@@ -224,6 +224,7 @@ def mostrarMemoria(memoria):
 
 		print(centrarCadena(i.tamanioTxt,tamanoLen)+'|',end='')
 
+		#Notacion cientifica si el num. de paginas es muy grande
 		if(i.numPaginas > 99999999):
 			tamanioRedondeado = i.numPaginas
 			contDiv = 0
@@ -245,7 +246,6 @@ def mostrarMemoria(memoria):
 
 
 #Metodo que devuelve una cadena centrada entre espacios para tener una longitud tamano
-
 def centrarCadena(cadena,tamano):
 	if len(cadena) >= tamano:
 		return cadena
@@ -267,11 +267,6 @@ obtenerBloques(pid, bloques)
 generarMemoria(bloques,memoria)
 
 mostrarMemoria(memoria)
-
-"""
-for i in memoria:
-	i.mostrarPagina()
-"""
 
 
 
