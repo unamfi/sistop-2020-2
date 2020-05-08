@@ -1,10 +1,7 @@
-# -*- coding: utf-8 -*-
-"""
-Spyder Editor
-
-This is a temporary script file.
-"""
+import eel
 import math
+
+eel.init('web')
 
 #Funcion que resta dos numeros hexadecimales y regresa el resultado en hexadecimal
 def restaHex(a,b):
@@ -200,30 +197,54 @@ def direccionesClave(rows):
     dirTerminaStack=retDirB(actual)
     
     return [dirIniciaTexto,dirTerminaTexto,dirIniciaDatos,dirTerminaDatos,dirIniciaHeap,dirTerminaHeap,dirIniciaBib,dirTerminaBib,dirIniciaStack,dirTerminaStack]    
-    
+
+
+        
 #id=str(7455)
-id=str(input("Dame el numero: "))
+
+@eel.expose
+def getPID(data):
+    id=data
+    f= open('/proc/'+id+'/maps','r')
+    file= f.read()
+    titles=[" Direciones "," Perm "," "," "," "," Ubicacion o uso ","Uso","Tam","Pags"]
+    rows=seccionesMemoria(file)
+    if rows.__len__()==0:
+      print("Ocurrió un error, lo lamento")
+      exit()
+    printFormat(titles)
+    for row in rows:
+       printFormat(row)
+    values=direccionesClave(rows)
+
+    if values.__len__()==0:
+      print("No logré determinar las regiones")
+    else:
+        print("Regiones para imagen: ")
+        print("Texto: ",values[0],"-",values[1])
+        print("Datos: ",values[2],"-",values[3])
+        print("Heap: ",values[4],"-",values[5])
+        print("Bibliotecas: ",values[6],"-",values[7])
+        print("Stack: ",values[8],"-",values[9])
+
+
+
+
+    textSize=int(restaHex(values[1],values[0]),16)
+    dataSize=int(restaHex(values[3],values[2]),16)
+    heapSize=int(restaHex(values[5],values[4]),16)
+    librarySize=int(restaHex(values[7],values[6]),16)
+    stackSize=int(restaHex(values[9],values[8]),16)
+    total=textSize+dataSize+heapSize+librarySize+stackSize
+
+    textSize=float(textSize/total)*100
+    dataSize=float(dataSize/total)*100
+    heapSize=float(heapSize/total)*100
+    librarySize=float(librarySize/total)*100
+    stackSize=float(stackSize/total)*100
+    f.close()
+    return [textSize,dataSize,heapSize,librarySize,stackSize]
+
+eel.start('index.html', size=(1000, 600))
+#id=str(input("Dame el numero: "))
 #abrimos el archivo
-f= open('/proc/'+id+'/maps','r')
-file= f.read()
-titles=[" Direciones "," Perm "," "," "," "," Ubicacion o uso ","Uso","Tam","Pags"]
-rows=seccionesMemoria(file)
-if rows.__len__()==0:
-    print("Ocurrió un error, lo lamento")
-    exit()
-printFormat(titles)
-for row in rows:
-    printFormat(row)
-values=direccionesClave(rows)
-
-if values.__len__()==0:
-    print("No logré determinar las regiones")
-else:
-    print("Regiones para imagen: ")
-    print("Texto: ",values[0],"-",values[1])
-    print("Datos: ",values[2],"-",values[3])
-    print("Heap: ",values[4],"-",values[5])
-    print("Bibliotecas: ",values[6],"-",values[7])
-    print("Stack: ",values[8],"-",values[9])
-f.close()
-
