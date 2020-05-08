@@ -1,0 +1,55 @@
+#+title: Evaluación de exposición: Rust
+#+author: Gunnar Wolf
+
+- Tema presentado por :: Alam Guillén y Alejandro Pérez
+- Calificación global ::  8.04 * 0.3 + 6.38 * 0.7 = *6.87*
+
+* Comentarios
+
+Dado que es una presentación en video, no puedo evaluar /dominio del
+tema/ y /presencia/ como lo hacemos habitualmente. Me centro en las
+respuestas que hagan a las preguntas de sus compañeros y en si la
+presentación "suena" leída directamente del material que prepararon o
+expuesta más libremente.
+
+* Evaluación grupal
+
+[[./evaluacion_alumnos.pdf][Evaluaciones individuales de los alumnos]]
+
+|--------------+-------+------------+----------+-----------+-------|
+| Originalidad | Nivel | Relevancia | Claridad | Presencia | Total |
+|--------------+-------+------------+----------+-----------+-------|
+|           10 |    10 |         10 |       10 |        10 |       |
+|           10 |    10 |         10 |       10 |        10 |    10 |
+|           10 |    10 |         10 |       10 |        10 |    10 |
+|           10 |    10 |         10 |       10 |        10 |    10 |
+|           10 |    10 |         10 |       10 |        10 |    10 |
+|           10 |   7.5 |         10 |       10 |       7.5 |  9.00 |
+|           10 |   7.5 |         10 |      7.5 |       7.5 |  8.50 |
+|          7.5 |   7.5 |        7.5 |      7.5 |       7.5 |  7.50 |
+|          7.5 |   7.5 |        7.5 |      7.5 |       7.5 |  7.50 |
+|          7.5 |   7.5 |        7.5 |      7.5 |       7.5 |  7.50 |
+|          7.5 |   7.5 |        7.5 |      7.5 |         5 |  7.00 |
+|          7.5 |   7.5 |          5 |        5 |         5 |  6.00 |
+|          7.5 |     5 |          5 |        0 |         0 |  3.50 |
+|              |       |            |          |           |       |
+|--------------+-------+------------+----------+-----------+-------|
+|         8.85 |  8.27 |       8.46 |     7.88 |      7.50 |  8.04 |
+|--------------+-------+------------+----------+-----------+-------|
+#+TBLFM: @>$1..@>$6=vmean(@II..@III-1); f-2::@3$>..@>>>$>=vmean($1..$5); f-2
+
+* Evaluación del docente
+
+| *Aspecto*              | *Peso* | *Evaluación* | *Puntos* |
+|------------------------+--------+--------------+----------|
+| Originalidad del tema  |    0.1 |           10 |       1. |
+| Material desarrollado  |    0.2 |            5 |       1. |
+| Contenido              |    0.2 |            5 |       1. |
+| Fuentes bibliográficas |    0.1 |            5 |      0.5 |
+| Uso del tiempo         |    0.1 |           10 |       1. |
+| Dominio del tema       |   0.15 |            5 |     0.75 |
+| Presencia              |   0.15 |          7.5 |    1.125 |
+|------------------------+--------+--------------+----------|
+| *Global*               |        |              |     6.38 |
+#+TBLFM: @<<$4..@>>$4=$2*$3::$4=vsum(@<<..@>>);f-2
+
