@@ -42,3 +42,4 @@ algunas operaciones a partir de ingresar un PID para poder entregar el mapa de m
 ## Parte dos
 
 Se realizó a aprtir del análisis del comportamiento de la asignación de memoria, con herrmientas complmentarias con hexdump.
+Se encuentra el pdf entre los archivos...
