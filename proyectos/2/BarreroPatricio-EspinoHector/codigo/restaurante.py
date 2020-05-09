@@ -24,12 +24,11 @@ class Restaurante:
             de un restaurante. Y los distintos comportamientos concurrentes que estos presentan. 
 
             Ejemplo de uso:
-            python3 restaurante.py 6 3 2 2
+            python3 restaurante.py 3 4 2 3
             """)
         parser.add_argument("grupos",type=int,help="Numero de grupos de clientes")
         parser.add_argument("maxgrupos",type=int,help="Numero maximo de  clientes por grupo")
         parser.add_argument("meseros",type=int,help="Numero de meseros")
-        parser.add_argument("mesas",type=int,help="Numero de mesas")
         parser.add_argument("chefs",type=int,help="Numero de chefs")
         arg = parser.parse_args()
         return arg        
@@ -39,7 +38,7 @@ if __name__ == "__main__":
     restarurantito = Restaurante()
     arg = restarurantito.main()
 
-    num_mesas = arg.mesas
+    num_mesas = 1
     num_meseros = arg.meseros
     num_cocineros = arg.chefs
     num_grupos = arg.grupos
