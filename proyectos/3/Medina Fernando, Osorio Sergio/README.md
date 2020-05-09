@@ -1,0 +1,11 @@
+# Documentacion
+
+Basados en los conocimientos de la teoría, así como los diversos recursos proporcionados por el profesor, fue como pudimos implementar de una manera eficaz, los diversos comandos para la identificacion de las paginas requeridas por el proceso a analizar, en este caso no solamente hicimos el analisis del proceso filosofo implementado por el profesor, sino que tambien nos dedicamos a la búsqueda de algunos otros para tener un punto comparativo y poder así identificar algunas páginas en común o librerías utilizadas.
+Cabe destacar que las librerías de uso común entre algunos procesos son sobretodo las que depliegaran una interfaz gráfica, además de tener algunas terminaciones típicas o triviales como .so, es muy importante que esto lo intuímos sin tomar en cuenta el nuevo tema que se esta revisando en clase sobre archivos, ya que al buscar dichos archivos en foros de internet, así como documentación hallada, encontramos las coincidencias, sin embargo, las cosas que aun quedan en duda por nuestra parte son las paginas "vacías" que no nos depliega ningún tipo de informacion.
+Segun ciertos documentos encontrados y que referiremos en la sección de referencias, estos espacios "vacíos" son propios de el Sistemoa Operativo y dependientes del mismo, además de que el espacio que ocupa esta página reside directamente en la memoria RAM.
+Es importante destacar el hecho de que la identificación y formato que se le tuvo que dar a la informacion proporcionada, queriamos darle  un enfasis especifico, sobre todo en los inicios y fin de página, ya que podemos darnos cuenta, basados en estos números, los diversos saltos de memoria que se están utilizando por las diversas páginas.
+
+# Referencias
+	- Grupo de Sistemas Operativos DATSI FI UPM. Módulo de Memoria.(2018) Universidad Politécnica de Madrid. Sitio web: https://laurel.datsi.fi.upm.es/docencia/asignaturas/sox/prv/practicas/analisis_so5/modulo_gm
+	- Michael Kerrisk, The Linux Programming Interface (2010), No Starch Press, USA.
+	- Poesía Binaria. Obtener información básica sobre procesos del sistema Linux en C y C++ (parte 3).(2017). Poesía Binaria. Sitio Web: https://poesiabinaria.net/2017/07/obtener-informacion-basica-procesos-del-sistema-linux-c-c-parte-3/
