@@ -6,7 +6,7 @@
 
 2. Para las unidades *3. Administración de procesos* y
    *4. Planificación de procesos*, [Proyecto 2: Una situación
-   cotidiana paralelizable](./2/README.org) (2020.03.26 → 2020.04.14)
+   cotidiana paralelizable](./2/README.org) (2020.03.26 → 2020.04.26)
 
 3. Para la unidad *5. Administración de memoria*, [Proyecto 3:
    Asignación de memoria en un sistema real](./3/README.org)
