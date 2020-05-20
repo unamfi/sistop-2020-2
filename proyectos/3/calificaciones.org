@@ -1,0 +1,679 @@
+#+title: Proyecto 3 • Calificaciones y comentarios
+
+*Comentarios generales*:
+- La primera versión de mi ejemplo incluía dos totales: Uno, el
+  espacio de memoria total mapeado por el proceso, y otro, el espacio
+  de memoria no-compartido (/exclusivo/) usado por el
+  proceso. Pero... Como les comenté, /metí las cuatro/ y perdí ese
+  ejemplo ☹ Veamos si a alguno de ustedes se le ocurrió ese extra
+  (que, considero, ¡es muy importante a visualizar!)
+- Una confusión que vi muy frecuentemente es que reportaron los
+  espacios de /memoria anónima/ como si fuera /vacío/. Parte de lo que
+  quería demostrar (vean el [[./ejemplo/repr_visual_bash_rpi0][ejemplo que les presenté]]) es que hay
+  muchos espacios vacíos entre los espacios asignados. Fíjense en la
+  magnitud de los espacios que yo reporté — En un sistema de 32 bits,
+  =beae8 - ffff0= es de 1GB y =00937 - b6db6= es de 2.8GB. Las
+  regiones anónimas que muchos reportaron como vacías son apenas de
+  unas cuantas unidades a cientos de Kb.
+
+* Carlos Alcantara, Jimenez Eduardo
+- Documentación :: [[./AlcantaraCarlosJimenezEduardo/Admin. Memoria.pdf][Admin. Memoria.pdf]], [[./AlcantaraCarlosJimenezEduardo/web/img/bg-img/welcome-bg.png][welcome-bg.png]], [[./AlcantaraCarlosJimenezEduardo/web/info.png][info.png]]
+- Archivos :: [[./AlcantaraCarlosJimenezEduardo/proyecto3SO.py][proyecto3SO.py]], [[./AlcantaraCarlosJimenezEduardo/readme][readme]], [[./AlcantaraCarlosJimenezEduardo/web/css/bootstrap.min.css][bootstrap.min.css]], [[./AlcantaraCarlosJimenezEduardo/web/index.html][index.html]],
+              [[./AlcantaraCarlosJimenezEduardo/web/main.js][main.js]], [[./AlcantaraCarlosJimenezEduardo/web/style.css][style.css]]
+- Lenguaje de desarrollo :: Python
+- Interfaz :: GUI basado en HTML+JavaScript empleando =eel=
+- Comentarios ::
+  - ¡Muy buen desarrollo de interfaz!
+  - Su interpretación presenta a cada sección como el /intervalo
+    completo/ desde donde inicia la primera sección que lo cubre hasta
+    donde inicia la siguiente sección — No considera la cantidad de
+    espacio vacío que tiene dentro
+  - No contempla abrir los archivos ejemplo
+  - Hace buenas heurísticas para encontrar los límites entre
+    secciones. Logran una buena salida (preguntar al usuario) en caso
+    de no poder encontrar de forma automatizada la ubicación entre
+    secciones.
+  - ¡Buenísima explicación de la parte 2! Se ve que se echaron un muy
+    buen clavado. ¡Espero que haya resultado divertido!
+  - Sin duda el único punto no resuelto es el más difícil. ¿Qué
+    podrían haber buscado?
+    - Podrían haber sido los valores numéricos (el =30= que se guarda
+      en =tamano= o el =4= que multiplica a =tamano= y
+      =sizeof(char)=) (supongo que los =20= del tamaño de buffers no,
+      porque son utilizados en tiempo de compilación.
+    - ¿Se dieron cuenta de que parte de la cadena no aparece en la
+      compilación a ensamblador? Me parece que corresponde con los
+      valores =$8246211200043688386= y =$9399061139649824= que se
+      cargan a =%rax= (stack).
+|----------------------------------------------------+-----+-----------+------|
+| *Parte 1*                                          |     | Valor (%) |      |
+|----------------------------------------------------+-----+-----------+------|
+| Entrega base                                       |   1 |        30 |   30 |
+| Documentación                                      |   1 |        20 |   20 |
+| Ejecución sin modificación                         |   1 |        10 |   10 |
+| Calidad de reconocimiento de secciones             | 0.7 |        10 |   7. |
+| *Representación visual*                            |     |           |    0 |
+| Base (similar al ejemplo)                          |   1 |        10 |   10 |
+| Salida /mejorada/                                  |   1 |         5 |    5 |
+| *Universalidad*                                    |     |           |    0 |
+| Funciona con mis archivos ejemplo                  |   0 |         5 |    0 |
+| Procesos cualquiera de mi sistema                  |   1 |         5 |    5 |
+| Funciona en 32/64 bits                             |   1 |         5 |    5 |
+|----------------------------------------------------+-----+-----------+------|
+| *Subtotal*                                         |     |           |  92. |
+|----------------------------------------------------+-----+-----------+------|
+| *Parte 2*                                          |     |           |      |
+|----------------------------------------------------+-----+-----------+------|
+| Entrega base                                       |   1 |        50 |   50 |
+| Ubican dirección/sección de cadenas                |   1 |        15 |   15 |
+| Distinguen y ubican cadenas a =printf()=           |   1 |        15 |   15 |
+| *Ubicar símbolos*                                  |     |           |    0 |
+| Ubicación                                          |   1 |         5 |    5 |
+| Explicación de por qué algunas /no/ están          |   1 |         5 |    5 |
+| *Otros símbolos y valores*                         |     |           |    0 |
+| Valores no-textuales                               |   0 |         5 |    0 |
+| ¿qué está en la tabla de símbolos y no en fuentes? |   1 |         5 |    5 |
+|----------------------------------------------------+-----+-----------+------|
+| *Subtotal*                                         |     |           |   95 |
+|----------------------------------------------------+-----+-----------+------|
+| *Total*                                            |     |           | 93.5 |
+|----------------------------------------------------+-----+-----------+------|
+#+TBLFM: @2$4..@12$4=$2*$3::@13$4=vsum(0,@2$4..@12$4)::@15$4..@23$4=$2*$3::@24$4=vsum(0,@15$4..@23$4)::@25$4=vmean(@13$4,@24$4)
+
+* Jorge Barcenas, Sergio Reza
+- Documentación :: [[./BarcenasJorge_RezaSergio/Proyecto3BarcenasJorge_RezaSergio.pdf][Proyecto3BarcenasJorge_RezaSergio.pdf]]
+- Archivos :: [[./BarcenasJorge_RezaSergio/proyecto3.py][proyecto3.py]]
+- Lenguaje de desarrollo :: Python
+- Interfaz :: El resultado del análisis de secciones es enviado tanto
+              a consola (texto) como al GUI (TkInter), coloreando por
+              columna, y con posibilidad de interacción para
+              establecer otros PIDs
+- Comentarios ::
+  - Creo que sería más útil/legible colorear por /tipo de renglón/ que
+    por columna, para ayudar a entender el papel de cada sección, ¿no
+    lo creen?
+  - No contempla abrir los archivos ejemplo
+  - Si van a leer un archivo ya existente (=/proc/<PID>/maps= y
+    =smaps=, en =inicioMap()=), ¿por qué no abrirlo directamente con
+    =open=? ¿Para qué ejecutar un programa externo
+    (='cat /proc/' + str(num_PID) + '/maps > maps' + str(num_PID)+'txt'=)?
+    No sólo es perder tiempo (y hacer decenas de llamadas al sistema
+    innecesarias), sino que abre la superficie de un posible ataque si
+    no son cuidadosos.
+    - ¡Dejan el "reguero" de archivos temporales analizados — Podrían
+      haber especificado en =.gitignore= a =maps*.txt=, =*smaps*.txt=
+      y =newMap*.txt=, o eliminado el archivo al terminar de utilizarlo
+    - O mucho mejor aún: Usar el módulo =tempfile=
+  - Reportan únicamente con el nombre de secciones presentado por el
+    sistema, no hacen gran cosa de reconocimiento de secciones. No
+    reconocen secciones de texto, datos...
+  - Un mapeo anónimo /no es lo mismo/ que un espacio vacío en el
+    mapa. Con /vacío/, mi ejemplo hace referencia a los bloques de
+    memoria que no fueron asignados para uso del proceso (digamos, el
+    espacio típicamente enorme entre heap y bibliotecas, o entre
+    bibliotecas y stack)
+  - La razón principal por la que =cadena2= sigue apareciendo en
+    memoria es porque el programa estaba vivo cuando le tomé la foto
+    (y no había tenido que entregar su memoria aún)
+    - Aunque... Sí, gacho error mío — no me meto en este momento a
+      depurar, ¡pero no pedí el =malloc= para ese buffer! Habla muy
+      mal de mi habilidad con C... :-\
+
+|----------------------------------------------------+-----+-----------+------|
+| *Parte 1*                                          |     | Valor (%) |      |
+|----------------------------------------------------+-----+-----------+------|
+| Entrega base                                       |   1 |        30 |   30 |
+| Documentación                                      |   1 |        20 |   20 |
+| Ejecución sin modificación                         |   1 |        10 |   10 |
+| Calidad de reconocimiento de secciones             | 0.3 |        10 |   3. |
+| *Representación visual*                            |     |           |    0 |
+| Base (similar al ejemplo)                          | 0.6 |        10 |   6. |
+| Salida /mejorada/                                  |   1 |         5 |    5 |
+| *Universalidad*                                    |     |           |    0 |
+| Funciona con mis archivos ejemplo                  |   0 |         5 |    0 |
+| Procesos cualquiera de mi sistema                  |   1 |         5 |    5 |
+| Funciona en 32/64 bits                             |   1 |         5 |    5 |
+|----------------------------------------------------+-----+-----------+------|
+| *Subtotal*                                         |     |           |  84. |
+|----------------------------------------------------+-----+-----------+------|
+| *Parte 2*                                          |     |           |      |
+|----------------------------------------------------+-----+-----------+------|
+| Entrega base                                       |   1 |        50 |   50 |
+| Ubican dirección/sección de cadenas                |   1 |        15 |   15 |
+| Distinguen y ubican cadenas a =printf()=           |   1 |        15 |   15 |
+| *Ubicar símbolos*                                  |     |           |    0 |
+| Ubicación                                          |   1 |         5 |    5 |
+| Explicación de por qué algunas /no/ están          |   1 |         5 |    5 |
+| *Otros símbolos y valores*                         |     |           |    0 |
+| Valores no-textuales                               |   1 |         5 |    5 |
+| ¿qué está en la tabla de símbolos y no en fuentes? |   0 |         5 |    0 |
+|----------------------------------------------------+-----+-----------+------|
+| *Subtotal*                                         |     |           |   95 |
+|----------------------------------------------------+-----+-----------+------|
+| *Total*                                            |     |           | 89.5 |
+|----------------------------------------------------+-----+-----------+------|
+#+TBLFM: @2$4..@12$4=$2*$3::@13$4=vsum(0,@2$4..@12$4)::@15$4..@23$4=$2*$3::@24$4=vsum(0,@15$4..@23$4)::@25$4=vmean(@13$4,@24$4)
+
+* Patricio Barrero, Hector Espino
+- Documentación :: [[./BarreroPatricio-EspinoHector/entrada.txt][entrada.txt]], [[./BarreroPatricio-EspinoHector/maps_bash_rpi0.txt][maps_bash_rpi0.txt]], [[./BarreroPatricio-EspinoHector/reporte.pdf][reporte.pdf]], [[./BarreroPatricio-EspinoHector/smaps_bash_rpi0.txt][smaps_bash_rpi0.txt]]
+- =.gitignore= :: [[./BarreroPatricio-EspinoHector/.gitignore][.gitignore]]
+- Archivos :: [[./BarreroPatricio-EspinoHector/patomap.py][patomap.py]]
+- Lenguaje de desarrollo :: Python
+- Interfaz :: Vuelca la información obtenida del proceso a consola,
+              coloreando (empleando =termcolor= por columna, y
+              alternando el fondo por renglón)
+- Comentarios ::
+  - Creo que sería más útil/legible colorear por /tipo de renglón/ que
+    por columna, para ayudar a entender el papel de cada sección, ¿no
+    lo creen?
+  - ¿Para qué incluyen en su entrega una copia idéntica de los
+    archivos que ya están en =ejemplo/=?
+  - Al recibir argumentos para poder procesar un archivo =smaps=
+    (=-s=), su programa falla porque lo reciben como un archivo ya
+    abierto — y más adelante lo intentan abrir. Para usarlo de esta
+    manera, hay que recibir el parámetro como una cadena:
+    #+BEGIN_SRC diff
+      --- a/proyectos/3/BarreroPatricio-EspinoHector/patomap.py
+      +++ b/proyectos/3/BarreroPatricio-EspinoHector/patomap.py
+      @@ -29,7 +29,7 @@ def crear_parser():
+	   python3 patomap.py -s /proc/34/maps
+	   python3 patomap.py -s /home/gwolf/Downloads/smapdump""",
+	   epilog="En caso de bugs reportar a pato@patomail.com",formatter_class=argparse.RawTextHelpFormatter)
+      -    parser.add_argument('-s','--smap',dest='smap',type=argparse.FileType('r'),
+      +    parser.add_argument('-s','--smap',dest='smap',type=str,
+			   help='Ruta del archivo smap')
+	   parser.add_argument('-p','--pid',dest='pid',type=int,
+			   help='Pid del proceso.Se buscará en: /proc/{PID]}/ \n ->Esta opcion hace que se ignoren las demas')
+    #+END_SRC
+  - La heurística que emplean para detectar si un segmento es de datos
+    o texto es interesante, aunque me dejó rascándome la cabeza un
+    poco 😉 ¿Sólo ejecutamos cosas desde =/usr/bin=? ¿Y qué hay de
+    =/bin=? ¿O de cualquier programa que corran desde sus =/home=?
+    ¿O...?
+    - Pero es una heurística, y tiene su mérito ☺
+
+|----------------------------------------------------+-----+-----------+------|
+| *Parte 1*                                          |     | Valor (%) |      |
+|----------------------------------------------------+-----+-----------+------|
+| Entrega base                                       |   1 |        30 |   30 |
+| Documentación                                      |   1 |        20 |   20 |
+| Ejecución sin modificación                         | 0.7 |        10 |   7. |
+| Calidad de reconocimiento de secciones             | 0.7 |        10 |   7. |
+| *Representación visual*                            |     |           |    0 |
+| Base (similar al ejemplo)                          | 0.7 |        10 |   7. |
+| Salida /mejorada/                                  |   1 |         5 |    5 |
+| *Universalidad*                                    |     |           |    0 |
+| Funciona con mis archivos ejemplo                  |   1 |         5 |    5 |
+| Procesos cualquiera de mi sistema                  |   1 |         5 |    5 |
+| Funciona en 32/64 bits                             |   1 |         5 |    5 |
+|----------------------------------------------------+-----+-----------+------|
+| *Subtotal*                                         |     |           |  91. |
+|----------------------------------------------------+-----+-----------+------|
+| *Parte 2*                                          |     |           |      |
+|----------------------------------------------------+-----+-----------+------|
+| Entrega base                                       |   1 |        50 |   50 |
+| Ubican dirección/sección de cadenas                |   1 |        15 |   15 |
+| Distinguen y ubican cadenas a =printf()=           |   1 |        15 |   15 |
+| *Ubicar símbolos*                                  |     |           |    0 |
+| Ubicación                                          |   1 |         5 |    5 |
+| Explicación de por qué algunas /no/ están          |   1 |         5 |    5 |
+| *Otros símbolos y valores*                         |     |           |    0 |
+| Valores no-textuales                               |   1 |         5 |    5 |
+| ¿qué está en la tabla de símbolos y no en fuentes? |   1 |         5 |    5 |
+|----------------------------------------------------+-----+-----------+------|
+| *Subtotal*                                         |     |           |  100 |
+|----------------------------------------------------+-----+-----------+------|
+| *Total*                                            |     |           | 95.5 |
+|----------------------------------------------------+-----+-----------+------|
+#+TBLFM: @2$4..@12$4=$2*$3::@13$4=vsum(0,@2$4..@12$4)::@15$4..@23$4=$2*$3::@24$4=vsum(0,@15$4..@23$4)::@25$4=vmean(@13$4,@24$4)
+
+* Cardenas Jorge, Samuel Garrido
+- Documentación :: [[./CardenasJorge-GarridoSamuel/README.md][README.md]], [[./CardenasJorge-GarridoSamuel/img/ejemploEjec.png][ejemploEjec.png]], [[./CardenasJorge-GarridoSamuel/img/img1.png][img1.png]], [[./CardenasJorge-GarridoSamuel/img/img11.png][img11.png]],
+                   [[./CardenasJorge-GarridoSamuel/img/img12.png][img12.png]], [[./CardenasJorge-GarridoSamuel/img/img2.png][img2.png]], [[./CardenasJorge-GarridoSamuel/img/img3.png][img3.png]], [[./CardenasJorge-GarridoSamuel/img/img4.png][img4.png]], [[./CardenasJorge-GarridoSamuel/img/img5.png][img5.png]],
+                   [[./CardenasJorge-GarridoSamuel/img/img6.png][img6.png]], [[./CardenasJorge-GarridoSamuel/img/img7.png][img7.png]], [[./CardenasJorge-GarridoSamuel/img/img10.jpeg][img10.jpeg]], [[./CardenasJorge-GarridoSamuel/img/img8.jpeg][img8.jpeg]],
+                   [[./CardenasJorge-GarridoSamuel/img/img9.jpeg][img9.jpeg]]
+- =.gitignore= :: [[./CardenasJorge-GarridoSamuel/.gitignore][.gitignore]]
+- Archivos :: [[./CardenasJorge-GarridoSamuel/jsmap.py][jsmap.py]]
+- Lenguaje de desarrollo :: Python
+- Interfaz :: Presenta el mapeo en texto a consola, coloreando /por
+              renglón/ (¡bien!) el uso a que corresponde cada línea
+- Comentarios ::
+  - Uau, la documentación incluye básicamente todo un resumen de la
+    unidad, enfocado a sistemas Unix. ¡Bonito! 😉
+    - Epa – Mencionan que las regiones principales son los datos, el
+      texto y la pila (/stack/). ¿Y la región de /libres/ (/heap/)?
+    - Presentan desde la documentación una bonita heurística para
+      encontrar a qué sección pertenece cada mapeo. No es
+      /estrictamente/ cierta, pero tiene una buena dosis de verdad.
+  - Las regiones de memoria que presentan como /- Vacío -/ no
+    corresponden a su uso real. Son regiones /anónimas/, pero no
+    /vacías/.
+  - No contempla abrir los archivos ejemplo
+  - Averiguan el /cmdline/ de cada proceso para identificarlo. ¡Bien!
+    - La convención indica que =exit(0)= indica que un proceso
+      finalizó exitosamente. Si no pueden obtener el =cmdline= (línea
+      17), deberían indicarlo finalizando con un código de error
+      (p.ej. =exit(1)=).
+
+|----------------------------------------------------+-----+-----------+------|
+| *Parte 1*                                          |     | Valor (%) |      |
+|----------------------------------------------------+-----+-----------+------|
+| Entrega base                                       |   1 |        30 |   30 |
+| Documentación                                      |   1 |        20 |   20 |
+| Ejecución sin modificación                         |   1 |        10 |   10 |
+| Calidad de reconocimiento de secciones             | 0.7 |        10 |   7. |
+| *Representación visual*                            |     |           |    0 |
+| Base (similar al ejemplo)                          |   1 |        10 |   10 |
+| Salida /mejorada/                                  |   1 |         5 |    5 |
+| *Universalidad*                                    |     |           |    0 |
+| Funciona con mis archivos ejemplo                  |   0 |         5 |    0 |
+| Procesos cualquiera de mi sistema                  |   1 |         5 |    5 |
+| Funciona en 32/64 bits                             |   1 |         5 |    5 |
+|----------------------------------------------------+-----+-----------+------|
+| *Subtotal*                                         |     |           |  92. |
+|----------------------------------------------------+-----+-----------+------|
+| *Parte 2*                                          |     |           |      |
+|----------------------------------------------------+-----+-----------+------|
+| Entrega base                                       |   1 |        50 |   50 |
+| Ubican dirección/sección de cadenas                |   1 |        15 |   15 |
+| Distinguen y ubican cadenas a =printf()=           |   1 |        15 |   15 |
+| *Ubicar símbolos*                                  |     |           |    0 |
+| Ubicación                                          |   1 |         5 |    5 |
+| Explicación de por qué algunas /no/ están          |   1 |         5 |    5 |
+| *Otros símbolos y valores*                         |     |           |    0 |
+| Valores no-textuales                               |   0 |         5 |    0 |
+| ¿qué está en la tabla de símbolos y no en fuentes? |   1 |         5 |    5 |
+|----------------------------------------------------+-----+-----------+------|
+| *Subtotal*                                         |     |           |   95 |
+|----------------------------------------------------+-----+-----------+------|
+| *Total*                                            |     |           | 93.5 |
+|----------------------------------------------------+-----+-----------+------|
+#+TBLFM: @2$4..@12$4=$2*$3::@13$4=vsum(0,@2$4..@12$4)::@15$4..@23$4=$2*$3::@24$4=vsum(0,@15$4..@23$4)::@25$4=vmean(@13$4,@24$4)
+
+* Javier Loidi, Kevin Lara
+- Documentación :: [[./LoidiJavier-LaraKevin/Parte1/documentacion.txt][documentacion.txt]], [[./LoidiJavier-LaraKevin/Parte2/explicacion.txt][explicacion.txt]], [[./LoidiJavier-LaraKevin/Parte2/hexdump.txt][hexdump.txt]], [[./LoidiJavier-LaraKevin/Parte2/salida_pmap_4542.txt][salida_pmap_4542.txt]]
+- Archivos :: [[./LoidiJavier-LaraKevin/Parte1/pmap.py][pmap.py]], [[./LoidiJavier-LaraKevin/Parte2/core.4542][core.4542]], [[./LoidiJavier-LaraKevin/Parte2/donde_en_la_memoria.c][donde_en_la_memoria.c]]
+- Lenguaje de desarrollo :: Python
+- Interfaz :: Tabla presentada en consola con los datos del proceso
+              a reportar
+- Comentarios ::
+  - No contempla abrir los archivos ejemplo
+  - Programa corto y al grano. No hace mucha heurística, pero es fácil
+    de seguir y comprender. ¡Y eso es bueno! ☺
+  - Para la parte 2: Al hablar de =cadena1=, mencionan que /como es
+    una variable local, no está ni en el stack ni en el heap/. ¡Una
+    variable /local/ es precisamente lo que debería estar en el stack!
+    Pero... =cadena1= no es una variable local, sino que /global/
+    (está definida en el /cuerpo externo/ del archivo
+    =donde_en_la_memoria.c=), y por eso está en una dirección tan baja
+    (sección de datos)
+    - Leyendo la salida que presentan de hexdump, sería más correcto
+      decir que comienza en =0X00001E8C= a decir que es en la
+      línea 233.
+  - ¿Cómo establecen la relación entre la dirección o el número de
+    línea que les da =hexdump= y el segmento correspondiente que
+    presentan indicando a qué corresponde cada sección?
+  - La herramienta principal que utilizan es =hexdump=, que ha sido
+    también la que más les he mostrado yo. Pero parte del ejercicio
+    era mostrarles lo /primitivo e incompleto/ que es su uso; las
+    otras herramientas mencionadas en mi texto (y por varios de sus
+    compañeros) demuestran ser mucho más completas para esto. Les
+    recomiendo revisar lo que reportan sus compañeros.
+  - Como sea, la explicación que hacen y la deducción que hacen es
+    mayormente correcta. ¡Bien!
+  - No me reportaron símbolos y valores no-textuales ☹
+
+|----------------------------------------------------+-----+-----------+------|
+| *Parte 1*                                          |     | Valor (%) |      |
+|----------------------------------------------------+-----+-----------+------|
+| Entrega base                                       |   1 |        30 |   30 |
+| Documentación                                      |   1 |        20 |   20 |
+| Ejecución sin modificación                         |   1 |        10 |   10 |
+| Calidad de reconocimiento de secciones             | 0.7 |        10 |   7. |
+| *Representación visual*                            |     |           |    0 |
+| Base (similar al ejemplo)                          |   1 |        10 |   10 |
+| Salida /mejorada/                                  |   0 |         5 |    0 |
+| *Universalidad*                                    |     |           |    0 |
+| Funciona con mis archivos ejemplo                  |   0 |         5 |    0 |
+| Procesos cualquiera de mi sistema                  |   1 |         5 |    5 |
+| Funciona en 32/64 bits                             |   1 |         5 |    5 |
+|----------------------------------------------------+-----+-----------+------|
+| *Subtotal*                                         |     |           |  87. |
+|----------------------------------------------------+-----+-----------+------|
+| *Parte 2*                                          |     |           |      |
+|----------------------------------------------------+-----+-----------+------|
+| Entrega base                                       |   1 |        50 |   50 |
+| Ubican dirección/sección de cadenas                |   1 |        15 |   15 |
+| Distinguen y ubican cadenas a =printf()=           |   1 |        15 |   15 |
+| *Ubicar símbolos*                                  |     |           |    0 |
+| Ubicación                                          |   0 |         5 |    0 |
+| Explicación de por qué algunas /no/ están          |   0 |         5 |    0 |
+| *Otros símbolos y valores*                         |     |           |    0 |
+| Valores no-textuales                               |   0 |         5 |    0 |
+| ¿qué está en la tabla de símbolos y no en fuentes? |   0 |         5 |    0 |
+|----------------------------------------------------+-----+-----------+------|
+| *Subtotal*                                         |     |           |   80 |
+|----------------------------------------------------+-----+-----------+------|
+| *Total*                                            |     |           | 83.5 |
+|----------------------------------------------------+-----+-----------+------|
+#+TBLFM: @2$4..@12$4=$2*$3::@13$4=vsum(0,@2$4..@12$4)::@15$4..@23$4=$2*$3::@24$4=vsum(0,@15$4..@23$4)::@25$4=vmean(@13$4,@24$4)
+
+* Niver Martinez
+- Documentación :: [[./MartinezNiver/Captura de pantalla de 2020-05-08 20-31-58.png][Captura de pantalla de 2020-05-08 20-31-58.png]], [[./MartinezNiver/Captura de pantalla de 2020-05-08 20-32-07.png][Captura de pantalla de 2020-05-08 20-32-07.png]], [[./MartinezNiver/manual_programa.README.md][manual_programa.README.md]], [[./MartinezNiver/parte2_proyecto3.pdf][parte2_proyecto3.pdf]]
+- Archivos :: [[./MartinezNiver/memmap.py][memmap.py]]
+- Lenguaje de desarrollo :: Python
+- Interfaz :: 
+  - Muestra la lista de secciones en consola, coloreando cada una de
+    ellas (aunque todas se colorean de la misma forma)
+- Comentarios ::
+  - Si generas un archivo temporal, es /altamente recomendable/
+    hacerlo de una forma que no sea con un nombre predecible, y con
+    garantías de que el archivo temporal sea eliminado al terminar la
+    ejecución. En Python, asómate a =tempfile.TemporaryFile()=.
+  - No contempla abrir los archivos ejemplo
+  - ¡Bien por compartir los recursos consultados! Claro, no todo lo
+    que consultas cabe en una bibliografía formal... Pero es
+    importante dar atribución.
+  - La interfaz que presentas "embellece" sin duda los resultados que
+    tienes en tu /archivo de depuración/ (a fin de cuentas, lo generas
+    desde =debug_file()= 😉), pero... En este caso, me parece que
+    tendrías que revisar la interfaz humana de tu programa
+    - Me parece mucho más fácil interpretar la salida en el archivo de
+      depuración que en la salida formal
+    - Si tienes información con alto nivel de repetición, la
+      comparación línea a línea es más sencilla que la comparación global
+  - Me gusta que manejes los casos de argumentos incompletos /
+    incorrectos mediante excepciones ☺
+  - Respecto a la parte 2 del proyecto, =hexdump= te sirve para ver el
+    contenido de un archivo no-textual. No te sirve de mucho para
+    abrir un archivo con fuentes en ensamblador, únicamente te
+    /complica/ la legibilidad.
+  - Refieres varias veces que algo está /en memoria alta/
+    (p.ej. /Mientras que sí vemos las direcciones hexadecimales del
+    volcado que nos da/ /el código objeto, estas puede que estén igual
+    en memoria alta/), pero... ¡estás haciendo referencia a la memoria
+    más /baja/ de toda la asignada! Fíjate en las direcciones que te
+    reporta (primera columna de =pmap= y de =hexdump=), no a su
+    posición en pantalla
+
+|----------------------------------------------------+-----+-----------+------|
+| *Parte 1*                                          |     | Valor (%) |      |
+|----------------------------------------------------+-----+-----------+------|
+| Entrega base                                       |   1 |        30 |   30 |
+| Documentación                                      |   1 |        20 |   20 |
+| Ejecución sin modificación                         |   1 |        10 |   10 |
+| Calidad de reconocimiento de secciones             |     |        10 |    0 |
+| *Representación visual*                            |     |           |    0 |
+| Base (similar al ejemplo)                          |   1 |        10 |   10 |
+| Salida /mejorada/                                  | 0.7 |         5 |  3.5 |
+| *Universalidad*                                    |     |           |    0 |
+| Funciona con mis archivos ejemplo                  |   0 |         5 |    0 |
+| Procesos cualquiera de mi sistema                  |   1 |         5 |    5 |
+| Funciona en 32/64 bits                             |   1 |         5 |    5 |
+|----------------------------------------------------+-----+-----------+------|
+| *Subtotal*                                         |     |           | 83.5 |
+|----------------------------------------------------+-----+-----------+------|
+| *Parte 2*                                          |     |           |      |
+|----------------------------------------------------+-----+-----------+------|
+| Entrega base                                       |   1 |        50 |   50 |
+| Ubican dirección/sección de cadenas                | 0.8 |        15 |  12. |
+| Distinguen y ubican cadenas a =printf()=           | 0.5 |        15 |  7.5 |
+| *Ubicar símbolos*                                  |     |           |    0 |
+| Ubicación                                          |   0 |         5 |    0 |
+| Explicación de por qué algunas /no/ están          |   1 |         5 |    5 |
+| *Otros símbolos y valores*                         |     |           |    0 |
+| Valores no-textuales                               |   0 |         5 |    0 |
+| ¿qué está en la tabla de símbolos y no en fuentes? |   0 |         5 |    0 |
+|----------------------------------------------------+-----+-----------+------|
+| *Subtotal*                                         |     |           | 74.5 |
+|----------------------------------------------------+-----+-----------+------|
+| *Total*                                            |     |           |  79. |
+|----------------------------------------------------+-----+-----------+------|
+#+TBLFM: @2$4..@12$4=$2*$3::@13$4=vsum(0,@2$4..@12$4)::@15$4..@23$4=$2*$3::@24$4=vsum(0,@15$4..@23$4)::@25$4=vmean(@13$4,@24$4)
+
+* Fernando Medina, Sergio Osorio
+- Documentación :: [[./Medina Fernando, Osorio Sergio/README.md][README.md]]
+- Archivos :: [[./Medina Fernando, Osorio Sergio/pmapS.c][pmapS.c]]
+- Lenguaje de desarrollo :: C
+- Interfaz :: Vuelca la información obtenida del proceso a consola,
+              coloreando por columna
+- Comentarios ::
+  - No contempla abrir los archivos ejemplo
+  - Dado que el programa que hicieron es sobre todo un programa de
+    manipulación de cadenas... ¡Muy chido haberlo hecho en C!
+    (¿Sensato? No lo sé. Pero chido, sin duda ☺)
+  - ⸘No entregaron nada para la 2ª parte del ejercicio‽ ☹
+|----------------------------------------------------+-----+-----------+-------|
+| *Parte 1*                                          |     | Valor (%) |       |
+|----------------------------------------------------+-----+-----------+-------|
+| Entrega base                                       |   1 |        30 |    30 |
+| Documentación                                      | 0.6 |        20 |   12. |
+| Ejecución sin modificación                         |   1 |        10 |    10 |
+| Calidad de reconocimiento de secciones             |   1 |        10 |    10 |
+| *Representación visual*                            |     |           |     0 |
+| Base (similar al ejemplo)                          |   1 |        10 |    10 |
+| Salida /mejorada/                                  | 0.7 |         5 |   3.5 |
+| *Universalidad*                                    |     |           |     0 |
+| Funciona con mis archivos ejemplo                  |   0 |         5 |     0 |
+| Procesos cualquiera de mi sistema                  |   1 |         5 |     5 |
+| Funciona en 32/64 bits                             |   1 |         5 |     5 |
+|----------------------------------------------------+-----+-----------+-------|
+| *Subtotal*                                         |     |           |  85.5 |
+|----------------------------------------------------+-----+-----------+-------|
+| *Parte 2*                                          |     |           |       |
+|----------------------------------------------------+-----+-----------+-------|
+| Entrega base                                       |   0 |        50 |     0 |
+| Ubican dirección/sección de cadenas                |   0 |        15 |     0 |
+| Distinguen y ubican cadenas a =printf()=           |   0 |        15 |     0 |
+| *Ubicar símbolos*                                  |     |           |     0 |
+| Ubicación                                          |   0 |         5 |     0 |
+| Explicación de por qué algunas /no/ están          |   0 |         5 |     0 |
+| *Otros símbolos y valores*                         |     |           |     0 |
+| Valores no-textuales                               |   0 |         5 |     0 |
+| ¿qué está en la tabla de símbolos y no en fuentes? |   0 |         5 |     0 |
+|----------------------------------------------------+-----+-----------+-------|
+| *Subtotal*                                         |     |           |     0 |
+|----------------------------------------------------+-----+-----------+-------|
+| *Total*                                            |     |           | 42.75 |
+|----------------------------------------------------+-----+-----------+-------|
+#+TBLFM: @2$4..@12$4=$2*$3::@13$4=vsum(0,@2$4..@12$4)::@15$4..@23$4=$2*$3::@24$4=vsum(0,@15$4..@23$4)::@25$4=vmean(@13$4,@24$4)
+
+* Alfonso Murrieta,-Joaquin Valdespino
+- Documentación :: [[./MurrietaAlfonso-ValdespinoJoaquin/README.md][README.md]], [[./MurrietaAlfonso-ValdespinoJoaquin/evidencias/fig10.png][fig10.png]], [[./MurrietaAlfonso-ValdespinoJoaquin/evidencias/fig11.png][fig11.png]], [[./MurrietaAlfonso-ValdespinoJoaquin/evidencias/fig2.png][fig2.png]], [[./MurrietaAlfonso-ValdespinoJoaquin/evidencias/fig3.png][fig3.png]], [[./MurrietaAlfonso-ValdespinoJoaquin/evidencias/fig4.png][fig4.png]], [[./MurrietaAlfonso-ValdespinoJoaquin/evidencias/fig5.png][fig5.png]], [[./MurrietaAlfonso-ValdespinoJoaquin/evidencias/fig6.png][fig6.png]], [[./MurrietaAlfonso-ValdespinoJoaquin/evidencias/fig7.png][fig7.png]], [[./MurrietaAlfonso-ValdespinoJoaquin/evidencias/fig8.png][fig8.png]], [[./MurrietaAlfonso-ValdespinoJoaquin/evidencias/fig9.png][fig9.png]], [[./MurrietaAlfonso-ValdespinoJoaquin/proyecto3.pdf][proyecto3.pdf]]
+- =.gitignore= :: [[./MurrietaAlfonso-ValdespinoJoaquin/.gitignore][.gitignore]]
+- Archivos :: [[./MurrietaAlfonso-ValdespinoJoaquin/Myapp.py][Myapp.py]], [[./MurrietaAlfonso-ValdespinoJoaquin/lines/LineComplete.py][LineComplete.py]], [[./MurrietaAlfonso-ValdespinoJoaquin/maps.ui][maps.ui]]
+- Lenguaje de desarrollo :: Python
+- Interfaz :: Aplicación GUI Qt (pero limitada a una salida tipo
+              consola en un /widget/ =QTextEdit=), coloreando cada
+              renglón (¡bien!) según su uso
+- Comentarios ::
+  - No hay manejo de errores ☹ Si le doy un PID inexistente, o uno del
+    que no tengo permisos, me manda la pantalla vacía
+  - Si van a leer un archivo ya existente (=/proc/<PID>/maps=, en
+    =mapping()=), ¿por qué no abrirlo directamente con =open=? ¿Para
+    qué ejecutar un programa externo (='cat /proc/' + str(pid) +
+    '/maps > maps' + str(pid)+'txt'=)?  No sólo es perder tiempo (y
+    hacer decenas de llamadas al sistema innecesarias), sino que abre
+    la superficie de un posible ataque si no son cuidadosos.
+    - ¡Dejan el "reguero" de archivos temporales analizados — Podrían
+      haber especificado en =.gitignore= a =maps*.txt= y =*MUVA*.txt=,
+      o eliminado el archivo al terminar de utilizarlo
+    - O mucho mejor aún: Usar el módulo =tempfile=
+  - A nivel usabilidad: Lograron una aplicación GUI, y se los
+    reconozco con el punto completo, pero no sigue el "espíritu" de
+    una aplicación GUI: La salida es a un elemento (/widget/) de tipo
+    editor de texto; puedo modificar el texto como si fuera para eso,
+    y no me da ninguna ventaja /real/ sobre una aplicación de consola.
+  - No contempla abrir los archivos ejemplo
+  - No reconocen las secciones de texto y datos del proceso principal
+    (aunque sí, parcialmente, de las bibliotecas).
+    - Las reglas que emplean para esto están incompletas. En el
+      ejemplo que presentan en la documentación, las primeras 7
+      páginas deberían ser texto, y las siguientes 1+1 datos
+    - En las bibliotecas, yo marcaría como datos de biblioteca las
+      secciones con /cualquier permiso no-ejecutable/ mapeadas de un
+      archivo.
+    - Los segmentos que marcan como /vacíos/ no lo son — Son
+      /anónimos/. No reconocen segmentos vacíos.
+  - Respecto a la 2ª parte — ¡Muy buen análisis! Me quea sólo un dato
+    importante que apuntar: Hay una discrepancia importante entre lo
+    que presentan las figuras 5, 6, 7 y 8 y lo que muestra la 9. ¿Se
+    dan cuenta? En las tres primeras, casi todo lo que muestran está
+    en el rango a partir de =55eead5221000= (y no lo presentaron, pero
+    algunos de los valores estarían en las regiones más altas, a
+    partir de =7fff4d8e8000=, sobre todo los valores en stack). La
+    figura 9 muestra todo en direcciones muy bajitas. llegando hasta
+    =201d70= como tope. ¿Por qué?
+    - Las primeras imagenes vienen de analizar una imagen en
+      memoria. Con =nm= están analizando al archivo ejecutable. Si
+      bien este tiene secciones, estas están únicamente /marcadas/. El
+      cargador las acomodará donde les corresponda al poner al
+      programa en ejecución.
+|----------------------------------------------------+-----+-----------+-----|
+| *Parte 1*                                          |     | Valor (%) |     |
+|----------------------------------------------------+-----+-----------+-----|
+| Entrega base                                       |   1 |        30 |  30 |
+| Documentación                                      |   1 |        20 |  20 |
+| Ejecución sin modificación                         |   1 |        10 |  10 |
+| Calidad de reconocimiento de secciones             | 0.6 |        10 |  6. |
+| *Representación visual*                            |     |           |   0 |
+| Base (similar al ejemplo)                          |   1 |        10 |  10 |
+| Salida /mejorada/                                  |   1 |         5 |   5 |
+| *Universalidad*                                    |     |           |   0 |
+| Funciona con mis archivos ejemplo                  |   0 |         5 |   0 |
+| Procesos cualquiera de mi sistema                  |   1 |         5 |   5 |
+| Funciona en 32/64 bits                             |   1 |         5 |   5 |
+|----------------------------------------------------+-----+-----------+-----|
+| *Subtotal*                                         |     |           | 91. |
+|----------------------------------------------------+-----+-----------+-----|
+| *Parte 2*                                          |     |           |     |
+|----------------------------------------------------+-----+-----------+-----|
+| Entrega base                                       |   1 |        50 |  50 |
+| Ubican dirección/sección de cadenas                |   1 |        15 |  15 |
+| Distinguen y ubican cadenas a =printf()=           |   1 |        15 |  15 |
+| *Ubicar símbolos*                                  |     |           |   0 |
+| Ubicación                                          |   1 |         5 |   5 |
+| Explicación de por qué algunas /no/ están          |   0 |         5 |   0 |
+| *Otros símbolos y valores*                         |     |           |   0 |
+| Valores no-textuales                               |   0 |         5 |   0 |
+| ¿qué está en la tabla de símbolos y no en fuentes? |   0 |         5 |   0 |
+|----------------------------------------------------+-----+-----------+-----|
+| *Subtotal*                                         |     |           |  85 |
+|----------------------------------------------------+-----+-----------+-----|
+| *Total*                                            |     |           | 88. |
+|----------------------------------------------------+-----+-----------+-----|
+#+TBLFM: @2$4..@12$4=$2*$3::@13$4=vsum(0,@2$4..@12$4)::@15$4..@23$4=$2*$3::@24$4=vsum(0,@15$4..@23$4)::@25$4=vmean(@13$4,@24$4)
+
+* Alejandro Perez
+- Documentación :: [[./PerezAlejandro/proyecto 3.pdf][proyecto 3.pdf]]
+- Archivos :: [[./PerezAlejandro/mem.py][mem.py]]
+- Lenguaje de desarrollo :: Python
+- Interfaz :: Salida del comando =mmap= aplicando distintos filtros
+              hacia consola
+- Comentarios ::
+  - En vez de ejecutar siete comandos, seis de ellos con /pipe/ hacia
+    un segundo comando, resultaría mucho mejor obtener la información
+    una única vez, e iterar sobre ella en memoria buscando las cadenas
+    en cuestión
+  - La información que presentas incluye partes de un mapa de memoria
+    — Pero /no son/ un mapa de memoria, son sólo pedazos que filtran
+    sobre cadenas arbitrarias
+    - Podrías probablemente encontrar los espacios mapeados a
+      bibliotecas, sí, con los filtros por =lib= y =ld=. Podrías
+      reportar la memoria anónima, con =anon=...
+    - ... Pero... ¿Y de dónde salen =bash= y =dash=? ¡No tienen nada
+      que ver con el ejercicio en cuestión...
+  - No entregaste la 2ª parte del ejercicio ☹
+|----------------------------------------------------+-----+-----------+-----|
+| *Parte 1*                                          |     | Valor (%) |     |
+|----------------------------------------------------+-----+-----------+-----|
+| Entrega base                                       |   1 |        30 |  30 |
+| Documentación                                      |   1 |        20 |  20 |
+| Ejecución sin modificación                         |   1 |        10 |  10 |
+| Calidad de reconocimiento de secciones             | 0.3 |        10 |  3. |
+| *Representación visual*                            |     |           |   0 |
+| Base (similar al ejemplo)                          | 0.5 |        10 |  5. |
+| Salida /mejorada/                                  |   0 |         5 |   0 |
+| *Universalidad*                                    |     |           |   0 |
+| Funciona con mis archivos ejemplo                  |   0 |         5 |   0 |
+| Procesos cualquiera de mi sistema                  |   1 |         5 |   5 |
+| Funciona en 32/64 bits                             |   1 |         5 |   5 |
+|----------------------------------------------------+-----+-----------+-----|
+| *Subtotal*                                         |     |           | 78. |
+|----------------------------------------------------+-----+-----------+-----|
+| *Parte 2*                                          |     |           |     |
+|----------------------------------------------------+-----+-----------+-----|
+| Entrega base                                       |   0 |        50 |   0 |
+| Ubican dirección/sección de cadenas                |   0 |        15 |   0 |
+| Distinguen y ubican cadenas a =printf()=           |   0 |        15 |   0 |
+| *Ubicar símbolos*                                  |     |           |   0 |
+| Ubicación                                          |   0 |         5 |   0 |
+| Explicación de por qué algunas /no/ están          |   0 |         5 |   0 |
+| *Otros símbolos y valores*                         |     |           |   0 |
+| Valores no-textuales                               |   0 |         5 |   0 |
+| ¿qué está en la tabla de símbolos y no en fuentes? |   0 |         5 |   0 |
+|----------------------------------------------------+-----+-----------+-----|
+| *Subtotal*                                         |     |           |   0 |
+|----------------------------------------------------+-----+-----------+-----|
+| *Total*                                            |     |           | 39. |
+|----------------------------------------------------+-----+-----------+-----|
+#+TBLFM: @2$4..@12$4=$2*$3::@13$4=vsum(0,@2$4..@12$4)::@15$4..@23$4=$2*$3::@24$4=vsum(0,@15$4..@23$4)::@25$4=vmean(@13$4,@24$4)
+
+* Roel Perez
+- Documentación :: [[./PerezRoel/ejemplo_ejec.png][ejemplo_ejec.png]], [[./PerezRoel/examinacion_de_memoria.pdf][examinacion_de_memoria.pdf]], [[./PerezRoel/proyecto3-doc.txt][proyecto3-doc.txt]]
+- Archivos :: [[./PerezRoel/archivos/a.out][a.out]], [[./PerezRoel/archivos/donde_en_la_memoria][donde_en_la_memoria]], [[./PerezRoel/archivos/donde_en_la_memoria.18800][donde_en_la_memoria.18800]], [[./PerezRoel/archivos/donde_en_la_memoria.c][donde_en_la_memoria.c]], [[./PerezRoel/archivos/donde_en_la_memoria.s][donde_en_la_memoria.s]], [[./PerezRoel/proyecto3.py][proyecto3.py]]
+- Lenguaje de desarrollo :: Python
+- Interfaz :: Presenta el mapeo en texto a consola, coloreando /por
+              renglón/ (¡bien!) el uso a que corresponde cada línea
+- Comentarios ::
+  - ¡BIEN! En la última oportunidad, el último alumno... Por lo menos
+    uno sí muestra las /regiones vacías/, los espacios no asignados de
+    memoria, presentando su tamaño. Para los demás alumnos que pasen
+    por este punto — Para ilustrar lo que pedía, consulten en el
+    [[./PerezRoel/ejemplo_ejec.png][ejemplo de ejecución]]: Espacios vacíos de 86TB, 40TB, 741TB, ¡16EB!
+    Sí, son magnitudes correctas.
+  - No contempla abrir los archivos ejemplo
+  - ¡Muy buena implementación! Código de fácil lectura, y muy buena
+    documentación.
+  - Buenísimo que ajustes el =coredump_filter=, eso te ahorra tener
+    que estar buscando datos en diferentes lugares.
+  - Muy buena comentada del código ensamblador. Me va a ser útil a
+    futuro.
+  - Eres también el único que logró encontrar a los valores
+    no-textuales (=tamano 0x1e = 30=) ☺
+  - _Excelente_ proyecto. 
+|----------------------------------------------------+---+-----------+------|
+| *Parte 1*                                          |   | Valor (%) |      |
+|----------------------------------------------------+---+-----------+------|
+| Entrega base                                       | 1 |        30 |   30 |
+| Documentación                                      | 1 |        20 |   20 |
+| Ejecución sin modificación                         | 1 |        10 |   10 |
+| Calidad de reconocimiento de secciones             | 1 |        10 |   10 |
+| *Representación visual*                            |   |           |    0 |
+| Base (similar al ejemplo)                          | 1 |        10 |   10 |
+| Salida /mejorada/                                  | 1 |         5 |    5 |
+| *Universalidad*                                    |   |           |    0 |
+| Funciona con mis archivos ejemplo                  | 0 |         5 |    0 |
+| Procesos cualquiera de mi sistema                  | 1 |         5 |    5 |
+| Funciona en 32/64 bits                             | 1 |         5 |    5 |
+|----------------------------------------------------+---+-----------+------|
+| *Subtotal*                                         |   |           |   95 |
+|----------------------------------------------------+---+-----------+------|
+| *Parte 2*                                          |   |           |      |
+|----------------------------------------------------+---+-----------+------|
+| Entrega base                                       | 1 |        50 |   50 |
+| Ubican dirección/sección de cadenas                | 1 |        15 |   15 |
+| Distinguen y ubican cadenas a =printf()=           | 1 |        15 |   15 |
+| *Ubicar símbolos*                                  |   |           |    0 |
+| Ubicación                                          | 1 |         5 |    5 |
+| Explicación de por qué algunas /no/ están          | 1 |         5 |    5 |
+| *Otros símbolos y valores*                         |   |           |    0 |
+| Valores no-textuales                               | 1 |         5 |    5 |
+| ¿qué está en la tabla de símbolos y no en fuentes? | 1 |         5 |    5 |
+|----------------------------------------------------+---+-----------+------|
+| *Subtotal*                                         |   |           |  100 |
+|----------------------------------------------------+---+-----------+------|
+| *Total*                                            |   |           | 97.5 |
+|----------------------------------------------------+---+-----------+------|
+#+TBLFM: @2$4..@12$4=$2*$3::@13$4=vsum(0,@2$4..@12$4)::@15$4..@23$4=$2*$3::@24$4=vsum(0,@15$4..@23$4)::@25$4=vmean(@13$4,@24$4)
+

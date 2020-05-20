@@ -6,7 +6,7 @@ Planteamiento: 2020.04.24
 Entrega: 2020.05.07
 #+end_src
 
-# Pueden [[./calificaciones.org][consultar los comentarios y calificaciones del proyecto aquí]].
+Pueden [[./calificaciones.org][consultar los comentarios y calificaciones del proyecto aquí]].
 
 Todos los sistemas operativos de uso general al día de hoy utilizan un
 modelo de memoria basado en la /paginación/, y /casi/ siempre (si le
