@@ -1,5 +1,6 @@
 import mmap
 import os
+import sys
 import os.path, time
 import math
 # La superficie del disco se divide en sectores de 256 bytes.
@@ -84,7 +85,7 @@ class SistArch:
 
     def buscar (self,archivo):
         for x in range(0,64):
-            p = self.bp.tamanio_cluster + i * self.bp.tamanio_entrada
+            p = self.bp.tamanio_cluster + x * self.bp.tamanio_entrada
             j = Entrada(self.fs_map[p:p + self.bp.tamanio_entrada])
             if archivo == j.nombreF:
                 j.numdir = x
@@ -95,7 +96,7 @@ class SistArch:
         for x in range(0,64):
             p = self.bp.tamanio_cluster + x*self.bp.tamanio_entrada
             i = Entrada(self.fs_map[p:p + self.bp.tamanio_entrada])
-            if self.entrada_no_usada == i.fname:
+            if self.entrada_no_usada == i.nombreF:
                 #espacios = i.nombre_f - len(archivo)
                 #El rjust()método alineará a la derecha la cadena, utilizando un carácter especificado 
                 #(el espacio es el predeterminado) como el carácter de relleno.
@@ -124,17 +125,13 @@ class SistArch:
 
                 break
 
-    def cpint(self,inodo,cluster_destino):
-        p = self.bp.tamanio_cluster * inodo.clusterF
-        buffer = self.fs_map[p:p + inodo.tamanioF]
-        p_dest=self.bp.tamanio_cluster * cluster_destino
-        self.fs_map[p_dest:p_dest + inodo.tamanioF ] = buffer
+
 
     def ls(self):
-        print("{:10}{:10}{:10}{:10}{:10}{:10}{:10}".format("Nombre","Cluster","Tamaño","Mes","Dia","Año","Hora"))
+        print("{:15}{:15}{:10}{:6}{:6}{:6}{:6}".format("Nombre","Cluster","Tamaño","Mes","Dia","Año","Hora"))
         for i in self.inodo():
-            fecha = FormatoFecha(i.modifF)
-            print("{:10}{:10}{:10}{:24}".format(i.nombreF, i.clusterF, i.tamanioF, fecha))
+            fecha = self.FormatoFecha(i.modifF)
+            print("{:15}{:8}{:12}{:24}".format(i.nombreF, i.clusterF, i.tamanioF, fecha))
 
     def FormatoFecha(self,fecha):
         meses={'01':'Ene','02':'Feb','03':'Mar','04':'Abr','05':'May',
@@ -145,10 +142,10 @@ class SistArch:
         hh=fecha[8:10]
         mm=fecha[10:12]
         ss=fecha[12:14]
-        return "{:6}{:6}{:6}{:6}".format(m,d,a,hh+':'+mm+':'+ss)
+        return "{:8}{:5}{:6}{:10}".format("\t"+m,d,a,hh+':'+mm+':'+ss)
 
     def rm(self,archivo):
-        i = self.search(archivo)
+        i = self.buscar(archivo)
         if i is None :
             print("rm: " + archivo + " : Archivo no encontrado ")
         else :
@@ -163,9 +160,8 @@ class SistArch:
             print("cpout: " + archivo + " : Archivo no encontrado ")
         else :
             p = self.bp.tamanio_cluster + self.bp.tamanio_entrada * i.numdir
-            # VERIFICAR QUE EXISTA EL ARCHIVO
             archivocp = open(archivo,"a+b")
-            cluster = self.sb.tamanio_cluster * i.clusterF
+            cluster = self.bp.tamanio_cluster * i.clusterF
             archivocp.write(self.fs_map[cluster:cluster + i.tamanioF])
             archivocp.close()
 
@@ -181,6 +177,63 @@ class SistArch:
         else:
             print("cpin: " + archivo + " Archivo no encontrado")
 
+    def Copiar(self, archivo):
+        inodos = self.inodo()
+        inodos.sort(key = lambda x : x.clusterF)
+        tam_archivo = os.stat(archivo).st_size
+        #El método de número de Python ceil () devuelve el valor máximo de x :
+        #  el entero más pequeño, no menor que x.
+        cluster_archivo = math.ceil(tam_archivo/self.bp.tamanio_cluster)
 
+        #si no hay archivos el primero lo meteremos en el cluster 5 
+        if len(inodos) == 0:
+            #los clusters que ocupa el archivo debe ser menor al espacio disponible
+            if  cluster_archivo <= (self.bp.total_clusters - 4):
+                f = open(archivo,"rb")
+                #lo meteremos en el cluster 5
+                destino = self.bp.tamanio_cluster * 5
+                self.fs_map[destino: destino + tam_archivo] = f.read()
+                self.registrar(archivo,5)
+                f.close()
+            else:
+                print(archivo + " demasiado grande")
+        else:
+            copiado = False
+            for j in range(0,len(inodos)-1):
+                #                 cluster           +           (tamaño del archivo / 1024)
+                ultimo_cluster = inodos[j].clusterF + math.ceil( inodos[j].tamanioF / self.bp.tamanio_cluster)
+                espacio_entre_sig_archivo = inodos[j+1].clusterF - ultimo_cluster
+
+                if cluster_archivo <= espacio_entre_sig_archivo:
+                    f = open(archivo, "rb")
+                    p = int(self.bp.tamanio_cluster * (cluster_archivo + 1))
+                    self.fs_map[p : p + tam_archivo ] = f.read()
+                    self.registrar(archivo,cluster_archivo + 1)
+                    f.close()
+                    copiado = True
+                    break
+            # si no hubo espacio entre archivos lo intentaremos copiar al final
+            if copiado == False:
+                #            cluster del ultimo archivo
+                ultimo = inodos[len(inodos) - 1].clusterF + math.ceil(inodos[len(inodos) - 1].tamanioF / self.bp.tamanio_cluster )
+                espacio_restante = self.bp.total_clusters - ultimo
+                if cluster_archivo <= espacio_restante:
+                    f = open(archivo,"rb")
+                    p = self.bp.total_clusters * (ultimo + 1)
+                    self.fs_map[p : p + tam_archivo] = f.read()
+                    self.registrar(archivo, ultimo + 1)
+                    f.close()
+                    copiado = True
+                else:
+                    print(archivo + "Archivo demasido grande")
+
+    #def defrag(self):
 
             
+
+
+
+
+
+
+
