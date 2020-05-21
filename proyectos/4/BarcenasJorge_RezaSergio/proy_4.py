@@ -1,6 +1,7 @@
 import mmap
 import os
 import os.path, time
+import math
 # La superficie del disco se divide en sectores de 256 bytes.
 # Cada cluster mide cuatro sectores.
 #
@@ -145,3 +146,41 @@ class SistArch:
         mm=fecha[10:12]
         ss=fecha[12:14]
         return "{:6}{:6}{:6}{:6}".format(m,d,a,hh+':'+mm+':'+ss)
+
+    def rm(self,archivo):
+        i = self.search(archivo)
+        if i is None :
+            print("rm: " + archivo + " : Archivo no encontrado ")
+        else :
+            p = self.bp.tamanio_cluster + self.bp.tamanio_entrada *i.numdir
+            self.fs_map[p:p + i.nombre_f] = bytes(self.entrada_no_usada,'utf-8')
+    
+    def cpout(self,archivo,dir):
+        #Primero buscar si el archivo existe,
+        #si existe, lo copiamos al directorio especificado
+        i = self.buscar(archivo)
+        if i is None :
+            print("cpout: " + archivo + " : Archivo no encontrado ")
+        else :
+            p = self.bp.tamanio_cluster + self.bp.tamanio_entrada * i.numdir
+            # VERIFICAR QUE EXISTA EL ARCHIVO
+            archivocp = open(archivo,"a+b")
+            cluster = self.sb.tamanio_cluster * i.clusterF
+            archivocp.write(self.fs_map[cluster:cluster + i.tamanioF])
+            archivocp.close()
+
+    def cpin(self, archivo):
+        if os.path.isfile(archivo):
+            if len(archivo) < 15:
+                if self.buscar(archivo) != None:
+                    print("se encontro un archivo con el mismo nombre, por favor repita la operacíon con un nombre diferente") 
+                else:
+                    self.Copiar(archivo)
+            else:
+                print("cpin: " + archivo + ": nombre de archivo demasiado grande, por favor repita la operación con un nombre más corto")
+        else:
+            print("cpin: " + archivo + " Archivo no encontrado")
+
+
+
+            
