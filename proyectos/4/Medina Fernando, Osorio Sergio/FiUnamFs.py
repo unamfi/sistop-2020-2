@@ -1,6 +1,7 @@
 import os
 import time
-import tkinter as tk 
+import tkinter as tk
+from tkinter import ttk 
 carp='/fiunamfs'
 
 def inicio():
@@ -17,8 +18,24 @@ def inicio():
     os.system('df -hT')
     
 """FUNCIONALIDADES """
+def nuevo(nombre,ext):
+    os.system('touch '+nombre+ext)
+
+def cierra():
+    
+    
 def n():
-    gui()
+    nuevo = tk.Toplevel() 
+    nuevo.title('Crear nuevo archivo')
+    ins=tk.Label(text='Por favor ingrese el nombre del archivo y seleccione la extensión deseada')
+    ins.grid(column=0,row=0)
+    nombre=tk.Entry(nuevo)
+    nombre.grid(column=0,row=1)
+    ext=ttk.Combobox(nuevo, width=27,textvariable='Elija uno')
+    ext['values']=('.com','.html','.docx','.pptx','.jpg','.png','.exe','.svg','.ico')
+    ext.grid(column=2,row=1)
+    boton=(nuevo,text='Aceptar',command=nuevo(nombre.get(),ext.current()))
+    nuevo.mainloop() 
 
 def o():
     pass
@@ -26,12 +43,17 @@ def o():
 def rm():
     pass
 
+
+
 '''Crearemos la interfaz grafica con tkinter'''
-def gui():
-    os.system('cd /mnt/fiunamfs')
+def gui():    
     vent_princip=tk.Tk()
+#    imgicon = tk.PhotoImage(file=os.path.join('favicon.ico'))
+#    vent_princip.tk.call('wm', 'iconbitmap', vent_princip._w, imgicon)  
+#    vent_princip.iconbitmap(os.path.join('favicon.ico'))
     vent_princip.geometry('500x500')
     vent_princip.title('Sistema de Archivos Fi-UNAM')    
+    os.system('cd /mnt/fiunamfs')
     menu = tk.Menu(vent_princip)
     vent_princip.config(menu=menu)
     filemenu = tk.Menu(menu) 
