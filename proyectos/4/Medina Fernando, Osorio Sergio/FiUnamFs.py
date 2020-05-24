@@ -11,10 +11,12 @@ def inicio():
     os.system('sudo mkfs -t ext4 ./fiunamfs.img')
     #creamos la carpeta en la que se montara el disco
     os.system('sudo mkdir /mnt'+carp)
-    print('Carpeta para montar creada')
+    os.system('clear')
+    os.system('cowsay Carpeta para montar creada')
     #Montado del disco en la carpeta creada
     os.system('sudo mount -r -t auto -o loop ./fiunamfs.img /mnt'+carp)
-    print('Disco montado en /mnt'+carp)
+    os.system('clear')
+    os.system('cowsay Disco montado en /mnt'+carp)
     #Comprobacion del montado del disco
     os.system('df -hT')
     
