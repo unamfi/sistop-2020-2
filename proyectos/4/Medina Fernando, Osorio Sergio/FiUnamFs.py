@@ -38,7 +38,7 @@ def nuevac(nombre):
 	:param nombre: El nombre que se le dará a la nueva carpeta. type: String
 	'''
 	try:
-		os.mkdir('mnt/'+carp+nombre)
+		os.mkdir('/mnt/'+carp+nombre)
 	except OSError:
             	tk.messagebox.showinfo(title='Archivo creado',message='Fallo al intentar crear carpeta nueva, es posible que ya exista una con el mismo nombre.')
 
@@ -59,7 +59,7 @@ def nc():
     nombre=tk.Entry(nuevo)
     nombre.grid(column=0,row=1)
     boton2=tk.Button(nuevo,text='Aceptar',command=nuevac(nombre.get()))
-    boton2.pack()
+    boton2.grid(column=0,row=3)
     nuevo.mainloop()
     '''
     Con la función nc se pretende desplegar una pantalla en la cual ingresaremos el nombre de la carpeta que será creada a través de la función nuevac.	
