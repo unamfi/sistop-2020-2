@@ -110,27 +110,27 @@ class SistArch:
                 #El rjust()método alineará a la derecha la cadena, utilizando un carácter especificado 
                 #(el espacio es el predeterminado) como el carácter de relleno.
                 # len(archivo)+espacios  => i.nombre_f                                                                         
-                self.fs_map[p:p + i.nombre_f] = bytes(archivo.rjust(i.nombre_f),'utf-8')
+                self.fs_map[p:p + i.nombre_f] = archivo.rjust(i.nombre_f).encode('utf-8')
 
                 #st_size : representa el tamaño del archivo en bytes.
                 archivo_tamanio = str(os.stat(archivo).st_size)
                 #tam = i.tamanio_f - len(archivo_tamanio)
                 nuevo_p = p + i.nombre_f + 1
                 #Rellene la cadena con ceros hasta que tenga i.tamanio_f caracteres de longitud:
-                self.fs_map[nuevo_p :nuevo_p + i.tamanio_f] = bytes(archivo_tamanio.zfill(i.tamanio_f),'utf-8')
+                self.fs_map[nuevo_p :nuevo_p + i.tamanio_f] = archivo_tamanio.zfill(i.tamanio_f).encode('utf-8')
 
                 cluster_archivo = str(cluster)
                 #cluster_z = i.cluster_f - len(cluster_archivo)
                 nuevo_p += i.tamanio_f + 1
-                self.fs_map[nuevo_p:nuevo_p + i.cluster_f] = bytes(cluster_archivo.zfill(i.cluster_f),'utf-8')
+                self.fs_map[nuevo_p:nuevo_p + i.cluster_f] = cluster_archivo.zfill(i.cluster_f).encode('utf-8')
 
                 fecha_creacion= time.strftime('%Y%m%d%H%M%S', time.gmtime(os.path.getctime(archivo)))
                 nuevo_p += i.cluster_f + 1
-                self.fs_map[nuevo_p:nuevo_p + i.creacion_f] = bytes(fecha_creacion,'utf-8')
+                self.fs_map[nuevo_p:nuevo_p + i.creacion_f] = fecha_creacion.encode('utf-8')
 
                 fecha_modif=time.strftime('%Y%m%d%H%M%S', time.gmtime(os.path.getmtime(archivo)))
                 nuevo_p += i.creacion_f + 1
-                self.fs_map[nuevo_p:nuevo_p + i.modif_f] = bytes(fecha_modif,'utf-8')
+                self.fs_map[nuevo_p:nuevo_p + i.modif_f] = fecha_modif.encode('utf-8')
 
                 break
 
@@ -256,7 +256,7 @@ class SistArch:
     	print("Defrag Complete")
     #Método de prueba para checar si se realizó la desfragmentación
     def printall (self):
-        print("entrada + archivo + cluster + fecha_creación   \t\t + fecha_modificación")
+        print("entrada + archivo + cluster + fecha_modificación   \t\t + fecha_creación")
         for i in range (0,64):
             p = self.bp.tamanio_cluster + i * self.bp.tamanio_entrada
             j = Entrada(self.fs_map[p:p + self.bp.tamanio_entrada])
