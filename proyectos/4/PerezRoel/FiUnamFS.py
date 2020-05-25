@@ -160,7 +160,7 @@ def importar(cmd, fs):
 	fs.write(f.read())
 	f.close()
 
-	print('Se ha importado el archivo al FiUnamFS.')
+	print('Se ha importado \'' + cmd[1] + '\' al FiUnamFS.')
 
 
 def generarEntrada(pathname):
@@ -288,13 +288,31 @@ def stringMenosEspacios(str):
 	return retString
 
 
-def eliminar(cmd):
-	print('elimino')
+def eliminar(cmd, fs, directorio):
+	if(len(cmd) != 2):
+		print('Número inválido de argumentos.')
+		return -1
+
+	global fsTamanioCluster, bitmap
+
+	archivoIndex = buscarArchivo(cmd[1],directorio)
+
+	clusterInicial = directorio[archivoIndex].clusterInicial
+	numClusters = tamanioEnClusters(directorio[archivoIndex].tamanio)
+	for i in range(clusterInicial, clusterInicial+numClusters):
+		bitmap[i] = False
+
+	fs.seek(1*fsTamanioCluster + 64*archivoIndex)
+	fs.write(b'Xx.xXx.xXx.xXx.')
 
 
 def desfragmentar(cmd):
 	print('desfragmento')
 
+
+
+
+#Inicio del programa
 
 if (len(argv) < 2):
 	print("Ingresa como argumento el nombre o la ruta al sistema de archivos. Ejemplo:")
@@ -363,7 +381,8 @@ while( inp != 's' ):
 		directorio = obtenerDirectorio(cmd,fs)
 		exportar(cmd,fs,directorio)
 	elif(cmd[0] == 'del'):
-		eliminar(cmd)
+		directorio = obtenerDirectorio(cmd,fs)
+		eliminar(cmd,fs,directorio)
 	elif(cmd[0] == 'df'):
 		desfragmentar(cmd)
 	elif(cmd[0] == 's'):
