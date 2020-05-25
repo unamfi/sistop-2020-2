@@ -84,7 +84,7 @@ class SistArch:
             # con entradas de 64 
             #64 * 64 = 4096
             #64 * 63 = 4032 (63 porque sera el ultimo lugar donde podra entra una entrada)
-            #       1024                + ( [0,63] * 64 )  
+            # 1024 + ( [0,63] * 64 )  
             p = self.bp.tamanio_cluster + i * self.bp.tamanio_entrada
             j = Entrada(self.fs_map[p:p + self.bp.tamanio_entrada])
             if self.entrada_no_usada != j.nombreF:
@@ -137,27 +137,17 @@ class SistArch:
 
     #Método de obtención de información
     def ls(self):
-        print("{:15}{:15}{:10}{:6}{:6}{:6}{:6}".format("Nombre","Cluster","Tamaño","Mes","Dia","Año","Hora"))
+        print("{:15}{:15}{:10}{:32}{:30}".format("Nombre","Cluster","Tamaño","Fecha y hora de Creacion","Fecha y hora de Modificación"))
         for i in self.inodo():
         	fecha_c= self.FormatoFecha(i.creacionF)
         	fecha_m = self.FormatoFecha(i.modifF)
         	print("{:15}{:8}{:12}{:24}{:24}".format(i.nombreF, i.clusterF, i.tamanioF, fecha_c,fecha_m))
-    #Método para la impresión de la fecha
-    def FormatoFecha(self,fecha):
-        meses={'01':'Ene','02':'Feb','03':'Mar','04':'Abr','05':'May',
-            '06':'Jun','07':'Jul','08':'Ago','09':'Sept','10':'Oct','11':'Nov','12':'Dis'}
-        a=fecha[0:4]
-        m=meses.get(fecha[4:6])
-        d=fecha[6:8]
-        hh=fecha[8:10]
-        mm=fecha[10:12]
-        ss=fecha[12:14]
-        return "{:8}{:5}{:6}{:10}".format("\t"+m,d,a,hh+':'+mm+':'+ss)
+    
    	#Método para eliminación de información
     def rm(self,archivo):
         i = self.buscar(archivo)
         if i is None :
-            print("rm: " + archivo + " : Archivo no encontrado ")
+            print(archivo + " : Archivo no encontrado ")
         else :
             p = self.bp.tamanio_cluster + self.bp.tamanio_entrada *i.numdir
             self.fs_map[p:p + i.nombre_f] = bytes(self.entrada_no_usada,'utf-8')
@@ -167,18 +157,21 @@ class SistArch:
             self.fs_map[p+46:p+60]=bytes("".zfill(14),'utf-8')
 
     #Método para copiar en nuestro sistema
-    def cpout(self,archivo):
+    def cpout(self,archivo,dir):
         #Primero buscar si el archivo existe,
         #si existe, lo copiamos al directorio especificado
         i = self.buscar(archivo)
-        if i is None :
-            print("cpout: " + archivo + " : Archivo no encontrado ")
-        else :
-            p = self.bp.tamanio_cluster + self.bp.tamanio_entrada * i.numdir
-            archivocp = open(archivo,"a+b")
-            cluster = self.bp.tamanio_cluster * i.clusterF
-            archivocp.write(self.fs_map[cluster:cluster + i.tamanioF])
-            archivocp.close()
+        if i is not None :
+            if os.path.exists(dir):
+                p = self.bp.tamanio_cluster + self.bp.tamanio_entrada * i.numdir
+                archivocp = open(dir+"/"+archivo,"a+b")
+                cluster = self.bp.tamanio_cluster * i.clusterF
+                archivocp.write(self.fs_map[cluster:cluster + i.tamanioF])
+                archivocp.close()
+            else:
+                print("Dirección " + dir+" no encontrada")
+        else:
+            print(i.nombreF + " : Archivo no encontrado ")
     #Método para comprobar si es posible copiar al sistema FiUnamFS
     def cpin(self, archivo):
         if os.path.isfile(archivo):
@@ -188,9 +181,9 @@ class SistArch:
                 else:
                     self.Copiar(archivo)
             else:
-                print("cpin: " + archivo + ": nombre de archivo demasiado grande, por favor repita la operación con un nombre más corto")
+                print(archivo + ": nombre de archivo demasiado grande, por favor repita la operación con un nombre más corto")
         else:
-            print("cpin: " + archivo + " Archivo no encontrado")
+            print(archivo + " Archivo no encontrado")
 
     #Metodo de copiado de archivos hacia el sistema FiUnamFS
     def Copiar(self, archivo):
@@ -263,31 +256,67 @@ class SistArch:
     	print("Defrag Complete")
     #Método de prueba para checar si se realizó la desfragmentación
     def printall (self):
-    	for i in range (0,64):
-    		p = self.bp.tamanio_cluster + i * self.bp.tamanio_entrada
-    		j = Entrada(self.fs_map[p:p + self.bp.tamanio_entrada])
-    		print("{} + {} + {} + {} + {} + {}".format(i,j.nombreF,j.clusterF,j.creacionF,j.modifF,j.numdir))
+        print("entrada + archivo + cluster + fecha_creación   \t\t + fecha_modificación")
+        for i in range (0,64):
+            p = self.bp.tamanio_cluster + i * self.bp.tamanio_entrada
+            j = Entrada(self.fs_map[p:p + self.bp.tamanio_entrada])
+            if j.nombreF == self.entrada_no_usada:
+                print("{:2} + {:15} + {:4} + {:30} + {:20}".format(i,j.nombreF,j.clusterF,j.creacionF,j.modifF))
+            else:
+                print("{:2} + {:15} + {:4} + {:29} + {:20}".format(i,j.nombreF,j.clusterF,self.FormatoFecha(j.creacionF),self.FormatoFecha(j.modifF)))
+    #Método para la impresión de la fecha
+    def FormatoFecha(self,fecha):
+        meses={'01':'Ene','02':'Feb','03':'Mar','04':'Abr','05':'May',
+            '06':'Jun','07':'Jul','08':'Ago','09':'Sept','10':'Oct','11':'Nov','12':'Dis'}
+        a=fecha[0:4]
+        m=meses.get(fecha[4:6])
+        d=fecha[6:8]
+        hh=fecha[8:10]
+        mm=fecha[10:12]
+        ss=fecha[12:14]
+        return "{:8}{:5}{:6}{:10}".format("\t"+m,d,a,hh+':'+mm+':'+ss)
+    def message(self):        
+        print("ls                   ->        Mostrar directorio")
+        print("printall             ->        Mostrar los 64 espacios para entradas")
+        print("rm    [FILE]         ->        Eliminar Archivo")
+        print("cpout [FILE] \"DIR\"   ->        Copiar archivo a nuestro sistema")
+        print("cpin  [FILE]         ->        Copiar archivo al sistema")
+        print("defrag               ->        Desfragmentación")    
 
 def main():
-	sistema = SistArch()
-	sistema.printall()
-	sistema.defrag()
-	sistema.printall()
-	sistema.rm("logo.png")
-	sistema.defrag()
-	sistema.printall()
-
+    sistema = SistArch()
+    if(len(sys.argv)==2):
+        if(sys.argv[1]=='ls'):
+            sistema.ls()
+        elif(sys.argv[1]=='printall'):
+            sistema.printall()
+        elif(sys.argv[1]=='printall'):
+            sistema.printall()
+        elif(sys.argv[1]=='defrag'):
+            sistema.defrag()
+        elif(sys.argv[1]=='-help'):
+            sistema.message()
+        else:
+            print("Comando no encontrado. Escriba -help para revisar lista de comandos")
+    elif(len(sys.argv)==3):
+        if(sys.argv[1]=='cpin'):
+            sistema.cpin(sys.argv[2])
+        elif(sys.argv[1]=='rm'):
+            sistema.rm(sys.argv[2])
+        else:
+            print("Comando no encontrado. Escriba -help para revisar lista de comandos")
+    elif(len(sys.argv)==4):
+        if(sys.argv[1]=='cpout'):
+            sistema.cpout(sys.argv[2],sys.argv[3])
+        else:
+            print("Comando no encontrado. Escriba -help para revisar lista de comandos")
+    else:
+        print("Comando no encontrado. Escriba -help para revisar lista de comandos")
 if __name__ == '__main__':
     main()
 
 
 
-"""
-    def printall (self):
-    	for i in range (0,64):
-    		p = self.bp.tamanio_cluster + i * self.bp.tamanio_entrada
-    		j = Entrada(self.fs_map[p:p + self.bp.tamanio_entrada])
-    		print("{} + {} + {} + {} + {} + {}".format(i,j.nombreF,j.clusterF,j.creacionF,j.modifF,j.numdir))
-"""
+
 
 
