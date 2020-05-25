@@ -3,6 +3,7 @@
 
 from sys import argv
 import os
+import time
 
 class EntradaDir:
 	
@@ -19,7 +20,7 @@ def ayuda():
 	print("\th\t\tMuestra las funcionalidades del programa.")
 	print("\tl\t\tLista el directorio del FiUnamFS.")
 	print("\timp <archivo>\tImporta <archivo> de tu sistema hacia el FiUnamFS.")
-	print("\texp <archivo\tExp>Exporta <archivo> del FiUnamFS hacia tu sistema.")
+	print("\texp <archivo>\tExporta <archivo> del FiUnamFS hacia tu sistema.")
 	print("\tdel <archivo>\tElimina <archivo> del FiUnamFS.")
 	print("\tdf\t\tDesfragmenta FiUnamFS.")
 	print("\ts\t\tSalir.")
@@ -27,7 +28,7 @@ def ayuda():
 
 def obtenerDirectorio(cmd, fs):
 
-	global fsTamanioCluster, fsTamanio
+	global fsTamanioCluster, fsTamanioDir
 
 	numEntradas = int((fsTamanioCluster*fsTamanioDir)/64)
 	
@@ -71,10 +72,10 @@ def obtenerTamanio(tamanio):
 		contUnidad += 1
 		tamanio = tamanio/1024
 
-
 	tamanioTxt = str(round(tamanio,1)) +' '+ unidades[contUnidad]
 
 	return tamanioTxt
+
 
 def obtenerFecha(fecha):
 	yyyy = fecha[0:4]
@@ -90,7 +91,6 @@ def obtenerFecha(fecha):
 
 
 def listarDirectorio(directorio):
-
 	if(len(cmd) > 1):
 		print('Número inválido de argumentos.')
 		return -1
@@ -107,12 +107,16 @@ def listarDirectorio(directorio):
 
 		print(obtenerFecha(ent.modificacion))
 
+		#########################
+		print(ent.clusterInicial)
+		#########################
+
 def generarBitmap(bm, dir):
 
 	for ent in dir:
 		numClusters = tamanioEnClusters(int(ent.tamanio))
 		for i in range(ent.clusterInicial,ent.clusterInicial+numClusters):
-			bm[i] = True 
+			bm[i] = True
 
 
 def tamanioEnClusters(tamanioEnBytes):
@@ -123,20 +127,116 @@ def tamanioEnClusters(tamanioEnBytes):
 	return (tamanioEnBytes+(fsTamanioCluster-1))//fsTamanioCluster
 
 
-def importar(cmd):
-	if(len(cmd) > 2):
+def importar(cmd, fs):
+	if(len(cmd) != 2):
 		print('Número inválido de argumentos.')
 		return -1
 
+	global fsTamanioCluster
+
 	try:
-		tamanioEnBytes = os.path.getsize(cmd[0])
 		f = open(cmd[1], 'rb')
+		entradaDir = generarEntrada(cmd[1])
 	except IOError:
 		print('No pudo abrirse el archivo \'' + cmd[1] + '\'')
 		return -1
 	except FileNotFoundError:
 		print('El archivo \'' + cmd[1] + '\' no se encuentra.')
 		return -1
+
+	entradaIndice = buscarEntradaDirLibre(fs)
+	if (entradaIndice == -1):
+		print("No hay entradas disponibles en el directorio.")
+
+	clusterInicialIndice = buscarBloquesContiguos(tamanioEnClusters(entradaDir.tamanio))
+	if (clusterInicialIndice == -1):
+		print('No hay bloques contiguos en la unidad para almacenar \'' + cmd[1] + '\'')
+
+	entradaDir.clusterInicial = clusterInicialIndice
+
+	escribirEntrada(fs, entradaDir, entradaIndice)
+	
+	fs.seek(fsTamanioCluster*entradaDir.clusterInicial)
+	fs.write(f.read())
+	f.close()
+
+	print('Se ha importado el archivo al FiUnamFS.')
+
+
+def generarEntrada(pathname):
+	entradaDir = EntradaDir()
+	
+	entradaDir.nombre = os.path.basename(pathname)
+	entradaDir.tamanio = os.path.getsize(pathname)
+	entradaDir.creacion = fechaEnFormato(os.path.getctime(pathname))
+	entradaDir.modificacion = fechaEnFormato(os.path.getmtime(pathname))
+	
+	return entradaDir
+
+
+def fechaEnFormato(segsDesdeEpoch):
+	datetime = time.gmtime(segsDesdeEpoch)
+	yyyy = str(datetime.tm_year).rjust(4,'0')
+	mm = str(datetime.tm_mon).rjust(2,'0')
+	dd = str(datetime.tm_mday).rjust(2,'0')
+	hh = str(datetime.tm_hour).rjust(2,'0')
+	mmin = str(datetime.tm_min).rjust(2,'0')
+	ss = str(datetime.tm_sec).rjust(2,'0')
+
+	return yyyy + mm + dd + hh + mmin + ss
+
+
+def buscarBloquesContiguos(numClusters):
+
+	global bitmap 
+
+	cuentaCluster = 0
+	for i in range(len(bitmap)):
+		if(bitmap[i] == False):
+			cuentaCluster += 1
+			if cuentaCluster == numClusters:
+				clusterInicial = i - numClusters + 1
+				for j in range(clusterInicial, clusterInicial+numClusters):
+					bitmap[j] = True
+				return clusterInicial
+		else:
+			cuentaCluster = 0
+
+	return -1 
+
+
+def buscarEntradaDirLibre(fs):
+	global fsTamanioCluster, fsTamanio
+
+	numEntradas = int((fsTamanioCluster*fsTamanioDir)/64)
+	
+	fs.seek(1*fsTamanioCluster)
+
+	for i in range(numEntradas):
+		nombre = fs.read(15).decode('ASCII')
+		
+		if (nombre == 'Xx.xXx.xXx.xXx.'):
+			return i
+
+		fs.read(64-15)
+
+	return -1
+
+
+def escribirEntrada(fs, ent, entIndice):
+	global fsTamanioCluster
+	fs.seek(1*fsTamanioCluster + 64*entIndice)
+
+	fs.write( ent.nombre.rjust(15,' ').encode('ASCII') )
+	fs.write(b'\x00')
+	fs.write( str(ent.tamanio).rjust(8,'0').encode('ASCII') )
+	fs.write(b'\x00')
+	fs.write( str(ent.clusterInicial).rjust(5,'0').encode('ASCII') )
+	fs.write(b'\x00')
+	fs.write( ent.creacion.encode('ASCII') )
+	fs.write(b'\x00')
+	fs.write( ent.modificacion.encode('ASCII') )
+	fs.write(b'\x00')
 
 
 def exportar(cmd, fs, directorio):
@@ -249,13 +349,16 @@ while( inp != 's' ):
 	inp = input('>> ')
 	cmd = inp.split()
 
+	if len(cmd) == 0:
+		continue
+
 	if (cmd[0] == 'h'):
 		ayuda()
 	elif(cmd[0] == 'l'):
 		directorio = obtenerDirectorio(cmd,fs)
 		listarDirectorio(directorio)
 	elif(cmd[0] == 'imp'):
-		importar(cmd)
+		importar(cmd,fs)
 	elif(cmd[0] == 'exp'):
 		directorio = obtenerDirectorio(cmd,fs)
 		exportar(cmd,fs,directorio)
