@@ -44,7 +44,9 @@ pueden realizar todas las tareas que les solicité con éste. Indíquenme
 
 - El sistema de archivos cabe en un /diskette/ tradicional. Claro, no
   espero que tengan acceso al hardware, por lo que lo simularemos
-  representándolo en un archivo de longitud fija, de 1440 Kilobytes
+  representándolo en un archivo de longitud fija, de 14400 Kilobytes
+  (les había dicho /1440/, pero me sobró un cero en mi programa de
+  creación)
 - Por simplicidad, si bien en un sistema de archivos real
   representaríamos las magnitudes en su representación binaria, vamos
   a hacerlo con cadenas (esto es, en vez de representar al número
