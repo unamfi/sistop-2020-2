@@ -137,7 +137,7 @@ class SistArch:
 
     #Método de obtención de información
     def ls(self):
-        print("{:15}{:15}{:10}{:32}{:30}".format("Nombre","Cluster","Tamaño","Fecha y hora de Creacion","Fecha y hora de Modificación"))
+        print("{:15}{:15}{:10}{:32}{:30}".format("Nombre","Cluster","Tamaño","Fecha y hora de Modificación","Fecha y hora de creación"))
         for i in self.inodo():
         	fecha_c= self.FormatoFecha(i.creacionF)
         	fecha_m = self.FormatoFecha(i.modifF)
