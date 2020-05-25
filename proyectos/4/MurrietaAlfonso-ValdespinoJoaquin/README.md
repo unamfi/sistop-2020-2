@@ -12,7 +12,8 @@
     3. Copiado de un archivo de la computadora propia hacia FiUnamFS
     4. Eliminado de un archivo de FiUnamFS
     5. Programa para desfragmentar a FiUnamFS  
-        - La defragmentación debe hacerse dentro del sistema de archivos (no creando un sistema de archivos nuevo y copiando hacia éste).
+        - La defragmentación debe hacerse dentro del sistema de archivos 
+          (no creando un sistema de archivos nuevo y copiando hacia éste).
 
 
  
@@ -22,10 +23,22 @@ Lenguaje de programación:
 - Python en su versión 3.X
 
 Bibliotecas, módulos y dependencias:
-- Qt 5 
+- qt 5 
 - os
 
+## Compilación y Ejecución
+
+Para poder compilar el proyecto es necesario tener cualquier versión de python 3, 
+y los respectivos módulos necesarios, como son el caso de os  y Qt5.
+
+  - Para instalar/descargar qt5 se puede utilizar el siguiente comando en linux: 
+    ``` apt install qttools5-dev-tools``` 
+    también puede usarse 
+        ``` apt install python3-pyqt5 ```
+
+
 Ejecución del programa:
+
 - Entra a la carpeta correspondiente y ejecutar en terminal la siguiente instrucción:
     ``` python3 main.py ``` 
 
