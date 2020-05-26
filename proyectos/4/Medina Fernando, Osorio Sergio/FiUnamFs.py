@@ -82,8 +82,10 @@ def na():
     nueva.mainloop()
 
 
-def o():
-    pass
+def desfragmentar():
+    fs.defrag()
+    tk.messagebox.showinfo(title='Desfragmentado exitoso',message='EL volumen ha sido desfragmentado exitosamente')
+
 
 def rm():
     eliminar = tk.Toplevel()
@@ -103,13 +105,14 @@ def rm():
 
 def copyin():
     nuevo=tk.Toplevel()
-    nuevo.title("Copiar archivo en el sistema local")
+    nuevo.title("Copiar archivo en el sistema")
     file_c = filedialog.askopenfilename()
-    fs.cpin(file_c)
+    fs.cpin(str(file_c))
+    tk.messagebox.showinfo(title='Archivo copiado',message='El archvo '+file_c+' ha sido copiado en el sistema de archivos')
     
 def copyout():
     nuevo=tk.Toplevel()
-    nuevo.title("Copiar archivo hacia el sistema")
+    nuevo.title("Copiar archivo hacia el sistema local")
     ins=tk.Label(nuevo,text='Por favor ingrese el nombre del archivo que desea copiar a su sistema local de archivos (incluyendo su extensión).').grid(column=0,row=0)
     nombre=tk.Entry(nuevo)
     nombre.grid(column=0,row=1)
@@ -118,8 +121,7 @@ def copyout():
             tk.messagebox.showinfo(title='Archivo no copiado',message='Por favor indique el nombre y extensión de archivo que desea copiar.')
         else:
             file_co = filedialog.askdirectory()
-            fs.cpout(str(nombre.get()),file_co)
-            tk.messagebox.showinfo(title='Archivo copiado',message='El archvo '+str(nombre.get())+' ha sido copiado en su sistema local de archivos')
+            tk.messagebox.showinfo(title='Archivo copiado',message=fs.cpout(str(nombre.get()),file_co))
             
 
     tk.Button(nuevo,text='Aceptar',command=elimina).grid(column=0,row=2)
@@ -145,14 +147,15 @@ def gui():
     filemenu.add_command(label='Copiar desde el sistema',command=copyout)
     filemenu.add_command(label='Copiar hacia el sistema',command=copyin)
     filemenu.add_command(label='Eliminar',command=rm)
-    filemenu.add_command(label='Desfragmentar')
+    filemenu.add_command(label='Desfragmentar',command=desfragmentar)
     filemenu.add_command(label='Abrir .img',command=oF)
     filemenu.add_command(label='Eliminar Archivo',command=rm)
     filemenu.add_separator() 
     filemenu.add_command(label='Salir', command=vent_princip.quit) 
     helpmenu = tk.Menu() 
     menu.add_cascade(label='Ayuda', menu=helpmenu) 
-    helpmenu.add_command(label='Acerca de ') 
+    helpmenu.add_command(label='Acerca de ')
+    menu.add_command(label='Actualizar',command=gui)
     #  
     label1=tk.Label(vent_princip,text='Listado de archivos')
     label1.grid(column=0,row=1)
