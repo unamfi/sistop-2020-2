@@ -5,6 +5,7 @@ import time
 import tkinter as tk
 from tkinter import ttk 
 from tkinter import messagebox
+from tkinter import filedialog
 from fifs import FIFS
 import sys
 fs = FIFS()
@@ -17,13 +18,9 @@ def oF():
     nuevo=tk.Toplevel()
     nuevo.title("Abrir imagen")
     file_img = filedialog.askopenfilename()
-    FS = FileSystem(file_img)
+    
     
 def cierra():
-	
-	'''
-	Con la función cierra, cerraremos por completo el programa, corriendo la secuencia fin(), no será necesario incluir parámetro alguno
-        '''
 	fin()
 	pass
 
@@ -59,9 +56,7 @@ def nc():
     Con la función nc se pretende desplegar una pantalla en la cual ingresaremos el nombre de la carpeta que será creada a través de la función nuevac.	
     '''
 
-
 def na():
-    '''Con la función n crearemos un nuevo archivo con la '''
     nueva = tk.Toplevel()
     nueva.title('Crear nuevo archivo')
     ins=tk.Label(nueva,text='Por favor ingrese el nombre del archivo y seleccione la extensión deseada').grid(column=0,row=0)
@@ -73,9 +68,9 @@ def na():
     print('creación de archivo')
     def nuevoa():
         '''
-        Con la función nuevoa se pretende crear el archivo con la extensión deseada por el usuario, ya sea que el la ingrese manualmente o utilizando el combobox proporcionado con las opciones más comunes, el nombre estará dado por el parámetro nombre y la extensión por el parametro ext
-        :param nombre: Nombre del archivo que vamos a crear. type: String
-        :param ext: Nombre de la extensión que tendrá el archivo, puede ser nulo. type: String
+        #Con la función nuevoa se pretende crear el archivo con la extensión deseada por el usuario, ya sea que el la ingrese manualmente o utilizando el combobox proporcionado con las opciones más comunes, el nombre estará dado por el parámetro nombre y la extensión por el parametro ext
+        #:param nombre: Nombre del archivo que vamos a crear. type: String
+        #:param ext: Nombre de la extensión que tendrá el archivo, puede ser nulo. type: String
         '''
         if(ext==''or ext==None or ext==-1):
                 open('/mnt'+carp+str(nombre.get()),'w')
@@ -86,30 +81,37 @@ def na():
     tk.Button(nueva,text='Aceptar',command=nuevoa).grid(column=0,row=2)
     nueva.mainloop()
 
+
 def o():
     pass
 
 def rm():
     eliminar = tk.Toplevel()
-    eliminar.title('Crear nuevo archivo')
-    ins=tk.Label(eliminar,text='Por favor ingrese el nombre del archivo y seleccione la extensión deseada').grid(column=0,row=0)
+    eliminar.title('ELiminar archivo')
+    ins=tk.Label(eliminar,text='Por favor ingrese el nombre del archivo que desea eliminar (incluyendo su extensión).').grid(column=0,row=0)
     nombre=tk.Entry(eliminar)
     nombre.grid(column=0,row=1)
-    ext=ttk.Combobox(eliminar, width=27,text='Elija uno')
-    ext['values']=('com','html','docx','pptx','jpg','png','exe','svg','ico')
-    ext.grid(column=2,row=1)
-    print('creación de archivo')
     def elimina():
-        fs.rm(str(nombre.get()))
-        tk.messagebox.showinfo(title='Archivo eliminado',message='El archvo '+str(nombre.get())+' ha sido eliminado')
+        if (str(nombre.get())==''):
+            tk.messagebox.showinfo(title='Archivo no eliminado',message='Por favor indique el nombre y extensión de archivo que desea eliminar.')
+        else:
+            fs.rm(str(nombre.get()))
+            tk.messagebox.showinfo(title='Archivo eliminado',message='El archvo '+str(nombre.get())+' ha sido eliminado')
 
-    tk.Button(eliminar,text='Aceptar',command=nuevoa).grid(column=0,row=2)
+    tk.Button(eliminar,text='Aceptar',command=elimina).grid(column=0,row=2)
     eliminar.mainloop()
 
-
-    pass
-
-
+def copyin():
+    nuevo=tk.Toplevel()
+    nuevo.title("Copiar archivo en el sistema")
+    file_c = filedialog.askopenfilename()
+    fs.cpin(file_c)
+    
+def copyout():
+    nuevo=tk.Toplevel()
+    nuevo.title("Copiar archivo hacia el sistema")
+    file_co = filedialog.askopenfilename()
+    fs.cpout(file_co)
 
 '''Crearemos la interfaz grafica con tkinter'''
 def gui():    
@@ -117,7 +119,7 @@ def gui():
 #    imgicon = tk.PhotoImage(file=os.path.join('favicon.ico'))
 #    vent_princip.tk.call('wm', 'iconbitmap', vent_princip._w, imgicon)  
 #    vent_princip.iconbitmap(os.path.join('favicon.ico'))
-    vent_princip.geometry('350x350')
+    vent_princip.geometry('400x400')
     vent_princip.title('Sistema de Archivos Fi-UNAM')   
     menu = tk.Menu(vent_princip)
     vent_princip.config(menu=menu)
@@ -126,8 +128,10 @@ def gui():
     nuevo_menu.add_command(label='Archivo',command=na)
     nuevo_menu.add_command(label='Carpeta',command=nc)
     menu.add_cascade(label='Archivo', menu=filemenu)
-    filemenu.add_cascade(label='Nuevo',menu=nuevo_menu)
-    filemenu.add_command(label='Abrir',command=o)
+    #filemenu.add_cascade(label='Nuevo',menu=nuevo_menu)
+#    filemenu.add_command(label='Abrir',command=o)
+    filemenu.add_command(label='Copiar desde el sistema',command=copyout)
+    filemenu.add_command(label='Copiar hacia el sistema',command=copyin)
     filemenu.add_command(label='Eliminar',command=rm)
     filemenu.add_command(label='Desfragmentar')
     filemenu.add_command(label='Abrir .img',command=oF)
@@ -143,7 +147,7 @@ def gui():
     #
     lista=fs.ls()
     arch=tk.Listbox(vent_princip,height=50,width=50)
-    desc=tk.Label(vent_princip,text='nombre    inicio    fin   mes   día    año    hora:min:seg').grid(column=0,row=2)
+    desc=tk.Label(vent_princip,text='nombre  |  inicio  |  fin  | mes  | día  |  año  |  hora:min:seg').grid(column=0,row=2)
 
     for i in lista:
         arch.insert(tk.END, i)

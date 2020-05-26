@@ -207,13 +207,13 @@ class FIFS:
         if os.path.isfile(fe):
             if len(fe)<15:
                 if self.search(fe)!=None:
-                    print('Ya existe un archivo con el mismo nombre, renombrar')
+                    return('Ya existe un archivo con el mismo nombre, renombrar')
                 else:
                    self.cp(fe)
             else:
-                print("cpin: " + fe + ": file name too large")
+                return("cpin: " + fe + ": Nombre del archivo muy extenso")
         else:
-            print("cpin: " + fe + ": file not found")
+            return("cpin: " + fe + ": archivo no encontrado")
 
     def defrag(self):
         inodes=self.inodes()
