@@ -39,7 +39,7 @@ y los respectivos módulos necesarios, como son el caso de os  y Qt5.
 
 Ejecución del programa:
 
-- Entra a la carpeta correspondiente y ejecutar en terminal la siguiente instrucción:
-    ``` python3 main.py ``` 
+- Entra a la carpeta 'proyecto4' y ejecutar en terminal la siguiente instrucción (Compilar MyApp.py que es el main de todo el código):
+    ``` python3 MyApp.py ``` 
 
 
