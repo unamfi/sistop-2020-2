@@ -11,13 +11,13 @@ package sistemasOperativos.back;
  */
 public class Archivo {
     private String name;
-    private int size;
-    private int initClus;
-    private int creationDate;
-    private int modificationDate;
-    private int bytesNotUsed;
+    private String size;
+    private String initClus;
+    private String creationDate;
+    private String modificationDate;
+    private String bytesNotUsed;
 
-    public Archivo(String name, int size, int initClus, int creationDate, int modificationDate, int bytesNotUsed) {
+    public Archivo(String name, String size, String initClus, String creationDate, String modificationDate, String bytesNotUsed) {
         this.name = name;
         this.size = size;
         this.initClus = initClus;
@@ -26,35 +26,97 @@ public class Archivo {
         this.bytesNotUsed = bytesNotUsed;
     }
     
+    public Archivo(){
+        this.name="Xx.xXx.xXx.xXx.";
+        this.size="00000000";
+        this.initClus="00000";
+        this.creationDate="00000000000000";
+        this.modificationDate="00000000000000";
+        byte empty=(byte)0;
+        this.bytesNotUsed=""+(char)empty+(char)empty+(char)empty;
+    }
+
     public void setInitClus(int initClus){
-        this.initClus=initClus;
+        String clusterInicial=Integer.toString(initClus);
+        while(clusterInicial.length()<5){
+            clusterInicial="0"+clusterInicial;
+        }
+        this.initClus=clusterInicial;
     }
     
     public String getName() {
-        return name;
+        String nombre="";
+        char s[]=name.toCharArray();
+        boolean bandera=false;
+        for(char c:s){
+            if(c!=' '){
+                nombre=nombre+c;
+                bandera=true;
+            }else if(bandera==true){
+                nombre=nombre+' ';
+            }
+        }
+        return nombre;
     }
 
-    public int getSize() {
+    public String getSize() {
         return size;
     }
 
-    public int getInitClus() {
+    public String getInitClus() {
         return initClus;
     }
 
-    public int getCreationDate() {
+    public String getCreationDate() {
         return creationDate;
     }
 
-    public int getModificationDate() {
+    public String getModificationDate() {
         return modificationDate;
     }
 
-    public int getBytesNotUsed() {
+    public String getBytesNotUsed() {
         return bytesNotUsed;
     }
     
+    public byte[] getByteMap(){
+        byte byteMap[]=new byte[Directorio.tamEntrada];
+        char aux[]=this.name.toCharArray();
+        for(int i=0;i<15;i++){
+            byteMap[i]=(byte)aux[i];
+        }
+        
+        aux=this.size.toCharArray();
+        for (int i=16;i<24;i++){
+            byteMap[i]=(byte)aux[i-16];
+        }
+        
+        aux=this.initClus.toCharArray();
+        for (int i=25;i<30;i++){
+            byteMap[i]=(byte)aux[i-25];
+        }
+        
+        aux=this.creationDate.toCharArray();
+        for (int i=31;i<45;i++){
+            byteMap[i]=(byte)aux[i-31];
+        }
+        
+        aux=this.modificationDate.toCharArray();
+        for (int i=46;i<60;i++){
+            byteMap[i]=(byte)aux[i-46];
+        }
+        
+        aux=this.bytesNotUsed.toCharArray();
+        for (int i=61;i<64;i++){
+            byteMap[i]=(byte)aux[i-61];
+        }
+        
+        return byteMap;
+    }
+    
+    
     public static Archivo getArchivo(byte byteMap[]){
+        Archivo created;
         if(byteMap.length!=Directorio.tamEntrada){
             return null;
         }
@@ -64,13 +126,39 @@ public class Archivo {
                 name=name+(char)byteMap[i];
             }
             
-            String size="";
+            String aux="";
             for (int i=16;i<24;i++){
-                size=size+(char)byteMap[i];
+                aux=aux+(char)byteMap[i];
             }
+            String size=aux;
             
+            aux="";
+            for (int i=25;i<30;i++){
+                aux=aux+(char)byteMap[i];
+            }
+            String initClus=aux;
             
+            aux="";
+            for (int i=31;i<45;i++){
+                aux=aux+(char)byteMap[i];
+            }
+            String creationDate=aux;
+            
+            aux="";
+            for (int i=46;i<60;i++){
+                aux=aux+(char)byteMap[i];
+            }
+            String modificationDate=aux;
+            
+            aux="";
+            for (int i=61;i<64;i++){
+                aux=aux+(char)byteMap[i];
+            }
+            String bytesNotUsed=aux;
+            
+            created= new Archivo(name, size, initClus, creationDate, modificationDate, bytesNotUsed);
         }
+        return created;
     }
 }
 

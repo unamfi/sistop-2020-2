@@ -12,21 +12,26 @@ import java.util.LinkedList;
  * @author carlo
  */
 public class Cluster {
-    private LinkedList<Sector> sectors;
-    private Integer size;
+    public static Integer size;
     private Boolean used;
+    private LinkedList<Byte> byteMap;
     
-    public Cluster(int size){
-        this.size=size;
-        sectors=new LinkedList<Sector>();
-        for (int i=0;i<size;i++){
-            sectors.add(null);
+    
+    public Cluster(){
+        byteMap=new LinkedList<Byte>();
+        for (int i =0;i<size;i++){
+            byteMap.add(null);
         }
+        this.used=false;
     }
     
-    
-    public void setSector(int index,Sector sec){
-        sectors.set(index, sec);
+    public Cluster(byte byteMap[]){
+        size=byteMap.length;
+        this.byteMap=new LinkedList<Byte>();
+        for (int i =0;i<size;i++){
+            this.byteMap.add(byteMap[i]);
+        }
+        this.used=true;
     }
     
     public Boolean isUsed(){
@@ -44,4 +49,20 @@ public class Cluster {
     public void marcarNoUsado(){
         this.setUsed(false);
     }
+    
+    public byte[] getByteMap(){
+        return SistemaDeArchivos.toArray(byteMap);
+    }
+    
+    public byte[] getByteMap(int indexA,int indexB){
+        byte res[]= new byte[indexB-indexA];
+        byte divide[]=getByteMap();
+        int j=0;
+        for(int i=indexA;i<indexB;i++){
+            res[j]=divide[i];
+            j=j+1;
+        }
+        return res;
+    }
+    
 }
