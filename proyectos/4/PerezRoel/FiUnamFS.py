@@ -5,6 +5,11 @@ from sys import argv
 import os
 import time
 
+
+"""
+Entrada en el directorio de FiUnamFS.
+Sus atributos son los metadatos del archivo.
+"""
 class EntradaDir:
 	
 	def __init__(self):
@@ -16,6 +21,9 @@ class EntradaDir:
 		self.reservado = ''
 
 
+"""
+Muestra en consola comandos que puedes utilizar en esta implementación del FiUnamFS.  
+"""
 def ayuda():
 	print("\th\t\tMuestra las funcionalidades del programa.")
 	print("\tl\t\tLista el directorio del FiUnamFS.")
@@ -26,20 +34,27 @@ def ayuda():
 	print("\ts\t\tSalir.")
 
 
+"""
+Devuelve una lista de EntradaDir que contiene las entradas no vacías del directorio.
+"""
 def obtenerDirectorio(cmd, fs):
 
 	global fsTamanioCluster, fsTamanioDir
 
+	#Numero de entradas permitidas en el directorio
 	numEntradas = int((fsTamanioCluster*fsTamanioDir)/64)
 	
+	#Se posiciona al principio del directorio	
 	fs.seek(1*fsTamanioCluster)
 
 	entradas = []
 
+	#Para cada entrada del directorio
 	for i in range(numEntradas):
 		nombre = fs.read(15).decode('ASCII')
 		fs.read(1)
 		
+		#Si la entrada está marcada como libre
 		if (nombre == 'Xx.xXx.xXx.xXx.'):
 			fs.read(48)
 			continue
@@ -63,6 +78,9 @@ def obtenerDirectorio(cmd, fs):
 	return entradas
 
 
+"""
+Devuelve como cadnena el tamaño de un archivo
+"""
 def obtenerTamanio(tamanio):
 
 	unidades = ['B','KB','MB','GB','TB','PB','EB','ZB','YB','BB']
@@ -77,6 +95,10 @@ def obtenerTamanio(tamanio):
 	return tamanioTxt
 
 
+"""
+Devuelve una cadena con la fecha en formato 'dd/mm/yyyy hh:mi:ss', dada una 
+cadena en el formato 'yyyymmddhhmiss'.
+"""
 def obtenerFecha(fecha):
 	yyyy = fecha[0:4]
 	mm = fecha[4:6]
@@ -90,6 +112,9 @@ def obtenerFecha(fecha):
 	return fechaTxt
 
 
+"""
+Muestra los archivos del directorio y sus datos.
+"""
 def listarDirectorio(directorio):
 	if(len(cmd) > 1):
 		print('Número inválido de argumentos.')
@@ -107,18 +132,22 @@ def listarDirectorio(directorio):
 
 		print(obtenerFecha(ent.modificacion))
 
-		#########################
-		print(ent.clusterInicial)
-		#########################
 
-def generarBitmap(bm, dir):
+"""
+Marca los clusters de los archivos en el directorio como ocupados en el bitmap.
+"""
+def generarBitmap(bm, directorio):
 
-	for ent in dir:
+	for ent in directorio:
+		#Numero de clusters que ocupa el archivo
 		numClusters = tamanioEnClusters(int(ent.tamanio))
 		for i in range(ent.clusterInicial,ent.clusterInicial+numClusters):
 			bm[i] = True
 
 
+"""
+Devuelve el tamaño en clusters necesario para un archivo dado su tamaño en bytes.
+"""
 def tamanioEnClusters(tamanioEnBytes):
 
 	global fsTamanioCluster
@@ -127,13 +156,17 @@ def tamanioEnClusters(tamanioEnBytes):
 	return (tamanioEnBytes+(fsTamanioCluster-1))//fsTamanioCluster
 
 
-def importar(cmd, fs):
+"""
+Importa un archivo del sistema del usuario hacia el FiUnamFS. 
+"""
+def importar(cmd, fs, directorio):
 	if(len(cmd) != 2):
 		print('Número inválido de argumentos.')
 		return -1
 
 	global fsTamanioCluster
 
+	#Se intenta abrir el archivo crear una EntradaDir con sus metadatos.
 	try:
 		f = open(cmd[1], 'rb')
 		entradaDir = generarEntrada(cmd[1])
@@ -144,18 +177,36 @@ def importar(cmd, fs):
 		print('El archivo \'' + cmd[1] + '\' no se encuentra.')
 		return -1
 
+	if(buscarArchivoDirVirtual(entradaDir.nombre, directorio) != -1 ):
+		print('La unidad ya contiene un archivo con ese nombre.')
+		return -1
+
+	if(len(entradaDir.nombre) > 15):
+		print('La longitud del nombre del archivo excede el límite del FiUnamFS.')
+		return -1
+
+	try: 
+		entradaDir.nombre.encode('ASCII')
+	except: 
+		print('El nombre del archivo tiene caracteres no incluidos en ASCII.')
+		return -1 
+
 	entradaIndice = buscarEntradaDirLibre(fs)
 	if (entradaIndice == -1):
 		print("No hay entradas disponibles en el directorio.")
+		return -1
 
+	#Se obtiene el cluster inicial en donde se alojará el archivo
 	clusterInicialIndice = buscarBloquesContiguos(tamanioEnClusters(entradaDir.tamanio))
 	if (clusterInicialIndice == -1):
 		print('No hay bloques contiguos en la unidad para almacenar \'' + cmd[1] + '\'')
+		return -1
 
 	entradaDir.clusterInicial = clusterInicialIndice
 
 	escribirEntrada(fs, entradaDir, entradaIndice)
 	
+	#Se posiciona en el cluster inicial para escribir el archivo
 	fs.seek(fsTamanioCluster*entradaDir.clusterInicial)
 	fs.write(f.read())
 	f.close()
@@ -163,6 +214,10 @@ def importar(cmd, fs):
 	print('Se ha importado \'' + cmd[1] + '\' al FiUnamFS.')
 
 
+"""
+Dada la ruta de un archivo en el sistema del usuario, genera un objeto
+EntradaDir para este archivo con todos sus metadatos, excepto cluster inicial.
+"""
 def generarEntrada(pathname):
 	entradaDir = EntradaDir()
 	
@@ -174,8 +229,13 @@ def generarEntrada(pathname):
 	return entradaDir
 
 
+"""
+Recibe un número flotante que representa el número de segundos desde el tiempo
+epoch y devuelve una cadena de la fecha en el formato de la especificación.
+"""
 def fechaEnFormato(segsDesdeEpoch):
 	datetime = time.gmtime(segsDesdeEpoch)
+	#Los numeros se rellenan con '0' a la izquierda
 	yyyy = str(datetime.tm_year).rjust(4,'0')
 	mm = str(datetime.tm_mon).rjust(2,'0')
 	dd = str(datetime.tm_mday).rjust(2,'0')
@@ -186,6 +246,10 @@ def fechaEnFormato(segsDesdeEpoch):
 	return yyyy + mm + dd + hh + mmin + ss
 
 
+"""
+Dado un número de clusters, busca secuencialmente en el bitmap ese número
+de clusters disponibles.
+"""
 def buscarBloquesContiguos(numClusters):
 
 	global bitmap 
@@ -193,7 +257,9 @@ def buscarBloquesContiguos(numClusters):
 	cuentaCluster = 0
 	for i in range(len(bitmap)):
 		if(bitmap[i] == False):
+			#Cuenta el número de clusters disponibles contiguos encontrados
 			cuentaCluster += 1
+
 			if cuentaCluster == numClusters:
 				clusterInicial = i - numClusters + 1
 				for j in range(clusterInicial, clusterInicial+numClusters):
@@ -205,16 +271,20 @@ def buscarBloquesContiguos(numClusters):
 	return -1 
 
 
+"""
+Devuelve el índice de una entrada libre en el directorio, o -1 si no encuentra.
+"""
 def buscarEntradaDirLibre(fs):
 	global fsTamanioCluster, fsTamanio
 
 	numEntradas = int((fsTamanioCluster*fsTamanioDir)/64)
 	
+	#Se posiciona en el directorio
 	fs.seek(1*fsTamanioCluster)
 
 	for i in range(numEntradas):
 		nombre = fs.read(15).decode('ASCII')
-		
+		#Si la entrada está disponible
 		if (nombre == 'Xx.xXx.xXx.xXx.'):
 			return i
 
@@ -223,10 +293,14 @@ def buscarEntradaDirLibre(fs):
 	return -1
 
 
+"""
+Escribe los datos de un archivo en una entrada del directorio.
+"""
 def escribirEntrada(fs, ent, entIndice):
 	global fsTamanioCluster
 	fs.seek(1*fsTamanioCluster + 64*entIndice)
 
+	#Las cadenas se rellenan con espacios, los numeros con 0
 	fs.write( ent.nombre.rjust(15,' ').encode('ASCII') )
 	fs.write(b'\x00')
 	fs.write( str(ent.tamanio).rjust(8,'0').encode('ASCII') )
@@ -239,6 +313,9 @@ def escribirEntrada(fs, ent, entIndice):
 	fs.write(b'\x00')
 
 
+"""
+Mueve un archivo del FiUnamFS hacia el sistema del usuario.
+"""
 def exportar(cmd, fs, directorio):
 	
 	global fsTamanioCluster
@@ -247,20 +324,24 @@ def exportar(cmd, fs, directorio):
 		print('Número inválido de argumentos.')
 		return -1
 
-	archivoInd = buscarArchivo(cmd[1],directorio)
+	#Obtiene el indice en directorio del archivo
+	archivoInd = buscarArchivoDirVirtual(cmd[1],directorio)
 
 	if archivoInd == -1:
 		print('El archivo \'' + cmd[1] + '\' no se encuentra en el FIUnamFS.')
 		return -1
 
+	#EntradaDir del archivo
 	archivo = directorio[archivoInd]
 
+	#Crea el archivo en el sistema donde se exportará
 	try:
 		expF = open(archivo.nombre,'w+b')
 	except IOError:
 		print('No se pudo exportar el archivo.')
 		return -1
 
+	#Se posiciona en el cluster inicial del archivo de FiUnamFS
 	fs.seek(fsTamanioCluster*archivo.clusterInicial)
 	expF.write(fs.read(archivo.tamanio))
 	expF.close()
@@ -268,8 +349,11 @@ def exportar(cmd, fs, directorio):
 	print('Se ha transferido \'' + cmd[1] + '\' a tu sistema.')
 
 
-
-def buscarArchivo(archivo,directorio):
+"""
+Busca un archivo en la lista que representa al directorio
+ y devuelve su índice, o -1 en caso de no encontrarlo.
+"""
+def buscarArchivoDirVirtual(archivo,directorio):
 	index = 0
 	for ent in directorio:
 		if archivo == ent.nombre:
@@ -278,6 +362,28 @@ def buscarArchivo(archivo,directorio):
 	return -1
 
 
+"""
+Busca un archivo en el directorio de la imagen del disco 
+y devuelve su índice, o -1 en caso de no encontrarlo.
+"""
+def buscarArchivoDirReal(archivo,fs):
+
+	global fsTamanioCluster, fsTamanioDir
+
+	numEntradas = int((fsTamanioCluster*fsTamanioDir)/64)
+
+	fs.seek(1*fsTamanioCluster)
+	for i in range(numEntradas):
+		if (cmd[1] == stringMenosEspacios(fs.read(15).decode('ASCII'))):
+			return i
+		fs.read(64-15)
+
+	return -1
+
+
+"""
+Recibe una cadena y la devuelve sin espacios.
+"""
 def stringMenosEspacios(str):
 	strLista = str.split()
 
@@ -288,6 +394,10 @@ def stringMenosEspacios(str):
 	return retString
 
 
+"""
+Elimina un archivo del FiUnamFS. Marca su entrada en el directorio como
+disponible y sus clusters del bitmap como libres.
+"""
 def eliminar(cmd, fs, directorio):
 	if(len(cmd) != 2):
 		print('Número inválido de argumentos.')
@@ -295,15 +405,26 @@ def eliminar(cmd, fs, directorio):
 
 	global fsTamanioCluster, bitmap
 
-	archivoIndex = buscarArchivo(cmd[1],directorio)
+	#Obtiene el indice del archivo que se eliminará en el directorio
+	indiceDirVirtual = buscarArchivoDirVirtual(cmd[1],directorio)
+	if(indiceDirVirtual == -1):
+		print('El archivo \''+cmd[1]+'\' no se encuentra en el FiUnamFS.')
+		return -1
 
-	clusterInicial = directorio[archivoIndex].clusterInicial
-	numClusters = tamanioEnClusters(directorio[archivoIndex].tamanio)
+	indiceDirReal = buscarArchivoDirReal(cmd[1],fs)
+
+
+	#Marca los clusters del archivo como disponibles
+	clusterInicial = directorio[indiceDirVirtual].clusterInicial
+	numClusters = tamanioEnClusters(directorio[indiceDirVirtual].tamanio)
 	for i in range(clusterInicial, clusterInicial+numClusters):
 		bitmap[i] = False
 
-	fs.seek(1*fsTamanioCluster + 64*archivoIndex)
-	fs.write(b'Xx.xXx.xXx.xXx.')
+	#Marca su entrada en el directorio como libre
+	fs.seek(1*fsTamanioCluster + 64*indiceDirReal)
+	fs.write('Xx.xXx.xXx.xXx.'.encode('ASCII'))
+
+	print('Se ha eliminado \''+cmd[1]+'\' del FiUnamFS.')
 
 
 def desfragmentar(cmd):
@@ -376,7 +497,8 @@ while( inp != 's' ):
 		directorio = obtenerDirectorio(cmd,fs)
 		listarDirectorio(directorio)
 	elif(cmd[0] == 'imp'):
-		importar(cmd,fs)
+		directorio = obtenerDirectorio(cmd,fs)
+		importar(cmd,fs,directorio)
 	elif(cmd[0] == 'exp'):
 		directorio = obtenerDirectorio(cmd,fs)
 		exportar(cmd,fs,directorio)
