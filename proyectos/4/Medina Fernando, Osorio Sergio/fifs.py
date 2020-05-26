@@ -182,7 +182,7 @@ class FIFS:
         #si existe, lo copiamos al directorio especificado
         i = self.search(fe)
         if i is None :
-            print("cpout: " + fe + " : No such file ")
+            return("cpout: " + fe + " : Archivo no existente ")
         else :
             prtb = self.sb.size_cluster + self.sb.size_dentry*i.numdir
             # VERIFICAR QUE EXISTA EL ARCHIVO

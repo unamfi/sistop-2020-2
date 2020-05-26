@@ -103,15 +103,27 @@ def rm():
 
 def copyin():
     nuevo=tk.Toplevel()
-    nuevo.title("Copiar archivo en el sistema")
+    nuevo.title("Copiar archivo en el sistema local")
     file_c = filedialog.askopenfilename()
     fs.cpin(file_c)
     
 def copyout():
     nuevo=tk.Toplevel()
     nuevo.title("Copiar archivo hacia el sistema")
-    file_co = filedialog.askopenfilename()
-    fs.cpout(file_co)
+    ins=tk.Label(nuevo,text='Por favor ingrese el nombre del archivo que desea copiar a su sistema local de archivos (incluyendo su extensión).').grid(column=0,row=0)
+    nombre=tk.Entry(nuevo)
+    nombre.grid(column=0,row=1)
+    def elimina():
+        if (str(nombre.get())==''):
+            tk.messagebox.showinfo(title='Archivo no copiado',message='Por favor indique el nombre y extensión de archivo que desea copiar.')
+        else:
+            file_co = filedialog.askdirectory()
+            fs.cpout(str(nombre.get()),file_co)
+            tk.messagebox.showinfo(title='Archivo copiado',message='El archvo '+str(nombre.get())+' ha sido copiado en su sistema local de archivos')
+            
+
+    tk.Button(nuevo,text='Aceptar',command=elimina).grid(column=0,row=2)
+    nuevo.mainloop()
 
 '''Crearemos la interfaz grafica con tkinter'''
 def gui():    
