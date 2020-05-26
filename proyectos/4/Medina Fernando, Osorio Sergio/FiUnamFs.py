@@ -141,15 +141,13 @@ def gui():
     label1=tk.Label(vent_princip,text='Listado de archivos')
     label1.grid(column=0,row=1)
     #
-    lista=[]
-    lista.append(fs.ls())
+    lista=fs.ls()
     arch=tk.Listbox(vent_princip,height=50,width=50)
-    arch.insert(tk.END,'nombre    inicio    fin   mes   día    año    hora:min:seg')
-    print('/********************************************\n'+str(lista))
+    desc=tk.Label(vent_princip,text='nombre    inicio    fin   mes   día    año    hora:min:seg').grid(column=0,row=2)
 
     for i in lista:
         arch.insert(tk.END, i)
-    arch.grid(column=0,row=2) 
+    arch.grid(column=0,row=3) 
     vent_princip.mainloop()
 
 

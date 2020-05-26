@@ -147,9 +147,12 @@ class FIFS:
         self.f.close()
 
     def ls(self):
+        lista=[]
         for i in self.inodes():
             f=self.date_format(i.fmodif)
-            print("%s\t%d\t%d\t%s" %(i.fname,i.finit_cluster,i.fsize,f))
+            lista.append("%s    %d    %d    %s" %(i.fname,i.finit_cluster,i.fsize,f))
+        return(lista)
+            
 
     def rm(self,fe):
         #Primero buscar si el archivo existe,
@@ -171,7 +174,7 @@ class FIFS:
         hh=date[8:10]
         mm=date[10:12]
         ss=date[12:14]
-        return str(mo)+'\t'+str(d)+'\t'+str(a)+'\t'+str(hh)+':'+str(mm)+':'+str(ss)
+        return str(mo)+' '+str(d)+' '+str(a)+' '+str(hh)+':'+str(mm)+':'+str(ss)
 
 
     def cpout(self,fe,dir):
