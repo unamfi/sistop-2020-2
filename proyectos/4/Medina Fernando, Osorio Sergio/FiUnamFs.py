@@ -5,22 +5,20 @@ import time
 import tkinter as tk
 from tkinter import ttk 
 from tkinter import messagebox
-carp='/fiunamfs'
+from fifs import FIFS
+import sys
+fs = FIFS()
 
 def inicio():
-    print("********************************************************\n**********************ADVERTENCIA***********************\n********************************************************\nLos comandos que seran utilizados requieren de que se \nejecuten como sudo o su, por ello se necesitara la \nejecucion como sudo python3 FiUnamFs.py o brindar de \nmanera manual el permiso, cada que se le solicite")
-    #le damos el formato al disco ext4
-    os.system('sudo mkfs -t fat ./fiunamfs.img')
-    #creamos la carpeta en la que se montara el disco
-    os.system('sudo mkdir /mnt'+carp)
-    print('Carpeta para montar creada')
-    #Montado del disco en la carpeta creada
-    os.system('sudo mount ./fiunamfs.img /mnt'+carp)
-    print('Disco montado en /mnt'+carp)
-    #Comprobacion del montado del discopython
-    os.system('df -hT')
+    print("********************************************************\n**********************ADVERTENCIA***********************\n********************************************************\nLos comandos que seran utilizados requieren de que se \nejecuten como sudo o su, por ello se necesitará la \nejecución de la forma 'sudo python3 FiUnamFs.py' o brindar de \nmanera manual el permiso, cada que se le solicite")
     
 """FUNCIONALIDADES """
+def oF():
+    nuevo=tk.Toplevel()
+    nuevo.title("Abrir imagen")
+    file_img = filedialog.askopenfilename()
+    FS = FileSystem(file_img)
+    
 def cierra():
 	
 	'''
@@ -92,6 +90,23 @@ def o():
     pass
 
 def rm():
+    eliminar = tk.Toplevel()
+    eliminar.title('Crear nuevo archivo')
+    ins=tk.Label(eliminar,text='Por favor ingrese el nombre del archivo y seleccione la extensión deseada').grid(column=0,row=0)
+    nombre=tk.Entry(eliminar)
+    nombre.grid(column=0,row=1)
+    ext=ttk.Combobox(eliminar, width=27,text='Elija uno')
+    ext['values']=('com','html','docx','pptx','jpg','png','exe','svg','ico')
+    ext.grid(column=2,row=1)
+    print('creación de archivo')
+    def elimina():
+        fs.rm(str(nombre.get()))
+        tk.messagebox.showinfo(title='Archivo eliminado',message='El archvo '+str(nombre.get())+' ha sido eliminado')
+
+    tk.Button(eliminar,text='Aceptar',command=nuevoa).grid(column=0,row=2)
+    eliminar.mainloop()
+
+
     pass
 
 
@@ -102,9 +117,8 @@ def gui():
 #    imgicon = tk.PhotoImage(file=os.path.join('favicon.ico'))
 #    vent_princip.tk.call('wm', 'iconbitmap', vent_princip._w, imgicon)  
 #    vent_princip.iconbitmap(os.path.join('favicon.ico'))
-    vent_princip.geometry('300x300')
-    vent_princip.title('Sistema de Archivos Fi-UNAM')    
-    os.system('cd /mnt/fiunamfs')
+    vent_princip.geometry('350x350')
+    vent_princip.title('Sistema de Archivos Fi-UNAM')   
     menu = tk.Menu(vent_princip)
     vent_princip.config(menu=menu)
     filemenu = tk.Menu(menu)
@@ -113,9 +127,11 @@ def gui():
     nuevo_menu.add_command(label='Carpeta',command=nc)
     menu.add_cascade(label='Archivo', menu=filemenu)
     filemenu.add_cascade(label='Nuevo',menu=nuevo_menu)
-    
     filemenu.add_command(label='Abrir',command=o)
     filemenu.add_command(label='Eliminar',command=rm)
+    filemenu.add_command(label='Desfragmentar')
+    filemenu.add_command(label='Abrir .img',command=oF)
+    filemenu.add_command(label='Eliminar Archivo',command=rm)
     filemenu.add_separator() 
     filemenu.add_command(label='Salir', command=vent_princip.quit) 
     helpmenu = tk.Menu() 
@@ -125,25 +141,19 @@ def gui():
     label1=tk.Label(vent_princip,text='Listado de archivos')
     label1.grid(column=0,row=1)
     #
-    lista = os.listdir('/mnt'+carp)
-    arch=tk.Listbox(vent_princip,width=40)
+    lista=[]
+    lista.append(fs.ls())
+    arch=tk.Listbox(vent_princip,height=50,width=50)
+    arch.insert(tk.END,'nombre    inicio    fin   mes   día    año    hora:min:seg')
+    print('/********************************************\n'+str(lista))
 
     for i in lista:
         arch.insert(tk.END, i)
     arch.grid(column=0,row=2) 
     vent_princip.mainloop()
 
-def fin():
-    
-    '''¡¡¡A LEVANTAR LOS JUGUETES!!!'''
-    print('Desmontando el disco')
-    os.system('sudo umount /mnt'+carp)
-    print('Eliminacion de la carpeta')
-    os.system('sudo rmdir /mnt'+carp)
-    print('Carpeta eliminada')
 
 if __name__=="__main__":
     inicio()
     gui()
-    fin()
 
