@@ -80,10 +80,10 @@ def na():
         :param ext: Nombre de la extensión que tendrá el archivo, puede ser nulo. type: String
         '''
         if(ext==''or ext==None or ext==-1):
-                open(str(nombre.get()),'w')
+                open('/mnt'+carp+str(nombre.get()),'w')
                 tk.messagebox.showinfo(title='Archivo creado',message='El archvo '+str(nombre.get())+' ha sido creado')
         else:
-                open(str(nombre.get())+'.'+str(ext.current()),'w')
+                open('/mnt'+carp+str(nombre.get())+'.'+str(ext.current()),'w')
                 tk.messagebox.showinfo(title='Archivo creado',message='El archvo '+str(nombre.get())+'.'+str(ext.current())+' ha sido creado')
     tk.Button(nueva,text='Aceptar',command=nuevoa).grid(column=0,row=2)
     nueva.mainloop()
