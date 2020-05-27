@@ -1,36 +1,50 @@
 import sys
 
 ##Comandos
-def validar_comandos(funcion,num_comandos,lista):
-    if num_comandos > len(lista):
-        print('{} solo recive #{}comandos pero recivio #{} '.format(funcion,num_comandos,len(lista)))
+def validar_comandos(num_parametros,lista):
+    nombre = sys._getframe(1).f_code.co_name
+    tamano = len(lista)
+    if num_parametros != tamano:
+        print('{} solo recibe: #{} parametros, pero recibio: #{} '.format(
+            nombre,num_parametros,tamano)
+            )
+        return False
+    return True
 
 
 def ls(*argv):
-    print("Mostramos los Archivos ")
+    if validar_comandos(0,argv):
+        print("Mostramos los Archivos ")
 
 def lstat(*argv):
-    print("Aquí estan todos tus archivos papá y sus datos")
+    if validar_comandos(0,argv):
+        print("Aquí estan todos tus archivos papá y sus datos")
 
 def cp(*argv):
-    if "\\" in a:
-        a,b = b,a
-    elif not "\\" in b:
-        print("Ninguna de las rutas corresponde a una del sistema")
-        return -1
-    print("Ruta inicial {}, Ruta final{}".format(a,b))
+    if validar_comandos(2,argv):
+        a,b = argv
+        if ("/" in a) ^ ("/" in b):
+            print("Ruta inicial {}, Ruta final {}".format(a,b))
+        else:
+            print("Se debe agregar una y solo una ruta de sistema\n \
+La ruta del sistema debe incluir '/'")
+        
 
 def rm(*argv):
-    print("Eliminando archivo")
+    if validar_comandos(1,argv):
+        print("Eliminando archivo {}".format(argv[0]))
 
 def cat(*argv):
-    print("Cat al archivo")
+    if validar_comandos(1,argv):
+        print("Cat al archivo",argv[0])
 
 def stat(*argv):
-    print("Mostramos los datos del archivo")
+    if validar_comandos(1,argv):
+        print("Mostramos los datos del archivo",argv[0])
 
 def defrag(*argv):
-    print("Piri piri piri ando desframentiri")
+    if validar_comandos(0,argv):
+        print("Piri piri piri ando desframentiri")
 
 def help(*argv):
     print(
@@ -72,10 +86,8 @@ def main():
     opcion = ""
     while True:
         opcion = input(">>> ").split()
-        if len(opcion) > 2:
-            print("Demasiadas opciones  ")
-        elif opcion[0] in menu:
-            menu[ opcion[0] ]( *opcion[1:0] )
+        if opcion[0] in menu:
+            menu[ opcion[0] ]( *opcion[1:] )
         else:
             print("Opcion Invalida")
 
