@@ -1,13 +1,6 @@
 import sys
 from colorama import init,Back,Fore
 
-##Comprobamos que el nombre este en  asccii
-def validar_nombre(nombre):
-    if all(ord(char) < 128 for char in nombre):
-        if len(nombre) <= 15:
-            return True
-    return False
-
 ##Creamos un validador, asegura que los comandos tengan el numero de parametros deseado. 
 ##-> Tenerlo así da mayor escalabilidad
 def validar_comandos(num_parametros,lista):

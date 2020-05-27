@@ -3,42 +3,8 @@
 from math import ceil
 
 from fecha import formatear, fecha_actual
-
-# 
-
-def agregar_espacios(cadena, num):
-    num_espacios =  num - len(str(cadena))
-    if num_espacios <= 0:
-        return cadena
-    return ' ' * num_espacios + str(cadena)
-
-# Funciones Relacionadas con Manejo de Archivos
-
-def tamano_archivo(ubicacion):
-    temp = open(ubicacion, "rb+")
-    cantidad = len(temp.read())
-    temp.close()
-    return cantidad
-
-def escribir(inicio, contenido, ubicacion, codificacion = "utf-8"):
-    if contenido:
-        contenido = bytes(contenido, codificacion)
-    archivo = open(ubicacion, "rb+")
-    archivo.seek(inicio)
-    archivo.write(contenido)
-    archivo.close()
-
-def leer(inicio, cantidad, ubicacion, codificacion = "utf-8"):
-    archivo = open(ubicacion, "rb+")
-    archivo.seek(inicio)
-    lectura = archivo.read(cantidad)
-    archivo.close()
-    try:
-        return lectura.decode(codificacion)  # hex => str
-    except:
-        return lectura
-    
-
+from tratamiento_cadenas import validar_nombre, agregar_espacios
+from trabajar_archivos import tamano_archivo, escribir, leer
 class Archivo:
 
     def __init__(self, cadena):
@@ -96,7 +62,7 @@ class SistemaArchivos:
                 if cadena[:15] != 'Xx.xXx.xXx.xXx.':  # Excluimos los archivos vacios
                     archivo = Archivo(cadena)
                     self.archivos.append(archivo)
-
+        
     def obtener_archivo(self, nombre):
         self.leer_archivos()
         for archivo in self.archivos:
@@ -134,9 +100,10 @@ class SistemaArchivos:
         int cluster_incial - cluster inicial deseado para almacenar el archivo en curso
         """
         for a, b in zip(self.archivos, self.archivos[1:]):
-            inicio = a.tamano + a.inicio // self.tamano_cluster
+            cluster_incial = a.tamano + int(ceil(a.inicio / self.tamano_cluster))
             if b.inicio - inicio >= tamano:
-                return inicio
+                return cluster_incial
+        raise MemoryError
 
     def escribir_en_directorios(self, nombre, tamano):
         offset = self.entrada_directorio()
@@ -163,7 +130,8 @@ class SistemaArchivos:
         2 - si la capacidad de archivos es la maxima
         3 - si la operacion fue un exito
         """
-        nombre_correcto(nombre)
+        if not validar_nombre(nombre):
+            raise SyntaxError
         archivo = self.obtener_archivo(nombre)
         tamano = len(contenido)
         inicio = 0
@@ -217,11 +185,13 @@ class SistemaArchivos:
         max_nombre = 0
         #max_
 
-ubicacion_archivo = "fiunamfs.img" 
-sa = SistemaArchivos(ubicacion_archivo)
-sa.leer_archivos()
-#sa.borrar("logo.png")
-print(sa)
+
+if __name__ == "__main__":
+    ubicacion_archivo = "fiunamfs.img" 
+    sa = SistemaArchivos(ubicacion_archivo)
+    sa.copiar("./fecha.py", "fecha.py")
+    #sa.borrar("logo.png")
+    print(sa)
 
 
 
