@@ -21,10 +21,21 @@ En el archivo `FiUnamFs.py` se maneja la creación de la interfaz y se ajusta la
 
 En la interfaz se pueden realizar las operaciones de eliminar archivos del sistema, añadir archivos al sistema, hacer una copia local de los archivos, desfragmentar la unidad. 
 
-Para poder ejecutar el sistema de archivos debe ejecutar el archivo `FiUnamFs.py` inmediatamente después el programa le pedirá la ruta del archivo.img que contiene el sistema de archivos para este proyecto. Una vez proporcionada se desplegará esta ventana
+Para poder ejecutar el sistema de archivos debe ejecutar el archivo `FiUnamFs.py` inmediatamente después el programa le pedirá la ruta del archivo.img que contiene el sistema de archivos para este proyecto. 
+
+![alt text](https://github.com/fernando170/sistop-2020-2/blob/master/proyectos/4/Medina%20Fernando%2C%20Osorio%20Sergio/inputRuta.png)
+
+Una vez proporcionada se desplegará esta ventana
+
+
 ![alt text](https://github.com/fernando170/sistop-2020-2/blob/master/proyectos/4/Medina%20Fernando%2C%20Osorio%20Sergio/captura.png)
 
+#Nota
+Para la implementación de esta solución nos basamos en ejemplos de la implementación de Fuse obtenidos de esta liga: 
+http://thepythoncorner.com/dev/writing-a-fuse-filesystem-in-python/
 
+También de ejemplos de implementaciones anteriores hechas por Ricardo Rosales en el siguiente repositorio:
+https://github.com/unamfi/sistop-2020-1/blob/master/proyectos/3/RosalesRicardo/main.py
 
 
 
