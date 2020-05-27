@@ -1,53 +1,62 @@
 import sys
+from colorama import init,Back,Fore
+
 
 ##Comandos
 def validar_comandos(num_parametros,lista):
     nombre = sys._getframe(1).f_code.co_name
     tamano = len(lista)
     if num_parametros != tamano:
-        print('{} solo recibe: #{} parametros, pero recibio: #{} '.format(
+        mostrarError('{} solo recibe: #{} parametros, pero recibio: #{} '.format(
             nombre,num_parametros,tamano)
             )
         return False
     return True
 
+def mostrarNormal(cadena):
+    print(Back.CYAN+Fore.BLACK+cadena)
+def mostrarError(cadena):
+    print(Fore.BLACK+Back.RED+cadena)
+def prompt():
+    entrada = input(Fore.GREEN + ">>> ").split()
+    return entrada
 
 def ls(*argv):
     if validar_comandos(0,argv):
-        print("Mostramos los Archivos ")
+        mostrarNormal("Mostramos los Archivos ")
 
 def lstat(*argv):
     if validar_comandos(0,argv):
-        print("Aquí estan todos tus archivos papá y sus datos")
+        mostrarNormal("Aquí estan todos tus archivos papá y sus datos")
 
 def cp(*argv):
     if validar_comandos(2,argv):
         a,b = argv
         if ("/" in a) ^ ("/" in b):
-            print("Ruta inicial {}, Ruta final {}".format(a,b))
+            mostrarNormal("Ruta inicial {}, Ruta final {}".format(a,b))
         else:
-            print("Se debe agregar una y solo una ruta de sistema\n \
+            mostrarError("Se debe agregar una y solo una ruta de sistema\n \
 La ruta del sistema debe incluir '/'")
         
 
 def rm(*argv):
     if validar_comandos(1,argv):
-        print("Eliminando archivo {}".format(argv[0]))
+        mostrarNormal("Eliminando archivo {}".format(argv[0]))
 
 def cat(*argv):
     if validar_comandos(1,argv):
-        print("Cat al archivo",argv[0])
+        mostrarNormal("Cat al archivo"+argv[0])
 
 def stat(*argv):
     if validar_comandos(1,argv):
-        print("Mostramos los datos del archivo",argv[0])
+        mostrarNormal("Mostramos los datos del archivo"+argv[0])
 
 def defrag(*argv):
     if validar_comandos(0,argv):
-        print("Piri piri piri ando desframentiri")
+        mostrarNormal("Piri piri piri ando desframentiri")
 
 def help(*argv):
-    print(
+    mostrarNormal(
         """Se utilizan comandos similares a posix:
 Comandos:
 
@@ -56,7 +65,7 @@ Comandos:
     ls
         Muestra los contenidos del archivo
     stat [nombre_archivo]
-        Muestra los distintos datos del archivo, incluyendo:
+        Muestra los distintos initdatos del archivo, incluyendo:
             nombre,fecha de creacion, tamaño, cluster inicial, etc.
     lstat
         Muestra todos los datos de todos los archivos
@@ -75,23 +84,23 @@ Comandos:
         )
 
 def exit(*argv):
-    print("Hasta pronto!")
+    mostrarNormal("Hasta pronto!")
     sys.exit()
 
 def main():
     menu={"ls":ls,"lstat":lstat,"cp":cp,"help":help,"exit":exit,    
     "stat":stat,"rm":rm,"defrag":defrag,"cat":cat}
-    help()
-    print("Ingrese la opcion indicada")
+    mostrarNormal("Ingrese el comando deseado, si necesita ayuda escriba: help")
     opcion = ""
     while True:
-        opcion = input(">>> ").split()
+        opcion = prompt()
         if opcion[0] in menu:
             menu[ opcion[0] ]( *opcion[1:] )
         else:
-            print("Opcion Invalida")
+            mostrarError("Opcion Invalida")
 
 
 
 if __name__ == "__main__":
+    init(autoreset=True)
     main()
