@@ -1,0 +1,14 @@
+PROYECTO 4
+
+Sistema de archivos.
+
+Este proyecto consistió en desarrollar un sistema de archivos que pudiera realizar las funciones caracterizaticas de uno. Tal que debe poder eliminar, listar, y copiar archivos entres sus características principales.
+
+Se logró desarrollar la interfaz de operación y la función de listado. Las demás no fue posible terminarlas de plantear.
+
+
+Para ejecutarlo, basta con correr python el nombre del archivo y la abreviatura de la función que se desea realizar. Por ejemplo:
+
+	$python3 fileControl.py ls
+
+El resto de las funciones que dependían de otros parámetros pueden hacer que el funcionamiento varie.
