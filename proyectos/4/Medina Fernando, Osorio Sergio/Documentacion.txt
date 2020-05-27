@@ -1,0 +1,55 @@
+ * @Authors: Fernando Arturo Medina Molina, Sergio Osorio Robles
+ * @Version: 1.0
+ * @Copyleft:
+ * 1.-Usarla sin ninguna limitación.
+ * 2.-Libertad de estudio (ver cómo está hecho el trabajo).
+ * 3.-(re)distribuir cuantas copias desee.
+ * 4.-Modificarla de la manera que crea conveniente.
+ * @Description: Gracias a lo visto en las clases de teoría de Sistemas Operativos se pretende crear un 'micro-Sistema de archivos' el cual contenga las operaciones simples de Importar, Exportar, Desfragmentar y Eliminar archivos en un Disco o archivo .img proporcionado por el profesor, en este caso será el archivo fiunamfs.py .
+ * @Referencias:  
+ * °https://github.com/gwolf/sistop-2019-2/blob/master/proyectos/3/FranciscoRodrigo-SanchezBeatriz/fsm.py
+ * °https://github.com/unamfi/sistop-2020-1/blob/master/proyectos/3/RosalesRicardo/main.py
+ * @Contact: fernando170@comunidad.unam.mx
+
+def inicio():
+    
+    Rutina inicial del programa, al ejecutarse desde una terminal, desplegará la información necesaria para que el programa sea ejecutado de manera correcta, ya que son necesarios los permisos de administrador para realizar las operaciones escenciales.
+    Nota.: IMPORTANTE, si el plrograma no esejecutado como administrador o se le brindan los permisos pertinentes no se asegura la correcta ejecución del programa.
+    
+def cierra():
+    
+    Cerraremos el programa 
+	
+
+def desfragmentar():
+    
+   Con la funcionalidad desfragmentar lograremos que el volúmen sea desgragmentado gracias a la función defrag() encontrada en el archivo fifs.py y utilizamos dentro de nuestro programa, invocándolo con el comando Desfragmentar ubicado en el menú principal.
+    
+def rm():
+    
+    Gracias a la función 'rm' invocada en el menú por el comando eliminar, despliegaremos una ventana la cual a través de una entrada de texto podremos especificar los inodos que deseamos perder referencia, o eliminar los archivos que especifiquemos, indicando uno por uno el nombre y extensión del archivo deseado. Una vez realizada la eliminación se despliegará un mensaje informativo confirmando dicha operación.
+    
+    
+def copyin():
+    
+   Con la funcionalidad de copyin() podemos realizar la operación de transferencia de un archivo local al disco con el que se está operando, la función desplegará un selector de archivos del sistema local, seleccionar el deseado, har click en abrir y el archivo será insertado en el disco.
+    
+def ajustar_print(entrada):
+    
+    Con ésta función pretendemos ajustar la cadena de caracteres devuelta por la función ls() la cual nos permite mostrar de una manera más organizada los archivos que son listados en el list box, retornará una cadena de caracteres con un formato específico
+    :param: entrada. Será la cadena de caractres a la que se le dará formato. Type: string.
+    :return: nuevaCadena. Es la cadena que retornamos con un formato específico para ser desplegada en el listbox. Type: String.
+    
+def copyout():
+    
+    Con coupyout() podremos importar al sistema local los archivos que se deseen y se encuentren dentro del disco. La función desiplegará una ventana en la cual solo ingresará en la casilla de texto, el nombre del archivo deseado (junto con su extensión), al hacer click en el botón de aceptar se abrirá otra ventana en la cual tendrá que seleccionar el nombre de la carpeta en la que será alojado el archivo. Finalmente se mostrará un mensaje informativo confirmando la operación.
+    
+def ayuda():
+    
+    Con la función ayuda podrá acceder a esta documentación la cual será desplegada a través de su navegador. ésta se encuentra en un archivo .html
+
+def gui():
+    
+    gui() será la funcionalidad más importante, ya que es la ventana principal conteniente de todas las funcionalidades contenientes en el sistema de archivos, así mismo, contiene la función que despliega ésta documentación.
+       
+    
