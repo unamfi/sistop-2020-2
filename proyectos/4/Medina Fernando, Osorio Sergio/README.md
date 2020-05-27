@@ -30,7 +30,7 @@ Una vez proporcionada se desplegará esta ventana
 
 ![alt text](https://github.com/fernando170/sistop-2020-2/blob/master/proyectos/4/Medina%20Fernando%2C%20Osorio%20Sergio/captura.png)
 
-#Nota
+### Nota
 Para la implementación de esta solución nos basamos en ejemplos de la implementación de Fuse obtenidos de esta liga: 
 http://thepythoncorner.com/dev/writing-a-fuse-filesystem-in-python/
 
