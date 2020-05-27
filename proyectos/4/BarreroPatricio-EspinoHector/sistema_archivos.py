@@ -137,11 +137,8 @@ class SistemaArchivos:
         --params--
         str nombre - nombre del archivo que deseamos escribir
         str contenido - lo que queremos escribir en el archivo
-        --returns--
-        0 - si el nombre del archivo es incorrecto
-        1 - si la memoria esta llena
-        2 - si la capacidad de archivos es la maxima
-        3 - si la operacion fue un exito
+        
+        
         """
         if not validar_nombre(nombre):
             raise SyntaxError
@@ -180,6 +177,10 @@ class SistemaArchivos:
             escribir(0, contenido, archivo2, ext=None)
 
     def borrar(self, nombre_archivo):
+        '''
+        Permite borrar una archivo
+        Escribe en el 
+        '''
         self.leer_archivos()
         archivo = self.obtener_archivo(nombre_archivo)
         offset = self.entrada_directorio(archivo.nombre)
@@ -187,11 +188,12 @@ class SistemaArchivos:
         print(offset)
         escribir(offset, contenido, self.ubicacion_diskete)
 
-    def __str__(self):
-        self.leer_archivos()
-        return '\n'.join(map(str, self.archivos))
+    # Funciones para mostrar en pantalla
 
     def info(self):
+        '''
+        Funcion que permite mostrar el encabezado de la descripcion de archivos
+        '''
         nombre_archivo = agregar_espacios("Nombre Archivo", 15)
         tamano = agregar_espacios("Tamaño Bytes", 8)
         cluster_inicial = agregar_espacios("Cluster Inicial", 15)
@@ -199,11 +201,20 @@ class SistemaArchivos:
         fecha_modificacion = agregar_espacios("Fecha Modificacion", 14)
         print("{}\t{}\t{}\t{}\t\t{}".format(nombre_archivo, tamano, cluster_inicial, fecha_creacion, fecha_modificacion))
 
+    def __str__(self):
+        '''
+        Muestra los nombres de todos los archivos
+        '''
+        self.leer_archivos()
+        return '\n'.join(map(str, self.archivos))    
+
     def __repr__(self):
+        '''
+        Muestra todos las caracteristicas de todos los archivos
+        '''
         self.leer_archivos()
         self.info()
         return '\n'.join(map(repr, self.archivos))
-
 
 if __name__ == "__main__":
     ubicacion_archivo = "fiunamfs.img" 
