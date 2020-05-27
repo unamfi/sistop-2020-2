@@ -109,7 +109,78 @@ def copyin():
     file_c = filedialog.askopenfilename()
     fs.cpin(str(file_c))
     tk.messagebox.showinfo(title='Archivo copiado',message='El archvo '+file_c+' ha sido copiado en el sistema de archivos')
+def ajustar_print(entrada):
+    nuevaCadena = ''
+    if len(entrada[0])<15:
+        for i in range(14):
+            if len(entrada[0])==i:
+                espacios=entrada[0]
+                for j in range(15-i):
+                    espacios=espacios+' '
+                nuevaCadena=nuevaCadena+espacios
+    else:
+        nuevaCadena=nuevaCadena+entrada[0]                           
+    #print(nuevaCadena)
+    nuevaCadena+='   '
+    if len(entrada[1])<10:
+        for i in range(6):
+            if len(entrada[1])==i:
+                espacios=entrada[1]
+                for j in range(7-i):
+                    espacios=espacios+' '
+                nuevaCadena=nuevaCadena+espacios
+    else:
+        nuevaCadena=nuevaCadena+entrada[1]
     
+    if len(entrada[2])<=9:
+        for i in range(8):
+            if len(entrada[2])==i:
+                espacios=entrada[2]
+                for j in range(9-i):
+                    espacios=espacios+' '
+                nuevaCadena=nuevaCadena+espacios
+    else:
+        nuevaCadena=nuevaCadena+entrada[2]
+    nuevaCadena+='  '
+    if len(entrada[3])<7:
+        for i in range(6):
+            if len(entrada[3])==i:
+                espacios=entrada[3]
+                for j in range(7-i):
+                    espacios=espacios+' '
+                nuevaCadena=nuevaCadena+espacios
+    else:
+        nuevaCadena=nuevaCadena+entrada[3]
+    nuevaCadena+='  '
+    if len(entrada[4])<7:
+        for i in range(6):
+            if len(entrada[4])==i:
+                espacios=entrada[4]
+                for j in range(7-i):
+                    espacios=espacios+' '
+                nuevaCadena=nuevaCadena+espacios
+    else:
+        nuevaCadena=nuevaCadena+entrada[4]
+    if len(entrada[5])<7:
+        for i in range(6):
+            if len(entrada[5])==i:
+                espacios=entrada[5]
+                for j in range(7-i):
+                    espacios=espacios+' '
+                nuevaCadena=nuevaCadena+espacios
+    else:
+        nuevaCadena=nuevaCadena+entrada[5]
+    nuevaCadena+='   '
+    if len(entrada[6])<7:
+        for i in range(6):
+            if len(entrada[6])==i:
+                espacios=entrada[6]
+                for j in range(7-i):
+                    espacios=espacios+' '
+                nuevaCadena=nuevaCadena+espacios
+    else:
+        nuevaCadena=nuevaCadena+entrada[6]
+    return(nuevaCadena)
 def copyout():
     nuevo=tk.Toplevel()
     nuevo.title("Copiar archivo hacia el sistema local")
@@ -133,7 +204,7 @@ def gui():
 #    imgicon = tk.PhotoImage(file=os.path.join('favicon.ico'))
 #    vent_princip.tk.call('wm', 'iconbitmap', vent_princip._w, imgicon)  
 #    vent_princip.iconbitmap(os.path.join('favicon.ico'))
-    vent_princip.geometry('400x400')
+    vent_princip.geometry('544x400')
     vent_princip.title('Sistema de Archivos Fi-UNAM')   
     menu = tk.Menu(vent_princip)
     vent_princip.config(menu=menu)
@@ -161,11 +232,13 @@ def gui():
     label1.grid(column=0,row=1)
     #
     lista=fs.ls()
-    arch=tk.Listbox(vent_princip,height=50,width=50)
-    desc=tk.Label(vent_princip,text='nombre  |  inicio  |  fin  | mes  | día  |  año  |  hora:min:seg').grid(column=0,row=2)
+    arch=tk.Listbox(vent_princip,height=50,width=75)
+    desc=tk.Label(vent_princip,text='NOMBRE      |  INICIO  |   FIN   |  MES  |  DIA  |  AÑO  |  hora:min:seg').grid(column=0,row=2)
 
     for i in lista:
-        arch.insert(tk.END, i)
+        trozos=i.split()
+        #ajustar_print(trozos)
+        arch.insert(tk.END,ajustar_print(trozos)) 
     arch.grid(column=0,row=3) 
     vent_princip.mainloop()
 
@@ -173,4 +246,3 @@ def gui():
 if __name__=="__main__":
     inicio()
     gui()
-
