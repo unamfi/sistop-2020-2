@@ -7,7 +7,7 @@
 - Sistema de archivos fiunamfs.img
 ## Descripción de la solución
 La implementación de nuestra solución se realizó utilizando Python 3.7.2 con el package `tkinter` para crear la interfaz
-gráfica. Se crearon dos archivos: `fifs.py` y `FiUnamFs.py`; `fifs.py` contiene los métodos necesarios para realizar las 
+gráfica. Se crearon dos archivos: `FIFS.py` y `FiUnamFs.py`; `FIFS.py` contiene los métodos necesarios para realizar las 
 acciones de enlistar archivos, copiar hacía el sistema, copiar desde el sistema y la definición del súperbloque. 
 
 El método para obtener los archivos contenidos dentro del `fiunamfs.img` fue utilizando la función `mmap`, realizando 
@@ -19,6 +19,13 @@ de los archivos y el objeto DIRENTRY que contiene los inodos de cada archivo en 
 
 En el archivo `FiUnamFs.py` se maneja la creación de la interfaz y se ajusta la salida en el listBox para que se vea con forma de tabla. Esta es nuestra clase principal por lo que debe ejecutarse este archivo para probar el sistema de archivos. 
 
-![alt text](/home/sergio/sistop-2020-2/proyectos/4/Medina Fernando, Osorio Sergio/Documentacion/captura.png)
+En la interfaz se pueden realizar las operaciones de eliminar archivos del sistema, añadir archivos al sistema, hacer una copia local de los archivos, desfragmentar la unidad. 
+
+Para poder ejecutar el sistema de archivos debe ejecutar el archivo `FiUnamFs.py` inmediatamente después el programa le pedirá la ruta del archivo.img que contiene el sistema de archivos para este proyecto. Una vez proporcionada se desplegará esta ventana
+![alt text](https://github.com/fernando170/sistop-2020-2/blob/master/proyectos/4/Medina%20Fernando%2C%20Osorio%20Sergio/captura.png)
+
+
+
+
 
 
