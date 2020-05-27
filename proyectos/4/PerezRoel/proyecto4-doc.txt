@@ -66,7 +66,9 @@ Funciones:
     El archivo se genera en el directorio donde se esté ejecutando el programa, sobrescribiendose si es que ya existe, y creandose en caso contrario.
     La función termina si el archivo seleccionado por el usuario (cmd[1]) no se encuentra en el directorio.
 
-    buscarArchivo: Recibe una cadena que representa el nombre de un archivo y el directorio. Si existe un archivo en el directorio con el nombre igual a la cadena, se devuelve el índice en directorio de éste archivo, o -1 en caso de no encontrarse. 
+    buscarArchivoDirVirtual: Recibe una cadena que representa el nombre de un archivo y la lista del directorio. Si existe un archivo en el directorio con el nombre igual a la cadena, se devuelve el índice en directorio de éste archivo, o -1 en caso de no encontrarse.
+
+    buscarArchivoDirReal: Recibe una cadena que representa el nombre de un archivo y a fs. Buscará en el área del directorio el archivo cuyo nombre coincida con el que se busca. Devolverá el índice en el directorio real, o -1 en caso de no encontrarlo.
 
 
     stringMenosEspacios: Recibe una cadena. Devuelve la misma cadena pero sin los espacios. 

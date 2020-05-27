@@ -30,7 +30,7 @@ def ayuda():
 	print("\timp <archivo>\tImporta <archivo> de tu sistema hacia el FiUnamFS.")
 	print("\texp <archivo>\tExporta <archivo> del FiUnamFS hacia tu sistema.")
 	print("\tdel <archivo>\tElimina <archivo> del FiUnamFS.")
-	print("\tdf\t\tDesfragmenta FiUnamFS.")
+	#print("\tdf\t\tDesfragmenta FiUnamFS.") :(
 	print("\ts\t\tSalir.")
 
 
@@ -509,5 +509,6 @@ while( inp != 's' ):
 		desfragmentar(cmd)
 	elif(cmd[0] == 's'):
 		fs.close()
+		exit()
 	else:
 		print('Comando no reconocido.')
