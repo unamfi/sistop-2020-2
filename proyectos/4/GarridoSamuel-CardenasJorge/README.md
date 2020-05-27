@@ -60,15 +60,17 @@ Para gestionar muchos problemas se implementa una función de búsqueda que perm
 
 Para el caso de eliminar, cuando encontramos la coincidencia, toda la cadena o el segmento que comprenda el archivo dentro de fiunamfs.img será reemplazado por ceros. 
 
-Para copiar hacia mi directorio comienzo por cumplir las condiciones que nombres menores a 15 caracteres, archivo no más grande que lo que soporte fiunamfs.img. Luego ordenamos los inodos, luego el archivo que voy a copiar tenemos que partirlo en base al tamaño de los clusters y después vamos insertando los elementos bloque pedazo por pedazo.
+Para copiar hacia mi directorio comienzo por cumplir las condiciones que nombres menores a 15 caracteres, archivo no más grande que lo que soporte fiunamfs.img. Luego ordenamos los inodos, luego el archivo que voy a copiar tenemos que partirlo en base al tamaño de los clusters y después vamos insertando los elementos bloque pedazo por pedazo. En el caso de copiar hacia afuera, mediante la función si matcheamos algún elemento tenemos donde comienza y donde termina, por lo que mandamos la imagen dada una cierta región seleccionada.
+
+Para finalizar la desfragmentación es realizada con un movimiento, donde la vamos recorriendo todo lo que esté marcado como vacío y a la vez todo lo que se encontraba lleno se colocará en si todavía no llegamos a llenar consecutivamente esa área de memoria.
 
 #### Ejecución
 
 Para ejecutar el programa se debe emplear el siguiente comando:
 
-~~~
-python3 SGJC_FSYS.py
-~~~
+```shell
+$ python3 SGJC_FSYS.py
+```
 
 Al ejecutarse se contará con un prompt personalizado donde podremos colocar los siguientes comandos
 
@@ -92,10 +94,22 @@ Cabe destacar que se agregó como opción la interrupción a teclado mediante CO
 
 
 
-#### Ejemplos de ejecución 🖥
-![](img/1.png)
+### Ejemplos de ejecución 🖥
+
+
+##### Ayuda, mostrar los archivos y error de comando
 ![](img/2.png)
+##### Montaje, mostrar archivos, copiar hacia fiunamfs.img, remover y voler a intentar con éxito
 ![](img/5.png)
+##### Memoria fragmentada después de remover un elemento, copiar hacia afuera de fiunamfs.img
+![](img/1.png)
+
+##### Desfragmentación y comprobación
+![](img/3.png)
+
+##### Posibles errores y salida del programa
+![](img/errors.png)
+
 #### Requerimientos del sistema 🛠️
 Fue desarrollado utilizando el lenguaje de programación Python con las siguientes características:
 
@@ -105,21 +119,13 @@ Python 3.6.9 (default, Nov  7 2019, 10:44:02)
 ```
 
 
-
-
-
 ## Conclusión 🍪
-
-
+Los sistemas de archivos son escenciales para la persistencia de datos y ya que no estamos en los años 70 como para cargar todo nuestro programa en memoria cada rato, tendremos que hacer uso de algún sistema de archivos para almacenar nuestros ficheros. Existen de todos sabores y colores y depende en gran medida del sistema operativo. Podemos usar implementaciones como VFat para ilustrarnos, más en la realidad para implementar hasta directorios se vuelve más complejo al grado que sistemas de archivos como HDFS+ utiliza árboles B. GNU LINUX admite la administración de manera transparente al usuario de más de 15 tipos diferentes de sistemas de archivos, incluyendo NTFS (Microsoft Windows), iso9660, msdos y vfat. La estructura de archivos es una estructura jerárquica en forma de árbol invertido, donde el directorio principal (raíz) es el directorio "/", del que cuelga toda la estructura del sistema.
 
 
 ## Bibliografía ☕
 
 
-HIMANSHU. (2012). 10 Practical Linux nm Command. 06 de Mayo del 2020, de The Geek Stuff Sitio web: https://www.thegeekstuff.com/2012/03/linux-nm-command/
+HIMANSHU. (2012). 10 Practical Linux nm Command. 25 de Mayo del 2020, de The Geek Stuff Sitio web: https://www.thegeekstuff.com/2012/03/linux-nm-command/
 
-SANFOUNDRY. (2015). 10+ “objdump” Command Usage Examples in Linux. 03 de Mayo del 2020, de SANFOUNDRY Sitio web: https://www.sanfoundry.com/objdump-command-usage-examples-in-linux/
-
-Universidad de Almería. (2014). Gestión de Memoria. 05 de Mayo del 2020, de Departamentos de Lenguajes y computación. Universidad de Almería. Sitio web: https://w3.ual.es/~acorral/DSO/Tema_3.pdf
-
-Federico Kereki. (2008). Discover the possibilities of the /proc directory. 04 de Mayo del 2020, de The Linux Foundation Sitio web: https://www.linux.com/news/discover-possibilities-proc-directory/
+Lars Wirzenius. (2013). Utilizando Discos y Otros Medios de Almacenamiento. 26 de Mayo del 2020, de Guía Para Administradores de Sistemas GNU/Linux Sitio web: http://www.tldp.org/pub/Linux/docs/ldp-archived/system-admin-guide/translations/es/html/ch06s08.html
