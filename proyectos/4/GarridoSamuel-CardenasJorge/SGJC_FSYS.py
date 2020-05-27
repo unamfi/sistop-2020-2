@@ -4,12 +4,15 @@ import sys
 import os.path, time
 import math
 import re
-
-codificacion = 'utf-8'
+## Mecionamos la codificación que usaremos, en el caso de nuestro ejercicio es ASCII
+codificacion = 'ASCII'
 class SuperBloque:
     tamanio_entrada = 64
     def __init__(self):
+        ##Intentamos abrir la imagen del sistema de archivos
         try:
+            ## Usamos mmap para tratar con el acceso al sistema de archivos y luego dividimos
+            ## Este sector en los que corresponderá el nombre, la versión, el tamaño de cluster, el número de clusters
             self.f = open('fiunamfs.img','r+b')
             self.imagen = mmap.mmap(self.f.fileno(),0,access=mmap.ACCESS_READ)
             self.nombre             = self.imagen[0:8].decode(codificacion)      
@@ -24,6 +27,7 @@ class SuperBloque:
             print("Error al abrir el sistema de archivos ")
 
 class Entrada:
+
     nombre_archivo = 15
     tamanio_archivo = 8
     num_cluster = 5
@@ -100,6 +104,7 @@ class SistemaArchivosSGJC:
             self.imagen[archivoEliminar+25:archivoEliminar+30]=bytes('00000',codificacion)
             self.imagen[archivoEliminar+31:archivoEliminar+45]=bytes('00000000000000',codificacion)
             self.imagen[archivoEliminar+46:archivoEliminar+60]=bytes('00000000000000',codificacion)
+            sys.stdout.write('\n\t'+'\x1b[1;32m' + 'Archivo removido con éxito :)' + '\x1b[0m'+'\n\n')
             
         else :
             sys.stdout.write('\n\t'+'\x1b[1;33m' + 'Archivo demasiado grande :c' + '\x1b[0m'+'\n\n')
@@ -137,26 +142,24 @@ class SistemaArchivosSGJC:
                         copiado = False
                         for j in range(0,len(inodos)-1):
                             ultimo_cluster = inodos[j].NumClusters + math.ceil( inodos[j].tamanoArchivo / self.SuperBloque.tamanio_cluster)
-                            espacio_entre_sig_archivo = inodos[j+1].NumClusters - ultimo_cluster
-                            if cluster_archivo <= espacio_entre_sig_archivo:
-                                f = open(archivo, "rb")
-                                p = int(self.SuperBloque.tamanio_cluster * (cluster_archivo + 1))
-                                self.imagen[p : p + tam_archivo ] = f.read()
+                            espacio_siguiente_archivo = inodos[j+1].NumClusters - ultimo_cluster
+                            if cluster_archivo <= espacio_siguiente_archivo:
+                                file = open(archivo, "rb")
+                                self.imagen[int(self.SuperBloque.tamanio_cluster * (cluster_archivo + 1)) : int(self.SuperBloque.tamanio_cluster * (cluster_archivo + 1)) + tam_archivo ] = file.read()
                                 self.registrar(archivo,cluster_archivo + 1)
                                 f.close()
                                 copiado = True
                                 sys.stdout.write('\n\t'+'\x1b[1;32m' + 'Archivo copiado con éxito :)' + '\x1b[0m'+'\n\n')
                                 break
                             if copiado == False:
-                                ultimo = inodos[len(inodos) - 1].NumClusters + math.ceil(inodos[len(inodos) - 1].tamanoArchivo / self.SuperBloque.tamanio_cluster )
-                                espacio_restante = self.SuperBloque.total_clusters - ultimo
-                                if cluster_archivo <= espacio_restante:
-                                    f = open(archivo,"rb")
-                                    p = self.SuperBloque.total_clusters * (ultimo + 1)
-                                    self.imagen[p : p + tam_archivo] = f.read()
-                                    self.registrar(archivo, ultimo + 1)
+                                ultimoEspacio = inodos[len(inodos) - 1].NumClusters + math.ceil(inodos[len(inodos) - 1].tamanoArchivo / self.SuperBloque.tamanio_cluster )
+                                if cluster_archivo <= self.SuperBloque.total_clusters - ultimoEspacio:
+                                    file = open(archivo,"rb")
+                                    self.imagen[self.SuperBloque.total_clusters * (ultimoEspacio + 1) : self.SuperBloque.total_clusters * (ultimoEspacio + 1) + tam_archivo] = f.read()
+                                    self.registrar(archivo, ultimoEspacio + 1)
                                     f.close()
                                     copiado = True
+                                    sys.stdout.write('\n\t'+'\x1b[1;32m' + 'Archivo copiado con éxito :)' + '\x1b[0m'+'\n\n')
                                 else:
                                     sys.stdout.write('\n\t'+'\x1b[1;31m' + 'Archivo demasiado grande :c' + '\x1b[0m'+'\n\n')
 
