@@ -65,12 +65,11 @@ Entra a la carpeta 'proyecto4' y ejecutar en terminal la siguiente instrucción 
 ## Manejo de la aplicación y descripción de cada método asociado a la GUI
 
 - Añadir
-  ```En el editText (En el box blanco) se necesita colocar el nombre del archivo que se va a agregar, después dar click para añadir a fiunamfs.```
+  En el editText (En el box blanco) se necesita colocar el nombre del archivo que se va a agregar, después dar click para añadir a fiunamfs.
 
 - Copiar a 
-  ```Se necesitas seleccionar el elemento a copiar en la lista desplegada dentro de la GUI, además en el editText colocar la ruta absoluta del destino donde se quiere copiar el archivo.
-  
-  Posteriormente, teniendo estos elementos se pulsa el botón "copiar a"  para así copiar un elemento de fiunamfs a la PC del usuario.```
+  Se necesitas seleccionar el elemento a copiar en la lista desplegada dentro de la GUI, además en el editText colocar la ruta absoluta del destino donde se quiere copiar el archivo.
+  Posteriormente, teniendo estos elementos se pulsa el botón "copiar a"  para así copiar un elemento de fiunamfs a la PC del usuario.
 
 - eliminar
   Se necesita seleccionar el archivo que se desee eliminar dentro de fiunam
