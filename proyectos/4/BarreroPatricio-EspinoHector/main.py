@@ -77,10 +77,6 @@ def stat(*argv):
             print(sa.obtener_datos_archivo(argv[0]))
         except FileNotFoundError:
             mostrarError("Error: El archivo {} no existe".format(argv[0]))
-def defrag(*argv):
-    if validar_comandos(0,argv):
-        ##Pato
-        mostrarNormal("Piri piri piri ando desframentiri")
         
 def help(*argv):
     mostrarNormal(
@@ -104,8 +100,6 @@ Comandos:
         Copia desde el volumen hacía la computadora o viseversa.
             El archivo de la computadora debe tener / Ej: /imagen.jpg
             Solamente un parametro puede tener diagonal
-    defrag
-        Desfragmenta el volumen.
     exit
         Sale del programa.
         """
@@ -121,7 +115,7 @@ def exit(*argv):
 
 def main():
     menu={"ls":ls,"lstat":lstat,"cp":cp,"help":help,"exit":exit,    
-    "stat":stat,"rm":rm,"defrag":defrag,"cat":cat}
+    "stat":stat,"rm":rm,"cat":cat}
     mostrarNormal("Ingrese el comando deseado, si necesita ayuda escriba: help")
     opcion = ""
     while True:

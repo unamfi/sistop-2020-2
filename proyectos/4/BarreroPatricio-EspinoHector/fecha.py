@@ -1,6 +1,5 @@
 import datetime
 
-
 ##Convierte de la fecha lineal a un string formatareadoo
 def formatear(fecha_lineal):
     formato = "%Y%m%d%H%M%S"

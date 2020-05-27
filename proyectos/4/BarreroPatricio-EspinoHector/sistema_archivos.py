@@ -190,9 +190,13 @@ class SistemaArchivos:
     def borrar(self, nombre_archivo):
         '''
         Permite borrar una archivo
+<<<<<<< HEAD
         Vacia  todo lo relacionado con el archivo en el directorio
         --params--
         str nombre del archivo
+=======
+        Escribe en el 
+>>>>>>> 782779715f9c2b3e4d94788ace7235aeb6d07229
         '''
         self.leer_archivos()
         archivo = self.obtener_archivo(nombre_archivo)
