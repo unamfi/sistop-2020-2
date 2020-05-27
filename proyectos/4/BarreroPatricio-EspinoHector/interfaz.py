@@ -1,6 +1,12 @@
 import sys
 from colorama import init,Back,Fore
 
+##Comprobamos que el nombre este en  asccii
+def validar_nombre(nombre):
+    if all(ord(char) < 128 for char in nombre):
+        if len(nombre) <= 15:
+            return True
+    return False
 
 ##Comandos
 def validar_comandos(num_parametros,lista):
@@ -23,16 +29,19 @@ def prompt():
 
 def ls(*argv):
     if validar_comandos(0,argv):
+        ##Pato
         mostrarNormal("Mostramos los Archivos ")
 
 def lstat(*argv):
     if validar_comandos(0,argv):
+        ##Pato
         mostrarNormal("Aquí estan todos tus archivos papá y sus datos")
 
 def cp(*argv):
     if validar_comandos(2,argv):
         a,b = argv
         if ("/" in a) ^ ("/" in b):
+            ###Pato
             mostrarNormal("Ruta inicial {}, Ruta final {}".format(a,b))
         else:
             mostrarError("Se debe agregar una y solo una ruta de sistema\n \
@@ -41,18 +50,22 @@ La ruta del sistema debe incluir '/'")
 
 def rm(*argv):
     if validar_comandos(1,argv):
+        ##Pato
         mostrarNormal("Eliminando archivo {}".format(argv[0]))
 
 def cat(*argv):
     if validar_comandos(1,argv):
+        ##Pato
         mostrarNormal("Cat al archivo"+argv[0])
 
 def stat(*argv):
     if validar_comandos(1,argv):
+        ###Pato
         mostrarNormal("Mostramos los datos del archivo"+argv[0])
 
 def defrag(*argv):
     if validar_comandos(0,argv):
+        ##Pato
         mostrarNormal("Piri piri piri ando desframentiri")
 
 def help(*argv):
