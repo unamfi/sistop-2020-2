@@ -15,7 +15,21 @@
         - La defragmentación debe hacerse dentro del sistema de archivos 
           (no creando un sistema de archivos nuevo y copiando hacia éste).
 
+## Especificaciones generales del Proyecto
 
+
+
+.
+├── proyecto4
+│   ├── fiunamfs.img
+│   ├── FSFI.ui
+│   ├── Myapp.py
+│   └── obb
+│       ├── entry_fs.py
+│       └── sblock.py
+└── README.md
+
+2 directories, 6 files
  
 ## Especificaciones generales del Proyecto
 
@@ -36,10 +50,15 @@ y los respectivos módulos necesarios, como son el caso de os  y Qt5.
     también puede usarse 
         ``` apt install python3-pyqt5 ```
 
-
 Ejecución del programa:
 
-- Entra a la carpeta 'proyecto4' y ejecutar en terminal la siguiente instrucción (Compilar MyApp.py que es el main de todo el código):
+- Entra a la carpeta 'proyecto4' y ejecutar en terminal la siguiente instrucción (Compilar MyApp.py que 
+  es el main de todo el código):
     ``` python3 MyApp.py ``` 
 
+
+## NOTAS
+
+Para mayor comprensión del código, se puede checar los comentarios que se han realizado en
+las clases realizadas 
 
