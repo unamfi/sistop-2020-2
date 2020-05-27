@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import mmap
-import os # para conocer los metadatos de archivos a ingresar con la fx cpin()
+import os 
 import math
 import os.path, time
 class SuperBlock :
@@ -14,12 +14,12 @@ class SuperBlock :
 
     # Información de superbloque
     name            = fs_map[0:8].decode('utf-8')         # FiUnamFS
-    version         = fs_map[10:13].decode('utf-8')       # 0.4
-    tagv            = fs_map[20:35].decode('utf-8')       # Mi Sistema
+    version         = fs_map[10:13].decode('utf-8')       # 0.9
+    tagv            = fs_map[20:35].decode('utf-8')       # FiUnamFS2020-2
     size_cluster    = int(fs_map[40:45].decode('utf-8'))  # 1024
     numdir_cluster  = int(fs_map[47:49].decode('utf-8'))  # 04
     total_cluster   = int(fs_map[52:60].decode('utf-8'))  # 00001440
-    size_dentry     = 64                                  # size dir entry
+    size_dentry     = 64                                  # tamaño del directorio de entrada
 
     f.close()
     fs_map.close()

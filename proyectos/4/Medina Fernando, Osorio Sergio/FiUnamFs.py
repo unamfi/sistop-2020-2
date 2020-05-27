@@ -74,8 +74,10 @@ def copyin():
     nuevo=tk.Toplevel()
     nuevo.title("Copiar archivo en el sistema")
     file_c = filedialog.askopenfilename()
-    fs.cpin(str(file_c))
-    tk.messagebox.showinfo(title='Archivo copiado',message='El archvo '+file_c+' ha sido copiado en el sistema de archivos')
+    if fs.cpin(str(file_c))!=None:
+        tk.messagebox.showinfo(title='Archivo copiado',message='El archvo '+str(file_c)+' ha sido copiado en el sistema de archivos')
+    else:
+        tk.messagebox.showinfo(title='Archivo no copiado',message='El archvo '+str(file_c)+'no ha sido copiado en el sistema de archivos por:'+str(fs.cpint(str(file_c))))
     
 def ajustar_print(entrada):
     '''
