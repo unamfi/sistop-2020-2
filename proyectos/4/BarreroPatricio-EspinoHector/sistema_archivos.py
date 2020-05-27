@@ -31,7 +31,9 @@ class Archivo:
                                         agregar_espacios(formatear(self.fecha_modificacion), 14))
 
 class SistemaArchivos:
-
+    """
+        Implementa los comandos a los que responde el sistema de archvios
+    """
     def __init__(self, ubicacion_diskete, tamano_directorio = 64,nombre_original = "FiUnamFS"):
         #Comprobamos que el archivo que leemos es el correcto
         self.ubicacion_diskete = ubicacion_diskete
@@ -67,6 +69,9 @@ class SistemaArchivos:
                     self.archivos.append(archivo)
         
     def obtener_archivo(self, nombre):
+        '''
+        Obtiene un archivo asociado al nombre
+        '''
         self.leer_archivos()
         for archivo in self.archivos:
             if archivo.nombre == nombre:
@@ -74,12 +79,18 @@ class SistemaArchivos:
         raise FileNotFoundError(ENOENT, strerror(ENOENT), nombre)
 
     def leer_archivo(self, nombre):  # Puede que el nombre no exista
+        '''
+        Permite leer el contenido de un archivo guardado en el diskete, leyendo en el area de datos la informacion
+        '''
         archivo = self.obtener_archivo(nombre)
         inicio = self.tamano_cluster*archivo.cluster_inicial
         tamano = archivo.tamano
         return leer(inicio, tamano, self.ubicacion_diskete)
 
     def obtener_datos_archivo(self, nombre):
+        '''
+        Permite obtener los metadatos asociados a un archivos 
+        '''
         archivo = self.obtener_archivo(nombre)
         self.info()
         return repr(archivo)
@@ -137,11 +148,8 @@ class SistemaArchivos:
         --params--
         str nombre - nombre del archivo que deseamos escribir
         str contenido - lo que queremos escribir en el archivo
-        --returns--
-        0 - si el nombre del archivo es incorrecto
-        1 - si la memoria esta llena
-        2 - si la capacidad de archivos es la maxima
-        3 - si la operacion fue un exito
+        
+        
         """
         if not validar_nombre(nombre):
             raise SyntaxError
@@ -180,6 +188,12 @@ class SistemaArchivos:
             escribir(0, contenido, archivo2, ext=None)
 
     def borrar(self, nombre_archivo):
+        '''
+        Permite borrar una archivo
+        Vacia  todo lo relacionado con el archivo en el directorio
+        --params--
+        str nombre del archivo
+        '''
         self.leer_archivos()
         archivo = self.obtener_archivo(nombre_archivo)
         offset = self.entrada_directorio(archivo.nombre)
@@ -187,11 +201,12 @@ class SistemaArchivos:
         print(offset)
         escribir(offset, contenido, self.ubicacion_diskete)
 
-    def __str__(self):
-        self.leer_archivos()
-        return '\n'.join(map(str, self.archivos))
+    # Funciones para mostrar en pantalla
 
     def info(self):
+        '''
+        Funcion que permite mostrar el encabezado de la descripcion de archivos
+        '''
         nombre_archivo = agregar_espacios("Nombre Archivo", 15)
         tamano = agregar_espacios("Tamaño Bytes", 8)
         cluster_inicial = agregar_espacios("Cluster Inicial", 15)
@@ -199,11 +214,20 @@ class SistemaArchivos:
         fecha_modificacion = agregar_espacios("Fecha Modificacion", 14)
         print("{}\t{}\t{}\t{}\t\t{}".format(nombre_archivo, tamano, cluster_inicial, fecha_creacion, fecha_modificacion))
 
+    def __str__(self):
+        '''
+        Muestra los nombres de todos los archivos
+        '''
+        self.leer_archivos()
+        return '\n'.join(map(str, self.archivos))    
+
     def __repr__(self):
+        '''
+        Muestra todos las caracteristicas de todos los archivos
+        '''
         self.leer_archivos()
         self.info()
         return '\n'.join(map(repr, self.archivos))
-
 
 if __name__ == "__main__":
     ubicacion_archivo = "fiunamfs.img" 

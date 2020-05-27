@@ -66,7 +66,7 @@ def cat(*argv):
     if validar_comandos(1,argv):
         try:
             mostrarNormal("Cat al archivo"+argv[0])
-            sa.leer_archivo(argv[0])
+            print(sa.leer_archivo(argv[0]))
         except FileNotFoundError:
             mostrarError("Error: El archivo {} no existe".format(argv[0]))
 
@@ -84,7 +84,7 @@ def defrag(*argv):
         
 def help(*argv):
     mostrarNormal(
-        """Se utilizan comandos similares a posix:
+        """Se utilizan comandos similares a posix. El archivo fiunamfs.img debe estar en la misma carpeta que este archivo:
 Comandos:
 
     help
