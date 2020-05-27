@@ -1,5 +1,5 @@
 '''
- * @Authors: Fernando Arturo Medina Molina, Sergio Osorio Sánchez
+ * @Authors: Fernando Arturo Medina Molina, Sergio Osorio Robles
  * @Version: 1.0
  * @Copyleft:
  * 1.-Usarla sin ninguna limitación.
