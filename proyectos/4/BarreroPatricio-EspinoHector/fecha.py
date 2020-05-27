@@ -1,10 +1,12 @@
 import datetime
 
 
+##Convierte de la fecha lineal a un string formatareado
 def formatear(fecha_lineal):
     formato = "%Y%m%d%H%M%S"
     return str(datetime.datetime.strptime(fecha_lineal,formato))
 
+##Convierte de un string formateado a una fecha lineal
 def compactar(fecha):
     formato = "%Y%m%d%H%M%S"
     formato_original = "%Y-%m-%d %H:%M:%S"

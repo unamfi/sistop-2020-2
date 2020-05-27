@@ -8,7 +8,8 @@ def validar_nombre(nombre):
             return True
     return False
 
-##Comandos
+##Creamos un validador, asegura que los comandos tengan el numero de parametros deseado. 
+##-> Tenerlo así da mayor escalabilidad
 def validar_comandos(num_parametros,lista):
     nombre = sys._getframe(1).f_code.co_name
     tamano = len(lista)
@@ -19,6 +20,7 @@ def validar_comandos(num_parametros,lista):
         return False
     return True
 
+###Coloreamos las salidas
 def mostrarNormal(cadena):
     print(Back.CYAN+Fore.BLACK+cadena)
 def mostrarError(cadena):
@@ -27,6 +29,8 @@ def prompt():
     entrada = input(Fore.GREEN + ">>> ").split()
     return entrada
 
+
+###Definimos el como trabajan los distintos comandos
 def ls(*argv):
     if validar_comandos(0,argv):
         ##Pato
@@ -99,6 +103,10 @@ Comandos:
 def exit(*argv):
     mostrarNormal("Hasta pronto!")
     sys.exit()
+
+##Funcion principal, despliega el menu, parsea las entradas.
+##El menú se define acorde a las entradas del usuario y manda los parametros.
+##Al querer hacer una interfaz interactiva creamos un ciclo infinito.
 
 def main():
     menu={"ls":ls,"lstat":lstat,"cp":cp,"help":help,"exit":exit,    
