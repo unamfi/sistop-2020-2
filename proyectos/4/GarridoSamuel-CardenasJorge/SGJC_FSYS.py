@@ -6,20 +6,21 @@ import math
 import re
 
 class SuperBloque:
-    try:
-        f = open('fiunamfs.img','r+b')
-        imagen = mmap.mmap(f.fileno(),0,access=mmap.ACCESS_READ)
-        nombre             = imagen[0:8].decode('utf-8')      
-        version            = imagen[10:13].decode('utf-8')
-        etiqueta_volumen   = imagen[20:35].decode('utf-8')
-        tamanio_cluster    = int(imagen[40:45].decode('utf-8'))
-        num_cluster        = int(imagen[47:49].decode('utf-8'))
-        total_clusters     = int(imagen[52:60].decode('utf-8'))
-        tamanio_entrada    = 64                               
-        f.close()
-        imagen.close()
-    except IOError:
-        print("Error al abrir el sistema de archivos ")
+    tamanio_entrada = 64
+    def __init__(self):
+        try:
+            self.f = open('fiunamfs.img','r+b')
+            self.imagen = mmap.mmap(self.f.fileno(),0,access=mmap.ACCESS_READ)
+            self.nombre             = self.imagen[0:8].decode('ASCII')      
+            self.version            = self.imagen[10:13].decode('ASCII')
+            self.etiqueta_volumen   = self.imagen[20:35].decode('ASCII')
+            self.tamanio_cluster    = int(self.imagen[40:45].decode('ASCII'))
+            self.num_cluster        = int(self.imagen[47:49].decode('ASCII'))
+            self.total_clusters     = int(self.imagen[52:60].decode('ASCII'))                       
+            self.f.close()
+            self.imagen.close()
+        except IOError:
+            print("Error al abrir el sistema de archivos ")
 
 class Entrada:
     nombre_archivo = 15
@@ -29,101 +30,93 @@ class Entrada:
     fecha_modificacion = 14
 
     def __init__(self, entrada):
-        self.nombreArchivo   = entrada[0:15].decode('utf-8').lstrip()
-        self.tamanoArchivo   = int(entrada[16:24].decode('utf-8'))
-        self.NumClusters     = int(entrada[25:30].decode('utf-8'))
-        self.fecha_crea      = entrada[31:45].decode('utf-8')
-        self.fecha_modif     = entrada[46:60].decode('utf-8')
+        self.nombreArchivo   = entrada[0:15].decode('ASCII').lstrip()
+        self.tamanoArchivo   = int(entrada[16:24].decode('ASCII'))
+        self.NumClusters     = int(entrada[25:30].decode('ASCII'))
+        self.fecha_crea      = entrada[31:45].decode('ASCII')
+        self.fecha_modif     = entrada[46:60].decode('ASCII')
+        self.numeroDireccion = 0
 
 
 class SistemaArchivosSGJC:
-    f = open('fiunamfs.img','a+b')
-    imagen = mmap.mmap(f.fileno(),0,access=mmap.ACCESS_WRITE)
     SuperBloque = SuperBloque()
+    archivo = open('fiunamfs.img','a+b')
+    imagen = mmap.mmap(archivo.fileno(),0,access=mmap.ACCESS_WRITE)
     sinUsar ='Xx.xXx.xXx.xXx.'
 
     def inodo(self):
         inodos = []
-        for i in range(64):
-            p = self.SuperBloque.tamanio_cluster + i * self.SuperBloque.tamanio_entrada
-            j = Entrada(self.imagen[p:p + self.SuperBloque.tamanio_entrada])
-            if self.sinUsar != j.nombreArchivo:
-                j.numdir = i
-                inodos.append(j)
+        for i in range(SuperBloque.tamanio_entrada):
+            inicio = self.SuperBloque.tamanio_cluster + i * self.SuperBloque.tamanio_entrada
+            fin = self.SuperBloque.tamanio_cluster + i * self.SuperBloque.tamanio_entrada + self.SuperBloque.tamanio_entrada
+            insercion = Entrada(self.imagen[inicio:fin])
+            if self.sinUsar != insercion.nombreArchivo:
+                insercion.numeroDireccion = i
+                inodos.append(insercion)
         return inodos
 
     def buscar (self,archivo):
-        for x in range(64):
-            p = self.SuperBloque.tamanio_cluster + x * self.SuperBloque.tamanio_entrada
-            j = Entrada(self.imagen[p:p + self.SuperBloque.tamanio_entrada])
-            if archivo == j.nombreArchivo:
-                j.numdir = x
-                return j
+        for i in range(SuperBloque.tamanio_entrada):
+            inicio = self.SuperBloque.tamanio_cluster + i * self.SuperBloque.tamanio_entrada
+            fin = self.SuperBloque.tamanio_cluster + i * self.SuperBloque.tamanio_entrada + self.SuperBloque.tamanio_entrada
+            busqueda = Entrada(self.imagen[inicio:fin])
+            if archivo == busqueda.nombreArchivo:
+                busqueda.numeroDireccion = i
+                return busqueda
 
     def registrar(self,archivo,cluster):
-        for x in range(64):
-            p = self.SuperBloque.tamanio_cluster + x*self.SuperBloque.tamanio_entrada
-            i = Entrada(self.imagen[p:p + self.SuperBloque.tamanio_entrada])
-            if self.sinUsar == i.nombreArchivo:
-                                                                                       
-                self.imagen[p:p + i.nombre_archivo] = archivo.rjust(i.nombre_archivo).encode('utf-8')
+        for i in range(SuperBloque.tamanio_entrada):
+            inicio = self.SuperBloque.tamanio_cluster + i * self.SuperBloque.tamanio_entrada
+            fin = self.SuperBloque.tamanio_cluster + i * self.SuperBloque.tamanio_entrada + self.SuperBloque.tamanio_entrada
+            registro = Entrada(self.imagen[inicio:fin])
+            if self.sinUsar == registro.nombreArchivo:                                                                
+                self.imagen[inicio:inicio + registro.nombre_archivo] = archivo.rjust(registro.nombre_archivo).encode('ASCII')
                 archivo_tamanio = str(os.stat(archivo).st_size)
-                nuevo_p = p + i.nombre_archivo + 1
-                self.imagen[nuevo_p :nuevo_p + i.tamanio_archivo] = archivo_tamanio.zfill(i.tamanio_archivo).encode('utf-8')
-
-                cluster_archivo = str(cluster)
-              
-                nuevo_p += i.tamanio_archivo + 1
-                self.imagen[nuevo_p:nuevo_p + i.num_cluster] = cluster_archivo.zfill(i.num_cluster).encode('utf-8')
-
+                nuevo_p = inicio + registro.nombre_archivo + 1
+                self.imagen[nuevo_p :nuevo_p + registro.tamanio_archivo] = archivo_tamanio.zfill(registro.tamanio_archivo).encode('ASCII')
+                cluster_archivo = str(cluster)              
+                nuevo_p += registro.tamanio_archivo + 1
+                self.imagen[nuevo_p:nuevo_p + registro.num_cluster] = cluster_archivo.zfill(registro.num_cluster).encode('ASCII')
                 fecha_creacion= time.strftime('%Y%m%d%H%M%S', time.gmtime(os.path.getctime(archivo)))
-                nuevo_p += i.num_cluster + 1
-                self.imagen[nuevo_p:nuevo_p + i.fechaCreacion] = fecha_creacion.encode('utf-8')
-
+                nuevo_p += registro.num_cluster + 1
+                self.imagen[nuevo_p:nuevo_p + registro.fechaCreacion] = fecha_creacion.encode('ASCII')
                 fecha_modif=time.strftime('%Y%m%d%H%M%S', time.gmtime(os.path.getmtime(archivo)))
-                nuevo_p += i.fechaCreacion + 1
-                self.imagen[nuevo_p:nuevo_p + i.fecha_modificacion] = fecha_modif.encode('utf-8')
-
+                nuevo_p += registro.fechaCreacion + 1
+                self.imagen[nuevo_p:nuevo_p + registro.fecha_modificacion] = fecha_modif.encode('ASCII')
                 break
 
     def ls(self):
-        
-        print("{:15}{:15}{:10}{:32}{:30}".format("Nombre","Cluster","Tamaño","Fecha y hora de Modificación","Fecha y hora de creación"))
+        print("Nombre  Cluster  Tamaño   Fecha y hora de Modificación   Fecha y hora de creación")
         for i in self.inodo():
             tamanioArchivo = convertir(i.tamanoArchivo)
-            fecha_c= self.ObtenerFecha(i.fecha_crea)
-            fecha_m = self.ObtenerFecha(i.fecha_modif)
+            fecha_c= self.obtenerFecha(i.fecha_crea)
+            fecha_m = self.obtenerFecha(i.fecha_modif)
             print(i.nombreArchivo, i.NumClusters, tamanioArchivo, fecha_c,fecha_m)
     
     def eliminar(self,archivo):
-        i = self.buscar(archivo)
-        if i is None :
-            print(archivo + " : Archivo no encontrado ")
+        busqueda = self.buscar(archivo)
+        if busqueda is not None:
+            archivoEliminar = self.SuperBloque.tamanio_cluster + self.SuperBloque.tamanio_entrada *busqueda.numeroDireccion
+            self.imagen[archivoEliminar:archivoEliminar + busqueda.nombre_archivo] = bytes(self.sinUsar,'ASCII')
+            self.imagen[archivoEliminar+16:archivoEliminar+24]=bytes("00000000",'ASCII')
+            self.imagen[archivoEliminar+25:archivoEliminar+30]=bytes("00000",'ASCII')
+            self.imagen[archivoEliminar+31:archivoEliminar+45]=bytes('00000000000000','ASCII')
+            self.imagen[archivoEliminar+46:archivoEliminar+60]=bytes('00000000000000','ASCII')
+            
         else :
-            p = self.SuperBloque.tamanio_cluster + self.SuperBloque.tamanio_entrada *i.numdir
-            self.imagen[p:p + i.nombre_archivo] = bytes(self.sinUsar,'utf-8')
-            self.imagen[p+16:p+24]=bytes("".zfill(8),'utf-8')
-            self.imagen[p+25:p+30]=bytes("".zfill(5),'utf-8')
-            self.imagen[p+31:p+45]=bytes("".zfill(14),'utf-8')
-            self.imagen[p+46:p+60]=bytes("".zfill(14),'utf-8')
+            print("El archivo no existe en el sistema.")
 
-    #Método para copiar en nuestro sistema
-    def cpout(self,archivo,dir):
-        #Primero buscar si el archivo existe,
-        #si existe, lo copiamos al directorio especificado
+    def cpout(self,archivo):
         i = self.buscar(archivo)
         if i is not None :
-            if os.path.exists(dir):
-                p = self.SuperBloque.tamanio_cluster + self.SuperBloque.tamanio_entrada * i.numdir
-                archivocp = open(dir+"/"+archivo,"a+b")
-                cluster = self.SuperBloque.tamanio_cluster * i.NumClusters
-                archivocp.write(self.imagen[cluster:cluster + i.tamanoArchivo])
-                archivocp.close()
-            else:
-                print("Dirección " + dir+" no encontrada")
+            p = self.SuperBloque.tamanio_cluster + self.SuperBloque.tamanio_entrada * i.numeroDireccion
+            archivocp = open(archivo,"a+b")
+            cluster = self.SuperBloque.tamanio_cluster * i.NumClusters
+            archivocp.write(self.imagen[cluster:cluster + i.tamanoArchivo])
+            archivocp.close()
         else:
             print(i.nombreArchivo + " : Archivo no encontrado ")
-    #Método para comprobar si es posible copiar al sistema FiUnamFS
+
     def cpin(self, archivo):
         if os.path.isfile(archivo):
             if len(archivo) < 15:
@@ -136,21 +129,39 @@ class SistemaArchivosSGJC:
         else:
             print(archivo + " Archivo no encontrado")
 
-    #Metodo de copiado de archivos hacia el sistema FiUnamFS
+
     def Copiar(self, archivo):
         inodos = self.inodo()
         inodos.sort(key = lambda x : x.NumClusters)
         tam_archivo = os.stat(archivo).st_size
-        #El método de número de Python ceil () devuelve el valor máximo de x :
-        #  el entero más pequeño, no menor que x.
         cluster_archivo = math.ceil(tam_archivo/self.SuperBloque.tamanio_cluster)
 
-        #si no hay archivos el primero lo meteremos en el cluster 5 
-        
+        if len(inodos) == 0:
+            if  cluster_archivo <= (self.SuperBloque.total_clusters - 4):
+                f = open(archivo,"rb")
+                #lo meteremos en el cluster 5
+                destino = self.SuperBloque.tamanio_cluster * 5
+                self.imagen[destino: destino + tam_archivo] = f.read()
+                self.registrar(archivo,5)
+                f.close()
+            else:
+                print("Archivo demasiado grande :(")
+        else:
+            copiado = False
+            for j in range(0,len(inodos)-1):
+                ultimo_cluster = inodos[j].NumClusters + math.ceil( inodos[j].tamanoArchivo / self.SuperBloque.tamanio_cluster)
+                espacio_entre_sig_archivo = inodos[j+1].NumClusters - ultimo_cluster
+
+                if cluster_archivo <= espacio_entre_sig_archivo:
+                    f = open(archivo, "rb")
+                    p = int(self.SuperBloque.tamanio_cluster * (cluster_archivo + 1))
+                    self.imagen[p : p + tam_archivo ] = f.read()
+                    self.registrar(archivo,cluster_archivo + 1)
+                    f.close()
+                    copiado = True
                     break
-            # si no hubo espacio entre archivos lo intentaremos copiar al final
+
             if copiado == False:
-                #            cluster del ultimo archivo
                 ultimo = inodos[len(inodos) - 1].NumClusters + math.ceil(inodos[len(inodos) - 1].tamanoArchivo / self.SuperBloque.tamanio_cluster )
                 espacio_restante = self.SuperBloque.total_clusters - ultimo
                 if cluster_archivo <= espacio_restante:
@@ -161,36 +172,37 @@ class SistemaArchivosSGJC:
                     f.close()
                     copiado = True
                 else:
-                    print(archivo + "Archivo demasido grande")
+                    print("Archivo demasido grande :(")
     #Método para desfragmentar 
     def defrag(self):
-        for i in range(64): 
+        for i in range(SuperBloque.tamanio_entrada): 
             p = self.SuperBloque.tamanio_cluster + i * self.SuperBloque.tamanio_entrada
             j = Entrada(self.imagen[p:p + self.SuperBloque.tamanio_entrada])
             #print("{} + {} + {}".format(i,j.nombreArchivo,j.NumClusters))
             if (j.nombreArchivo==self.sinUsar):
-                for k in range (i+1,64):
+                for k in range (i+1,SuperBloque.tamanio_entrada):
                     paux = self.SuperBloque.tamanio_cluster + k * self.SuperBloque.tamanio_entrada
                     jaux = Entrada(self.imagen[paux:paux + self.SuperBloque.tamanio_entrada])
                     if(jaux.nombreArchivo!=self.sinUsar):
                         self.imagen[p:p + self.SuperBloque.tamanio_entrada]=self.imagen[paux:paux + self.SuperBloque.tamanio_entrada]
-                        self.imagen[paux:paux + 15]=bytes(self.sinUsar,'utf-8')
-                        self.imagen[paux+16:paux+24]=bytes("".zfill(8),'utf-8')
-                        self.imagen[paux+25:paux+30]=bytes("".zfill(5),'utf-8')
-                        self.imagen[paux+31:paux+45]=bytes("".zfill(14),'utf-8')
-                        self.imagen[paux+46:paux+60]=bytes("".zfill(14),'utf-8')
+                        self.imagen[paux:paux + 15]=bytes(self.sinUsar,'ASCII')
+                        self.imagen[paux+16:paux+24]=bytes("".zfill(8),'ASCII')
+                        self.imagen[paux+25:paux+30]=bytes("".zfill(5),'ASCII')
+                        self.imagen[paux+31:paux+45]=bytes("".zfill(14),'ASCII')
+                        self.imagen[paux+46:paux+60]=bytes("".zfill(14),'ASCII')
                         break
         sys.stdout.write('\n\t'+'\x1b[1;32m' + 'Desfragmentación completa! :) ' + '\x1b[0m'+'\n\n')
-    #Método de prueba para checar si se realizó la desfragmentación
-    def mostrarTodo (self):
+
+
+    def mostrarTodo(self):
         print("IN  Nombre archivo   cluster  Fecha de creación      \t      Fecha de modificación")
-        for i in range (64):
+        for i in range (SuperBloque.tamanio_entrada):
             p = self.SuperBloque.tamanio_cluster + i * self.SuperBloque.tamanio_entrada
             j = Entrada(self.imagen[p:p + self.SuperBloque.tamanio_entrada])
             if j.nombreArchivo == self.sinUsar:
                 print("{:2}  {:15}     {:4}  {:30}  {:20}".format(i,j.nombreArchivo,j.NumClusters,j.fecha_crea,j.fecha_modif))
             else:
-                print("{:2}  {:15}     {:4}  {:30}  {:20}".format(i,j.nombreArchivo,j.NumClusters,self.ObtenerFecha(j.fecha_crea),self.ObtenerFecha(j.fecha_modif)))
+                print("{:2}  {:15}     {:4}  {:30}  {:20}".format(i,j.nombreArchivo,j.NumClusters,self.obtenerFecha(j.fecha_crea),self.obtenerFecha(j.fecha_modif)))
 
 
     def obtenerFecha(self,fecha):
@@ -234,23 +246,28 @@ def print_line():
     print('#' if('root' in user) else '$', end = ' ')
 def main():
     print("\n\t", "============ 🗄  - FiUnamFS Montado! - 💾 ============","\n")
-    sistema = SistemaArchivosSGJC()
+    SGJC = SistemaArchivosSGJC()
+    breaker = False
     while(True):
         try:
             print_line()
             comand = input()
+            romper = False
             while not comand:
+                romper = True
+            if romper:
                 break
-            if(comand=='ls'):
-                sistema.ls()
-            elif(comand=='pwd'):
-                sistema.ruta()
-            elif(comand=='mostrar'):
-                sistema.mostrarTodo()
-            elif(comand=='desfrag'):
-                sistema.defrag()
             elif(comand=='ayuda'):
-                sistema.ayuda()
+                SGJC.ayuda()
+            if(comand=='ls'):
+                SGJC.ls()
+            elif(comand=='pwd'):
+                SGJC.ruta()
+            elif(comand=='mostrar'):
+                SGJC.mostrarTodo()
+            elif(comand=='desfrag'):
+                SGJC.defrag()
+            
             elif(comand[0:2] == 'rm'):
                 if(comand[2:3]!=" "):
                     sys.stdout.write('\n\t'+'\x1b[1;33m' + 'Error en el comando, cheque el espacio!' + '\x1b[0m'+'\n\n')
@@ -258,15 +275,23 @@ def main():
                 if not comand[3:]:
                     sys.stdout.write('\n\t'+'\x1b[1;33m' + 'Inserte el nombre del archivo a remover' + '\x1b[0m'+'\n\n')
                     continue
-                sistema.eliminar(comand[3:])
-            elif(comand[0:2] == 'cpin'):
-                if(comand[2:3]!=" "):
+                SGJC.eliminar(comand[3:])
+            elif(comand[0:3] == 'cpi'):
+                if(comand[3:4]!=" "):
                     sys.stdout.write('\n\t'+'\x1b[1;33m' + 'Error en el comando, cheque el espacio!' + '\x1b[0m'+'\n\n')
                     continue
-                if not comand[3:]:
+                if not comand[4:]:
                     sys.stdout.write('\n\t'+'\x1b[1;33m' + 'Inserte el nombre del archivo a remover' + '\x1b[0m'+'\n\n')
                     continue
-                sistema.cpin(comand[3:])
+                SGJC.cpin(comand[4:])
+            elif(comand[0:3] == 'cpo'):
+                if(comand[3:4]!=" "):
+                    sys.stdout.write('\n\t'+'\x1b[1;33m' + 'Error en el comando, cheque el espacio!' + '\x1b[0m'+'\n\n')
+                    continue
+                if not comand[4:]:
+                    sys.stdout.write('\n\t'+'\x1b[1;33m' + 'Inserte el nombre del archivo a remover' + '\x1b[0m'+'\n\n')
+                    continue
+                SGJC.cpout(comand[4:])
             elif 'salir' in comand:
                 print("\n\t============ 🖥  - FiUnamFS Desmontado! - 🗃 ============\n")
                 exit(0)
@@ -275,21 +300,5 @@ def main():
         except (KeyboardInterrupt,EOFError):
             print("\n\t============ 🖥  - FiUnamFS Desmontado! - 🗃 ============\n")
             exit(0)
-"""
-    if(len(sys.argv)==3):
-        if(sys.argv[1]=='cpin'):
-            sistema.cpin(sys.argv[2])
-        elif(sys.argv[1]=='rm'):
-            sistema.rm(sys.argv[2])
-        else:
-            print("Comando no encontrado. Escriba -help para revisar lista de comandos")
-    elif(len(sys.argv)==4):
-        if(sys.argv[1]=='cpout'):
-            sistema.cpout(sys.argv[2],sys.argv[3])
-        else:
-            print("Comando no encontrado. Escriba -help para revisar lista de comandos")
-    else:
-        print("Comando no encontrado. Escriba -help para revisar lista de comandos")
-"""
 if __name__ == '__main__':
     main()
