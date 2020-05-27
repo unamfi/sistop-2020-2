@@ -19,3 +19,5 @@ Aunque le programa acepta también rm, dg, cpfs, cppc y el signo de interrogaci�
 
 ## Pruebas
 Se anexa imagen del método que funciona.
+
+![Aquí la descripción de la imagen por si no carga](https://github.com/NiverMtz/sistop-2020-2/blob/proyecto4/proyectos/4/MartinezNiver/Captura.PNG)
