@@ -1,10 +1,13 @@
 # Importamos lo necesario
 
 from math import ceil
+from os import strerror
+from errno import ENOENT
 
-from fecha import formatear, fecha_actual
+from fecha import formatear, fecha_actual, compactar
 from tratamiento_cadenas import validar_nombre, agregar_espacios
 from trabajar_archivos import tamano_archivo, escribir, leer
+
 class Archivo:
 
     def __init__(self, cadena):
@@ -41,12 +44,12 @@ class SistemaArchivos:
         etiqueta_volumen = leer(20, 15, ubicacion_diskete)
         self.tamano_cluster = int(leer(40, 5, ubicacion_diskete))
         self.num_clusters_directorio = int(leer(47, 2, ubicacion_diskete))
-        num_clusters_unidad_completa = int(leer(52, 8, ubicacion_diskete))
+        self.num_clusters_unidad_completa = int(leer(52, 8, ubicacion_diskete))
         print("version =", version)
         print("etiqueta volumen =", etiqueta_volumen)
         print("tamano cluster =", self.tamano_cluster)
         print("numero de clusters directorio =", self.num_clusters_directorio)
-        print("num clusters unidad completa =", num_clusters_unidad_completa)
+        print("num clusters unidad completa =", self.num_clusters_unidad_completa)
 
     def leer_archivos(self):
         '''
@@ -68,13 +71,18 @@ class SistemaArchivos:
         for archivo in self.archivos:
             if archivo.nombre == nombre:
                 return archivo
-        raise FileNotFoundError
+        raise FileNotFoundError(ENOENT, strerror(ENOENT), nombre)
 
     def leer_archivo(self, nombre):  # Puede que el nombre no exista
         archivo = self.obtener_archivo(nombre)
         inicio = self.tamano_cluster*archivo.cluster_inicial
         tamano = archivo.tamano
         return leer(inicio, tamano, self.ubicacion_diskete)
+
+    def obtener_datos_archivo(self, nombre):
+        archivo = self.obtener_archivo(nombre)
+        self.info()
+        return repr(archivo)
 
     def entrada_directorio(self, nombre = 'Xx.xXx.xXx.xXx.'):
         """
@@ -99,21 +107,26 @@ class SistemaArchivos:
         --returns--
         int cluster_incial - cluster inicial deseado para almacenar el archivo en curso
         """
+        primero = self.num_clusters_directorio + 1
+        if self.archivos[0].cluster_inicial - primero >= tamano:
+            return primero
         for a, b in zip(self.archivos, self.archivos[1:]):
-            cluster_incial = a.tamano + int(ceil(a.inicio / self.tamano_cluster))
-            if b.inicio - inicio >= tamano:
-                return cluster_incial
+            cluster_inicial = a.tamano + int(ceil(a.cluster_inicial / self.tamano_cluster))
+            if b.cluster_inicial - cluster_inicial >= tamano:
+                return cluster_inicial
+        ultimo = self.num_clusters_unidad_completa
+        if ultimo - self.archivos[-1].cluster_inicial >= tamano:
+            return self.archivos[-1].cluster_inicial
         raise MemoryError
 
-    def escribir_en_directorios(self, nombre, tamano):
-        offset = self.entrada_directorio()
-        cluster_inicial = str(self.localidad_vacia(tamano))
+    def escribir_en_directorios(self, offset, cluster_inicial, nombre, tamano, fecha_creacion = None, fecha_modificacion = None):
         nombre = agregar_espacios(nombre, 15)
         cluster_inicial = agregar_espacios(cluster_inicial, 5)
-        tamano = agregar_espacios(str(tamano), 8)
-        fecha_creacion = fecha_actual() 
-        escribir(offset, nombre + tamano + cluster_inicial + fecha_creacion + fecha_creacion, self.ubicacion_diskete)
-        return cluster_inicial
+        tamano = agregar_espacios(tamano, 8)
+        if fecha_creacion == None: fecha_creacion = fecha_actual() 
+        if fecha_modificacion == None: fecha_modificacion = fecha_creacion
+        cadena = '{} {} {} {} {}'.format(nombre, tamano, cluster_inicial, fecha_creacion, fecha_creacion)
+        escribir(offset, cadena, self.ubicacion_diskete)
 
     def escribir_archivo_diskete(self, nombre, contenido):
         """
@@ -132,21 +145,24 @@ class SistemaArchivos:
         """
         if not validar_nombre(nombre):
             raise SyntaxError
-        archivo = self.obtener_archivo(nombre)
         tamano = len(contenido)
         inicio = 0
-        if archivo == None:  # Si no existe el archivo en el directorio
-            inicio =  self.escribir_en_directorios(nombre, tamano)
-        else:
+        try:
+            archivo = self.obtener_archivo(nombre)
             if tamano > archivo.tamano:
-                inicio =  self.escribir_en_directorios(nombre, tamano)
+                self.borrar(nombre)
+                offset = self.entrada_directorio()
+                inicio = self.localidad_vacia(tamano)
+                self.escribir_en_directorios(offset, inicio, nombre, tamano)
             else:  # Actualizar fecha y tamano
                 offset = self.entrada_directorio(archivo.nombre)
-                tamano = agregar_espacios(str(tamano), 8)
-                fecha_modificacion = fecha_actual() 
-                escribir(offset, nombre + tamano + archivo.cluster_inicial + archivo.fecha_creacion + fecha_modificacion, self.ubicacion_diskete)
+                self.escribir_en_directorios(offset, archivo.cluster_inicial, nombre, tamano, archivo.fecha_creacion, fecha_actual())
                 inicio =  archivo.cluster_inicial
-        escribir(inicio, contenido, self.ubicacion_diskete)
+        except FileNotFoundError:  # Si no existe el archivo en el directorio
+            offset = self.entrada_directorio()
+            inicio = self.localidad_vacia(tamano)           
+            self.escribir_en_directorios(offset, inicio, nombre, tamano)
+        escribir(inicio*self.tamano_cluster, contenido, self.ubicacion_diskete)
     
     def copiar(self, archivo1, archivo2):  # Copia el archivo1 en el archivo2
         """
@@ -161,7 +177,7 @@ class SistemaArchivos:
             self.escribir_archivo_diskete(archivo2, contenido)
         else:
             contenido = self.leer_archivo(archivo1)  # Verificar esto
-            escribir(0, contenido, archivo2, codificacion=None)
+            escribir(0, contenido, archivo2, ext=None)
 
     def borrar(self, nombre_archivo):
         self.leer_archivos()
@@ -173,23 +189,26 @@ class SistemaArchivos:
 
     def __str__(self):
         self.leer_archivos()
+        return '\n'.join(map(str, self.archivos))
+
+    def info(self):
         nombre_archivo = agregar_espacios("Nombre Archivo", 15)
         tamano = agregar_espacios("Tamaño Bytes", 8)
         cluster_inicial = agregar_espacios("Cluster Inicial", 15)
         fecha_creacion = agregar_espacios("Fecha Creacion", 14)
         fecha_modificacion = agregar_espacios("Fecha Modificacion", 14)
         print("{}\t{}\t{}\t{}\t\t{}".format(nombre_archivo, tamano, cluster_inicial, fecha_creacion, fecha_modificacion))
-        return '\n'.join(map(repr, self.archivos))
 
     def __repr__(self):
-        max_nombre = 0
-        #max_
+        self.leer_archivos()
+        self.info()
+        return '\n'.join(map(repr, self.archivos))
 
 
 if __name__ == "__main__":
     ubicacion_archivo = "fiunamfs.img" 
     sa = SistemaArchivos(ubicacion_archivo)
-    sa.copiar("./fecha.py", "fecha.py")
+    sa.copiar("datetime.txt", "./datetime.txt")
     #sa.borrar("logo.png")
     print(sa)
 

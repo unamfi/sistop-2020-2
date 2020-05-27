@@ -1,7 +1,7 @@
 import datetime
 
 
-##Convierte de la fecha lineal a un string formatareado
+##Convierte de la fecha lineal a un string formatareadoo
 def formatear(fecha_lineal):
     formato = "%Y%m%d%H%M%S"
     return str(datetime.datetime.strptime(fecha_lineal,formato))
@@ -16,7 +16,7 @@ def compactar(fecha):
 def fecha_actual():
     formato_original = "%Y-%m-%d %H:%M:%S"
     fecha = datetime.datetime.now().strftime(formato_original)
-    return compatar(fecha)
+    return compactar(fecha)
 
 if __name__ == "__main__":
     a = formatear("20190509182600")
