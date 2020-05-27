@@ -14,7 +14,9 @@ def compactar(fecha):
     return datetime.datetime.strftime(fecha_obj,formato)
 
 def fecha_actual():
-    return datetime.datetime.now()
+    formato_original = "%Y-%m-%d %H:%M:%S"
+    fecha = datetime.datetime.now().strftime(formato_original)
+    return compatar(fecha)
 
 if __name__ == "__main__":
     a = formatear("20190509182600")
