@@ -17,16 +17,16 @@
 
 ## Especificaciones generales del Proyecto
 
-A continuación el árbol del proyecto donde se pueden observar los 3 archivos de python que cotienen toda la lógica del proyecto (Mayor descripción en la parte inferior), la imagen .img y un archivo .ui que es el mapeo de la interfaz gráfica 
+A continuación el árbol del proyecto donde se pueden observar los 3 archivos de python que cotienen toda la lógica del proyecto (Mayor descripción en la parte inferior), la imagen .img y un archivo .ui que es el mapeo de la interfaz gráfica <br>
 
-.
-├── proyecto4
-│   ├── fiunamfs.img
-│   ├── FSFI.ui
-│   ├── Myapp.py
-│   └── obb
-│       ├── entry_fs.py
-│       └── sblock.py
+.<br>
+├── proyecto4 <br>
+│   ├── fiunamfs.img<br>
+│   ├── FSFI.ui<br>
+│   ├── Myapp.py<br>
+│   └── obb<br>
+│       ├── entry_fs.py<br>
+│       └── sblock.py<br>
 └── README.md
 
 
@@ -88,3 +88,5 @@ Entra a la carpeta 'proyecto4' y ejecutar en terminal la siguiente instrucción 
   2. Los archivos .ui son un mapeo mediante xml para la biblioteca gráfica qt, realmente no es un archivo que contenga código en python, sino que es un recurso que auxilia a la biblioteca, para más información link https://www.qt.io/product/ui-design-tools
 
   3. Se dejaron algunos archivos dentro de la imagen fiunamfs.img sobre todo para poder "jugar " un poco con archivos propios 
+
+  4. No modificar el directorio ni la ubicación de la imagen que se usa para el proyecto :( 
