@@ -146,31 +146,7 @@ class SistemaArchivosSGJC:
         cluster_archivo = math.ceil(tam_archivo/self.SuperBloque.tamanio_cluster)
 
         #si no hay archivos el primero lo meteremos en el cluster 5 
-        if len(inodos) == 0:
-            #los clusters que ocupa el archivo debe ser menor al espacio disponible
-            if  cluster_archivo <= (self.SuperBloque.total_clusters - 4):
-                f = open(archivo,"rb")
-                #lo meteremos en el cluster 5
-                destino = self.SuperBloque.tamanio_cluster * 5
-                self.imagen[destino: destino + tam_archivo] = f.read()
-                self.registrar(archivo,5)
-                f.close()
-            else:
-                print(archivo + " demasiado grande")
-        else:
-            copiado = False
-            for j in range(0,len(inodos)-1):
-                #                 cluster           +           (tamaño del archivo / 1024)
-                ultimo_cluster = inodos[j].NumClusters + math.ceil( inodos[j].tamanoArchivo / self.SuperBloque.tamanio_cluster)
-                espacio_entre_sig_archivo = inodos[j+1].NumClusters - ultimo_cluster
-
-                if cluster_archivo <= espacio_entre_sig_archivo:
-                    f = open(archivo, "rb")
-                    p = int(self.SuperBloque.tamanio_cluster * (cluster_archivo + 1))
-                    self.imagen[p : p + tam_archivo ] = f.read()
-                    self.registrar(archivo,cluster_archivo + 1)
-                    f.close()
-                    copiado = True
+        
                     break
             # si no hubo espacio entre archivos lo intentaremos copiar al final
             if copiado == False:
