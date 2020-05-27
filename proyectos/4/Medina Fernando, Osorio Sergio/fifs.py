@@ -3,13 +3,14 @@ import mmap
 import os 
 import math
 import os.path, time
+ruta = input("Ruta del archivo.img: ")
 class SuperBlock :
     """
         El superbloque para este sistema de archivos ocupa el primer cluster
         del mismo, es decir, ocupa 1024
     """
 
-    f = open('fiunamfs.img','r+b')
+    f = open(ruta,'r+b')
     fs_map = mmap.mmap(f.fileno(),0,access=mmap.ACCESS_READ)
 
     # Información de superbloque
@@ -68,7 +69,7 @@ class FIFS:
         * para desfragmentar
             defrag
     """
-    f = open('fiunamfs.img','a+b')
+    f = open(ruta,'a+b')
     fs_map = mmap.mmap(f.fileno(),0,access=mmap.ACCESS_WRITE)
 
     sb = SuperBlock()
