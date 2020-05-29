@@ -1,0 +1,587 @@
+#+title: Calificaciones y comentarios del proyecto 3
+#+author: Gunnar Wolf
+
+El planteamiento del proyecto y la rúbrica para su calificación están
+[[./README.org][disponibles aquí]].
+
+* Carlos Alcántara y Eduardo Jiménez
+- Documentación :: [[./AlcantaraCarlosJimenezEduardo/READMEprofesor.txt][READMEprofesor.txt]]
+- Archivos :: [[./AlcantaraCarlosJimenezEduardo/p4.py][p4.py]]
+- Lenguaje de desarrollo :: Python
+- Interfaz :: Línea de comando basada en menú de opciones; /interfaz
+              conversacional/
+- Estrategia empleada ::
+  - Conjuntos de llamadas a =seek()= + =read()= y =seek()= + =write()=
+- Observaciones ::
+  - Manejan muchas variables globales. Es completamente válido, pero
+    es /buena práctica/ considerar si es buena idea... O si tal vez
+    deberían estructurar su código como orientado a objetos, y
+    convertir a muchas de estas variables en atributos de sus objetos.
+  - Me creó un poco de sorpresa el ver cómo usan nombres de función
+    que /copian/ al nombre de métodos sobre objetos del sistema
+    (p.ej. =read()= y =write()=).
+
+| *Rubro*                             | *Parcial* | *Peso* | *Puntos* |
+|-------------------------------------+-----------+--------+----------|
+| *Proyecto*                          |           |    0.3 |     1.75 |
+| Cumplimiento                        |        10 |        |     1.00 |
+| Claridad de desarrollo              |           |        |     0.00 |
+| Interfaz usuario                    |       7.5 |        |     0.75 |
+|-------------------------------------+-----------+--------+----------|
+| *Desarrollo*                        |           |    0.3 |     3.00 |
+| Directorio de proyecto              |        10 |        |     1.00 |
+| Código válido                       |        10 |        |     1.00 |
+| Comentarios                         |        10 |        |     1.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Legibilidad*                       |           |    0.2 |     1.75 |
+| Estructura                          |        10 |        |     1.00 |
+| Nomenclatura                        |       7.5 |        |     0.75 |
+|-------------------------------------+-----------+--------+----------|
+| *Entrega*                           |           |    0.2 |     2.00 |
+| Entorno y dependencias              |        10 |        |     1.00 |
+| Historia en Git                     |        10 |        |     1.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Extras*                            |           |        |     0.00 |
+| Envió correcciones al planteamiento |           |    0.1 |     0.00 |
+| Directorios jerárquicos             |           |    0.1 |     0.00 |
+| Sistema de archivos con bitácora    |           |    0.1 |     0.00 |
+|-------------------------------------+-----------+--------+----------|
+| *TOTAL*                             |           |        |     8.50 |
+|-------------------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3+@4+@5 ; f-2::@3$4=$2*@2$3/3 ; f-2::@4$4=$2*@2$3/3 ; f-2::@5$4=$2*@2$3/3 ; f-2::@6$4=@7+@8+@9 ; f-2::@7$4=$2*@6$3/3 ; f-2::@8$4=$2*@6$3/3 ; f-2::@9$4=$2*@6$3/3 ; f-2::@10$4=@11+@12 ; f-2::@11$4=$2*@10$3/2 ; f-2::@12$4=$2*@10$3/2 ; f-2::@13$4=@14+@15 ; f-2::@14$4=$2*@13$3/2 ; f-2::@15$4=$2*@13$3/2 ; f-2::@16$4=@17+@18+@19 ; f-2::@17$4=$2*$3 ; f-2::@18$4=$2*$3 ; f-2::@19$4=$2*$3 ; f-2::@20$4=@2+@6+@10+@13+@16 ; f-2
+
+* Jorge Bárcenas y Sergio Reza
+- Documentación :: [[./BarcenasJorge_RezaSergio/Proyecto4BarcenasJorge_RezaSergio.pdf][Proyecto4BarcenasJorge_RezaSergio.pdf]]
+- Archivos :: [[./BarcenasJorge_RezaSergio/proy_4.py][proy_4.py]]
+- Lenguaje de desarrollo :: Python
+- Interfaz :: Programa con argumentos especificados en la línea de
+              comandos (incluye ayuda).
+- Estrategia empleada ::
+  Acceso al archivo imagen mapeado a memoria (=mmap=). Sistema de
+     archivos, superbloque y entradas del directorio representadas
+     como clases (OOP).
+- Observaciones ::
+  - La desfragmentación va sobre las entradas del directorio, pero no
+    desfragmenta el espacio de almacenamiento (los "agujeros" entre
+    archivos), que es lo más importante para esta operación.
+  - Si incluyen a una copia del sistema de archivos ejemplo como parte
+    de su entrega, probablemente deberían incluirla en el =.gitignore=
+    (que si no, va generando /ruido/ para cualquier modificación que
+    le hacemos)
+  - ¡Muy bonito código!
+
+| *Rubro*                             | *Parcial* | *Peso* | *Puntos* |
+|-------------------------------------+-----------+--------+----------|
+| *Proyecto*                          |           |    0.3 |     2.50 |
+| Cumplimiento                        |       7.5 |        |     0.75 |
+| Claridad de desarrollo              |        10 |        |     1.00 |
+| Interfaz usuario                    |       7.5 |        |     0.75 |
+|-------------------------------------+-----------+--------+----------|
+| *Desarrollo*                        |           |    0.3 |     2.75 |
+| Directorio de proyecto              |       7.5 |        |     0.75 |
+| Código válido                       |        10 |        |     1.00 |
+| Comentarios                         |        10 |        |     1.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Legibilidad*                       |           |    0.2 |     2.00 |
+| Estructura                          |        10 |        |     1.00 |
+| Nomenclatura                        |        10 |        |     1.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Entrega*                           |           |    0.2 |     2.00 |
+| Entorno y dependencias              |        10 |        |     1.00 |
+| Historia en Git                     |        10 |        |     1.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Extras*                            |           |        |     0.00 |
+| Envió correcciones al planteamiento |           |    0.1 |     0.00 |
+| Directorios jerárquicos             |           |    0.1 |     0.00 |
+| Sistema de archivos con bitácora    |           |    0.1 |     0.00 |
+|-------------------------------------+-----------+--------+----------|
+| *TOTAL*                             |           |        |     9.25 |
+|-------------------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3+@4+@5 ; f-2::@3$4=$2*@2$3/3 ; f-2::@4$4=$2*@2$3/3 ; f-2::@5$4=$2*@2$3/3 ; f-2::@6$4=@7+@8+@9 ; f-2::@7$4=$2*@6$3/3 ; f-2::@8$4=$2*@6$3/3 ; f-2::@9$4=$2*@6$3/3 ; f-2::@10$4=@11+@12 ; f-2::@11$4=$2*@10$3/2 ; f-2::@12$4=$2*@10$3/2 ; f-2::@13$4=@14+@15 ; f-2::@14$4=$2*@13$3/2 ; f-2::@15$4=$2*@13$3/2 ; f-2::@16$4=@17+@18+@19 ; f-2::@17$4=$2*$3 ; f-2::@18$4=$2*$3 ; f-2::@19$4=$2*$3 ; f-2::@20$4=@2+@6+@10+@13+@16 ; f-2
+
+* Patricio Barrero y Héctor Espino
+- Documentación :: [[./BarreroPatricio-EspinoHector/proyecto4.pdf][proyecto4.pdf]]
+- =.gitignore= :: [[./BarreroPatricio-EspinoHector/.gitignore][.gitignore]]
+- Archivos :: [[./BarreroPatricio-EspinoHector/excepciones.py][excepciones.py]], [[./BarreroPatricio-EspinoHector/fecha.py][fecha.py]], [[./BarreroPatricio-EspinoHector/main.py][main.py]], [[./BarreroPatricio-EspinoHector/sistema_archivos.py][sistema_archivos.py]], [[./BarreroPatricio-EspinoHector/trabajar_archivos.py][trabajar_archivos.py]], [[./BarreroPatricio-EspinoHector/tratamiento_cadenas.py][tratamiento_cadenas.py]]
+- Lenguaje de desarrollo :: Python
+- Interfaz ::  Línea de comando basada en menú de opciones; /interfaz
+              conversacional/, asistiendo al uso con colores
+              indicativos de prompt / tipo de información / estado
+- Estrategia empleada ::
+  Conjuntos de llamadas a =seek()= + =read()= y =seek()= + =write()=.
+
+  Programa modularizado; OOP para los principales objetos persistentes
+- Observaciones ::
+  - Veo que intentan usar un lenguaje formal para el desarrollo de su
+    documentación, entregarla con trabajo estético y todo. ¡Muy bien!
+    Sin embargo, ¡flagelo del ingeniero! Cuando hablan de /una cadena
+    del archivo exadecimal/ (olvidando la /h/ necesaria del prefijo
+    /hexa/) pierden la credibilidad que iban logrando ☹ ¡Cuidemos
+    nuestra ortografía!
+    - Misma cosa, ya en la ejecución del programa ⇒ /Copia desde el
+      volumen hacía la computadora o viseversa./ (debe ser:
+      /viceversa/)
+  - Los módulos que utilizan para el desarrollo (=datetime=, =sys=,
+    =os=, =errno=) no son parte del /core/ de Python (eso significaría
+    que no hace falta =import= arlos), sino que de su /biblioteca
+    estándar/ (/standard library/) — El conjunto de bibliotecas que
+    /acompañan al core/ en cualquier instalación que pueda decirse
+    normal.
+  - En la documentación se ve que comenzaron a implementar
+    =defrag=... Pero no llegó a fin de cuentas a la entrega ☹
+  - Hay otro archivo vacío, =excepciones.py=. No tiene nada de malo,
+    pero es... un poco raro verlo en la entrega.
+  - Bonito código. Veo /rastros/ de que estan acostumbrados a, por lo
+    menos de forma introductoria, hacer pruebas de funcionalidad en
+    sus programas (en =fecha.py=). ¡Muy bien!
+  - Si incluyen a una copia del sistema de archivos ejemplo como parte
+    de su entrega, probablemente deberían incluirla en el =.gitignore=
+    (que si no, va generando /ruido/ para cualquier modificación que
+    le hacemos)
+
+| *Rubro*                             | *Parcial* | *Peso* | *Puntos* |
+|-------------------------------------+-----------+--------+----------|
+| *Proyecto*                          |           |    0.3 |     2.50 |
+| Cumplimiento                        |       7.5 |        |     0.75 |
+| Claridad de desarrollo              |        10 |        |     1.00 |
+| Interfaz usuario                    |       7.5 |        |     0.75 |
+|-------------------------------------+-----------+--------+----------|
+| *Desarrollo*                        |           |    0.3 |     2.75 |
+| Directorio de proyecto              |       7.5 |        |     0.75 |
+| Código válido                       |        10 |        |     1.00 |
+| Comentarios                         |        10 |        |     1.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Legibilidad*                       |           |    0.2 |     2.00 |
+| Estructura                          |        10 |        |     1.00 |
+| Nomenclatura                        |        10 |        |     1.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Entrega*                           |           |    0.2 |     2.00 |
+| Entorno y dependencias              |        10 |        |     1.00 |
+| Historia en Git                     |        10 |        |     1.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Extras*                            |           |        |     0.00 |
+| Envió correcciones al planteamiento |           |    0.1 |     0.00 |
+| Directorios jerárquicos             |           |    0.1 |     0.00 |
+| Sistema de archivos con bitácora    |           |    0.1 |     0.00 |
+|-------------------------------------+-----------+--------+----------|
+| *TOTAL*                             |           |        |     9.25 |
+|-------------------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3+@4+@5 ; f-2::@3$4=$2*@2$3/3 ; f-2::@4$4=$2*@2$3/3 ; f-2::@5$4=$2*@2$3/3 ; f-2::@6$4=@7+@8+@9 ; f-2::@7$4=$2*@6$3/3 ; f-2::@8$4=$2*@6$3/3 ; f-2::@9$4=$2*@6$3/3 ; f-2::@10$4=@11+@12 ; f-2::@11$4=$2*@10$3/2 ; f-2::@12$4=$2*@10$3/2 ; f-2::@13$4=@14+@15 ; f-2::@14$4=$2*@13$3/2 ; f-2::@15$4=$2*@13$3/2 ; f-2::@16$4=@17+@18+@19 ; f-2::@17$4=$2*$3 ; f-2::@18$4=$2*$3 ; f-2::@19$4=$2*$3 ; f-2::@20$4=@2+@6+@10+@13+@16 ; f-2
+
+* Jorge Cárdenas y Samuel Garrido
+- Documentación :: [[./GarridoSamuel-CardenasJorge/README.md][README.md]], [[./GarridoSamuel-CardenasJorge/img/1.png][1.png]], [[./GarridoSamuel-CardenasJorge/img/2.png][2.png]], [[./GarridoSamuel-CardenasJorge/img/3.png][3.png]], [[./GarridoSamuel-CardenasJorge/img/4.png][4.png]], [[./GarridoSamuel-CardenasJorge/img/5.png][5.png]], [[./GarridoSamuel-CardenasJorge/img/6.png][6.png]], [[./GarridoSamuel-CardenasJorge/img/ayuda.png][ayuda.png]], [[./GarridoSamuel-CardenasJorge/img/errors.png][errors.png]]
+- =.gitignore= :: [[./GarridoSamuel-CardenasJorge/.gitignore][.gitignore]]
+- Archivos :: [[./GarridoSamuel-CardenasJorge/SGJC_FSYS.py][SGJC_FSYS.py]]
+- Lenguaje de desarrollo :: Python
+- Interfaz :: Línea de comando basada en menú de opciones; /interfaz
+              conversacional/, asistiendo al uso con colores
+              indicativos de prompt / tipo de información / estado
+- Estrategia empleada ::
+     Acceso al archivo imagen mapeado a memoria (=mmap=). Sistema de
+     archivos, superbloque y entradas del directorio representadas
+     como clases (OOP).
+- Observaciones ::
+  - La desfragmentación va sobre las entradas del directorio, pero no
+    desfragmenta el espacio de almacenamiento (los "agujeros" entre
+    archivos), que es lo más importante para esta operación.
+  - Si incluyen a una copia del sistema de archivos ejemplo como parte
+    de su entrega, probablemente deberían incluirla en el =.gitignore=
+    (que si no, va generando /ruido/ para cualquier modificación que
+    le hacemos)
+  - ¡No confundan /memoria/ con /sistemas de archivos/! (imágenes de
+    la documentación → /Memoria fragmentada después de remover un
+    elemento (...)/, y en la conclusión, /no estamos en los años 70
+    como para cargar todo nuestro programa en memoria cada rato/...)
+    Esperaba que la diferencia quedara mucho más clara y grabada en
+    sus mentes ☹
+  - ¡Muy buen manejo de excepciones! Hace mucho más limpio el manejo
+    de errores.
+
+| *Rubro*                             | *Parcial* | *Peso* | *Puntos* |
+|-------------------------------------+-----------+--------+----------|
+| *Proyecto*                          |           |    0.3 |     2.50 |
+| Cumplimiento                        |       7.5 |        |     0.75 |
+| Claridad de desarrollo              |        10 |        |     1.00 |
+| Interfaz usuario                    |       7.5 |        |     0.75 |
+|-------------------------------------+-----------+--------+----------|
+| *Desarrollo*                        |           |    0.3 |     2.75 |
+| Directorio de proyecto              |       7.5 |        |     0.75 |
+| Código válido                       |        10 |        |     1.00 |
+| Comentarios                         |        10 |        |     1.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Legibilidad*                       |           |    0.2 |     2.00 |
+| Estructura                          |        10 |        |     1.00 |
+| Nomenclatura                        |        10 |        |     1.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Entrega*                           |           |    0.2 |     2.00 |
+| Entorno y dependencias              |        10 |        |     1.00 |
+| Historia en Git                     |        10 |        |     1.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Extras*                            |           |        |     0.00 |
+| Envió correcciones al planteamiento |           |    0.1 |     0.00 |
+| Directorios jerárquicos             |           |    0.1 |     0.00 |
+| Sistema de archivos con bitácora    |           |    0.1 |     0.00 |
+|-------------------------------------+-----------+--------+----------|
+| *TOTAL*                             |           |        |     9.25 |
+|-------------------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3+@4+@5 ; f-2::@3$4=$2*@2$3/3 ; f-2::@4$4=$2*@2$3/3 ; f-2::@5$4=$2*@2$3/3 ; f-2::@6$4=@7+@8+@9 ; f-2::@7$4=$2*@6$3/3 ; f-2::@8$4=$2*@6$3/3 ; f-2::@9$4=$2*@6$3/3 ; f-2::@10$4=@11+@12 ; f-2::@11$4=$2*@10$3/2 ; f-2::@12$4=$2*@10$3/2 ; f-2::@13$4=@14+@15 ; f-2::@14$4=$2*@13$3/2 ; f-2::@15$4=$2*@13$3/2 ; f-2::@16$4=@17+@18+@19 ; f-2::@17$4=$2*$3 ; f-2::@18$4=$2*$3 ; f-2::@19$4=$2*$3 ; f-2::@20$4=@2+@6+@10+@13+@16 ; f-2
+
+* Kevin Lara y Javier Loidi
+- Documentación :: [[./LoidiJavier-LaraKevin/documentacion.txt][documentacion.txt]]
+- Archivos :: [[./LoidiJavier-LaraKevin/fiunamfs.py][fiunamfs.py]]
+- Lenguaje de desarrollo :: Python
+- Interfaz :: Línea de comando basada en menú de opciones; /interfaz
+              conversacional/
+- Estrategia empleada ::
+  Conjuntos de llamadas a =seek()= + =read()= y =seek()= + =write()=.
+
+  Programación estructurada tradicional.
+- Observaciones ::
+  - Bien por notar mi error en el planteamiento. Se me fue un dedo,
+    les di una imagen de 14400KB en vez de 1440KB :-\
+  - No implementa desfragmentación ☹
+  - Es mucho más sencillo ir comentando el código conforme se
+    desarrolla que hacer todo el comentario como paso
+    aparte. ¡Intenten agarrar el buen hábito)
+
+| *Rubro*                             | *Parcial* | *Peso* | *Puntos* |
+|-------------------------------------+-----------+--------+----------|
+| *Proyecto*                          |           |    0.3 |     2.50 |
+| Cumplimiento                        |       7.5 |        |     0.75 |
+| Claridad de desarrollo              |        10 |        |     1.00 |
+| Interfaz usuario                    |       7.5 |        |     0.75 |
+|-------------------------------------+-----------+--------+----------|
+| *Desarrollo*                        |           |    0.3 |     2.75 |
+| Directorio de proyecto              |       7.5 |        |     0.75 |
+| Código válido                       |        10 |        |     1.00 |
+| Comentarios                         |        10 |        |     1.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Legibilidad*                       |           |    0.2 |     2.00 |
+| Estructura                          |        10 |        |     1.00 |
+| Nomenclatura                        |        10 |        |     1.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Entrega*                           |           |    0.2 |     1.75 |
+| Entorno y dependencias              |        10 |        |     1.00 |
+| Historia en Git                     |       7.5 |        |     0.75 |
+|-------------------------------------+-----------+--------+----------|
+| *Extras*                            |           |        |     1.00 |
+| Envió correcciones al planteamiento |        10 |    0.1 |     1.00 |
+| Directorios jerárquicos             |           |    0.1 |     0.00 |
+| Sistema de archivos con bitácora    |           |    0.1 |     0.00 |
+|-------------------------------------+-----------+--------+----------|
+| *TOTAL*                             |           |        |    10.00 |
+|-------------------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3+@4+@5 ; f-2::@3$4=$2*@2$3/3 ; f-2::@4$4=$2*@2$3/3 ; f-2::@5$4=$2*@2$3/3 ; f-2::@6$4=@7+@8+@9 ; f-2::@7$4=$2*@6$3/3 ; f-2::@8$4=$2*@6$3/3 ; f-2::@9$4=$2*@6$3/3 ; f-2::@10$4=@11+@12 ; f-2::@11$4=$2*@10$3/2 ; f-2::@12$4=$2*@10$3/2 ; f-2::@13$4=@14+@15 ; f-2::@14$4=$2*@13$3/2 ; f-2::@15$4=$2*@13$3/2 ; f-2::@16$4=@17+@18+@19 ; f-2::@17$4=$2*$3 ; f-2::@18$4=$2*$3 ; f-2::@19$4=$2*$3 ; f-2::@20$4=@2+@6+@10+@13+@16 ; f-2
+
+* Niver Martínez
+- Documentación :: [[./MartinezNiver/Captura.PNG][Captura.PNG]], [[./MartinezNiver/README.md][README.md]], [[./MartinezNiver/planteamiento.txt][planteamiento.txt]]
+- Archivos :: [[./MartinezNiver/source/__pycache__/filesys_options.cpython-38.pyc][filesys_options.cpython-38.pyc]], [[./MartinezNiver/source/fileControl.py][fileControl.py]], [[./MartinezNiver/source/filesys_options.py][filesys_options.py]]
+- Lenguaje de desarrollo :: Python
+- Interfaz :: Programa con argumentos especificados en la línea de
+              comandos
+- Estrategia empleada ::
+     Acceso al archivo imagen mapeado a memoria (=mmap=).
+
+     Separación en dos archivos fuente (funcionalidad e interfaz) — Al
+     menos, /apuntando hacia/ allá (implementación incompleta ☹)
+- Observaciones ::
+  - Falta implementar funcionalidad ☹ Sólo está implementado el
+    listado de directorios.
+  - Al ejecutar tu código, se genera un archivo
+    =source/__pycache__/filesys_options.cpython-37.pyc= — Deberías
+    agregar un =.gitignore=
+    - Incluyes además un archivo compilado para tu versión de Python
+      (3.8). No debería ser parte de la entrega.
+    - Si modificaras al sistema de archivos que incluyes, Git también
+      se /quejaría/ por estas modificaciones
+
+| *Rubro*                             | *Parcial* | *Peso* | *Puntos* |
+|-------------------------------------+-----------+--------+----------|
+| *Proyecto*                          |           |    0.3 |     1.50 |
+| Cumplimiento                        |         0 |        |     0.00 |
+| Claridad de desarrollo              |        10 |        |     1.00 |
+| Interfaz usuario                    |         5 |        |     0.50 |
+|-------------------------------------+-----------+--------+----------|
+| *Desarrollo*                        |           |    0.3 |     1.50 |
+| Directorio de proyecto              |         5 |        |     0.50 |
+| Código válido                       |        10 |        |     1.00 |
+| Comentarios                         |         0 |        |     0.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Legibilidad*                       |           |    0.2 |     2.00 |
+| Estructura                          |        10 |        |     1.00 |
+| Nomenclatura                        |        10 |        |     1.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Entrega*                           |           |    0.2 |     2.00 |
+| Entorno y dependencias              |        10 |        |     1.00 |
+| Historia en Git                     |        10 |        |     1.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Extras*                            |           |        |     0.00 |
+| Envió correcciones al planteamiento |           |    0.1 |     0.00 |
+| Directorios jerárquicos             |           |    0.1 |     0.00 |
+| Sistema de archivos con bitácora    |           |    0.1 |     0.00 |
+|-------------------------------------+-----------+--------+----------|
+| *TOTAL*                             |           |        |     7.00 |
+|-------------------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3+@4+@5 ; f-2::@3$4=$2*@2$3/3 ; f-2::@4$4=$2*@2$3/3 ; f-2::@5$4=$2*@2$3/3 ; f-2::@6$4=@7+@8+@9 ; f-2::@7$4=$2*@6$3/3 ; f-2::@8$4=$2*@6$3/3 ; f-2::@9$4=$2*@6$3/3 ; f-2::@10$4=@11+@12 ; f-2::@11$4=$2*@10$3/2 ; f-2::@12$4=$2*@10$3/2 ; f-2::@13$4=@14+@15 ; f-2::@14$4=$2*@13$3/2 ; f-2::@15$4=$2*@13$3/2 ; f-2::@16$4=@17+@18+@19 ; f-2::@17$4=$2*$3 ; f-2::@18$4=$2*$3 ; f-2::@19$4=$2*$3 ; f-2::@20$4=@2+@6+@10+@13+@16 ; f-2
+
+* Fernando Medina y Sergio Osorio
+- Documentación :: [[./Medina Fernando, Osorio Sergio/Documentacion.txt][Documentacion.txt]], [[./Medina Fernando, Osorio Sergio/README.md][README.md]], [[./Medina Fernando, Osorio Sergio/captura.png][captura.png]], [[./Medina Fernando, Osorio Sergio/inputRuta.png][inputRuta.png]]
+- Archivos :: [[./Medina Fernando, Osorio Sergio/FiUnamFs.py][FiUnamFs.py]], [[./Medina Fernando, Osorio Sergio/fifs.py][fifs.py]]
+- Lenguaje de desarrollo :: 
+- Interfaz :: GUI TkInter
+- Estrategia empleada ::
+  
+- Observaciones ::
+  - ¡Uy! A este proyecto sí que le hizo falta un
+    =.gitignore=. ¡Incluyen /muchos/ archivos temporales! El sistema
+    de archivos mismo, sus contenidos, los módulos de Python
+    compilados a intermedio (y a diferentes versiones de Python — 3.5
+    y 3.7), ...
+  - ¡Muy bueno que se echaran un clavado con TkInter! Vamos a criticar
+    la interfaz...
+    - ¿Para qué mostrar las entradas correspondientes a los archivos
+      vacíos? (todos lox =Xx.xXx...=)
+    - Muy bueno que tenga el botón de actualizar. Aunque con la
+      funcionalidad que hay en este momento, podrían hacer que
+      cualquier modificación al FS lanzara un evento de actualización
+      forzada, en vez de descargárselo al usuario
+    - Entiendo que esto es, si acaso, un prototipo. Pero se me hace
+      muy raro que presenten a la ayuda como una cajota de texto
+      (=tk.Text=) modificable ☺
+  - ¡Muy bien que busquen referencia en personas que han resuelto este
+    ejercicio en el pasado, y genial que le den crédito!
+    Pero... Recuerden /comprender/ y /asegurarse de adecuar/ lo que
+    copian a la nueva realidad.
+    - En alguna versión anterior de FIUNAMFS, usé la cadena
+      =AQUI_NO_VA_NADA= en vez de =Xx.xXx.xXx.xXx=. No pueden
+      incluirla y esperar que funcione...
+    - En las leyes de derecho de autor se especifica la excepción
+      (Derecho de Cita) que establece la /cita textual/ es un recurso
+      que puede utilizarse siempre y cuando –entre otras cosas– no sea
+      demasiado substantivo. En el caso de ustedes, =fifs.py= /sí es/
+      substantivamente igual al =fiUnam.py= de Ricardo. Lo doy por
+      bueno, pero copiar /tanto/ podría meterlos en problemas en un
+      entorno real.
+  - Hasta donde he revisado, el desfragmentado que hacen es el único
+    /efectivo/ (es el único, hasta este punto de mi revisión, que más
+    que compactar el listado del directorio, reordena el área de
+    datos). ¡Muy bien!
+    - Aunque... desfragmentar al FS lo corrompe ☹ Después de
+      desfragmentar, el programa se muere al intentar leer la imagen,
+      aduciendo que =ValueError: invalid literal for int() with base
+      10: 'archivos'=
+
+
+| *Rubro*                             | *Parcial* | *Peso* | *Puntos* |
+|-------------------------------------+-----------+--------+----------|
+| *Proyecto*                          |           |    0.3 |     2.50 |
+| Cumplimiento                        |        10 |        |     1.00 |
+| Claridad de desarrollo              |       7.5 |        |     0.75 |
+| Interfaz usuario                    |       7.5 |        |     0.75 |
+|-------------------------------------+-----------+--------+----------|
+| *Desarrollo*                        |           |    0.3 |     2.25 |
+| Directorio de proyecto              |         5 |        |     0.50 |
+| Código válido                       |       7.5 |        |     0.75 |
+| Comentarios                         |        10 |        |     1.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Legibilidad*                       |           |    0.2 |     1.50 |
+| Estructura                          |        10 |        |     1.00 |
+| Nomenclatura                        |         5 |        |     0.50 |
+|-------------------------------------+-----------+--------+----------|
+| *Entrega*                           |           |    0.2 |     2.00 |
+| Entorno y dependencias              |        10 |        |     1.00 |
+| Historia en Git                     |        10 |        |     1.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Extras*                            |           |        |     0.00 |
+| Envió correcciones al planteamiento |           |    0.1 |     0.00 |
+| Directorios jerárquicos             |           |    0.1 |     0.00 |
+| Sistema de archivos con bitácora    |           |    0.1 |     0.00 |
+|-------------------------------------+-----------+--------+----------|
+| *TOTAL*                             |           |        |     8.25 |
+|-------------------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3+@4+@5 ; f-2::@3$4=$2*@2$3/3 ; f-2::@4$4=$2*@2$3/3 ; f-2::@5$4=$2*@2$3/3 ; f-2::@6$4=@7+@8+@9 ; f-2::@7$4=$2*@6$3/3 ; f-2::@8$4=$2*@6$3/3 ; f-2::@9$4=$2*@6$3/3 ; f-2::@10$4=@11+@12 ; f-2::@11$4=$2*@10$3/2 ; f-2::@12$4=$2*@10$3/2 ; f-2::@13$4=@14+@15 ; f-2::@14$4=$2*@13$3/2 ; f-2::@15$4=$2*@13$3/2 ; f-2::@16$4=@17+@18+@19 ; f-2::@17$4=$2*$3 ; f-2::@18$4=$2*$3 ; f-2::@19$4=$2*$3 ; f-2::@20$4=@2+@6+@10+@13+@16 ; f-2
+
+* Alfonso Murrieta y Joaquín Valdespino
+- Documentación :: [[./MurrietaAlfonso-ValdespinoJoaquin/README.md][README.md]]
+- =.gitignore= :: [[./MurrietaAlfonso-ValdespinoJoaquin/.gitignore][.gitignore]]
+- Archivos :: [[./MurrietaAlfonso-ValdespinoJoaquin/proyecto4/FSFI.ui][FSFI.ui]], [[./MurrietaAlfonso-ValdespinoJoaquin/proyecto4/Myapp.py][Myapp.py]], [[./MurrietaAlfonso-ValdespinoJoaquin/proyecto4/fiunamfs.img][fiunamfs.img]], [[./MurrietaAlfonso-ValdespinoJoaquin/proyecto4/obb/entry_fs.py][entry_fs.py]], [[./MurrietaAlfonso-ValdespinoJoaquin/proyecto4/obb/sblock.py][sblock.py]]
+- Lenguaje de desarrollo :: Python
+- Interfaz :: UI basada en Qt
+- Estrategia empleada ::
+     Acceso al archivo imagen mapeado a memoria (=mmap=).
+
+     Separa las clases =ENTRY_FS= (entrada de directorio) y =sblock=
+     (superbloque) para tratarlas por separado de la lógica de la
+     aplicación.
+- Observaciones ::
+  - Hay varios detalles de usabilidad. Algunos:
+    - ¿Para qué hace falta el botón /iniciar/? ¿Por qué no arrancar de
+      una con el FS montado?
+    - El encabezado de la tabla se puede seleccionar igual que
+      cualquier archivo. Naturalmente, si le doy /eliminar/ fracasa.
+    - No puedo copiar archivos del FIUNAMFS a mi sistema; al
+      seleccionar =copiar a=, recibo la excepción:
+      #+BEGIN_SRC python
+	Traceback (most recent call last):
+	  File "Myapp.py", line 196, in cpc
+	    self.lb_msg.setText("file "+ entry.name +" not exist")
+	AttributeError: 'NoneType' object has no attribute 'name'
+	Aborted
+      #+END_SRC
+      Esto, porque su fuente dice:
+      #+BEGIN_SRC python
+	file = strings[15] #name archivo a copiar
+	pathfinder = self.txt_inst.toPlainText() ##ruta donde se va a copiar
+	entry = self.getEntry(file)
+	if entry != None :
+	    # (...)
+	else:
+	    self.lb_msg.setText("file "+ entry.name +" not exist")
+      #+END_SRC
+      Cambié el =entry.name= por =file=, y en vez de morirse,
+      simplemente dice =file not exist=... No quiero dedicarle demasiado
+      tiempo a depurar.
+    - Varias operaciones (/eliminar/, /copiar a/ con mis cambios)
+      fallan intermitentemente sin explicar por qué ☹
+    - A pesar de tener una UI bastante elaborada, este es uno de los
+      programas para los que más he requerido leer la documentación
+      para comprender su uso. ¡Y eso no es crítica a ustedes! En
+      realidad... Diseñar una GUI /usable/ es más complicado que
+      diseñar una TUI.
+  - Si incluyen a una copia del sistema de archivos ejemplo como parte
+    de su entrega, probablemente deberían incluirla en el =.gitignore=
+    (que si no, va generando /ruido/ para cualquier modificación que
+    le hacemos).
+  - Desfragmenta correctamente. ¡Bien! Muy pocos lo implementaron.
+
+| *Rubro*                             | *Parcial* | *Peso* | *Puntos* |
+|-------------------------------------+-----------+--------+----------|
+| *Proyecto*                          |           |    0.3 |     2.50 |
+| Cumplimiento                        |       7.5 |        |     0.75 |
+| Claridad de desarrollo              |        10 |        |     1.00 |
+| Interfaz usuario                    |       7.5 |        |     0.75 |
+|-------------------------------------+-----------+--------+----------|
+| *Desarrollo*                        |           |    0.3 |     2.50 |
+| Directorio de proyecto              |       7.5 |        |     0.75 |
+| Código válido                       |       7.5 |        |     0.75 |
+| Comentarios                         |        10 |        |     1.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Legibilidad*                       |           |    0.2 |     2.00 |
+| Estructura                          |        10 |        |     1.00 |
+| Nomenclatura                        |        10 |        |     1.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Entrega*                           |           |    0.2 |     2.00 |
+| Entorno y dependencias              |        10 |        |     1.00 |
+| Historia en Git                     |        10 |        |     1.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Extras*                            |           |        |     0.00 |
+| Envió correcciones al planteamiento |           |    0.1 |     0.00 |
+| Directorios jerárquicos             |           |    0.1 |     0.00 |
+| Sistema de archivos con bitácora    |           |    0.1 |     0.00 |
+|-------------------------------------+-----------+--------+----------|
+| *TOTAL*                             |           |        |     9.00 |
+|-------------------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3+@4+@5 ; f-2::@3$4=$2*@2$3/3 ; f-2::@4$4=$2*@2$3/3 ; f-2::@5$4=$2*@2$3/3 ; f-2::@6$4=@7+@8+@9 ; f-2::@7$4=$2*@6$3/3 ; f-2::@8$4=$2*@6$3/3 ; f-2::@9$4=$2*@6$3/3 ; f-2::@10$4=@11+@12 ; f-2::@11$4=$2*@10$3/2 ; f-2::@12$4=$2*@10$3/2 ; f-2::@13$4=@14+@15 ; f-2::@14$4=$2*@13$3/2 ; f-2::@15$4=$2*@13$3/2 ; f-2::@16$4=@17+@18+@19 ; f-2::@17$4=$2*$3 ; f-2::@18$4=$2*$3 ; f-2::@19$4=$2*$3 ; f-2::@20$4=@2+@6+@10+@13+@16 ; f-2
+
+* Alejandro Pérez
+- Documentación :: [[./PerezAlejandro/documentacion.txt][documentacion.txt]]
+- Archivos :: [[./PerezAlejandro/proyecto4.py][proyecto4.py]]
+- Lenguaje de desarrollo :: Python
+- Interfaz :: Línea de comando basada en menú de opciones; /interfaz
+              conversacional/
+- Estrategia empleada ::
+  Conjuntos de llamadas a =seek()= + =read()= y =seek()= + =write()=.
+- Observaciones ::
+  - Para que la interfaz de tu =menu()= funcione: Estás comparando lo
+    que recibes del teclado (una cadena) con las opciones
+    (números). Para corregirlo, le agregué un =int()= a tu =op =
+    input("\t>> ")=.
+    - Sigo sin obtener resultados... Veo que en =monta()= comentaste
+      la declaración de variables globales para =arch, size,
+      clusterPosition, loc=. ¿Por qué? (des-comentarla hace que por lo
+      menos la opción 5 me dé información...)
+  - Encuentro varias inconsistencias lógicas (p.ej. en el manejo de
+    =clusterPosition= para indicar la posición en el listado del
+    directorio); no continúo intentando hacer funcional al
+    programa. Me enfoco en leer la implementación.
+  - Tú mismo lo dices en el único comentario del programa:
+    =#Precaucion con el nombre de las variables=. ¡Es difícil
+    comprender tu lógica! :-(
+
+| *Rubro*                             | *Parcial* | *Peso* | *Puntos* |
+|-------------------------------------+-----------+--------+----------|
+| *Proyecto*                          |           |    0.3 |     1.75 |
+| Cumplimiento                        |       7.5 |        |     0.75 |
+| Claridad de desarrollo              |         5 |        |     0.50 |
+| Interfaz usuario                    |         5 |        |     0.50 |
+|-------------------------------------+-----------+--------+----------|
+| *Desarrollo*                        |           |    0.3 |     1.00 |
+| Directorio de proyecto              |        10 |        |     1.00 |
+| Código válido                       |         0 |        |     0.00 |
+| Comentarios                         |         0 |        |     0.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Legibilidad*                       |           |    0.2 |     1.00 |
+| Estructura                          |        10 |        |     1.00 |
+| Nomenclatura                        |         0 |        |     0.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Entrega*                           |           |    0.2 |     1.00 |
+| Entorno y dependencias              |         5 |        |     0.50 |
+| Historia en Git                     |         5 |        |     0.50 |
+|-------------------------------------+-----------+--------+----------|
+| *Extras*                            |           |        |     0.00 |
+| Envió correcciones al planteamiento |           |    0.1 |     0.00 |
+| Directorios jerárquicos             |           |    0.1 |     0.00 |
+| Sistema de archivos con bitácora    |           |    0.1 |     0.00 |
+|-------------------------------------+-----------+--------+----------|
+| *TOTAL*                             |           |        |     4.75 |
+|-------------------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3+@4+@5 ; f-2::@3$4=$2*@2$3/3 ; f-2::@4$4=$2*@2$3/3 ; f-2::@5$4=$2*@2$3/3 ; f-2::@6$4=@7+@8+@9 ; f-2::@7$4=$2*@6$3/3 ; f-2::@8$4=$2*@6$3/3 ; f-2::@9$4=$2*@6$3/3 ; f-2::@10$4=@11+@12 ; f-2::@11$4=$2*@10$3/2 ; f-2::@12$4=$2*@10$3/2 ; f-2::@13$4=@14+@15 ; f-2::@14$4=$2*@13$3/2 ; f-2::@15$4=$2*@13$3/2 ; f-2::@16$4=@17+@18+@19 ; f-2::@17$4=$2*$3 ; f-2::@18$4=$2*$3 ; f-2::@19$4=$2*$3 ; f-2::@20$4=@2+@6+@10+@13+@16 ; f-2
+
+* Roel Pérez
+- Documentación :: [[./PerezRoel/proyecto4-doc.txt][proyecto4-doc.txt]]
+- Archivos :: [[./PerezRoel/FiUnamFS.py][FiUnamFS.py]], [[./PerezRoel/roel.img][roel.img]]
+- Lenguaje de desarrollo :: Python
+- Interfaz :: Línea de comando basada en menú de opciones; /interfaz
+              conversacional/
+- Estrategia empleada ::
+  - Conjuntos de llamadas a =seek()= + =read()= y =seek()= + =write()=
+- Observaciones ::
+  - No implementa desfragmentación ☹
+  - Documentación muy completa y comprehensiva
+  - Si incluyen a una copia del sistema de archivos ejemplo como parte
+    de su entrega, probablemente deberían incluirla en el =.gitignore=
+    (que si no, va generando /ruido/ para cualquier modificación que
+    le hacemos).
+
+| *Rubro*                             | *Parcial* | *Peso* | *Puntos* |
+|-------------------------------------+-----------+--------+----------|
+| *Proyecto*                          |           |    0.3 |     2.50 |
+| Cumplimiento                        |       7.5 |        |     0.75 |
+| Claridad de desarrollo              |        10 |        |     1.00 |
+| Interfaz usuario                    |       7.5 |        |     0.75 |
+|-------------------------------------+-----------+--------+----------|
+| *Desarrollo*                        |           |    0.3 |     2.75 |
+| Directorio de proyecto              |       7.5 |        |     0.75 |
+| Código válido                       |        10 |        |     1.00 |
+| Comentarios                         |        10 |        |     1.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Legibilidad*                       |           |    0.2 |     2.00 |
+| Estructura                          |        10 |        |     1.00 |
+| Nomenclatura                        |        10 |        |     1.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Entrega*                           |           |    0.2 |     2.00 |
+| Entorno y dependencias              |        10 |        |     1.00 |
+| Historia en Git                     |        10 |        |     1.00 |
+|-------------------------------------+-----------+--------+----------|
+| *Extras*                            |           |        |     0.00 |
+| Envió correcciones al planteamiento |           |    0.1 |     0.00 |
+| Directorios jerárquicos             |           |    0.1 |     0.00 |
+| Sistema de archivos con bitácora    |           |    0.1 |     0.00 |
+|-------------------------------------+-----------+--------+----------|
+| *TOTAL*                             |           |        |     9.25 |
+|-------------------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3+@4+@5 ; f-2::@3$4=$2*@2$3/3 ; f-2::@4$4=$2*@2$3/3 ; f-2::@5$4=$2*@2$3/3 ; f-2::@6$4=@7+@8+@9 ; f-2::@7$4=$2*@6$3/3 ; f-2::@8$4=$2*@6$3/3 ; f-2::@9$4=$2*@6$3/3 ; f-2::@10$4=@11+@12 ; f-2::@11$4=$2*@10$3/2 ; f-2::@12$4=$2*@10$3/2 ; f-2::@13$4=@14+@15 ; f-2::@14$4=$2*@13$3/2 ; f-2::@15$4=$2*@13$3/2 ; f-2::@16$4=@17+@18+@19 ; f-2::@17$4=$2*$3 ; f-2::@18$4=$2*$3 ; f-2::@19$4=$2*$3 ; f-2::@20$4=@2+@6+@10+@13+@16 ; f-2
+
+* René Vázquez
+  Este proyecto está [[https://github.com/gwolf/sistop-2019-2/tree/master/proyectos/3/Dur%25C3%25A1nArturo-L%25C3%25B3pezMiguel][copiado del entregado por tus compañeros]] en otro
+  semestre. No tienes derecho a calificación.

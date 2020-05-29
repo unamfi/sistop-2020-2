@@ -2,10 +2,10 @@
 
 #+BEGIN_SRC yaml
 Planteamiento: 2020.05.04
-Entrega: 2019.05.26
+Entrega: 2020.05.26
 #+END_SRC
 
-# ¡Las [[./calificaciones.org][calificaciones y comentarios]] ya están disponibles!
+¡Las [[./calificaciones.org][calificaciones y comentarios]] ya están disponibles!
 
 ** Descripción del proyecto
 
