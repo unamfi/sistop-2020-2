@@ -1,0 +1,48 @@
+#+title: Evaluación de exposición: Listas LRU
+#+author: Gunnar Wolf
+
+- Tema presentado por :: René Vázquez
+- Calificación global :: 8 * 0.3 + 6.38 * 0.7 = *6.86*
+
+* Comentarios
+
+Dado que es una presentación en video, no puedo evaluar /dominio del
+tema/ y /presencia/ como lo hacemos habitualmente. Me centro en las
+respuestas que hagan a las preguntas de sus compañeros y en si la
+presentación "suena" leída directamente del material que prepararon o
+expuesta más libremente.
+
+* Evaluación grupal
+
+La herramienta que utilicé para recabar esta evaluación... Se negó a
+funcionar ☹ Recibí sus respuestas por correo; las "vierto" aquí.
+
+|--------------+-------+------------+----------+-----------+-------|
+| Originalidad | Nivel | Relevancia | Claridad | Presencia | Total |
+|--------------+-------+------------+----------+-----------+-------|
+|          7.5 |   7.5 |         10 |      7.5 |         5 |  7.50 |
+|           10 |    10 |         10 |      7.5 |         5 |  8.50 |
+|              |       |            |          |           |       |
+|--------------+-------+------------+----------+-----------+-------|
+|         8.75 |  8.75 |         10 |     7.50 |         5 |  8.00 |
+|--------------+-------+------------+----------+-----------+-------|
+#+TBLFM: @>$1..@>$6=vmean(@II..@III-1); f-2::@2$>..@>>>$>=vmean($1..$5); f-2
+
+** Comentarios de los alumnos:
+
+
+* Evaluación del docente
+
+| *Aspecto*              | *Peso* | *Evaluación* | *Puntos* |
+|------------------------+--------+--------------+----------|
+| Originalidad del tema  |    0.1 |          7.5 |     0.75 |
+| Material desarrollado  |    0.2 |            5 |       1. |
+| Contenido              |    0.2 |            5 |       1. |
+| Fuentes bibliográficas |    0.1 |          7.5 |     0.75 |
+| Uso del tiempo         |    0.1 |           10 |       1. |
+| Dominio del tema       |   0.15 |            5 |     0.75 |
+| Presencia              |   0.15 |          7.5 |    1.125 |
+|------------------------+--------+--------------+----------|
+| *Global*               |        |              |     6.38 |
+#+TBLFM: @<<$4..@>>$4=$2*$3::$4=vsum(@<<..@>>);f-2
+

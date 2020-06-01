@@ -1,0 +1,53 @@
+#+title: Evaluación de exposición: WannaCry y EternalBlue
+#+author: Gunnar Wolf
+
+- Tema presentado por :: Sergio Reza
+- Calificación global ::  9 * 0.3 +  8.63 * 0.7 = *8.74*
+
+* Comentarios
+
+Dado que es una presentación en video, no puedo evaluar /dominio del
+tema/ y /presencia/ como lo hacemos habitualmente. Me centro en las
+respuestas que hagan a las preguntas de sus compañeros y en si la
+presentación "suena" leída directamente del material que prepararon o
+expuesta más libremente.
+
+* Evaluación grupal
+
+La herramienta que utilicé para recabar esta evaluación... Se negó a
+funcionar ☹ Recibí sus respuestas por correo; las "vierto" aquí.
+
+|--------------+-------+------------+----------+-----------+-------|
+| Originalidad | Nivel | Relevancia | Claridad | Presencia | Total |
+|--------------+-------+------------+----------+-----------+-------|
+|           10 |    10 |         10 |       10 |       7.5 |  9.50 |
+|          7.5 |   7.5 |          5 |      7.5 |       7.5 |  7.00 |
+|           10 |    10 |        7.5 |       10 |        10 |  9.50 |
+|           10 |    10 |        7.5 |       10 |        10 |  9.50 |
+|           10 |   7.5 |         10 |      7.5 |       7.5 |  8.50 |
+|           10 |    10 |         10 |       10 |        10 |    10 |
+|              |       |            |          |           |       |
+|--------------+-------+------------+----------+-----------+-------|
+|         9.58 |  9.17 |       8.33 |     9.17 |      8.75 |  9.00 |
+|--------------+-------+------------+----------+-----------+-------|
+#+TBLFM: @>$1..@>$6=vmean(@II..@III-1); f-2::@2$>..@>>>$>=vmean($1..$5); f-2
+
+** Comentarios de los alumnos:
+- Muy buena exposición, sin duda interesante ✌️
+
+
+* Evaluación del docente
+
+| *Aspecto*              | *Peso* | *Evaluación* | *Puntos* |
+|------------------------+--------+--------------+----------|
+| Originalidad del tema  |    0.1 |           10 |       1. |
+| Material desarrollado  |    0.2 |           10 |       2. |
+| Contenido              |    0.2 |           10 |       2. |
+| Fuentes bibliográficas |    0.1 |          7.5 |     0.75 |
+| Uso del tiempo         |    0.1 |           10 |       1. |
+| Dominio del tema       |   0.15 |          7.5 |    1.125 |
+| Presencia              |   0.15 |            5 |     0.75 |
+|------------------------+--------+--------------+----------|
+| *Global*               |        |              |     8.63 |
+#+TBLFM: @<<$4..@>>$4=$2*$3::$4=vsum(@<<..@>>);f-2
+
