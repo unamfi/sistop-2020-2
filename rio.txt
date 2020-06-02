@@ -1,0 +1,17 @@
+Problema de Cruce del Río.
+
+Se escribió en Python.
+
+Para probar el programa, basta con ejecutar el intérprete de Python: "python3 archivo.py"
+
+Para resolver el problema, usé semáforos, uno para alterar el valor de la balsa,
+y otro para poder ingresas a los programadores a la balsa.
+Con el primer semáforo, me aseguro de que los valores no se van a sobreescribir o
+va a haber corrupción de datos.
+Con el segundo, me aseguro que los hilos ingresarán uno por uno a la balsa.
+
+No se realizó ningún refinamiento.
+
+La única duda que me surgió fue, en qué parte poner exactamente el segundo semáforo,
+ya que, en las primeras pruebas, los hilos entraban en la balsa sin orden.
+
