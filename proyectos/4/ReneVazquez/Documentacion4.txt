@@ -1,0 +1,41 @@
+René Vázquez Peñaloza
+Sistemas Operativos 
+Proyecto 4 
+
+Planteamiento del problema.
+
+Desarrollar es un programa que pueda obtener, crear y modificar información en el micro-sistema-de-archivos de la Facultad de Ingeniería, FiUnamFS.
+
+
+- Listar los contenidos del directorio
+- Copiar uno de los archivos de dentro del FiUnamFS hacia tu sistema
+- Copiar un archivo de tu computadora hacia tu FiUnamFS
+- Eliminar un archivo del FiUnamFS
+- Generen también un programa que desfragmente al FiUnamFS.
+
+Desarrollo:
+
+Consta de dos archivos:
+
+main: la parte gráfica y de interacción con el usuario en conjunto con la consola utilizando la librería Tkinter.
+
+File: contiene la lógica de trabajo del sistema de archivos
+
+	- validación de FS
+	- obtener los datos del primer cluster getDataSB
+	- obternet los metadatos del cluster 0 hasta el numero de clusters del directorio getFilesInfo
+	- convertir los metadatos en archivo tipo File. con atributos como nombre, número de bytes 
+	- lista de archivos Ls
+	- copiar a la terminal del usuario copytoUser
+	- copiar un archivo del usuario al FS, copyToFS
+	- para eliminar un archivo del FS
+	- para desfragmentar se utiliza un acomodo de los archivos existentes para que al escribir un archivo en el FS éste se escriba al final 
+	
+Entorno donde se realizo
+
+SO: Windows 10 
+Python version 3.8.2 
+Ejecucion en consola CMD
+
+
+

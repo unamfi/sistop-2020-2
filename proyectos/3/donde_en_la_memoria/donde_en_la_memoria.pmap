@@ -1,0 +1,26 @@
+28186:   ./donde_en_la_memoria
+Address           Kbytes     RSS   Dirty Mode  Mapping
+0000557c8e463000       4       4       0 r---- donde_en_la_memoria
+0000557c8e464000       4       4       0 r-x-- donde_en_la_memoria
+0000557c8e465000       4       4       0 r---- donde_en_la_memoria
+0000557c8e466000       4       4       4 r---- donde_en_la_memoria
+0000557c8e467000       4       4       4 rw--- donde_en_la_memoria
+0000557c8fb4f000     132       4       4 rw---   [ anon ]
+00007fd3a61ca000     136     136       0 r---- libc-2.28.so
+00007fd3a61ec000    1312     832       0 r-x-- libc-2.28.so
+00007fd3a6334000     304      64       0 r---- libc-2.28.so
+00007fd3a6380000       4       0       0 ----- libc-2.28.so
+00007fd3a6381000      16      16      16 r---- libc-2.28.so
+00007fd3a6385000       8       8       8 rw--- libc-2.28.so
+00007fd3a6387000      24      20      20 rw---   [ anon ]
+00007fd3a63d0000       4       4       0 r---- ld-2.28.so
+00007fd3a63d1000     120     120       0 r-x-- ld-2.28.so
+00007fd3a63ef000      32      32       0 r---- ld-2.28.so
+00007fd3a63f7000       4       4       4 r---- ld-2.28.so
+00007fd3a63f8000       4       4       4 rw--- ld-2.28.so
+00007fd3a63f9000       4       4       4 rw---   [ anon ]
+00007ffc05546000     132      16      16 rw---   [ stack ]
+00007ffc0557e000      12       0       0 r----   [ anon ]
+00007ffc05581000       8       4       0 r-x--   [ anon ]
+---------------- ------- ------- ------- 
+total kB            2276    1288      84

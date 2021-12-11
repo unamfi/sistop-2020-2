@@ -1,0 +1,43 @@
+
+Presentando mapa de memoria. Ojo: Esta es una arquitectura de *32 bits*!
+Los bloques reportados _no_ están a escala.
+
+|  Uso      |De pág.|A pág. | Tamaño |Núm. páginas|Perm| Uso o mapeo 
+/-----------\ 
+|     ????? | ffff0 - ffff1 (    4KB -      1 pág.) r-x [vectors] 
+|           | beae8 - ffff0 (  1.0GB - 267528 pág.)      - Vacío -  
+|     ????? | beae7 - beae8 (    4KB -      1 pág.) r-x [sigpage] 
+|           | bea0b - beae7 (  880KB -    220 pág.)      - Vacío -  
+|     Stack | be9ea - bea0b (  132KB -     33 pág.) rw- [stack] 
+|           | b6fa2 - be9ea (122.3MB -  31304 pág.)      - Vacío -  
+| Bib→Datos | b6fa1 - b6fa2 (    4KB -      1 pág.) rw- /usr/lib/arm-linux-gnueabi/ld-2.28.so 
+| Bib→Datos | b6fa0 - b6fa1 (    4KB -      1 pág.) r-- /usr/lib/arm-linux-gnueabi/ld-2.28.so 
+|           | b6f90 - b6fa0 (   64KB -     16 pág.)      - Vacío -  
+| Bib→Texto | b6f70 - b6f90 (  128KB -     32 pág.) r-x /usr/lib/arm-linux-gnueabi/ld-2.28.so 
+| Bib→Datos | b6f6f - b6f70 (    4KB -      1 pág.) rw- /usr/lib/arm-linux-gnueabi/libtinfo.so.6.1 
+| Bib→Datos | b6f6d - b6f6f (    8KB -      2 pág.) r-- /usr/lib/arm-linux-gnueabi/libtinfo.so.6.1 
+|           | b6f5d - b6f6d (   64KB -     16 pág.) --- /usr/lib/arm-linux-gnueabi/libtinfo.so.6.1 
+| Bib→Texto | b6f3f - b6f5d (  120KB -     30 pág.) r-x /usr/lib/arm-linux-gnueabi/libtinfo.so.6.1 
+| Bib→Datos | b6f3e - b6f3f (    4KB -      1 pág.) rw- /usr/lib/arm-linux-gnueabi/libdl-2.28.so 
+| Bib→Datos | b6f3d - b6f3e (    4KB -      1 pág.) r-- /usr/lib/arm-linux-gnueabi/libdl-2.28.so 
+|           | b6f2e - b6f3d (   60KB -     15 pág.) --- /usr/lib/arm-linux-gnueabi/libdl-2.28.so 
+| Bib→Texto | b6f2c - b6f2e (    8KB -      2 pág.) r-x /usr/lib/arm-linux-gnueabi/libdl-2.28.so 
+|           | b6f29 - b6f2c (   12KB -      3 pág.)      - Vacío -  
+| Bib→Datos | b6f28 - b6f29 (    4KB -      1 pág.) rw- /usr/lib/arm-linux-gnueabi/libc-2.28.so 
+| Bib→Datos | b6f26 - b6f28 (    8KB -      2 pág.) r-- /usr/lib/arm-linux-gnueabi/libc-2.28.so 
+|           | b6f17 - b6f26 (   60KB -     15 pág.) --- /usr/lib/arm-linux-gnueabi/libc-2.28.so 
+| Bib→Texto | b6dd7 - b6f17 (  1.2MB -    320 pág.) r-x /usr/lib/arm-linux-gnueabi/libc-2.28.so 
+|           | b6dd1 - b6dd7 (   24KB -      6 pág.)      - Vacío -  
+| Bib→Datos | b6dd0 - b6dd1 (    4KB -      1 pág.) rw- /usr/lib/arm-linux-gnueabi/libnss_files-2.28.so 
+| Bib→Datos | b6dcf - b6dd0 (    4KB -      1 pág.) r-- /usr/lib/arm-linux-gnueabi/libnss_files-2.28.so 
+|           | b6dbf - b6dcf (   64KB -     16 pág.) --- /usr/lib/arm-linux-gnueabi/libnss_files-2.28.so 
+| Bib→Texto | b6db6 - b6dbf (   36KB -      9 pág.) r-x /usr/lib/arm-linux-gnueabi/libnss_files-2.28.so 
+|           | 00937 - b6db6 (  2.8GB - 746623 pág.)      - Vacío -  
+|      Heap | 008f5 - 00937 (  264KB -     66 pág.) rw- [heap] 
+|           | 00578 - 008f5 (  3.5MB -    893 pág.)      - Vacío -  
+|     Datos | 00572 - 00578 (   24KB -      6 pág.) rw- /usr/bin/bash 
+|     Datos | 00570 - 00572 (    8KB -      2 pág.) r-- /usr/bin/bash 
+|           | 00561 - 00570 (   60KB -     15 pág.)      - Vacío -  
+|     Texto | 0046b - 00561 (  984KB -    246 pág.) r-x /usr/bin/bash 
+|           | 00000 - 0046b (  4.4MB -   1131 pág.)      - Vacío -  
+\-----------/

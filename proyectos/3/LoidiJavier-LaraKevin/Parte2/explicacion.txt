@@ -1,0 +1,149 @@
+--- EXPLICACIÓN DE ACOMODO DE PROCESO EN MEMORIA ---
+
+Elaborado por: Javier Loidi y Kevin Lara
+
+--> Primero, en una terminal compilamos el programa donde_en_la_memoria.c y a la salida la nombramos: ejecutable (no está en el proyecto por ser un ejecutable)
+
+--> Al ejecutarlo se le asignó el PID: 4542
+
+--> Se abrió una segunda terminal
+
+--> Con nuestro programa pmap.py se analizó la asignación de memoria al proceso generado (4542) y se guardo su salida en: salida_pmap_4542.txt (está en el proyecto)
+
+--> Con el comando: "sudo gcore -a 4542" obtuvimos el volcado de su memoria en ejecución en un archivo llamado: core.4542 (está en el proyecto)
+
+--> Con el comando: "hexdump -C core.4542 > hexdump.txt" obtuvimos el desglose binario del volcado y se guardo en: hexdump.txt (está en el proyecto)
+
+
+Con estos archivos concluyo lo siguiente:
+
+* Nota: Las direcciones que nos da hexdump son relativas y no concuerdan con las direcciones que se obtienen del archivo en /proc que están en función de las páginas.
+
+>>>> ¿Dónde se encuentran las cadenas originales?:
+		
+	--> cadena1
+
+		En código:
+
+		char cadena1[] = "Yo solo sé que no sé nada";
+
+		En hexdump.txt la encontramos en las líneas 233 a 235:
+
+		00001e80  00 00 00 00 08 50 ff 21  17 56 00 00 59 6f 20 73  |.....P.!.V..Yo s|
+		00001e90  6f 6c 6f 20 73 c3 a9 20  71 75 65 20 6e 6f 20 73  |olo s.. que no s|
+		00001ea0  c3 a9 20 6e 61 64 61 00  1e 00 00 00 00 0a 22 73  |.. nada......."s|
+
+		Como es una variable local, no está ni en el stack ni en el heap, así que debe de estar en una región de datos que se pueda leer y escribir:
+
+		|---------------|----------------|--------------|-------|---------|---------|----------------------------------------------------------------|
+		|Datos          |561721ff5       |561721ff6     |4000   |1        |rw-p     |/home/javier/sistop-2020-2/proyectos/3/LoidiJavier-LaraKevin/Par|
+		|               |                |              |       |         |         |te2/ejecutable                                                  |
+		|---------------|----------------|--------------|-------|---------|---------|----------------------------------------------------------------|
+
+	--> cadena2
+
+		En código:
+
+		char *cadena2;
+		strncpy(cadena2, "Yo sólo sé que nada sé", tamano * sizeof(char));
+
+		En hexdump.txt la encontramos en las líneas 2263 a 2265:
+
+		00052140  fd 7f 00 00 1c 00 00 00  00 00 00 00 59 6f 20 73  |............Yo s|
+		00052150  c3 b3 6c 6f 20 73 c3 a9  20 71 75 65 20 6e 61 64  |..lo s.. que nad|
+		00052160  61 20 73 c3 a9 00 00 00  00 00 00 00 d3 d2 14 14  |a s.............|
+
+		Es un apuntador a caracter dentro de una función, pero nunca se le asigna espacio con malloc o calloc por lo que está en el stack:
+
+		|---------------|----------------|--------------|-------|---------|---------|----------------------------------------------------------------|
+		|[stack]        |7ffd1412d       |7ffd1414e     |132000 |33       |rw-p     |[stack]                                                         |
+		|---------------|----------------|--------------|-------|---------|---------|----------------------------------------------------------------|
+
+	--> cadena3
+
+		En código:
+
+		cadena3 = (char *) malloc(tamano * sizeof(char));
+		strncpy(cadena3, "Pero si alguien sabe menos", tamano * sizeof(char));
+
+		En hexdump.txt la encontramos en las líneas 243 a 245:
+
+		000030d0  00 00 00 00 31 00 00 00  00 00 00 00 50 65 72 6f  |....1.......Pero|
+		000030e0  20 73 69 20 61 6c 67 75  69 65 6e 20 73 61 62 65  | si alguien sabe|
+		000030f0  20 6d 65 6e 6f 73 00 00  00 00 00 00 00 00 00 00  | menos..........|
+
+		Es un apuntador a caracter dentro de una función, que se le asigna espacio con malloc, por lo que está en el heap:
+
+		|---------------|----------------|--------------|-------|---------|---------|----------------------------------------------------------------|
+		|[heap]         |56172322c       |56172324d     |132000 |33       |rw-p     |[heap]                                                          |
+		|---------------|----------------|--------------|-------|---------|---------|----------------------------------------------------------------|
+
+	--> No encontramos las cadenas:
+
+		char parte1[20] = "¡siempre ";
+		char parte3[20] = " usted!";
+		char *parte2 = "puede ser";
+
+		Pero, si encontramos:
+
+		completa
+
+		En código:
+
+		char *completa = malloc(tamano * sizeof(char));
+
+		En hexdump.txt la encontramos en las líneas 256 a 258:
+
+		00003510  00 00 00 00 31 00 00 00  00 00 00 00 c2 a1 73 69  |....1.........si|
+		00003520  65 6d 70 72 65 20 70 75  65 64 65 20 73 65 72 20  |empre puede ser |
+		00003530  75 73 74 65 64 21 00 00  00 00 00 00 00 00 00 00  |usted!..........|
+
+		Es un apuntador a caracter dentro de una función, que se le asigna espacio con malloc, por lo que está en el heap:
+
+		|---------------|----------------|--------------|-------|---------|---------|----------------------------------------------------------------|
+		|[heap]         |56172322c       |56172324d     |132000 |33       |rw-p     |[heap]                                                          |
+		|---------------|----------------|--------------|-------|---------|---------|----------------------------------------------------------------|
+
+
+>>>> ¿Dónde se encuentran las cadenas entregadas a printf?:
+
+	--> cadena_total
+
+		En código:
+
+		cadena_total = malloc(tamano * 4 * sizeof(char));
+		snprintf(cadena_total, tamano * 4 * sizeof(char), "%s\n%s\n%s\n%s\n",
+		cadena1, cadena2, cadena3, cadena4);
+
+		puts(cadena_total);
+
+		En hexdump.txt la encontramos en las líneas 259 a 266:
+
+		00003540  00 00 00 00 81 00 00 00  00 00 00 00 59 6f 20 73  |............Yo s|
+		00003550  6f 6c 6f 20 73 c3 a9 20  71 75 65 20 6e 6f 20 73  |olo s.. que no s|
+		00003560  c3 a9 20 6e 61 64 61 0a  59 6f 20 73 c3 b3 6c 6f  |.. nada.Yo s..lo|
+		00003570  20 73 c3 a9 20 71 75 65  20 6e 61 64 61 20 73 c3  | s.. que nada s.|
+		00003580  a9 0a 50 65 72 6f 20 73  69 20 61 6c 67 75 69 65  |..Pero si alguie|
+		00003590  6e 20 73 61 62 65 20 6d  65 6e 6f 73 0a c2 a1 73  |n sabe menos...s|
+		000035a0  69 65 6d 70 72 65 20 70  75 65 64 65 20 73 65 72  |iempre puede ser|
+		000035b0  20 75 73 74 65 64 21 0a  00 00 00 00 00 00 00 00  | usted!.........|
+
+		Es un apuntador a caracter dentro de una función, que se le asigna espacio con malloc, por lo que está en el heap:
+
+		|---------------|----------------|--------------|-------|---------|---------|----------------------------------------------------------------|
+		|[heap]         |56172322c       |56172324d     |132000 |33       |rw-p     |[heap]                                                          |
+		|---------------|----------------|--------------|-------|---------|---------|----------------------------------------------------------------|
+
+>>>> ¿Dónde se encuentran los nombres de variables, funciones y otras cosas?
+
+	--> No los pudimos encontrar con la herramienta hexdump
+
+
+
+
+
+
+
+
+
+

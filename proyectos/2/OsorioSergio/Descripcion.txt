@@ -1,0 +1,23 @@
+1.Situación a modelar:
+
+El cuerpo humano produce muchas hormonas para controlar su funcionamiento y varias de ellas afectan a los mismos
+sitemas, la situación simulada consta del sistema digestivo siendo afectado por 3 hormonas siguiendo el algoritmo
+RoundRobin que es el que mas se asemeja al efecto en el cuerpo humano, ya que una célula puede estar afectada
+por distintas hormonas a la vez. 
+
+El intestino representa una barrera que limita la cantidad de alimento que se puede consumir, no permitiendo
+la ingesta de mas alimentos hasta que se haya vaciado. 
+
+2. ¿Dónde pueden verse las consecuencias nocivas de la concurrencia? ¿Qué eventos pueden ocurrir que queramos controlar?
+
+El ejemplo más claro para esta situación es cuando el intestino se encuentra lleno de la comida consumida, por lo que 
+debemos controlar el que no se consuma más comida hasta haber vaciado el intestino.
+
+Si no se manejaran correctamente el trabajo de las hormonas podríamos tener casos en los que la hormona del apetito
+no permita funciona a la insulina, impidiendo que la persona sintiera hambre con el estomago vacío.
+
+3.¿Hay eventos concurrentes para los cuales el ordenamiento relativo no resulta importante?
+No, pero para esta situación solo el algoritmo RoundRobin se asemeja más a la realidad. Ya que la célula no puede
+diferenciar que hormona durará más su efecto ni puede ordenarlas, por lo que es el cerebro quien se encarga de 
+producir las hormonas de manera ordenada y la célula sufra los efectos. (Si se libera primero la hormona de la saciedad
+la persona no querrá comer aunque lo necesite, o que se empiecen a asimilar los nutrientes sin que haya nutrientes presentes).

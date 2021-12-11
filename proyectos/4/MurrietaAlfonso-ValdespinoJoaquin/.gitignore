@@ -1,0 +1,5 @@
+__pycache__
+__init__.py
+*.pyc
+test.py
+*.txt

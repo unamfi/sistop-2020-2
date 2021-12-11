@@ -1,0 +1,15 @@
+--- DOCUMENTACION DE FIUNAMFS.PY ---
+
+Elaborado por: Javier Loidi y Kevin Lara
+
+--> El programa está hecho en Python 3.6.9 ejecutado en Ubuntu 18.04.4 LTS
+
+--> Usa las bibliotecas os y time
+
+--> Realiza operaciones con el sistema de archivos propuesto por el profesor
+
+
+El programa no cuenta con interfaz grafica, sin embargo se puede controlar a la perfeccion por medio de la terminal. En este podemos listar los archivos contenidos, podemos copiar archivos hacia nuestro ordenador, copiar archivos hacia el sistema de archivos propuesto (FiUnamFs) y podemos eliminar archivos. El programa más que nada son operaciones de extraer bytes de un archivo y saber que hacer con ellos.
+
+Para que funcionara correctamente tuve que hacer que se le quitara el ultimo caracter a los datos extraídos, ya que en los archivos contenidos en el sistema se encontraba un caracter nulo en los campos de informacion del archivo, esto resulto en que la longitud del nombre tenga un maximo de 15, pero fuera de eso funciona correctamente.
+

@@ -1,0 +1,695 @@
+#+title: Proyecto 2 • Calificaciones y comentarios
+
+* Carlos Alcántara y Eduardo Jiménez
+- Situación implementada :: Un parque de diversiones y sus juegos mecánicos
+- Interfaz :: GUI (Swing)
+- Documentación :: [[./AlcantaraCarlosJimenezEduardo/Documentacion_Proyecto2_Concurrencia.pdf][Documentacion_Proyecto2_Concurrencia.pdf]],
+                   [[./AlcantaraCarlosJimenezEduardo/README_PROFESOR.txt][README_PROFESOR.txt]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/1.png][1.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/RenderedImage.png][RenderedImage.png]],
+                   [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/alert.png][alert.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/enqueuePeople.png][enqueuePeople.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/proximo.png][proximo.png]],
+                   [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/rollerCoasterDay.png][rollerCoasterDay.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/terms.png][terms.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/upperBar.png][upperBar.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones
+                    estados/E1.png][E1.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones estados/E10.png][E10.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones estados/E11.png][E11.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones estados/E12.png][E12.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones estados/E13.png][E13.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones estados/E14.png][E14.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones estados/E15.png][E15.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones estados/E16.png][E16.png]],
+                   [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones estados/E17.png][E17.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones estados/E18.png][E18.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones estados/E19.png][E19.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones estados/E2.png][E2.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones estados/E20.png][E20.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones
+                    estados/E21.png][E21.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones estados/E22.png][E22.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones estados/E23.png][E23.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones estados/E24.png][E24.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones estados/E25.png][E25.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones estados/E3.png][E3.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones estados/E4.png][E4.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones estados/E5.png][E5.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones
+                    estados/E6.png][E6.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones estados/E7.png][E7.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones estados/E8.png][E8.png]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/icon/vagones estados/E9.png][E9.png]], [[./AlcantaraCarlosJimenezEduardo/primerIntentoJavaFX/README_Profe.txt][README_Profe.txt]], [[./AlcantaraCarlosJimenezEduardo/primerIntentoJavaFX/iconMaterial/rollerCoaster.png][rollerCoaster.png]]
+- Código :: [[./AlcantaraCarlosJimenezEduardo/archivosFuente/GUI/Cola.java][Cola.java]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/GUI/Espacios.java][Espacios.java]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/GUI/JuegoMecanico.java][JuegoMecanico.java]],
+            [[./AlcantaraCarlosJimenezEduardo/archivosFuente/GUI/Persona.java][Persona.java]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/GUI/Prueba.java][Prueba.java]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/GUI/Vagon.java][Vagon.java]], [[./AlcantaraCarlosJimenezEduardo/archivosFuente/GUI/mainWindow.java][mainWindow.java]],
+            [[./AlcantaraCarlosJimenezEduardo/archivosFuente/GUI/secondView.java][secondView.java]], [[./AlcantaraCarlosJimenezEduardo/ejecutable/Proyecto2.jar][Proyecto2.jar]], [[./AlcantaraCarlosJimenezEduardo/primerIntentoJavaFX/GUI/FXMLDocument.fxml][FXMLDocument.fxml]],
+            [[./AlcantaraCarlosJimenezEduardo/primerIntentoJavaFX/GUI/FXMLDocumentController.java][FXMLDocumentController.java]], [[./AlcantaraCarlosJimenezEduardo/primerIntentoJavaFX/GUI/Proyecto2.java][Proyecto2.java]], [[./AlcantaraCarlosJimenezEduardo/primerIntentoJavaFX/modeladoObjetos/Fila.java][Fila.java]],
+            [[./AlcantaraCarlosJimenezEduardo/primerIntentoJavaFX/modeladoObjetos/JuegoMecanico.java][JuegoMecanico.java]], [[./AlcantaraCarlosJimenezEduardo/primerIntentoJavaFX/modeladoObjetos/JuegoMecanicoCerradoException.java][JuegoMecanicoCerradoException.java]],
+            [[./AlcantaraCarlosJimenezEduardo/primerIntentoJavaFX/modeladoObjetos/ParqueDeDiversiones.java][ParqueDeDiversiones.java]], [[./AlcantaraCarlosJimenezEduardo/primerIntentoJavaFX/modeladoObjetos/Persona.java][Persona.java]], [[./AlcantaraCarlosJimenezEduardo/primerIntentoJavaFX/modeladoObjetos/Prueba.java][Prueba.java]],
+            [[./AlcantaraCarlosJimenezEduardo/primerIntentoJavaFX/modeladoObjetos/Unidad.java][Unidad.java]]
+- Lenguaje de desarrollo :: Java
+- Uso de multitarea / sincronización ::
+  - Barrera para abordar
+  - Arreglo de mutexes para evitar colisiones en los distintos
+    segmentos
+- Obsevaciones ::
+  - ¡Muy buena implementación, en todos los aspectos!
+  - En Git, hay que asumir que quien lo reciba lo va a compilar
+    - Esto es, el =.jar= sale sobrando, es responsabilidad mía
+      compilar
+    - Compilé, ¡y fui exitoso al primer intento! ☺
+    - ...Pero quedó el reguero de archivitos =.class= (faltó el
+      .gitignore)
+  - El proyecto no fue desarrollado/seguido en Git, sólo se agregaron
+    algunos "puntos clave" del desarrollo cumpliendo el requisito ☹
+  - En _algún lugar_ (que no alcancé a identificar, ¡una disculpa!)
+    hay un fallo que permite que, por alguna combinación de factores,
+    se presenten situaciones imposibles como la que reproduzco a
+    continuación:
+
+    [[./AlcantaraCarlosJimenezEduardo/abuso_parkview.png]]
+
+| *Rubro*                | *Parcial* | *Peso* | *Puntos* |
+|------------------------+-----------+--------+----------|
+| *Requisitos*           |           |    0.2 |       2. |
+| Cumplimiento           |        10 |        |     2.00 |
+|------------------------+-----------+--------+----------|
+| *Proyecto*             |           |    0.2 |     2.01 |
+| Creatividad            |        10 |        |     0.67 |
+| Complejidad            |        10 |        |     0.67 |
+| Interfaz usuario       |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Documentación*        |           |    0.2 |     2.01 |
+| Documentación expresa  |        10 |        |     0.67 |
+| Entorno y dependencias |        10 |        |     0.67 |
+| Comentarios            |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Entrega*              |           |    0.2 |     1.67 |
+| Historial en Git       |       7.5 |        |     0.50 |
+| Directorio de proyecto |       7.5 |        |     0.50 |
+| Código válido          |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Legibilidad*          |           |    0.2 |       2. |
+| Estructura             |        10 |        |     1.00 |
+| Nomenclatura           |        10 |        |     1.00 |
+|------------------------+-----------+--------+----------|
+| *TOTAL*                |           |        |     9.69 |
+|------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3::@3$4=@3$2*@2$3 ; f-2::@4$4=@5+@6+@7::@5$4=$2*@4$3/3 ; f-2::@6$4=$2*@4$3/3 ; f-2::@7$4=$2*@4$3/3 ; f-2::@8$4=@9+@10+@11::@9$4=$2*@8$3/3 ; f-2::@10$4=$2*@8$3/3 ; f-2::@11$4=$2*@8$3/3 ; f-2::@12$4=@13+@14+@15::@13$4=$2*@12$3/3 ; f-2::@14$4=$2*@12$3/3 ; f-2::@15$4=$2*@12$3/3 ; f-2::@16$4=@17+@18::@17$4=$2*@16$3/2 ; f-2::@18$4=$2*@16$3/2 ; f-2::@19$4=@2+@4+@8+@12+@16
+
+* Jorge Bárcenas y Sergio Reza
+- Situación implementada :: /Le Restaurant/
+- Interfaz :: TkInter con dos pantallas: Configuración de variables y
+              reporte de resultados
+- Documentación ::  [[./BarcenasJorge_RezaSergio/Proyecto2BarcenasJorge_RezaSergio.docx][Proyecto2BarcenasJorge_RezaSergio.docx]],
+- Código :: [[./BarcenasJorge_RezaSergio/proyecto_2.py][proyecto_2.py]]
+- Lenguaje de desarrollo :: Python
+- Uso de multitarea / sincronización ::
+  - Mutex para listas generales (meseros, clientes, chefs)
+  - Multiplex para cada uno de ellos (reflejan disponibilidad)
+- Obsevaciones ::
+  - Hacen manejo de errores por solicitudes ilógicas. ¡Bien!
+  - ¡Ojo con la ortografía! =leé= es imperativo en segunda persona
+    (/vos/). Cuando reportan que una persona leyó, se escribe =lee=, y
+    se pronuncia acentuado en la /primera/ =e=.
+  - Se presenta un problema cuando hay únicamente un mesero: El
+    programa no termina en que todos piden, comen, platican y se van
+    alegres. El problema siempre termina en que /Chef =n= terminó la
+    orden del cliente =x=./
+    - ¿Algún problema lógico sobre =mutex_meseros_disp.acquire()= en
+      376?
+  - Documentación: Con el escudo de fondo con tan mal contraste, se
+    estorban a ustedes mismos en legibilidad ☹
+  - El planteamiento y los datos parametrizables son muy muy muy
+    parecidos a los del equipo Barrero-Espino
+
+| *Rubro*                | *Parcial* | *Peso* | *Puntos* |
+|------------------------+-----------+--------+----------|
+| *Requisitos*           |           |    0.2 |      1.5 |
+| Cumplimiento           |       7.5 |        |     1.50 |
+|------------------------+-----------+--------+----------|
+| *Proyecto*             |           |    0.2 |     1.84 |
+| Creatividad            |         5 |        |     0.67 |
+| Complejidad            |       7.5 |        |     0.50 |
+| Interfaz usuario       |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Documentación*        |           |    0.2 |     2.01 |
+| Documentación expresa  |        10 |        |     0.67 |
+| Entorno y dependencias |        10 |        |     0.67 |
+| Comentarios            |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Entrega*              |           |    0.2 |     2.01 |
+| Historial en Git       |        10 |        |     0.67 |
+| Directorio de proyecto |        10 |        |     0.67 |
+| Código válido          |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Legibilidad*          |           |    0.2 |       2. |
+| Estructura             |        10 |        |     1.00 |
+| Nomenclatura           |        10 |        |     1.00 |
+|------------------------+-----------+--------+----------|
+| *TOTAL*                |           |        |     9.36 |
+|------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3::@3$4=@3$2*@2$3 ; f-2::@4$4=@5+@6+@7::@5$4=$2*@4$3/3 ; f-2::@6$4=$2*@4$3/3 ; f-2::@7$4=$2*@4$3/3 ; f-2::@8$4=@9+@10+@11::@9$4=$2*@8$3/3 ; f-2::@10$4=$2*@8$3/3 ; f-2::@11$4=$2*@8$3/3 ; f-2::@12$4=@13+@14+@15::@13$4=$2*@12$3/3 ; f-2::@14$4=$2*@12$3/3 ; f-2::@15$4=$2*@12$3/3 ; f-2::@16$4=@17+@18::@17$4=$2*@16$3/2 ; f-2::@18$4=$2*@16$3/2 ; f-2::@19$4=@2+@4+@8+@12+@16
+
+* Patricio Barrero y Héctor Espino
+- Situación implementada :: Restaurante
+- Interfaz :: Texto (mensajes a consola describen el avance del sistema)
+- Documentación :: [[./BarreroPatricio-EspinoHector/captura.png][captura.png]], [[./BarreroPatricio-EspinoHector/identificacion_y_descripcion_problema.md][identificacion_y_descripcion_problema.md]]
+- Código :: [[./BarreroPatricio-EspinoHector/codigo/__init__.py][__init__.py]], [[./BarreroPatricio-EspinoHector/codigo/cocina.py][cocina.py]], [[./BarreroPatricio-EspinoHector/codigo/comensal.py][comensal.py]], [[./BarreroPatricio-EspinoHector/codigo/comun.py][comun.py]], [[./BarreroPatricio-EspinoHector/codigo/menu.py][menu.py]],
+            [[./BarreroPatricio-EspinoHector/codigo/restaurante.py][restaurante.py]], [[./BarreroPatricio-EspinoHector/codigo/servicio.py][servicio.py]],
+            [[./BarreroPatricio-EspinoHector/identificacion_y_descripcion_problema.md~][identificacion_y_descripcion_problema.md~]]
+- Otros archivos en la entrega :: [[./BarreroPatricio-EspinoHector/.gitignore][.gitignore]]
+- Lenguaje de desarrollo :: Python
+- Uso de multitarea / sincronización ::
+- Obsevaciones ::
+  - El planteamiento y los datos parametrizables son muy muy muy
+    parecidos a los del equipo Bárcenas-Reza
+  - ¿Alguna espera activa?
+    - Cuando termina la ejecución con los parámetros indicados, el
+      programa se mantiene /vivo/... Usando el 100% de procesador
+    - =Servicio.run()= tiene un =while True= dentro del cual se
+      verifican (adquieren) =semaforo_meseros=  y
+      =mutex_atencion=. Una vez que =semaforo_meseros= haya sido
+      subido a valores positivos, esta función lo seguirá obteniendo y
+      liberando. =mutex_atencion= también se mantiene /girando/. ⇒
+      ¡Tenemos espera activa!
+  - ¡Bienvenido que el código tenga anotaciones (=@siguiente_estado=),
+    que haya /docstrings/... Pero se ve que les fue ganando el tiempo,
+    y que no tienen en automático la costumbre de comentar, es más
+    bien un comportamiento /impuesto/.
+
+
+
+| *Rubro*                | *Parcial* | *Peso* | *Puntos* |
+|------------------------+-----------+--------+----------|
+| *Requisitos*           |           |    0.2 |      1.5 |
+| Cumplimiento           |       7.5 |        |     1.50 |
+|------------------------+-----------+--------+----------|
+| *Proyecto*             |           |    0.2 |     1.33 |
+| Creatividad            |         5 |        |     0.33 |
+| Complejidad            |       7.5 |        |     0.50 |
+| Interfaz usuario       |       7.5 |        |     0.50 |
+|------------------------+-----------+--------+----------|
+| *Documentación*        |           |    0.2 |     1.34 |
+| Documentación expresa  |        10 |        |     0.67 |
+| Entorno y dependencias |        10 |        |     0.67 |
+| Comentarios            |           |        |     0.00 |
+|------------------------+-----------+--------+----------|
+| *Entrega*              |           |    0.2 |     2.01 |
+| Historial en Git       |        10 |        |     0.67 |
+| Directorio de proyecto |        10 |        |     0.67 |
+| Código válido          |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Legibilidad*          |           |    0.2 |       2. |
+| Estructura             |        10 |        |     1.00 |
+| Nomenclatura           |        10 |        |     1.00 |
+|------------------------+-----------+--------+----------|
+| *TOTAL*                |           |        |     8.18 |
+|------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3::@3$4=@3$2*@2$3 ; f-2::@4$4=@5+@6+@7::@5$4=$2*@4$3/3 ; f-2::@6$4=$2*@4$3/3 ; f-2::@7$4=$2*@4$3/3 ; f-2::@8$4=@9+@10+@11::@9$4=$2*@8$3/3 ; f-2::@10$4=$2*@8$3/3 ; f-2::@11$4=$2*@8$3/3 ; f-2::@12$4=@13+@14+@15::@13$4=$2*@12$3/3 ; f-2::@14$4=$2*@12$3/3 ; f-2::@15$4=$2*@12$3/3 ; f-2::@16$4=@17+@18::@17$4=$2*@16$3/2 ; f-2::@18$4=$2*@16$3/2 ; f-2::@19$4=@2+@4+@8+@12+@16
+
+* Samuel Garrido y Jorge Cárdenas
+- Situación implementada :: La cuarentena
+- Interfaz :: Texto (mensajes a consola), con la categoría de mensaje
+              calificada cromáticamente
+- Documentación ::  [[./GarridoSamuel-CardenasJorge/README.md][README.md]], [[./GarridoSamuel-CardenasJorge/screen1.png][screen1.png]], [[./GarridoSamuel-CardenasJorge/screen2.png][screen2.png]], [[./GarridoSamuel-CardenasJorge/screen3.png][screen3.png]], [[./GarridoSamuel-CardenasJorge/screen4.png][screen4.png]]
+- Código :: [[./GarridoSamuel-CardenasJorge/proyecto2.py][proyecto2.py]]
+- Otros archivos en la entrega :: [[./GarridoSamuel-CardenasJorge/.gitignore][.gitignore]]
+- Lenguaje de desarrollo :: Python
+- Uso de multitarea / sincronización ::
+  - Mutex para marcar periodos de enfermedad
+  - Barrera para esperar a que todos estén listos para comenzar
+  - Barreras para que las tareas se realicen cuando todos los
+    integrantes que las cubrirán estén listos
+- Obsevaciones ::
+  - ¡Excelente planteamiento y /storytelling/!
+    - Se nota que no conviven con niños chicos o mascotas... :-| Eso
+      de que...
+      #+BEGIN_SRC text
+	👶 Bebe8 está trabajando en Trapear 🧹
+	👶 Bebe 8 dejó de trabajar en Trapear 🧹
+		 1 ha(n) terminado la tarea: Trapear 🧹 
+	🐕 Perro4 está trabajando en Lavar el baño 🚽
+	🐕 Perro 4 dejó de trabajar en Lavar el baño 🚽
+		 1 ha(n) terminado la tarea: Lavar el baño 🚽 
+      #+END_SRC
+      Me parece... difícil de creer. (¿Alguna vez terminaremos de
+      limpiar esta méndiga casa? ☹)
+  - Muy buen listado de dependencias, incluso las dependencias
+    no-duras (fonts)
+
+| *Rubro*                | *Parcial* | *Peso* | *Puntos* |
+|------------------------+-----------+--------+----------|
+| *Requisitos*           |           |    0.2 |       2. |
+| Cumplimiento           |        10 |        |     2.00 |
+|------------------------+-----------+--------+----------|
+| *Proyecto*             |           |    0.2 |     1.84 |
+| Creatividad            |        10 |        |     0.67 |
+| Complejidad            |       7.5 |        |     0.50 |
+| Interfaz usuario       |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Documentación*        |           |    0.2 |     2.01 |
+| Documentación expresa  |        10 |        |     0.67 |
+| Entorno y dependencias |        10 |        |     0.67 |
+| Comentarios            |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Entrega*              |           |    0.2 |     2.01 |
+| Historial en Git       |        10 |        |     0.67 |
+| Directorio de proyecto |        10 |        |     0.67 |
+| Código válido          |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Legibilidad*          |           |    0.2 |       2. |
+| Estructura             |        10 |        |     1.00 |
+| Nomenclatura           |        10 |        |     1.00 |
+|------------------------+-----------+--------+----------|
+| *TOTAL*                |           |        |     9.86 |
+|------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3::@3$4=@3$2*@2$3 ; f-2::@4$4=@5+@6+@7::@5$4=$2*@4$3/3 ; f-2::@6$4=$2*@4$3/3 ; f-2::@7$4=$2*@4$3/3 ; f-2::@8$4=@9+@10+@11::@9$4=$2*@8$3/3 ; f-2::@10$4=$2*@8$3/3 ; f-2::@11$4=$2*@8$3/3 ; f-2::@12$4=@13+@14+@15::@13$4=$2*@12$3/3 ; f-2::@14$4=$2*@12$3/3 ; f-2::@15$4=$2*@12$3/3 ; f-2::@16$4=@17+@18::@17$4=$2*@16$3/2 ; f-2::@18$4=$2*@16$3/2 ; f-2::@19$4=@2+@4+@8+@12+@16
+
+* Javier Loidi
+- Situación implementada :: Ensamblaje de automóviles
+- Interfaz :: Impresión de avance a consola, indicando con tipos de
+              flecha el nivel de integración de cada auto producido
+- Documentación :: [[./LoidiJavier/documentacion.odt][documentacion.odt]]
+- Código :: [[./LoidiJavier/ensamblaje_de_autos.py][ensamblaje_de_autos.py]]
+- Otros archivos en la entrega :: 
+- Lenguaje de desarrollo :: Python
+- Uso de multitarea / sincronización ::
+  - Señalización entre módulos para "pasar" los componentes
+    construidos de uno al otro
+  - Barreras para dar salida a componentes de los que se requieren
+    varios
+  - Mutex para acceso a variables compartidas
+- Obsevaciones ::
+  - He visto que muchos de ustedes siguen el estilo de comentarios:
+    #+BEGIN_SRC python
+      total_motor = 0  #totales de elementos independientes
+      total_motor_chasis = 0  #totales de elementos compuestos
+      mutex_print = Semaphore(1) #mutex para imprimir correctamente
+      mutex_motor = Semaphore(1) #mutexes de elementos independientes
+    #+END_SRC
+    Esto es, poner el comentario en la misma línea (y a continuación
+    de) la acción a que hace referencia. Esto es considerado mal
+    estilo, te sugiero fuertemente cambiar a:
+    #+BEGIN_SRC python
+      # totales de elementos independientes
+      total_motor = 0
+      # totales de elementos compuestos
+      total_motor_chasis = 0
+      # mutex para imprimir correctamente
+      mutex_print = Semaphore(1)
+      # mutexes de elementos independientes
+      mutex_motor = Semaphore(1)
+    #+END_SRC
+    Esto deja que la vista lea la parte documental más fácilmente, y
+    no incrementa el largo total de líneas.
+  - Hay un principio de diseño/estilo al que se hace referencia como
+    /DRY — Don't Repeat Yourself/ (No te repitas a tí mismo). Si hay
+    elementos de tu programa que identificas con muy alta
+    auto-similitud, por claridad y mantenibilidad puedes abstraerlos
+    en una única función. Por ejemplo, dices:
+    #+BEGIN_SRC python
+      # LAS FUNCIONES A CONTINUACION SON SIMILARES POR LO QUE SOLO COMENTARE
+      # LAS SECCIONES PERTINENTES UNA SOLA VEZ
+      def constructor_motor(): 
+	  global mutex_motor, cuenta_motor, total_motor, mutex_print, hay_motor
+	  mutex_motor.acquire()  #se protege las variables de cuenta y totales
+	  cuenta_motor = cuenta_motor + 1
+	  total_motor = total_motor + 1
+	  mutex_print.acquire()
+	  print("\n Se construyó el motor numero",total_motor) 
+	  mutex_print.release()
+	  mutex_motor.release()
+	  hay_motor.release()  #se hace una señalización de que hay motor disponible
+    #+END_SRC
+    Te diste cuenta del problema, y lo muestras en tu
+    comentario. Entonces, en vez de usar las =global=, yo te
+    sugeriría:
+    #+BEGIN_SRC python
+      def construye_parte(mut_elem, cuenta_elem, total_elem, mut_pr, hay_elem, nombre_elem):
+	  mut_elem.acquire()
+	  cuenta_elem = cuenta_elem + 1
+	  total_elem = total_elem + 1
+	  mut_pr.acquire()
+	  pr("\n Se construyó el %s numero %d", (nombre_elem, total_elem))
+	  mut_pr.release()
+	  mut_elem.release()
+	  hay_elem.release()
+    #+END_SRC
+    Claro, hay ligeras diferencias... pero /casi/ seguramente podrías
+    representarlas sin demasiado dolor en una función genérica como esta.
+  - Dices:
+    #+BEGIN_SRC python
+      # Aqui tambien se hace una señalización pero con una condicional, por
+      # lo que seria un torniquete
+    #+END_SRC
+    En mi pueblo, a una señalización condicional por número de
+    elementos seguida de un torniquete le llaman /barrera/ ;-)
+
+| *Rubro*                | *Parcial* | *Peso* | *Puntos* |
+|------------------------+-----------+--------+----------|
+| *Requisitos*           |           |    0.2 |      1.5 |
+| Cumplimiento           |       7.5 |        |     1.50 |
+|------------------------+-----------+--------+----------|
+| *Proyecto*             |           |    0.2 |      1.5 |
+| Creatividad            |         5 |        |     0.33 |
+| Complejidad            |        10 |        |     0.67 |
+| Interfaz usuario       |       7.5 |        |     0.50 |
+|------------------------+-----------+--------+----------|
+| *Documentación*        |           |    0.2 |     2.01 |
+| Documentación expresa  |        10 |        |     0.67 |
+| Entorno y dependencias |        10 |        |     0.67 |
+| Comentarios            |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Entrega*              |           |    0.2 |     2.01 |
+| Historial en Git       |        10 |        |     0.67 |
+| Directorio de proyecto |        10 |        |     0.67 |
+| Código válido          |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Legibilidad*          |           |    0.2 |      1.5 |
+| Estructura             |        10 |        |     1.00 |
+| Nomenclatura           |         5 |        |     0.50 |
+|------------------------+-----------+--------+----------|
+| *TOTAL*                |           |        |     8.52 |
+|------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3::@3$4=@3$2*@2$3 ; f-2::@4$4=@5+@6+@7::@5$4=$2*@4$3/3 ; f-2::@6$4=$2*@4$3/3 ; f-2::@7$4=$2*@4$3/3 ; f-2::@8$4=@9+@10+@11::@9$4=$2*@8$3/3 ; f-2::@10$4=$2*@8$3/3 ; f-2::@11$4=$2*@8$3/3 ; f-2::@12$4=@13+@14+@15::@13$4=$2*@12$3/3 ; f-2::@14$4=$2*@12$3/3 ; f-2::@15$4=$2*@12$3/3 ; f-2::@16$4=@17+@18::@17$4=$2*@16$3/2 ; f-2::@18$4=$2*@16$3/2 ; f-2::@19$4=@2+@4+@8+@12+@16
+
+* Niver Martínez
+- Situación implementada :: Análisis clínico
+- Interfaz :: GUI (TkInter)
+- Documentación :: [[./MartinezNiver/README.md][README.md]], [[./MartinezNiver/plateaProblema.txt][plateaProblema.txt]], [[./MartinezNiver/proyecto 2 - tk version/img/jeringa.png][jeringa.png]], [[./MartinezNiver/proyecto 2 - tk
+                    version/img/jeringa.ico][jeringa.ico]], [[./MartinezNiver/capturas/Captura_01.PNG][Captura_01.PNG]], [[./MartinezNiver/capturas/Captura_02.PNG][Captura_02.PNG]], [[./MartinezNiver/capturas/Captura_03.PNG][Captura_03.PNG]]
+- Código ::  [[./MartinezNiver/proyecto 2 - tk
+             version/__pycache__/main.cpython-38.pyc][main.cpython-38.pyc]], [[./MartinezNiver/proyecto 2 - tk version/gui_project.pyw][gui_project.pyw]], [[./MartinezNiver/proyecto 2 - tk version/img/jeringa.ico][jeringa.ico]], [[./MartinezNiver/proyecto 2 - tk version/main.py][main.py]], [[./MartinezNiver/proyecto 2 - tk
+             version/test_gradient.py][test_gradient.py]]
+- Otros archivos en la entrega :: [[./MartinezNiver/.gitignore][.gitignore]], [[./MartinezNiver/proyecto 2 - tk version/.gitignore][.gitignore]]
+- Lenguaje de desarrollo :: Python
+- Uso de multitarea / sincronización ::
+- Obsevaciones ::
+  - Desarrollar un GUI funcional es difícil, y dicen que es factor de
+    riesgo cardiaco. ¡Muy bien por aventurarte! 😉
+  - Respecto a lo que mencionas en [[./MartinezNiver/plateaProblema.txt][plateaProblema.txt]], claro, no
+    esperaba que entregaran el desarrollo funcional de un programa de
+    diagnóstico médico. Basta con una simulación de la parte que nos
+    importa para esta materia 😉
+  - De la documentación: Me falta ver que /identifiques/ qué
+    patrones de sincronización utilizaste.
+    - Viendo el =main.py=, veo que lanzas dos hilos, =t= y =s=, pero
+      no veo que haya sincronización alguna entre ellos. Corren
+      paralelos y concurrentes, /pero no sincronizados/. Lo único que
+      podría verse como sincronización es el =t.join()= seguido de
+      =s.join()= al final.
+  - Tienes un .gitignore, con el que se ve que estuviste
+    jugando... Pero no excluye a =__pycache__=, con lo que la
+    ejecución de mi programa me genera a un horrible archivo =proyecto
+    2 - tk version/__pycache__/main.cpython-37.pyc= que mi Git
+    reconoce como desconocido
+
+| *Rubro*                | *Parcial* | *Peso* | *Puntos* |
+|------------------------+-----------+--------+----------|
+| *Requisitos*           |           |    0.2 |       1. |
+| Cumplimiento           |         5 |        |     1.00 |
+|------------------------+-----------+--------+----------|
+| *Proyecto*             |           |    0.2 |      1.5 |
+| Creatividad            |        10 |        |     0.67 |
+| Complejidad            |         5 |        |     0.33 |
+| Interfaz usuario       |       7.5 |        |     0.50 |
+|------------------------+-----------+--------+----------|
+| *Documentación*        |           |    0.2 |      1.5 |
+| Documentación expresa  |       7.5 |        |     0.50 |
+| Entorno y dependencias |        10 |        |     0.67 |
+| Comentarios            |         5 |        |     0.33 |
+|------------------------+-----------+--------+----------|
+| *Entrega*              |           |    0.2 |     1.67 |
+| Historial en Git       |        10 |        |     0.67 |
+| Directorio de proyecto |         5 |        |     0.33 |
+| Código válido          |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Legibilidad*          |           |    0.2 |     1.75 |
+| Estructura             |        10 |        |     1.00 |
+| Nomenclatura           |       7.5 |        |     0.75 |
+|------------------------+-----------+--------+----------|
+| *TOTAL*                |           |        |     7.42 |
+|------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3::@3$4=@3$2*@2$3 ; f-2::@4$4=@5+@6+@7::@5$4=$2*@4$3/3 ; f-2::@6$4=$2*@4$3/3 ; f-2::@7$4=$2*@4$3/3 ; f-2::@8$4=@9+@10+@11::@9$4=$2*@8$3/3 ; f-2::@10$4=$2*@8$3/3 ; f-2::@11$4=$2*@8$3/3 ; f-2::@12$4=@13+@14+@15::@13$4=$2*@12$3/3 ; f-2::@14$4=$2*@12$3/3 ; f-2::@15$4=$2*@12$3/3 ; f-2::@16$4=@17+@18::@17$4=$2*@16$3/2 ; f-2::@18$4=$2*@16$3/2 ; f-2::@19$4=@2+@4+@8+@12+@16
+
+* Fernando Medina
+- Situación implementada :: El plato de comida para perros
+- Interfaz :: Texto (mensajes a consola describen el avance del sistema)
+- Documentación ::  [[./Medina Fernando/Kali.png][Kali.png]], [[./Medina Fernando/MisPerros.png][MisPerros.png]], [[./Medina Fernando/Powershell.png][Powershell.png]], [[./Medina Fernando/README.md][README.md]], [[./Medina Fernando/Spyder.png][Spyder.png]]
+- Código :: [[./Medina Fernando/Proyecto2sistop.py][Proyecto2sistop.py]]
+- Otros archivos en la entrega :: 
+- Lenguaje de desarrollo :: Python
+- Uso de multitarea / sincronización ::
+  - Mutex para proteger al plato de acceso concurrente
+  - =Thread.join()= para esperar a que todos los hilos terminen antes
+    de salir del hilo principal
+- Obsevaciones ::
+  - La idea de problema a resolver se presentaba como bonita y daba
+    para jugar bastante
+  - Pero la implementación... Es muy, muy básica ☹
+    - =cantidadDeCroquetas= daba para ser una variable de control que
+      permitiera comportamiento interesante, pero no lo hace — ni
+      siquiera es verificada.
+    - La aumenté de 450 a 900, y los perros dejan de comer después de
+      una sola vez (dejan 450g)
+    - La disminuí a 150, y los perros dejan -150, -250 y -300 gramos
+
+| *Rubro*                | *Parcial* | *Peso* | *Puntos* |
+|------------------------+-----------+--------+----------|
+| *Requisitos*           |           |    0.2 |       1. |
+| Cumplimiento           |         5 |        |     1.00 |
+|------------------------+-----------+--------+----------|
+| *Proyecto*             |           |    0.2 |     0.99 |
+| Creatividad            |         5 |        |     0.33 |
+| Complejidad            |         5 |        |     0.33 |
+| Interfaz usuario       |         5 |        |     0.33 |
+|------------------------+-----------+--------+----------|
+| *Documentación*        |           |    0.2 |     2.01 |
+| Documentación expresa  |        10 |        |     0.67 |
+| Entorno y dependencias |        10 |        |     0.67 |
+| Comentarios            |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Entrega*              |           |    0.2 |     2.01 |
+| Historial en Git       |        10 |        |     0.67 |
+| Directorio de proyecto |        10 |        |     0.67 |
+| Código válido          |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Legibilidad*          |           |    0.2 |       2. |
+| Estructura             |        10 |        |     1.00 |
+| Nomenclatura           |        10 |        |     1.00 |
+|------------------------+-----------+--------+----------|
+| *TOTAL*                |           |        |     8.01 |
+|------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3::@3$4=@3$2*@2$3 ; f-2::@4$4=@5+@6+@7::@5$4=$2*@4$3/3 ; f-2::@6$4=$2*@4$3/3 ; f-2::@7$4=$2*@4$3/3 ; f-2::@8$4=@9+@10+@11::@9$4=$2*@8$3/3 ; f-2::@10$4=$2*@8$3/3 ; f-2::@11$4=$2*@8$3/3 ; f-2::@12$4=@13+@14+@15::@13$4=$2*@12$3/3 ; f-2::@14$4=$2*@12$3/3 ; f-2::@15$4=$2*@12$3/3 ; f-2::@16$4=@17+@18::@17$4=$2*@16$3/2 ; f-2::@18$4=$2*@16$3/2 ; f-2::@19$4=@2+@4+@8+@12+@16
+
+* Alfonso Murrieta y Joaquín Valdespino
+- Situación implementada :: Simulación de agencias de viajes
+- Interfaz :: Texto (mensajes a consola describen el avance del sistema)
+- Documentación :: [[./MurrietaAlfonso-ValdespinoJoaquin/ABOUT.md][ABOUT.md]], [[./MurrietaAlfonso-ValdespinoJoaquin/README.md][README.md]]
+- Código :: [[./MurrietaAlfonso-ValdespinoJoaquin/main.py][main.py]], [[./MurrietaAlfonso-ValdespinoJoaquin/modulos/agencia.py][agencia.py]], [[./MurrietaAlfonso-ValdespinoJoaquin/modulos/cliente.py][cliente.py]], [[./MurrietaAlfonso-ValdespinoJoaquin/modulos/compania.py][compania.py]]
+- Otros archivos en la entrega :: [[./MurrietaAlfonso-ValdespinoJoaquin/.gitignore][.gitignore]]
+- Lenguaje de desarrollo :: Python
+- Uso de multitarea / sincronización ::
+  - ¡Me gusta el uso de =RLock=! Es una primitiva interesante.
+    - Me /parece/, sin embargo, que no está bien utilizada: Al
+      iniciarlizarla como parte del =__init__= de agencia, /cada
+      instancia/ tendrá su propio =agLock=. Tendría que ser
+      inicializada globalmente en el módulo (archivo), y sólo
+      utilizada con =global= dentro del =__init__=:
+      #+BEGIN_SRC python
+	agLock = RLock()
+	class agencia(object):
+	  def __init__(self): # (y los demás argumentos)
+	    global agLock
+	    agLock.acquire()
+	    # (...)
+	    agLock.release()
+      #+END_SRC
+    - ¿Que para el 21/mayo vamos a seguir guardaditos en casa? ... ☹
+
+- Obsevaciones ::
+  - ¡Me gusta su estilo de Python! Verificación de tipos, buen OOP.
+  - La interfaz me dejó rascándome la cabeza. Nada explica que el
+    poner lo que parece encabezado es una venta exitosa, ni queda
+    claro el cliente desde la interfaz provista.
+  - Cuando especificaron el .gitignore, habían ya agregado los
+    archivos =*.pyc=, y hay que removerlos manualmente ☹
+  - Falta comentar mucho para comprender la lógica del código
+
+| *Rubro*                | *Parcial* | *Peso* | *Puntos* |
+|------------------------+-----------+--------+----------|
+| *Requisitos*           |           |    0.2 |       2. |
+| Cumplimiento           |        10 |        |     2.00 |
+|------------------------+-----------+--------+----------|
+| *Proyecto*             |           |    0.2 |     1.67 |
+| Creatividad            |        10 |        |     0.67 |
+| Complejidad            |        10 |        |     0.67 |
+| Interfaz usuario       |         5 |        |     0.33 |
+|------------------------+-----------+--------+----------|
+| *Documentación*        |           |    0.2 |     2.01 |
+| Documentación expresa  |        10 |        |     0.67 |
+| Entorno y dependencias |        10 |        |     0.67 |
+| Comentarios            |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Entrega*              |           |    0.2 |     1.67 |
+| Historial en Git       |        10 |        |     0.67 |
+| Directorio de proyecto |         5 |        |     0.33 |
+| Código válido          |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Legibilidad*          |           |    0.2 |     1.75 |
+| Estructura             |        10 |        |     1.00 |
+| Nomenclatura           |       7.5 |        |     0.75 |
+|------------------------+-----------+--------+----------|
+| *TOTAL*                |           |        |      9.1 |
+|------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3::@3$4=@3$2*@2$3 ; f-2::@4$4=@5+@6+@7::@5$4=$2*@4$3/3 ; f-2::@6$4=$2*@4$3/3 ; f-2::@7$4=$2*@4$3/3 ; f-2::@8$4=@9+@10+@11::@9$4=$2*@8$3/3 ; f-2::@10$4=$2*@8$3/3 ; f-2::@11$4=$2*@8$3/3 ; f-2::@12$4=@13+@14+@15::@13$4=$2*@12$3/3 ; f-2::@14$4=$2*@12$3/3 ; f-2::@15$4=$2*@12$3/3 ; f-2::@16$4=@17+@18::@17$4=$2*@16$3/2 ; f-2::@18$4=$2*@16$3/2 ; f-2::@19$4=@2+@4+@8+@12+@16
+
+* Sergio Osorio
+- Situación implementada :: Sistema digestivo
+- Interfaz :: GUI (Java Swing)
+- Documentación :: [[./OsorioSergio/Descripcion.txt][Descripcion.txt]], [[./OsorioSergio/Documentacion.txt][Documentacion.txt]], [[./OsorioSergio/SistemaDigestivo/build/classes/Imagenes/aliméntame.png][aliméntame.png]],
+                   [[./OsorioSergio/SistemaDigestivo/build/classes/Imagenes/ezgif.com-resize.gif][ezgif.com-resize.gif]], [[./OsorioSergio/SistemaDigestivo/build/classes/Imagenes/fondo.png][fondo.png]], [[./OsorioSergio/SistemaDigestivo/build/classes/Imagenes/insulina.jpg][insulina.jpg]],
+                   [[./OsorioSergio/SistemaDigestivo/dist/README.TXT][README.TXT]], [[./OsorioSergio/SistemaDigestivo/src/Imagenes/ezgif.com-resize.gif][ezgif.com-resize.gif]], [[./OsorioSergio/SistemaDigestivo/src/Imagenes/fondo.png][fondo.png]],
+                   [[./OsorioSergio/SistemaDigestivo/src/main/java/Imagenes/FotoDimensionado.gif][FotoDimensionado.gif]], [[./OsorioSergio/SistemaDigestivo/src/main/java/Imagenes/fondo.png][fondo.png]]
+- Código :: [[./OsorioSergio/SistemaDigestivo/build/classes/Interfaces/Inicio.form][Inicio.form]], [[./OsorioSergio/SistemaDigestivo/build/classes/Interfaces/Interfaz.form][Interfaz.form]], [[./OsorioSergio/SistemaDigestivo/build/classes/Interfaces/InterfazPrincipal.form][InterfazPrincipal.form]],
+            [[./OsorioSergio/SistemaDigestivo/src/Clases/RRHormonas.java][RRHormonas.java]], [[./OsorioSergio/SistemaDigestivo/src/Interfaces/Interfaz.form][Interfaz.form]], [[./OsorioSergio/SistemaDigestivo/src/Interfaces/Interfaz.java][Interfaz.java]],
+            [[./OsorioSergio/SistemaDigestivo/src/main/java/Interfaz/PrincipalInterfaz.form][PrincipalInterfaz.form]], [[./OsorioSergio/SistemaDigestivo/src/main/java/Interfaz/PrincipalInterfaz.java][PrincipalInterfaz.java]],
+            [[./OsorioSergio/SistemaDigestivo/src/main/java/Principal/RRhormonas.java][RRhormonas.java]],
+- Otros archivos en la entrega ::  [[./OsorioSergio/SistemaDigestivo/build/built-jar.properties][built-jar.properties]],
+     [[./OsorioSergio/SistemaDigestivo/build/classes/Clases/RRHormonas.class][RRHormonas.class]], [[./OsorioSergio/SistemaDigestivo/build/classes/Interfaces/Inicio.class][Inicio.class]], [[./OsorioSergio/SistemaDigestivo/build/classes/Interfaces/Inicio2.class][Inicio2.class]], [[./OsorioSergio/SistemaDigestivo/build/classes/Interfaces/Inicio2.form][Inicio2.form]],
+     [[./OsorioSergio/SistemaDigestivo/build/classes/Interfaces/Interfaz.class][Interfaz.class]], [[./OsorioSergio/SistemaDigestivo/build/classes/Interfaces/InterfazPrincipal.class][InterfazPrincipal.class]], [[./OsorioSergio/SistemaDigestivo/dist/SistemaDigestivo.jar][SistemaDigestivo.jar]],
+     [[./OsorioSergio/SistemaDigestivo/dist/lib/AbsoluteLayout.jar][AbsoluteLayout.jar]], [[./OsorioSergio/SistemaDigestivo/lib/unknown/binary/AbsoluteLayout/SNAPSHOT/AbsoluteLayout-SNAPSHOT.jar][AbsoluteLayout-SNAPSHOT.jar]], [[./OsorioSergio/SistemaDigestivo/manifest.mf][manifest.mf]],
+     [[./OsorioSergio/SistemaDigestivo/nbproject/build-impl.xml][build-impl.xml]], [[./OsorioSergio/SistemaDigestivo/nbproject/genfiles.properties][genfiles.properties]], [[./OsorioSergio/SistemaDigestivo/nbproject/private/private.properties][private.properties]],
+     [[./OsorioSergio/SistemaDigestivo/nbproject/private/private.xml][private.xml]], [[./OsorioSergio/SistemaDigestivo/nbproject/project.properties][project.properties]], [[./OsorioSergio/SistemaDigestivo/nbproject/project.xml][project.xml]],
+     [[./OsorioSergio/SistemaDigestivo/target/SistemaDigestivo-1.0-SNAPSHOT.jar][SistemaDigestivo-1.0-SNAPSHOT.jar]], [[./OsorioSergio/SistemaDigestivo/target/classes/Interfaz/PrincipalInterfaz.class][PrincipalInterfaz.class]],
+     [[./OsorioSergio/SistemaDigestivo/target/classes/Principal/RRhormonas.class][RRhormonas.class]]
+- Lenguaje de desarrollo :: Java
+- Uso de multitarea / sincronización ::
+  - En la documentación mencionas que la estrategia es Round
+    Robin... ¡Eso no es sincronización! (es /planificación/)
+  - No hay manejo de multihilos / multiprocesos. Esto no es lo que
+    solicité ☹
+- Obsevaciones ::
+  - Incluyes muchos archivos que no son fuente (todos los =.class=,
+    =.jar=, los =XML= generados, los detalles de compilación) deben
+    ser /excluidos/ de las entregas (ya sea con =.gitignore= o
+    sencillamente no poniéndolos ahí).
+  - Tu programa está bonito... Pero no es lo que pedimos ☹
+    - Podrías haberlo hecho multihilos, donde el disparador de cada
+      hormona fuera un hilo que esperara a su antecesor, y fuera
+      /disparado/ por una señalización o algo así...
+  - La documentación no incluye ningún aspecto técnico, ni siquiera
+    qué hacer para ejecutar el programa
+    - No puedo compilar el código, no indicas dependencias. Supongo
+      que me falta instalar algo de =Netbeans...=
+      #+BEGIN_SRC text
+	$ javac $(find . -type f -name *.java)
+	./Interfaces/Interfaz.java:64: error: package org.netbeans.lib.awtextra does not exist
+		getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+									^
+	./Interfaces/Interfaz.java:74: error: package org.netbeans.lib.awtextra does not exist
+		getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 40, 120, -1));
+									    ^
+	./Interfaces/Interfaz.java:77: error: package org.netbeans.lib.awtextra does not exist
+		getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 150, 260));
+									   ^
+	(...)
+      #+END_SRC
+    - Tengo que usar tu =.jar=, pero en clases como esta nunca
+      deberías requerir que tu usuario /confíe/ en tus ejecutables
+
+| *Rubro*                | *Parcial* | *Peso* | *Puntos* |
+|------------------------+-----------+--------+----------|
+| *Requisitos*           |           |    0.2 |       0. |
+| Cumplimiento           |         0 |        |     0.00 |
+|------------------------+-----------+--------+----------|
+| *Proyecto*             |           |    0.2 |     1.33 |
+| Creatividad            |         5 |        |     0.33 |
+| Complejidad            |         5 |        |     0.33 |
+| Interfaz usuario       |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Documentación*        |           |    0.2 |     1.33 |
+| Documentación expresa  |         5 |        |     0.33 |
+| Entorno y dependencias |         5 |        |     0.33 |
+| Comentarios            |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Entrega*              |           |    0.2 |     1.16 |
+| Historial en Git       |       7.5 |        |     0.50 |
+| Directorio de proyecto |         5 |        |     0.33 |
+| Código válido          |         5 |        |     0.33 |
+|------------------------+-----------+--------+----------|
+| *Legibilidad*          |           |    0.2 |       2. |
+| Estructura             |        10 |        |     1.00 |
+| Nomenclatura           |        10 |        |     1.00 |
+|------------------------+-----------+--------+----------|
+| *TOTAL*                |           |        |     5.82 |
+|------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3::@3$4=@3$2*@2$3 ; f-2::@4$4=@5+@6+@7::@5$4=$2*@4$3/3 ; f-2::@6$4=$2*@4$3/3 ; f-2::@7$4=$2*@4$3/3 ; f-2::@8$4=@9+@10+@11::@9$4=$2*@8$3/3 ; f-2::@10$4=$2*@8$3/3 ; f-2::@11$4=$2*@8$3/3 ; f-2::@12$4=@13+@14+@15::@13$4=$2*@12$3/3 ; f-2::@14$4=$2*@12$3/3 ; f-2::@15$4=$2*@12$3/3 ; f-2::@16$4=@17+@18::@17$4=$2*@16$3/2 ; f-2::@18$4=$2*@16$3/2 ; f-2::@19$4=@2+@4+@8+@12+@16
+
+* Roel Pérez
+- Situación implementada :: El bufón está en el trono
+- Interfaz :: Presentado en consola posicionable (=curses=)
+- Documentación :: [[./PerezRoel/documentacion/descripcionDelProblema.txt][descripcionDelProblema.txt]], [[./PerezRoel/documentacion/ejec_01.png][ejec_01.png]], [[./PerezRoel/documentacion/ejec_02.png][ejec_02.png]], [[./PerezRoel/documentacion/ejec_03.png][ejec_03.png]], [[./PerezRoel/documentacion/ejec_04.png][ejec_04.png]], [[./PerezRoel/documentacion/pantalla_de_titulo.png][pantalla_de_titulo.png]], [[./PerezRoel/documentacion/proyecto2-doc.txt][proyecto2-doc.txt]]
+- Código :: [[./PerezRoel/codigo/config.py][config.py]], [[./PerezRoel/codigo/interfaz.py][interfaz.py]], [[./PerezRoel/codigo/proyecto2.py][proyecto2.py]]
+- Otros archivos en la entrega ::  [[./PerezRoel/.gitignore][.gitignore]]
+- Lenguaje de desarrollo :: Python
+- Uso de multitarea / sincronización ::
+  - Semáforos: Debe levantarse (señalización), Puede sentarse
+    (apagador), Puerta cortesanos (torniquete/barrera), Bufón se sinta
+    (señalización), mutex (mutex)
+  - Variables de condición: Rey presente, Bufón sentado, Cortesanos
+    pasados, Cortesanos esperando, Personas presentes (totales)
+- Obsevaciones ::
+  - ¡Qué bonito planteamiento / historia! :-D
+  - Implementación sencilla y agradable de leer
+
+| *Rubro*                | *Parcial* | *Peso* | *Puntos* |
+|------------------------+-----------+--------+----------|
+| *Requisitos*           |           |    0.2 |       2. |
+| Cumplimiento           |        10 |        |     2.00 |
+|------------------------+-----------+--------+----------|
+| *Proyecto*             |           |   0.20 |     2.01 |
+| Creatividad            |        10 |        |     0.67 |
+| Complejidad            |        10 |        |     0.67 |
+| Interfaz usuario       |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Documentación*        |           |    0.2 |     2.01 |
+| Documentación expresa  |        10 |        |     0.67 |
+| Entorno y dependencias |        10 |        |     0.67 |
+| Comentarios            |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Entrega*              |           |    0.2 |     2.01 |
+| Historial en Git       |        10 |        |     0.67 |
+| Directorio de proyecto |        10 |        |     0.67 |
+| Código válido          |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Legibilidad*          |           |    0.2 |       2. |
+| Estructura             |        10 |        |     1.00 |
+| Nomenclatura           |        10 |        |     1.00 |
+|------------------------+-----------+--------+----------|
+| *TOTAL*                |           |        |    10.03 |
+|------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3::@3$4=@3$2*@2$3 ; f-2::@4$4=@5+@6+@7::@5$4=$2*@4$3/3 ; f-2::@6$4=$2*@4$3/3 ; f-2::@7$4=$2*@4$3/3 ; f-2::@8$4=@9+@10+@11::@9$4=$2*@8$3/3 ; f-2::@10$4=$2*@8$3/3 ; f-2::@11$4=$2*@8$3/3 ; f-2::@12$4=@13+@14+@15::@13$4=$2*@12$3/3 ; f-2::@14$4=$2*@12$3/3 ; f-2::@15$4=$2*@12$3/3 ; f-2::@16$4=@17+@18::@17$4=$2*@16$3/2 ; f-2::@18$4=$2*@16$3/2 ; f-2::@19$4=@2+@4+@8+@12+@16
+
+* René Vázquez
+- Situación implementada :: Saturación y consulta de usuarios
+- Interfaz :: Texto (mensajes a consola describen el avance del sistema)
+- Documentación ::  [[./VazquezRene/Documentacion.txt][Documentacion.txt]]
+- Código :: [[./VazquezRene/proyecto2.py][proyecto2.py]]
+- Otros archivos en la entrega :: 
+- Lenguaje de desarrollo :: Python
+- Uso de multitarea / sincronización ::
+  - Dos multiplex con el número de usuarios totales para cada una de
+    las operaciones
+  - Dos mutex que no se usan (el código donde verificaban si es seguro
+    consultar o guardar está comentado)
+- Obsevaciones ::
+  - Lo que planteas en la documentación no cuadra con lo que presentas
+    - La situación más habitual después de haber inicializado es que
+      /haya/ la misma cantidad de usuarios realizando acciones
+      distintas — Dos consultando y dos guardando
+  - No documentas cómo lanzar el programa, qué requiere, qué debo ver
+    en pantalla, dependencias, tu nombre...
+  - Termina siendo únicamente un control de usuarios máximos con dos
+    multiplex.
+
+| *Rubro*                | *Parcial* | *Peso* | *Puntos* |
+|------------------------+-----------+--------+----------|
+| *Requisitos*           |           |    0.2 |      1.5 |
+| Cumplimiento           |       7.5 |        |     1.50 |
+|------------------------+-----------+--------+----------|
+| *Proyecto*             |           |    0.2 |     1.16 |
+| Creatividad            |         5 |        |     0.33 |
+| Complejidad            |         5 |        |     0.33 |
+| Interfaz usuario       |       7.5 |        |     0.50 |
+|------------------------+-----------+--------+----------|
+| *Documentación*        |           |    0.2 |     0.99 |
+| Documentación expresa  |         5 |        |     0.33 |
+| Entorno y dependencias |         5 |        |     0.33 |
+| Comentarios            |         5 |        |     0.33 |
+|------------------------+-----------+--------+----------|
+| *Entrega*              |           |    0.2 |     1.67 |
+| Historial en Git       |         5 |        |     0.33 |
+| Directorio de proyecto |        10 |        |     0.67 |
+| Código válido          |        10 |        |     0.67 |
+|------------------------+-----------+--------+----------|
+| *Legibilidad*          |           |    0.2 |     1.75 |
+| Estructura             |        10 |        |     1.00 |
+| Nomenclatura           |       7.5 |        |     0.75 |
+|------------------------+-----------+--------+----------|
+| *TOTAL*                |           |        |     7.07 |
+|------------------------+-----------+--------+----------|
+#+TBLFM: @2$4=@3::@3$4=@3$2*@2$3 ; f-2::@4$4=@5+@6+@7::@5$4=$2*@4$3/3 ; f-2::@6$4=$2*@4$3/3 ; f-2::@7$4=$2*@4$3/3 ; f-2::@8$4=@9+@10+@11::@9$4=$2*@8$3/3 ; f-2::@10$4=$2*@8$3/3 ; f-2::@11$4=$2*@8$3/3 ; f-2::@12$4=@13+@14+@15::@13$4=$2*@12$3/3 ; f-2::@14$4=$2*@12$3/3 ; f-2::@15$4=$2*@12$3/3 ; f-2::@16$4=@17+@18::@17$4=$2*@16$3/2 ; f-2::@18$4=$2*@16$3/2 ; f-2::@19$4=@2+@4+@8+@12+@16
+

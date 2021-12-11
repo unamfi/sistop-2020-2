@@ -1,0 +1,175 @@
+#+title: Asignación de memoria en un sistema real
+#+options: toc:nil num:nil
+
+#+begin_src yaml
+Planteamiento: 2020.04.24
+Entrega: 2020.05.07
+#+end_src
+
+Pueden [[./calificaciones.org][consultar los comentarios y calificaciones del proyecto aquí]].
+
+Todos los sistemas operativos de uso general al día de hoy utilizan un
+modelo de memoria basado en la /paginación/, y /casi/ siempre (si le
+concedemos la excepción a uno que otro sistemas construidos para el
+/tiempo real duro/) memoria virtual.
+
+Vamos a ver qué tanto podemos aprender u obtener de esta
+información. Este proyecto buscará llevarlos a demostrar sus
+conocimientos al extraer información de la memoria de procesos
+reales. El proyecto consta de dos partes:
+
+** Reimplementación de =pmap=
+
+En Linux, les he mostrado que hay varias maneras para obtener la
+información de la asignación de memoria a un proceso. En clase usamos
+por conveniencia la salida de =pmap=.
+
+Trabajemos tan cerca como se pueda de la información /cruda/, tal como
+nos las da el sistema operativo: Quiero que me presenten con una
+implementación básica y un poquito ampliada /hecha por ustedes/ de
+=pmap=.
+
+Sugiero que usen como fuente para implementarlo la información que nos
+da Linux en =/proc/${PID}/maps= y =/proc/${PID}/smaps=. Su programa
+debe recibir como entrada el mapa de memoria de /cualquier proceso/
+(al que tenga permiso de lectura, naturalmente), y entregar:
+
+- Identificación de las secciones en memoria, indicando el tamaño de
+  cada una de ellas. Además de las regiones /clásicas/ que estudiamos,
+  les pido que indiquen claramente las regiones correspondientes a
+  /bibliotecas de sistema/ y a otros /archivos mapeados a memoria/.
+- Representación visual de la memoria del proceso. Naturalmente, no
+  espero que sea a escala (a fin de cuentas, ¿cómo se vería un proceso
+  de apenas 4MB ante la inmensidad de un espacio de direccionamiento
+  de 48 bits? 😉
+
+  La representación visual puede ser a partir de algo [[./ejemplo/repr_visual_bash_rpi0][como mi ejemplo]]
+  (ver un poquito más adelante para mayores detalles. Pero... ¡Échenle
+  creatividad! Pueden generar una imagen (dando mucha mayor
+  resolución), presentar cada sección con un color distinto, etc.
+
+  Ojo, mi ejemplo está construido a partir de procesar los archivos
+  [[./ejemplo/maps_bash_rpi0.txt][maps_bash_rpi0.txt]] y [[./ejemplo/smaps_bash_rpi0.txt][smaps_bash_rpi0.txt]], que fueron obtenidos en
+  una Raspberry Pi 0. Menciono esto porque es una plataforma de /32
+  bits/ — Y se nota cuando ven las direcciones. 
+
+*** Puede serles de utilidad...
+
+Para reimplementar =pmap=, puede resultarles conveniente leer el
+[[https://gitlab.com/procps-ng/procps/-/blob/master/pmap.c][código fuente en C de pmap]]. Su lectura, a pesar de ser código fuente
+productivo en C con cosa de 20 años de antigüedad, no está demasiado
+más allá de lo que espero de ustedes 😉.
+
+Pueden referirse a la [[https://github.com/mmalecki/procps/blob/86073c3b5145fd7596a74642a15b9ad38ea488c2/pmap.c][primera versión funcional de =pmap=]] (de octubre
+de 2002), pero no garantizo que siga funcionando: es posible que el
+formato de la información provista por Linux haya cambiado.
+
+** ¿Y realmente se acomoda así?
+
+Ya que pueden entender el acomodo del proceso en memoria y saben
+extraerle su información... ¡Verifiquemos si realmente funciona así!
+
+Para la segunda parte, les pido que identifiquen la región de memoria
+(que puede ser obtenida de ejecutar el programa que desarrollaron para
+la primera parte del proyecto en que encuentren a los /símbolos/
+(nombres de variables y funciones) y a los /datos/ (contenido de
+variables) de un programa real. Para esto, preparé un programa ejemplo
+en C, [[./donde_en_la_memoria/donde_en_la_memoria.c][donde_en_la_memoria.c]]. El programa es trivial, aunque presenta
+la información de forma casi anti-organizada /a propósito/ para
+ilustrarlo más claramente.
+
+Lo compilé en una computadora x86, y a partir de su ejecución, obtuve
+los siguientes archivos:
+
+- Compilé el programa:
+  - A ensamblador, usando =gcc -S donde_en_la_memoria.c=, obteniendo
+    [[./donde_en_la_memoria/donde_en_la_memoria.s][donde_en_la_memoria.s]].
+  - A ejecutable, usando =gcc -o donde_en_la_memoria
+    donde_en_la_memoria.c=, obteniendo [[./donde_en_la_memoria/donde_en_la_memoria][donde_en_la_memoria]].
+- El programa imprime su identificador de proceso al ejecutarse,
+  obtenido con =getpid()=. Para los siguientes archivos, digamos que
+  el PID fue =12345=.
+- Usando =gcore -a 12345= y dicho identificador del proceso, obtuve el
+  volcado de su memoria en ejecución, en [[./donde_en_la_memoria/donde_en_la_memoria.core][donde_en_la_memoria.core]].
+  Para interpretar este =core=, hay muchas herramientas disponibles.
+  - Una de las más socorridas, aunque no necesariamente de las más
+    amigables, es el depurador GNU, =gdb=. Para ejecutarlo, desde el
+    directorio donde tengan a =donde_en_la_memoria.*=, ejecuten
+    simplemente =gdb donde_en_la_memoria -c donde_en_la_memoria.core=.
+  - Probablemente les resulte más directo llegar a resultados si
+    inspeccionan el =core= usando =objdump=...
+  - Las herramientas de depuración requieren, sí, de saber qué estamos
+    esperando de ellas. Me atrevo a dejarles una liga a una pregunta
+    en /StackOverflow/ con varias explicaciones interesantes que les
+    pueden servir: [[https://stackoverflow.com/questions/8305866/how-do-i-analyze-a-programs-core-dump-file-with-gdb-when-it-has-command-line-pa][How do I analyze a program's core dump file with
+    GDB when it has command-line parameters?]]
+  - Cuando quieran sencillamente examinar un archivo binario y buscar
+    patrones a ojo (o filtrar), pueden utilizar =hexdump=. En
+    lo personal, les sugiero usar =hexdump -C core= para leer el
+    contenido.
+
+    Ojo — Si usan este método, que puede parecer el más sencillo, van
+    a tener que considerar la ubicación relativa a los /agujeros/ en
+    memoria y archivos mapeados que no forman parte del core...
+- Obtuve el mapa de memoria (extendido, para incluir información
+  acerca de las páginas limpias/sucias) usando =pmap -x 12345=. El
+  resultado está en [[./donde_en_la_memoria/donde_en_la_memoria.pmap][donde_en_la_memoria.pmap]].
+  - Hay información muy similar, aunque con diferencias de formato,
+    obtenida de =/proc/12345/maps=: [[./donde_en_la_memoria/donde_en_la_memoria.maps][donde_en_la_memoria.maps]]
+  - Y la misma información, ampliada y en formato de registros en vez
+    de tabular, en [[./donde_en_la_memoria/donde_en_la_memoria.smaps][donde_en_la_memoria.smaps]]
+
+** ¿Qué entregar?
+
+Tal vez a estas alturas estén ya un poco mareados. Sí, estoy pidiendo
+que apliquen conocimientos que no les dí explícitamente; a fin de
+cuentas, el proyecto busca /integración de conocimientos/ y una pizca
+de pensamiento crítico autodidacta 😉
+
+Para la primera parte, quiero un /programa/ al cual yo le indique un
+PID, y me genere un mapa como [[./donde_en_la_memoria/repr_visual_bash_rpi0][el que les doy como ejemplo]].
+
+Para la segunda parte, basta con un documento de texto, indicando qué
+herramienta utilizaron, cómo la utilizaron, y qué descubrieron con
+ella (si es que descubrieron /algo/; pueden también reportar que
+determinada herramienta o enfoque no les dio nada útil).
+
+** ¿Cómo se califica?
+
+El 50% de la calificación corresponde a cada parte del planteamiento.
+
+*** Para la parte 1
+
+- Entrega de un programa que intente resolver el planteamiento ⇒ 50%
+  - De entrada: Cuenten con el 30%
+  - Incluye documentación con autores, estrategia, requisitos, etc. ⇒ 20%
+- Puedo ejecutarlo (de ser necesario, compilarlo) /sin modificación
+  alguna/ ⇒ 10%
+- Calidad del reconocimiento de las regiones de memoria ⇒ 10%
+  - Texto, datos, heap, stack, bibliotecas, espacios vacíos... ¿Alguna
+    hipótesis para las regiones que yo marqué como «?»?
+- Representación visual ⇒ Hasta 15%
+  - Similar a mi ejemplo, 10%
+  - Salida a color, gráfica, interactiva con algún detalle
+    /interesante/, 5%
+- Universalidad ⇒ 15%
+  - Funciona con mis archivos de ejemplo, 5%
+  - Funciona con procesos cualquiera de mi sistema, sean sencillos o
+    complejos, 5%
+  - Funciona en equipos de 32 o 64 (ok, 48) bits sin problemas, 5%
+
+*** Para la parte 2
+- Entregado, explicando el proceso que siguen ⇒ 50%
+- Ubican correctamente (indicando dirección de memoria y sección a la
+  que corresponde) dónde están las cadenas de texto origen ⇒ 15%
+- Ubican correctamente dónde están las cadenas de texto que son
+  entregadas a =printf()=, diferenciándolas de las anteriores donde
+  haga falta ⇒ 15%
+- Ubican correctamente dónde están los nombres de las funciones y
+  variables ⇒ 10%
+  - Ubicarlas, 5%
+  - Explicar por qué hay algunas que /no pueden ser halladas/, 5%
+- Ubican correctamente otros símbolos y valores ⇒ 10%
+  - Valores que /no/ sean cadenas de texto ⇒ 5%
+  - Otros elementos que forman parte de la tabla de símbolos, pero no
+    forman parte de mi fuente (¿qué son?) ⇒ 5%
